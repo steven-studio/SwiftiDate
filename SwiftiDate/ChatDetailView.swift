@@ -245,19 +245,33 @@ struct ChatDetailView: View {
                 }
                 
                 if newMessageText == "" {
+                    Image(systemName: "microphone.fill")
+                        .resizable()
+                        .frame(maxWidth: 24, maxHeight: 24)
+                        .padding()
+                        .foregroundColor(.blue)
+                } else {
                     Button(action: sendMessage) {
                         Image(systemName: "paperplane.fill")
                             .resizable()
                             .frame(width: 24, height: 24)
                             .padding()
                     }
-                } else {
-                    Image(system)
                 }
             }
             .padding(2)
             
             HStack {
+                
+                Spacer()
+                
+                Image("gif")
+                    .resizable()
+                    .frame(width: 24, height: 24)
+                    .foregroundColor(.blue) // 將圖標設為藍色
+                
+                Spacer()
+                
                 Image(systemName: "photo")
                     .resizable()
                     .frame(width: 24, height: 24)
@@ -265,10 +279,12 @@ struct ChatDetailView: View {
                 
                 Spacer()
                 
-                Image(systemName: "microphone.fill")
+                Image(systemName: "map")
                     .resizable()
-                    .frame(maxWidth: 24, maxHeight: 24)
-                    .foregroundColor(.blue)
+                    .frame(width: 24, height: 24)
+                    .foregroundColor(.blue) // 將圖標設為藍色
+
+                Spacer()
             }
         }
         .sheet(isPresented: $showChatGPTModal) {

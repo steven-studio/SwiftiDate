@@ -45,7 +45,7 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         userLocation = location.coordinate
         
         // Print the latitude and longitude
-        print("User's location: \(location.coordinate.latitude), \(location.coordinate.longitude)")
+//        print("User's location: \(location.coordinate.latitude), \(location.coordinate.longitude)")
     }
     
     // CLLocationManagerDelegate 方法，當授權狀態改變時被呼叫

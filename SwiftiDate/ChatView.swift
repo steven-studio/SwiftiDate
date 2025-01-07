@@ -87,9 +87,16 @@ struct ChatView: View {
                 print("Failed to decode chats: \(error)")
             }
         }
-
+        
+        print("Path: \(ref.child("users").child(userId).child("chatMessages").description())")
+        
         // 讀取 chatMessages
         ref.child("users").child(userId).child("chatMessages").observeSingleEvent(of: .value) { snapshot in
+            if snapshot.exists() {
+                print("Snapshot exists for chatMessages: \(snapshot.value ?? "nil")")
+            } else {
+                print("Snapshot does not exist for chatMessages")
+            }
             guard let value = snapshot.value as? [String: [[String: Any]]] else {
                 print("Failed to decode chatMessages data")
                 return
@@ -103,14 +110,36 @@ struct ChatView: View {
                         continue
                     }
                     
+                    print("Processing chat ID: \(chatId)")
                     let jsonData = try JSONSerialization.data(withJSONObject: messagesArray, options: [])
-                    let messages = try JSONDecoder().decode([Message].self, from: jsonData)
-                    chatMessages[chatId] = messages
+                    if let jsonString = String(data: jsonData, encoding: .utf8) {
+                        print("Serialized JSON for chat \(chatId): \(jsonString)")
+                    }
+                    
+                    do {
+                        let messages = try JSONDecoder().decode([Message].self, from: jsonData)
+//                        print("Decoded Messages for chat \(chatId): \(messages)")
+                        chatMessages[chatId] = messages
+                    } catch let DecodingError.dataCorrupted(context) {
+                        print("Data corrupted: \(context)")
+                    } catch let DecodingError.keyNotFound(key, context) {
+                        print("Key '\(key)' not found: \(context.debugDescription)")
+                        print("Coding Path: \(context.codingPath)")
+                    } catch let DecodingError.typeMismatch(type, context) {
+                        print("Type '\(type)' mismatch: \(context.debugDescription)")
+                        print("Coding Path: \(context.codingPath)")
+                    } catch let DecodingError.valueNotFound(value, context) {
+                        print("Value '\(value)' not found: \(context.debugDescription)")
+                        print("Coding Path: \(context.codingPath)")
+                    } catch {
+                        print("Failed to decode Messages for chat \(chatId): \(error)")
+                    }
                 }
                 
                 // Update the state on the main thread
                 DispatchQueue.main.async {
                     self.chatMessages = chatMessages
+                    print("Final chatMessages dictionary: \(chatMessages)")
                     self.saveChatMessagesToAppStorage()
                 }
                 
@@ -294,6 +323,7 @@ struct ChatView: View {
             }
             .navigationTitle("聊天") // Ensure this is applied to the VStack
             .onAppear {
+                chatDataString = ""
                 if chatDataString.isEmpty || chatMessagesString.isEmpty {
                     // 如果本地的 chatDataString 或 chatMessagesString 為空，就從 Firebase 加載
                     print("Loading data from Firebase as local storage is empty")
@@ -362,7 +392,17 @@ struct ChatView: View {
         do {
             let decoder = JSONDecoder()
             if let data = chatMessagesString.data(using: .utf8) {
+                // 验证 JSON 数据是否有效
+                if let jsonObject = try? JSONSerialization.jsonObject(with: data, options: []) {
+                    print("Valid JSON: \(jsonObject)")
+                } else {
+                    print("Invalid JSON format")
+                    return
+                }
+                
+                // 尝试解码为 [UUID: [Message]]
                 chatMessages = try decoder.decode([UUID: [Message]].self, from: data)
+                print("Decoded chatMessages: \(chatMessages)")
             }
         } catch {
             print("Failed to decode chatMessages: \(error)")

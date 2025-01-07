@@ -81,7 +81,7 @@ class AppDelegate: NSObject, UIApplicationDelegate, CLLocationManagerDelegate, U
     }
         
     private func storeDeviceIdentifier() {
-        let keychain = Keychain(service: "com.yourapp.SwiftiDate")
+        let keychain = Keychain(service: "com.stevenstudio.SwiftiDate")
         if let existingUUID = keychain["deviceUUID"] {
             print("Existing Device UUID: \(existingUUID)")
             deviceIdentifier = existingUUID // Store it in the global variable
@@ -110,7 +110,7 @@ class AppDelegate: NSObject, UIApplicationDelegate, CLLocationManagerDelegate, U
         globalLatitude = latitude
         globalLongitude = longitude
         
-        print("Current Location: Latitude \(latitude), Longitude \(longitude)")
+//        print("Current Location: Latitude \(latitude), Longitude \(longitude)")
         
         // Reverse geocoding
         geocoder.reverseGeocodeLocation(location) { placemarks, error in
@@ -126,18 +126,18 @@ class AppDelegate: NSObject, UIApplicationDelegate, CLLocationManagerDelegate, U
                 
                 // Check if the location is in Hsinchu City, Taiwan
                 if placemark.country == "Taiwan", placemark.locality == "Hsinchu City" {
-                    print("The location is in Hsinchu City, Taiwan!")
+//                    print("The location is in Hsinchu City, Taiwan!")
                 } else {
-                    print("The location is not in Hsinchu City, Taiwan. It is in \(placemark.locality ?? "Unknown City"), \(placemark.country ?? "Unknown Country").")
+//                    print("The location is not in Hsinchu City, Taiwan. It is in \(placemark.locality ?? "Unknown City"), \(placemark.country ?? "Unknown Country").")
                 }
                 
                 // Print detailed address information
-                print("Administrative Area: \(placemark.administrativeArea ?? "N/A")")
-                print("Subadministrative Area: \(placemark.subAdministrativeArea ?? "N/A")")
-                print("Locality: \(placemark.locality ?? "N/A")")
-                print("SubLocality: \(placemark.subLocality ?? "N/A")")
-                print("Postal Code: \(placemark.postalCode ?? "N/A")")
-                print("Country: \(placemark.country ?? "N/A")")
+//                print("Administrative Area: \(placemark.administrativeArea ?? "N/A")")
+//                print("Subadministrative Area: \(placemark.subAdministrativeArea ?? "N/A")")
+//                print("Locality: \(placemark.locality ?? "N/A")")
+//                print("SubLocality: \(placemark.subLocality ?? "N/A")")
+//                print("Postal Code: \(placemark.postalCode ?? "N/A")")
+//                print("Country: \(placemark.country ?? "N/A")")
             }
         }
     }

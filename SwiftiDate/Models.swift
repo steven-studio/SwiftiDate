@@ -51,6 +51,7 @@ enum MessageType: Codable {
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         let type = try container.decode(String.self, forKey: .type)
+        print("Decoding MessageType with type: \(type)")
 
         switch MessageTypeKey(rawValue: type) {
         case .text:
@@ -63,7 +64,7 @@ enum MessageType: Codable {
             let audioPath = try container.decode(String.self, forKey: .value)
             self = .audio(audioPath)
         case .none:
-            throw DecodingError.dataCorruptedError(forKey: .type, in: container, debugDescription: "Unknown MessageType")
+            throw DecodingError.dataCorruptedError(forKey: .type, in: container, debugDescription: "Unknown MessageType: \(type)")
         }
     }
 }

@@ -121,11 +121,11 @@ struct ContentView: View {
 //                        }
 //                    }
 //                }
-                print("Processing item \(index + 1) of \(listResult.items.count): \(item.name)")
+//                print("Processing item \(index + 1) of \(listResult.items.count): \(item.name)")
                 
                 item.downloadURL { result in
                     processedItemCount += 1
-                    print("Download URL callback for item \(item.name), result: \(result)")
+//                    print("Download URL callback for item \(item.name), result: \(result)")
                     
                     switch result {
                     case .success(let url):
