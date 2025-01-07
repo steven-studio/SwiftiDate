@@ -92,6 +92,47 @@ struct TextViewRepresentable: UIViewRepresentable {
     }
 }
 
+struct MessageListView: View {
+    @Binding var messages: [Message]
+    @Binding var chatGPTResponse: String
+    @Binding var dynamicHeight: CGFloat
+    let maxHeight: CGFloat
+
+    var body: some View {
+        ScrollView {
+            ForEach(messages, id: \.id) { message in
+                HStack {
+                    Text(message.isSender ? "你: " : "對方: ")
+                        .fontWeight(.bold)
+                    Text(getMessageText(message))
+                }
+                .padding()
+                .frame(maxWidth: UIScreen.main.bounds.width - 64, alignment: .leading)
+                .background(Color.gray.opacity(0.1))
+                .cornerRadius(10)
+                .padding(.horizontal)
+                .textSelection(.enabled)
+            }
+
+            TextViewRepresentable(text: chatGPTResponse,
+                dynamicHeight: $dynamicHeight,
+                maxHeight: maxHeight
+            )
+                .frame(maxWidth: UIScreen.main.bounds.width - 64, minHeight: dynamicHeight, maxHeight: dynamicHeight) // 設置最大寬度和最小高度
+                .cornerRadius(10)
+                .padding()
+        }
+    }
+
+    private func getMessageText(_ message: Message) -> String {
+        switch message.content {
+        case .text(let text): return text
+        case .image: return "[圖片]"
+        case .audio: return "[語音]"
+        }
+    }
+}
+
 struct ChatGPTView: View {
     @Binding var messages: [Message]   // 聊天歷史記錄綁定自 ChatDetailView
     @State private var userInput: String = ""   // 用戶輸入的訊息
@@ -108,29 +149,12 @@ struct ChatGPTView: View {
                 .font(.title)
                 .padding()
             
-            ScrollView {
-                ForEach(messages, id: \.id) { message in
-                    HStack {
-                        Text(message.isSender ? "你: " : "對方: ")
-                            .fontWeight(.bold)
-                        Text(message.text)
-                    }
-                    .padding()
-                    .frame(maxWidth: UIScreen.main.bounds.width - 64, alignment: .leading)
-                    .background(Color.gray.opacity(0.1))
-                    .cornerRadius(10)
-                    .padding(.horizontal)
-                    .textSelection(.enabled) // by bryan_u.6_developer
-                }
-
-                TextViewRepresentable(text: chatGPTResponse,
-                    dynamicHeight: $dynamicHeight,
-                    maxHeight: maxHeight
-                )
-                    .frame(maxWidth: UIScreen.main.bounds.width - 64, minHeight: dynamicHeight, maxHeight: dynamicHeight) // 設置最大寬度和最小高度
-                    .cornerRadius(10)
-                    .padding()
-            }
+            MessageListView(
+                messages: $messages,
+                chatGPTResponse: $chatGPTResponse,
+                dynamicHeight: $dynamicHeight,
+                maxHeight: maxHeight
+            )
             .frame(maxWidth: UIScreen.main.bounds.width - 32, maxHeight: 300)
             .border(Color.gray, width: 1)
 
@@ -169,13 +193,20 @@ struct ChatGPTView: View {
         isLoading = true
         
         // 確保 messages 裡面的內容可以被正確轉換成 JSON
-        let jsonMessages: [[String: String]] = messages.map { message in
-            [
-                "role": message.isSender ? "user" : "chat_partner", // 用 "chat_partner" 表示女生或對方的訊息，而不是 "assistant"
-                "content": message.text // 消息內容是字符串
-            ]
-        }
+        let jsonMessages: [[String: String]] = messages.compactMap { message in
+            let role = message.isSender ? "user" : "chat_partner"
 
+            // 根據 MessageType 提取內容
+            switch message.content {
+            case .text(let text):
+                return ["role": role, "content": text]
+            case .image:
+                return ["role": role, "content": "[圖片]"] // 替換為適合的占位文本
+            case .audio:
+                return ["role": role, "content": "[語音]"] // 替換為適合的占位文本
+            }
+        }
+        
         // 添加用戶輸入的問題作為最後一條記錄
         let finalMessages = jsonMessages + [["role": "user", "content": userInput]]
 
@@ -250,8 +281,20 @@ struct ChatGPTResponse: Decodable {
 struct ChatGPTView_Previews: PreviewProvider {
     static var previews: some View {
         ChatGPTView(messages: .constant([ // 使用 .constant 來模擬綁定數據
-            Message(id: UUID(), text: "你好，這是範例訊息1", isSender: true, time: "10:00 AM", isCompliment: false),
-            Message(id: UUID(), text: "你好，這是範例訊息2", isSender: false, time: "10:05 AM", isCompliment: false)
+            Message(
+                id: UUID(),
+                content: .text("你好，這是範例訊息1"), // 將文字包裝為 .text
+                isSender: true,
+                time: "10:00 AM",
+                isCompliment: false
+            ),
+            Message(
+                id: UUID(),
+                content: .text("你好，這是範例訊息2"), // 將文字包裝為 .text
+                isSender: false,
+                time: "10:05 AM",
+                isCompliment: false
+            )
         ]))
     }
 }

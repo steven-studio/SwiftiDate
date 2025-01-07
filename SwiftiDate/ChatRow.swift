@@ -38,10 +38,25 @@ struct ChatRow: View {
 
                 // Display the last message
                 if let lastMessage = messages.last {
-                    Text(lastMessage.text)
-                        .font(.subheadline)
-                        .foregroundColor(.gray)
-                        .lineLimit(1)
+                    switch lastMessage.content {
+                    case .text(let text):
+                        Text(text)
+                            .font(.subheadline)
+                            .foregroundColor(.gray)
+                            .lineLimit(1)
+
+                    case .image:
+                        Text("[圖片]")
+                            .font(.subheadline)
+                            .foregroundColor(.gray)
+                            .lineLimit(1)
+
+                    case .audio:
+                        Text("[語音]")
+                            .font(.subheadline)
+                            .foregroundColor(.gray)
+                            .lineLimit(1)
+                    }
                 }
             }
             

@@ -197,22 +197,21 @@ struct ChatDetailView: View {
                         let showTime = index == 0 || messages[index].time != messages[index - 1].time
 
                         // Special check for the specific text message
-                        if message.text == "她希望可以先聊天，再見面～" {
-                            // Display this message as simple Text
+                        if case .text(let text) = message.content, text == "她希望可以先聊天，再見面～" {
                             HStack {
                                 Text("她希望")
-                                    .foregroundColor(.green) // Set the color for the specific text
+                                    .foregroundColor(.green)
 
-                                Text(message.text.replacingOccurrences(of: "她希望", with: "")) // Replace the specific text with an empty string
-                                    .foregroundColor(.black) // Default color for the rest of the text
-                                
-                                Spacer() // Add a Spacer to push the text to the left side
+                                Text(text.replacingOccurrences(of: "她希望", with: ""))
+                                    .foregroundColor(.black)
+
+                                Spacer()
                             }
                             .padding()
-                            .frame(maxWidth: .infinity, alignment: .leading) // Align the entire HStack to the left
-                            .background(Color.green.opacity(0.1)) // Apply background to the entire HStack
-                            .cornerRadius(10) // Apply corner radius to the HStack
-                            .padding(.horizontal) // Add horizontal padding around the whole HStack
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .background(Color.green.opacity(0.1))
+                            .cornerRadius(10)
+                            .padding(.horizontal)
                         } else {
                             // Display other messages as message bubbles
                             MessageBubbleView(message: message, isCurrentUser: message.isSender, showTime: showTime)
@@ -244,18 +243,32 @@ struct ChatDetailView: View {
                         .frame(width: 24, height: 24)
                         .padding(.trailing, 5)
                 }
-
-                Button(action: sendMessage) {
-                    Image(systemName: "paperplane.fill")
-                        .resizable()
-                        .frame(width: 24, height: 24)
-                        .padding()
+                
+                if newMessageText == "" {
+                    Button(action: sendMessage) {
+                        Image(systemName: "paperplane.fill")
+                            .resizable()
+                            .frame(width: 24, height: 24)
+                            .padding()
+                    }
+                } else {
+                    Image(system)
                 }
             }
-            .padding()
+            .padding(2)
             
             HStack {
+                Image(systemName: "photo")
+                    .resizable()
+                    .frame(width: 24, height: 24)
+                    .foregroundColor(.blue) // 將圖標設為藍色
                 
+                Spacer()
+                
+                Image(systemName: "microphone.fill")
+                    .resizable()
+                    .frame(maxWidth: 24, maxHeight: 24)
+                    .foregroundColor(.blue)
             }
         }
         .sheet(isPresented: $showChatGPTModal) {
@@ -269,7 +282,7 @@ struct ChatDetailView: View {
         
         let newMessage = Message(
             id: UUID(),
-            text: newMessageText,
+            content: .text(newMessageText),  // 將文字包裝為 .text
             isSender: true,  // 將此訊息標記為當前使用者發送的
             time: getCurrentTime(),
             isCompliment: false
@@ -337,14 +350,62 @@ struct ChatDetailView_Previews: PreviewProvider {
         let dummyChat = Chat(id: UUID(), name: "Laiiiiiiii", time: "01:50", unreadCount: 3)
         
         ChatDetailView(chat: dummyChat, messages: .constant([
-            Message(id: UUID(), text: "嗨～ 你有在這上面遇到什麼有趣的人嗎？", isSender: true, time: "09/12 15:53", isCompliment: false),
-            Message(id: UUID(), text: "你要夠有趣的哈哈哈", isSender: false, time: "09/16 02:09", isCompliment: false),
-            Message(id: UUID(), text: "我也不知道耶~", isSender: true, time: "09/20 15:03", isCompliment: false),
-            Message(id: UUID(), text: "我喜歡旅遊、追劇、吃日料 ，偶爾小酌，妳平常喜歡做什麼？", isSender: true, time: "09/20 15:03", isCompliment: false),
-            Message(id: UUID(), text: "還是像我一樣有趣的哈哈哈", isSender: true, time: "09/20 15:03", isCompliment: false),
-            Message(id: UUID(), text: "跳舞跟唱歌", isSender: false, time: "09/21 01:50", isCompliment: false),
-            Message(id: UUID(), text: "😂", isSender: false, time: "09/21 01:50", isCompliment: false),
-            Message(id: UUID(), text: "吃美食跟看劇", isSender: false, time: "09/21 01:50", isCompliment: false)
+            Message(
+                id: UUID(),
+                content: .text("嗨～ 你有在這上面遇到什麼有趣的人嗎？"),
+                isSender: true,
+                time: "09/12 15:53",
+                isCompliment: false
+            ),
+            Message(
+                id: UUID(),
+                content: .text("你要夠有趣的哈哈哈"),
+                isSender: false,
+                time: "09/16 02:09",
+                isCompliment: false
+            ),
+            Message(
+                id: UUID(),
+                content: .text("我也不知道耶~"),
+                isSender: true,
+                time: "09/20 15:03",
+                isCompliment: false
+            ),
+            Message(
+                id: UUID(),
+                content: .text("我喜歡旅遊、追劇、吃日料 ，偶爾小酌，妳平常喜歡做什麼？"),
+                isSender: true,
+                time: "09/20 15:03",
+                isCompliment: false
+            ),
+            Message(
+                id: UUID(),
+                content: .text("還是像我一樣有趣的哈哈哈"),
+                isSender: true,
+                time: "09/20 15:03",
+                isCompliment: false
+            ),
+            Message(
+                id: UUID(),
+                content: .text("跳舞跟唱歌"),
+                isSender: false,
+                time: "09/21 01:50",
+                isCompliment: false
+            ),
+            Message(
+                id: UUID(),
+                content: .text("😂"),
+                isSender: false,
+                time: "09/21 01:50",
+                isCompliment: false
+            ),
+            Message(
+                id: UUID(),
+                content: .text("吃美食跟看劇"),
+                isSender: false,
+                time: "09/21 01:50",
+                isCompliment: false
+            )
         ]), onBack: {
             // Provide an empty closure or action for the onBack parameter
         })
