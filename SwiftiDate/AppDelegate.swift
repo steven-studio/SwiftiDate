@@ -12,6 +12,7 @@ import FirebaseCrashlytics
 import KeychainAccess
 import FirebaseAppCheck
 import FirebaseFirestore
+import UserNotifications
 
 // 全局未捕獲異常處理函數
 func uncaughtExceptionHandler(exception: NSException) {
@@ -39,6 +40,26 @@ class AppDelegate: NSObject, UIApplicationDelegate, CLLocationManagerDelegate, U
         NSSetUncaughtExceptionHandler(uncaughtExceptionHandler)
         print("Uncaught Exception Handler registered")
         
+        configureFirestore()
+        
+        // 初始化 App Check
+        let providerFactory = DeviceCheckProviderFactory()
+        AppCheck.setAppCheckProviderFactory(providerFactory)
+        
+        // Store or retrieve device identifier
+        storeDeviceIdentifier()
+        
+        // Initialize location manager
+        initializeLocationManager()
+        
+        // 配置通知功能
+        NotificationManager.shared.requestAuthorization()
+        NotificationManager.shared.registerForPushNotifications()
+        
+        return true
+    }
+    
+    private func configureFirestore() {
         // 初始化 Firestore 並指定資料庫名稱
         let settings = FirestoreSettings()
         settings.host = "firestore.googleapis.com"
@@ -63,21 +84,21 @@ class AppDelegate: NSObject, UIApplicationDelegate, CLLocationManagerDelegate, U
         }
         
         print("Firestore initialized: \(db)")
-        
-        // 初始化 App Check
-        let providerFactory = DeviceCheckProviderFactory()
-        AppCheck.setAppCheckProviderFactory(providerFactory)
-        
-        // Store or retrieve device identifier
-        storeDeviceIdentifier()
-        
-        // Initialize location manager
-        initializeLocationManager()
-        
-        // Request notification permissions
-        requestNotificationPermission()
-        
-        return true
+    }
+    
+    // 收到設備令牌時的回調
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        NotificationManager.shared.handleDeviceToken(deviceToken: deviceToken)
+    }
+
+    // 註冊失敗的回調
+    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
+        print("Failed to register for notifications: \(error.localizedDescription)")
+    }
+    
+    // 在前台顯示通知時的處理
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        completionHandler([.alert, .sound, .badge]) // 顯示通知
     }
         
     private func storeDeviceIdentifier() {
@@ -147,20 +168,15 @@ class AppDelegate: NSObject, UIApplicationDelegate, CLLocationManagerDelegate, U
     }
     
     // Request notification permission
-    private func requestNotificationPermission() {
-        let center = UNUserNotificationCenter.current()
-        center.delegate = self
-        center.requestAuthorization(options: [.alert, .sound, .badge]) { granted, error in
-            if let error = error {
-                print("Error requesting notification permission: \(error.localizedDescription)")
-            } else {
-                print("Notification permission granted: \(granted)")
-            }
-        }
-    }
-    
-    // UNUserNotificationCenterDelegate method to handle notifications while the app is in the foreground
-    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-        completionHandler([.alert, .sound, .badge])
-    }
+//    private func requestNotificationPermission() {
+//        let center = UNUserNotificationCenter.current()
+//        center.delegate = self
+//        center.requestAuthorization(options: [.alert, .sound, .badge]) { granted, error in
+//            if let error = error {
+//                print("Error requesting notification permission: \(error.localizedDescription)")
+//            } else {
+//                print("Notification permission granted: \(granted)")
+//            }
+//        }
+//    }
 }
