@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -106,6 +106,8 @@
 		D055A7672D19A2B800F11F18 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D055A7662D19A2B800F11F18 /* GoogleService-Info.plist */; };
 		D055A7692D1DAE9200F11F18 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D055A7682D1DAE9200F11F18 /* AppDelegate.swift */; };
 		D055E9922C8CCFBA00A97DD1 /* InterestSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D055E9912C8CCFBA00A97DD1 /* InterestSelectionView.swift */; };
+		D060559E2D40D3FB0004F463 /* modelSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = D060559D2D40D3FB0004F463 /* modelSelector.swift */; };
+		D06055C82D4472BE0004F463 /* SwiftiDateWatch Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = D06055A42D4472BD0004F463 /* SwiftiDateWatch Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		D09587B92CB6552100BCD04B /* ChatGPTView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09587B82CB6552100BCD04B /* ChatGPTView.swift */; };
 		D09587BB2CB7558600BCD04B /* SafetyCenterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09587BA2CB7558600BCD04B /* SafetyCenterView.swift */; };
 		D09587BD2CB77F5200BCD04B /* SafetyTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09587BC2CB77F5200BCD04B /* SafetyTestView.swift */; };
@@ -163,6 +165,7 @@
 		D0DDDB542CA25B4E00A78A87 /* PrivacyPolicyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB532CA25B4D00A78A87 /* PrivacyPolicyView.swift */; };
 		D0DDDB562CA29B1200A78A87 /* TermsOfServiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB552CA29B1100A78A87 /* TermsOfServiceView.swift */; };
 		D0DDDB582CA4ECD300A78A87 /* DataManagementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB572CA4ECD200A78A87 /* DataManagementView.swift */; };
+		D0E3F1DB2D2E6BD5000FF556 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E3F1DA2D2E6BCF000FF556 /* NotificationManager.swift */; };
 		D0FA20B92C8CBAAB001C5D0E /* MeetWillingnessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FA20B82C8CBAAB001C5D0E /* MeetWillingnessView.swift */; };
 /* End PBXBuildFile section */
 
@@ -181,7 +184,42 @@
 			remoteGlobalIDString = D0445C2A2C71B3800059D522;
 			remoteInfo = SwiftiDate;
 		};
+		D06055B42D4472BE0004F463 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D0445C232C71B3800059D522 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D06055A32D4472BD0004F463;
+			remoteInfo = "SwiftiDateWatch Watch App";
+		};
+		D06055BE2D4472BE0004F463 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D0445C232C71B3800059D522 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D06055A32D4472BD0004F463;
+			remoteInfo = "SwiftiDateWatch Watch App";
+		};
+		D06055C52D4472BE0004F463 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D0445C232C71B3800059D522 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D06055A32D4472BD0004F463;
+			remoteInfo = "SwiftiDateWatch Watch App";
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		D06055C72D4472BE0004F463 /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+				D06055C82D4472BE0004F463 /* SwiftiDateWatch Watch App.app in Embed Watch Content */,
+			);
+			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		D017F4ED2CAEBC8700C71D18 /* QRCodeScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeScannerView.swift; sourceTree = "<group>"; };
@@ -264,6 +302,10 @@
 		D055A7662D19A2B800F11F18 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D055A7682D1DAE9200F11F18 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D055E9912C8CCFBA00A97DD1 /* InterestSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterestSelectionView.swift; sourceTree = "<group>"; };
+		D060559D2D40D3FB0004F463 /* modelSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = modelSelector.swift; sourceTree = "<group>"; };
+		D06055A42D4472BD0004F463 /* SwiftiDateWatch Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SwiftiDateWatch Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D06055B32D4472BE0004F463 /* SwiftiDateWatch Watch AppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "SwiftiDateWatch Watch AppTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D06055BD2D4472BE0004F463 /* SwiftiDateWatch Watch AppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "SwiftiDateWatch Watch AppUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D09587B82CB6552100BCD04B /* ChatGPTView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatGPTView.swift; sourceTree = "<group>"; };
 		D09587BA2CB7558600BCD04B /* SafetyCenterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafetyCenterView.swift; sourceTree = "<group>"; wrapsLines = 1; };
 		D09587BC2CB77F5200BCD04B /* SafetyTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafetyTestView.swift; sourceTree = "<group>"; };
@@ -325,8 +367,15 @@
 		D0DDDB532CA25B4D00A78A87 /* PrivacyPolicyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyView.swift; sourceTree = "<group>"; };
 		D0DDDB552CA29B1100A78A87 /* TermsOfServiceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsOfServiceView.swift; sourceTree = "<group>"; };
 		D0DDDB572CA4ECD200A78A87 /* DataManagementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManagementView.swift; sourceTree = "<group>"; };
+		D0E3F1DA2D2E6BCF000FF556 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		D0FA20B82C8CBAAB001C5D0E /* MeetWillingnessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetWillingnessView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		D06055A52D4472BD0004F463 /* SwiftiDateWatch Watch App */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = "SwiftiDateWatch Watch App"; sourceTree = "<group>"; };
+		D06055B62D4472BE0004F463 /* SwiftiDateWatch Watch AppTests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = "SwiftiDateWatch Watch AppTests"; sourceTree = "<group>"; };
+		D06055C02D4472BE0004F463 /* SwiftiDateWatch Watch AppUITests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = "SwiftiDateWatch Watch AppUITests"; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		D0445C282C71B3800059D522 /* Frameworks */ = {
@@ -368,6 +417,27 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		D0445C422C71B3830059D522 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D06055A12D4472BD0004F463 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D06055B02D4472BE0004F463 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D06055BA2D4472BE0004F463 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -501,6 +571,9 @@
 				D0445C2D2C71B3800059D522 /* SwiftiDate */,
 				D0445C3E2C71B3830059D522 /* SwiftiDateTests */,
 				D0445C482C71B3830059D522 /* SwiftiDateUITests */,
+				D06055A52D4472BD0004F463 /* SwiftiDateWatch Watch App */,
+				D06055B62D4472BE0004F463 /* SwiftiDateWatch Watch AppTests */,
+				D06055C02D4472BE0004F463 /* SwiftiDateWatch Watch AppUITests */,
 				D0445C2C2C71B3800059D522 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -511,6 +584,9 @@
 				D0445C2B2C71B3800059D522 /* SwiftiDate.app */,
 				D0445C3B2C71B3820059D522 /* SwiftiDateTests.xctest */,
 				D0445C452C71B3830059D522 /* SwiftiDateUITests.xctest */,
+				D06055A42D4472BD0004F463 /* SwiftiDateWatch Watch App.app */,
+				D06055B32D4472BE0004F463 /* SwiftiDateWatch Watch AppTests.xctest */,
+				D06055BD2D4472BE0004F463 /* SwiftiDateWatch Watch AppUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -543,6 +619,7 @@
 				D0DDDB0A2CA07A0D00A78A87 /* TurboView.swift */,
 				D0DDDB0C2CA07A2400A78A87 /* FeaturedCardView.swift */,
 				D0DDDB0E2CA0E65F00A78A87 /* LocationManager.swift */,
+				D0E3F1DA2D2E6BCF000FF556 /* NotificationManager.swift */,
 				D017F4F32CAF77D900C71D18 /* MessageBubbleView.swift */,
 				D017F4F52CAFBFF700C71D18 /* LoginOrRegisterView.swift */,
 				D09587B82CB6552100BCD04B /* ChatGPTView.swift */,
@@ -558,6 +635,7 @@
 				D039FC5A2CD230050082D2F3 /* PersonalityView.swift */,
 				D0C99B2C2D0DBFEC00FA98AD /* Localizable.strings */,
 				D055A7622D19931C00F11F18 /* GlobalVariables.swift */,
+				D060559D2D40D3FB0004F463 /* modelSelector.swift */,
 			);
 			path = SwiftiDate;
 			sourceTree = "<group>";
@@ -627,10 +705,12 @@
 				D0445C272C71B3800059D522 /* Sources */,
 				D0445C282C71B3800059D522 /* Frameworks */,
 				D0445C292C71B3800059D522 /* Resources */,
+				D06055C72D4472BE0004F463 /* Embed Watch Content */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				D06055C62D4472BE0004F463 /* PBXTargetDependency */,
 			);
 			name = SwiftiDate;
 			packageProductDependencies = (
@@ -699,6 +779,74 @@
 			productReference = D0445C452C71B3830059D522 /* SwiftiDateUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
+		D06055A32D4472BD0004F463 /* SwiftiDateWatch Watch App */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D06055C92D4472BE0004F463 /* Build configuration list for PBXNativeTarget "SwiftiDateWatch Watch App" */;
+			buildPhases = (
+				D06055A02D4472BD0004F463 /* Sources */,
+				D06055A12D4472BD0004F463 /* Frameworks */,
+				D06055A22D4472BD0004F463 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				D06055A52D4472BD0004F463 /* SwiftiDateWatch Watch App */,
+			);
+			name = "SwiftiDateWatch Watch App";
+			packageProductDependencies = (
+			);
+			productName = "SwiftiDateWatch Watch App";
+			productReference = D06055A42D4472BD0004F463 /* SwiftiDateWatch Watch App.app */;
+			productType = "com.apple.product-type.application";
+		};
+		D06055B22D4472BE0004F463 /* SwiftiDateWatch Watch AppTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D06055CC2D4472BE0004F463 /* Build configuration list for PBXNativeTarget "SwiftiDateWatch Watch AppTests" */;
+			buildPhases = (
+				D06055AF2D4472BE0004F463 /* Sources */,
+				D06055B02D4472BE0004F463 /* Frameworks */,
+				D06055B12D4472BE0004F463 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D06055B52D4472BE0004F463 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				D06055B62D4472BE0004F463 /* SwiftiDateWatch Watch AppTests */,
+			);
+			name = "SwiftiDateWatch Watch AppTests";
+			packageProductDependencies = (
+			);
+			productName = "SwiftiDateWatch Watch AppTests";
+			productReference = D06055B32D4472BE0004F463 /* SwiftiDateWatch Watch AppTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		D06055BC2D4472BE0004F463 /* SwiftiDateWatch Watch AppUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D06055CF2D4472BE0004F463 /* Build configuration list for PBXNativeTarget "SwiftiDateWatch Watch AppUITests" */;
+			buildPhases = (
+				D06055B92D4472BE0004F463 /* Sources */,
+				D06055BA2D4472BE0004F463 /* Frameworks */,
+				D06055BB2D4472BE0004F463 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D06055BF2D4472BE0004F463 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				D06055C02D4472BE0004F463 /* SwiftiDateWatch Watch AppUITests */,
+			);
+			name = "SwiftiDateWatch Watch AppUITests";
+			packageProductDependencies = (
+			);
+			productName = "SwiftiDateWatch Watch AppUITests";
+			productReference = D06055BD2D4472BE0004F463 /* SwiftiDateWatch Watch AppUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -706,7 +854,7 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1520;
+				LastSwiftUpdateCheck = 1620;
 				LastUpgradeCheck = 1520;
 				TargetAttributes = {
 					D0445C2A2C71B3800059D522 = {
@@ -719,6 +867,17 @@
 					D0445C442C71B3830059D522 = {
 						CreatedOnToolsVersion = 15.2;
 						TestTargetID = D0445C2A2C71B3800059D522;
+					};
+					D06055A32D4472BD0004F463 = {
+						CreatedOnToolsVersion = 16.2;
+					};
+					D06055B22D4472BE0004F463 = {
+						CreatedOnToolsVersion = 16.2;
+						TestTargetID = D06055A32D4472BD0004F463;
+					};
+					D06055BC2D4472BE0004F463 = {
+						CreatedOnToolsVersion = 16.2;
+						TestTargetID = D06055A32D4472BD0004F463;
 					};
 				};
 			};
@@ -746,6 +905,9 @@
 				D0445C2A2C71B3800059D522 /* SwiftiDate */,
 				D0445C3A2C71B3820059D522 /* SwiftiDateTests */,
 				D0445C442C71B3830059D522 /* SwiftiDateUITests */,
+				D06055A32D4472BD0004F463 /* SwiftiDateWatch Watch App */,
+				D06055B22D4472BE0004F463 /* SwiftiDateWatch Watch AppTests */,
+				D06055BC2D4472BE0004F463 /* SwiftiDateWatch Watch AppUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -776,6 +938,27 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D06055A22D4472BD0004F463 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D06055B12D4472BE0004F463 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D06055BB2D4472BE0004F463 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -794,6 +977,7 @@
 				D0DDDB4E2CA19D0800A78A87 /* PhotoUploadGuidelinesView.swift in Sources */,
 				D0445C832C73CBE70059D522 /* FitnessOptionsView.swift in Sources */,
 				D04729C62CC03D55007C33EC /* ProfileHeaderView.swift in Sources */,
+				D0E3F1DB2D2E6BD5000FF556 /* NotificationManager.swift in Sources */,
 				D0DDDB1A2CA1282B00A78A87 /* WhatIsSwiftiDateView.swift in Sources */,
 				D0DDDB322CA16B7000A78A87 /* UndoSwipeView.swift in Sources */,
 				D051EF2C2CC02C33004563A3 /* PhotoUtility.swift in Sources */,
@@ -846,6 +1030,7 @@
 				D0DDDB462CA18FDC00A78A87 /* HowToUseIncognitoModeView.swift in Sources */,
 				D04729CA2CC087AD007C33EC /* PreviewSectionView.swift in Sources */,
 				D0DDDB362CA16FF900A78A87 /* HowToPurchaseSwiftiDatePremiumView.swift in Sources */,
+				D060559E2D40D3FB0004F463 /* modelSelector.swift in Sources */,
 				D0DDDB442CA17FA700A78A87 /* HowToUseAdvancedFilteringView.swift in Sources */,
 				D055A7632D19931C00F11F18 /* GlobalVariables.swift in Sources */,
 				D018AD5B2C9E57DF005A14B9 /* UserGuideView.swift in Sources */,
@@ -929,6 +1114,27 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D06055A02D4472BD0004F463 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D06055AF2D4472BE0004F463 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D06055B92D4472BE0004F463 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -941,6 +1147,21 @@
 			isa = PBXTargetDependency;
 			target = D0445C2A2C71B3800059D522 /* SwiftiDate */;
 			targetProxy = D0445C462C71B3830059D522 /* PBXContainerItemProxy */;
+		};
+		D06055B52D4472BE0004F463 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D06055A32D4472BD0004F463 /* SwiftiDateWatch Watch App */;
+			targetProxy = D06055B42D4472BE0004F463 /* PBXContainerItemProxy */;
+		};
+		D06055BF2D4472BE0004F463 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D06055A32D4472BD0004F463 /* SwiftiDateWatch Watch App */;
+			targetProxy = D06055BE2D4472BE0004F463 /* PBXContainerItemProxy */;
+		};
+		D06055C62D4472BE0004F463 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D06055A32D4472BD0004F463 /* SwiftiDateWatch Watch App */;
+			targetProxy = D06055C52D4472BE0004F463 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1126,6 +1347,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"SwiftiDate/Preview Content\"";
 				DEVELOPMENT_TEAM = 5YGLWU7828;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_TESTABILITY = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SwiftiDate/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "We need access to your camera to scan QR codes.";
@@ -1225,6 +1447,147 @@
 			};
 			name = Release;
 		};
+		D06055CA2D4472BE0004F463 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_ASSET_PATHS = "\"SwiftiDateWatch Watch App/Preview Content\"";
+				DEVELOPMENT_TEAM = 5YGLWU7828;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = SwiftiDateWatch;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = stevenstudio.SwiftiDate;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = stevenstudio.SwiftiDate.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 11.2;
+			};
+			name = Debug;
+		};
+		D06055CB2D4472BE0004F463 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"SwiftiDateWatch Watch App/Preview Content\"";
+				DEVELOPMENT_TEAM = 5YGLWU7828;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = SwiftiDateWatch;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = stevenstudio.SwiftiDate;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = stevenstudio.SwiftiDate.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 11.2;
+			};
+			name = Release;
+		};
+		D06055CD2D4472BE0004F463 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 5YGLWU7828;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "steven.studio.SwiftiDateWatch-Watch-AppTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SwiftiDateWatch Watch App.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/SwiftiDateWatch Watch App";
+				WATCHOS_DEPLOYMENT_TARGET = 11.2;
+			};
+			name = Debug;
+		};
+		D06055CE2D4472BE0004F463 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 5YGLWU7828;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "steven.studio.SwiftiDateWatch-Watch-AppTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SwiftiDateWatch Watch App.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/SwiftiDateWatch Watch App";
+				WATCHOS_DEPLOYMENT_TARGET = 11.2;
+			};
+			name = Release;
+		};
+		D06055D02D4472BE0004F463 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 5YGLWU7828;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "steven.studio.SwiftiDateWatch-Watch-AppUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				TEST_TARGET_NAME = "SwiftiDateWatch Watch App";
+				WATCHOS_DEPLOYMENT_TARGET = 11.2;
+			};
+			name = Debug;
+		};
+		D06055D12D4472BE0004F463 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 5YGLWU7828;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "steven.studio.SwiftiDateWatch-Watch-AppUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				TEST_TARGET_NAME = "SwiftiDateWatch Watch App";
+				WATCHOS_DEPLOYMENT_TARGET = 11.2;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1260,6 +1623,33 @@
 			buildConfigurations = (
 				D0445C562C71B3830059D522 /* Debug */,
 				D0445C572C71B3830059D522 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D06055C92D4472BE0004F463 /* Build configuration list for PBXNativeTarget "SwiftiDateWatch Watch App" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D06055CA2D4472BE0004F463 /* Debug */,
+				D06055CB2D4472BE0004F463 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D06055CC2D4472BE0004F463 /* Build configuration list for PBXNativeTarget "SwiftiDateWatch Watch AppTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D06055CD2D4472BE0004F463 /* Debug */,
+				D06055CE2D4472BE0004F463 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D06055CF2D4472BE0004F463 /* Build configuration list for PBXNativeTarget "SwiftiDateWatch Watch AppUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D06055D02D4472BE0004F463 /* Debug */,
+				D06055D12D4472BE0004F463 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

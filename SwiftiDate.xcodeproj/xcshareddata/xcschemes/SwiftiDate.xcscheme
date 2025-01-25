@@ -29,6 +29,30 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES"
       shouldAutocreateTestPlan = "YES">
+      <Testables>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "D0445C442C71B3830059D522"
+               BuildableName = "SwiftiDateUITests.xctest"
+               BlueprintName = "SwiftiDateUITests"
+               ReferencedContainer = "container:SwiftiDate.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "D0445C3A2C71B3820059D522"
+               BuildableName = "SwiftiDateTests.xctest"
+               BlueprintName = "SwiftiDateTests"
+               ReferencedContainer = "container:SwiftiDate.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+      </Testables>
    </TestAction>
    <LaunchAction
       buildConfiguration = "Debug"

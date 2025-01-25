@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI
 import Firebase
+import Vision
 
 struct ChatView: View {
     @EnvironmentObject var userSettings: UserSettings
@@ -323,7 +324,6 @@ struct ChatView: View {
             }
             .navigationTitle("聊天") // Ensure this is applied to the VStack
             .onAppear {
-                chatDataString = ""
                 if chatDataString.isEmpty || chatMessagesString.isEmpty {
                     // 如果本地的 chatDataString 或 chatMessagesString 為空，就從 Firebase 加載
                     print("Loading data from Firebase as local storage is empty")
