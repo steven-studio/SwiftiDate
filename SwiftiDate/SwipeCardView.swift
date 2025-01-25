@@ -275,7 +275,7 @@ struct SwipeCard: View {
             
             VStack(alignment: .leading, spacing: 5) {
                 HStack(spacing: 5) {
-                    ForEach(0..<user.photos.count) { index in
+                    ForEach(0..<user.photos.count, id: \.self) { index in
                         RoundedRectangle(cornerRadius: 4)
                             .frame(width: 40, height: 8)
                             .foregroundColor(index == currentPhotoIndex ? .white : .gray)
