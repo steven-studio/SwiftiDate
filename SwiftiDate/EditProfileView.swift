@@ -246,7 +246,7 @@ struct EditProfileView: View {
                     
                     // 可選：監聽上傳進度
                     uploadTask.observe(.progress) { snapshot in
-                        let percentComplete = 100.0 * Double(snapshot.progress?.completedUnitCount ?? 0) / Double(snapshot.progress?.totalUnitCount ?? 0)
+                        _ = 100.0 * Double(snapshot.progress?.completedUnitCount ?? 0) / Double(snapshot.progress?.totalUnitCount ?? 0)
 //                        print("Upload is \(percentComplete)% complete.")
                     }
                 }
