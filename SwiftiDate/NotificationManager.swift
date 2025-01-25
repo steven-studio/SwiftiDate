@@ -39,7 +39,7 @@ class NotificationManager: NSObject, UNUserNotificationCenterDelegate {
 extension NotificationManager {
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         print("Received notification: \(notification.request.content.userInfo)")
-        completionHandler([.alert, .sound, .badge]) // 显示通知
+        completionHandler([.banner, .sound, .badge]) // 显示通知
     }
 
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
