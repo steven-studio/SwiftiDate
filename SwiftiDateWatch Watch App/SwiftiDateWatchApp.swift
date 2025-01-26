@@ -13,7 +13,7 @@ struct SwiftiDateWatch_Watch_AppApp: App {
     init() {
         if WCSession.isSupported() {
             let session = WCSession.default
-            session.delegate = WatchSessionManager.shared // 確保有一個共享管理器
+            session.delegate = WatchConnectivityManager.shared // 確保有一個共享管理器
             session.activate()
         }
     }
