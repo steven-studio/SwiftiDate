@@ -25,6 +25,7 @@ struct ProfileView: View {
     @State private var isShowingEditProfileView = false // State to show EditProfileView
     @State private var showSettingsView = false // State variable to control Settings View presentation
     @State private var showSafetyCenterView = false // 控制 SafetyCenterView 的顯示
+    @State private var showHealthDataSectionView = false
     
     // Local debug variable for Supreme status
     @State private var isSupreme = false // Modify this to test different scenarios
@@ -36,6 +37,13 @@ struct ProfileView: View {
         } else if showSafetyCenterView {
             SafetyCenterView(showSafetyCenterView: $showSafetyCenterView, photos: $userSettings.photos) // 如果全局变量为 true，则显示 SafetyCenterView
                 .environmentObject(userSettings)
+        } else if showHealthDataSectionView {
+            HealthDataSectionView(
+                onBack: {
+                    // 這裡的程式碼會在子視圖呼叫 onBack() 時執行
+                    showHealthDataSectionView = false
+                }
+            )
         } else {
             ZStack {
                 ScrollView {
@@ -83,7 +91,7 @@ struct ProfileView: View {
                 }
                 
                 // 使用新的 TopRightActionButtons 组件
-                TopRightActionButtons(showSettingsView: $showSettingsView, showSafetyCenterView: $showSafetyCenterView)
+                TopRightActionButtons(showSettingsView: $showSettingsView, showSafetyCenterView: $showSafetyCenterView, showHealthDataSectionView: $showHealthDataSectionView)
                 
                 // Show dimmed background and popup when isShowingInfoPopup is true
                 if isShowingInfoPopup {
