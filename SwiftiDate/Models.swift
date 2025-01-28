@@ -10,7 +10,7 @@ import SwiftUI
 
 // Define a structure for user match data
 struct UserMatch: Identifiable, Codable { // 添加 Codable
-    let id = UUID()
+    var id = UUID()
     let name: String
     let imageName: String // Use image names stored in Assets
 }
