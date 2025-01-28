@@ -140,18 +140,27 @@ struct ModelSelectorView: View {
                     Button(action: {
                         selectedModel = model // 更新選擇的模型
                     }) {
-                        VStack {
-                            // 動態顯示模型對應的圖標
-                            Image(iconName(for: model))
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 30, height: 30)
-                                .foregroundColor(selectedModel == model ? .white : .blue)
+                        ZStack {
+                            // 1) 若目前被選擇，顯示圓角背景／描邊；否則用透明或不顯示
+                            if selectedModel == model {
+                                RoundedRectangle(cornerRadius: 16)
+                                    .fill(Color.blue.opacity(0.2))   // 或者 fill(Color.blue.opacity(0.2)) 來上色
+                                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                            }
                             
-                            // 顯示模型名稱
-                            Text(model.rawValue)
-                                .padding(.top, 5)
-                                .foregroundColor(selectedModel == model ? .blue : .black)
+                            VStack {
+                                // 動態顯示模型對應的圖標
+                                Image(iconName(for: model))
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 30, height: 30)
+                                    .foregroundColor(selectedModel == model ? .white : .blue)
+                                
+                                // 顯示模型名稱
+                                Text(model.rawValue)
+                                    .padding(.top, 5)
+                                    .foregroundColor(selectedModel == model ? .blue : .black)
+                            }
                         }
                     }
                 }
