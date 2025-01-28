@@ -172,6 +172,22 @@ struct ModelSelectorView: View {
                 .padding()
 
             Spacer()
+            
+            // 在底部新增「繼續」按鈕
+            Button(action: {
+                // 在這裡處理「繼續」按鈕的邏輯
+                print("使用者選擇的模型：\(selectedModel.rawValue)")
+            }) {
+                Text("繼續")
+                    .foregroundColor(.white)
+                    .padding()
+                    .frame(maxWidth: .infinity)
+                    .background(Color.blue)
+                    .cornerRadius(8)
+            }
+            .padding(.horizontal)
+            .padding(.bottom, 20)
+
         }
         .padding()
         .onAppear {
