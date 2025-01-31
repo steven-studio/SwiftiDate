@@ -39,6 +39,15 @@ struct MainView: View {
                     Image(systemName: "questionmark.circle.fill")
                 }
                 .tag(2) // Assign a tag for UserGuideView tab
+            } else {
+                NavigationView {
+                    AstrologyView() // ✅ 針對女性用戶顯示命理學相關內容
+                }
+                .tabItem {
+                    Image(systemName: "moon.stars.fill") // 使用更符合命理學的 SF Symbol
+                    Text("星座占卜")
+                }
+                .tag(2)
             }
             
             ChatView(contentSelectedTab: $selectedTab) // Pass the binding to contentSelectedTab
@@ -53,10 +62,10 @@ struct MainView: View {
                     .environmentObject(userSettings) // 確保傳遞 userSettings
                     .environmentObject(appState) // 傳遞 appState
             }
-                .tabItem {
-                    Image(systemName: "person.fill")
-                }
-                .tag(4) // Assign a tag for ProfileView tab
+            .tabItem {
+                Image(systemName: "person.fill")
+            }
+            .tag(4) // Assign a tag for ProfileView tab
         }
     }
 }
