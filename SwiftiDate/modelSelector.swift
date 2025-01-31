@@ -84,7 +84,7 @@ func canConnect(to model: LLMModel, completion: @escaping (Bool) -> Void) {
     let task = URLSession.shared.dataTask(with: url) { data, response, error in
         
         // 1) 檢查有沒有 error
-        if let error = error {
+        if error != nil {
 //            print("[DEBUG] 請求失敗，error: \(error.localizedDescription) \(url)")
             completion(false)
             return
@@ -104,7 +104,7 @@ func canConnect(to model: LLMModel, completion: @escaping (Bool) -> Void) {
         
         // 4) 如果有 data 也可查看回應內容 (可能是 HTML, JSON 等)
         if let data = data,
-           let bodyString = String(data: data, encoding: .utf8) {
+           let _ = String(data: data, encoding: .utf8) {
 //            print("[DEBUG] 回應內容: \(bodyString)")
         }
         
