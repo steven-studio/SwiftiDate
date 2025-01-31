@@ -78,6 +78,20 @@ struct SwipeCardView: View {
         .fullScreenCover(isPresented: $showPrivacySettings) {
             PrivacySettingsView(isPresented: $showPrivacySettings)
         }
+        .background(
+            userSettings.globalUserGender == .female ?
+                LinearGradient(
+                    gradient: Gradient(colors: [Color.pink.opacity(0.1), Color.purple.opacity(0.2)]),
+                    startPoint: .topLeading,
+                    endPoint: .bottomTrailing
+                )
+            :
+                LinearGradient( // ✅ 確保男性用戶也使用 LinearGradient
+                    gradient: Gradient(colors: [Color.blue.opacity(0.1), Color.gray.opacity(0.2)]),
+                    startPoint: .topLeading,
+                    endPoint: .bottomTrailing
+                )
+        )
     }
     
     // 主滑動卡片畫面
@@ -87,7 +101,7 @@ struct SwipeCardView: View {
                 // 動態圓圈動畫頁面
                 CircleExpansionView()
             } else {
-                // 從後往前顯示卡片/
+                // 從後往前顯示卡片
                 ForEach(Array(users[currentIndex..<min(currentIndex + 3, users.count)]).reversed(), id: \.id) { user in
                     let index = users.firstIndex(where: { $0.id == user.id }) ?? 0
                     let isCurrentCard = index == currentIndex
@@ -129,6 +143,20 @@ struct SwipeCardView: View {
                 }
             }
         }
+        .background(
+            userSettings.globalUserGender == .female ?
+                LinearGradient(
+                    gradient: Gradient(colors: [Color.pink.opacity(0.1), Color.purple.opacity(0.2)]),
+                    startPoint: .topLeading,
+                    endPoint: .bottomTrailing
+                )
+            :
+                LinearGradient( // ✅ 確保男性用戶也使用 LinearGradient
+                    gradient: Gradient(colors: [Color.blue.opacity(0.1), Color.gray.opacity(0.2)]),
+                    startPoint: .topLeading,
+                    endPoint: .bottomTrailing
+                )
+        )
     }
     
     // Handle swipe action
@@ -264,6 +292,22 @@ struct SwipeCard: View {
                     .clipShape(RoundedRectangle(cornerRadius: 25))
                     .overlay(RoundedRectangle(cornerRadius: 25).stroke(Color.white, lineWidth: 4))
                     .edgesIgnoringSafeArea(.top)
+                    .onTapGesture { value in
+                            let screenWidth = UIScreen.main.bounds.width
+                            let tapX = value.x // 取得點擊的 X 軸座標
+                            
+                            if tapX < screenWidth / 2 {
+                                // 點擊左半邊，切換到上一張
+                                if currentPhotoIndex > 0 {
+                                    currentPhotoIndex -= 1
+                                }
+                            } else {
+                                // 點擊右半邊，切換到下一張
+                                if currentPhotoIndex < user.photos.count - 1 {
+                                    currentPhotoIndex += 1
+                                }
+                            }
+                        }
             } else {
                 // 顯示佔位符或錯誤圖像
                 Image(systemName: "exclamationmark.triangle.fill")
@@ -349,7 +393,7 @@ struct SwipeCard: View {
                                 
                                 VStack {
                                     Image(systemName: "arrow.uturn.backward")
-                                        .font(.system(size: 24))
+                                        .font(.title)
                                         .foregroundColor(.yellow)
                                 }
                             }
@@ -368,8 +412,8 @@ struct SwipeCard: View {
                                     .frame(width: 70, height: 50) // 設定矩形的大小
                                 
                                 Image(systemName: "xmark")
-                                    .font(.system(size: 24, weight: .bold)) // 設定字體大小和粗體
-                                    .foregroundColor(.white)
+                                    .font(.system(size: 30, weight: .bold)) // 設定字體大小和粗體
+                                    .foregroundColor(.red)
                             }
                         }
                         
@@ -424,7 +468,7 @@ struct SwipeCard: View {
                                 VStack {
                                     Image(systemName: "star.fill")
                                         .font(.system(size: 24))
-                                        .foregroundColor(.blue)
+                                        .foregroundColor(userSettings.globalUserGender == .male ? .blue : .pink)
                                 }
                             }
                         }
