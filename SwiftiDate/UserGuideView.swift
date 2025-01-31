@@ -6,21 +6,37 @@
 //
 
 import Foundation
-//
-//  UserGuideView.swift
-//  SwiftiDate
-//
-//  Created by 游哲維 on 2024/8/18.
-//
-
 import SwiftUI
 
 struct UserGuideView: View {
+    @State private var showSocialCourse = false  // 用來控制是否
+    
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 10) {
                 Text("歡迎來到 SwiftiDate！在這裡，使用「讚美」與「超級喜歡」的功能，就好比在現實生活中向女生搭訕，表達您的興趣和好感。在這份指南中，我們將引導您如何運用這些功能，讓您能更自然地向心儀的對象搭訕，並增加互動機會。")
                     .padding(.bottom)
+                
+                Text("想提升你的搭訕技巧？我們提供專業的社交課程，幫助你更自然地與異性互動。立即學習如何提升你的魅力！")
+                    .padding(.bottom, 10)
+                
+                // 🔥 按鈕：顯示社交課程視窗
+                Button(action: {
+                    showSocialCourse = true
+                }) {
+                    Text("🎓 進入社交課程")
+                        .font(.title2)
+                        .fontWeight(.bold)
+                        .foregroundColor(.white)
+                        .padding()
+                        .frame(maxWidth: .infinity)
+                        .background(Color.orange)
+                        .cornerRadius(10)
+                }
+                .padding(.vertical, 10)
+                .sheet(isPresented: $showSocialCourse) {
+                    SocialTrainingView()
+                }
 
                 Group {
                     Text("1. 了解「讚美」與「超級喜歡」的搭訕技巧")
