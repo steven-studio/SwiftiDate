@@ -31,7 +31,6 @@ struct GenderSelectionView: View {
                 // 中間的標題
                 Text("篩選")
                     .font(.title2)
-                    .fontWeight(.bold)
             }
             .frame(maxWidth: .infinity) // 讓ZStack佔滿整個寬度
             
@@ -72,6 +71,19 @@ struct GenderSelectionView: View {
             .padding()
             .onTapGesture {
                 selectedGender = "不限"
+            }
+            
+            HStack {
+                Text("不想滑")
+                Spacer()
+                if selectedGender == "不想滑" {
+                    Image(systemName: "checkmark")
+                        .foregroundColor(.green)
+                }
+            }
+            .padding()
+            .onTapGesture {
+                selectedGender = "不想滑"
             }
             
             Spacer() // 使用 Spacer 將所有元素推至頂部

@@ -24,6 +24,8 @@ struct SwipeCardView: View {
     @State private var showPrivacySettings = false // 控制隱私設置頁面的顯示
     @EnvironmentObject var userSettings: UserSettings
     @State private var showWelcomePopup = false // 初始值為 true，代表剛登入時顯示彈出視窗
+    
+    @AppStorage("globalSelectedGender") private var selectedGender: String = "female" // ✅ 直接存取 `AppStorage`
 
     // List of users and current index
     @State private var users: [User] = [
@@ -46,6 +48,7 @@ struct SwipeCardView: View {
                locationManager.authorizationStatus == .authorizedAlways {
                 // 使用者已授權位置存取，顯示滑動卡片畫面
                 mainSwipeCardView
+                    .blur(radius: selectedGender == "none" ? 10 : 0) // ✅ 讓畫面模糊
             } else {
                 // 使用者未授權位置存取，顯示提示畫面
                 locationPermissionPromptView
