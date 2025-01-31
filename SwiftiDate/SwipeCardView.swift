@@ -76,7 +76,7 @@ struct SwipeCardView: View {
         }
         .edgesIgnoringSafeArea(.all) // 保證圖標能貼近螢幕邊緣
         .fullScreenCover(isPresented: $showPrivacySettings) {
-            PrivacySettingsView() // 顯示隱私設置頁面
+            PrivacySettingsView(isPresented: $showPrivacySettings)
         }
     }
     
@@ -87,7 +87,7 @@ struct SwipeCardView: View {
                 // 動態圓圈動畫頁面
                 CircleExpansionView()
             } else {
-                // 從後往前顯示卡片
+                // 從後往前顯示卡片/
                 ForEach(Array(users[currentIndex..<min(currentIndex + 3, users.count)]).reversed(), id: \.id) { user in
                     let index = users.firstIndex(where: { $0.id == user.id }) ?? 0
                     let isCurrentCard = index == currentIndex
@@ -440,6 +440,7 @@ struct SwipeCard: View {
 struct SwipeCardView_Previews: PreviewProvider {
     static var previews: some View {
         SwipeCardView()
-            .previewDevice("iPhone 15 Pro Max") // 指定預覽設備為 iPhone 15 Pro Max
+            .environmentObject(UserSettings()) // ✅ 加入 userSettings
+            .previewDevice("iPhone 15 Pro Max") // ✅ 指定預覽設備
     }
 }
