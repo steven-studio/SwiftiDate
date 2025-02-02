@@ -42,7 +42,7 @@ enum LLMModel: String, CaseIterable {
         // 但實際上使用 ChatGPT 在台灣是可行的，所以這裡以 google.com 代替測試。
         // 基本邏輯是：能連上 Google，就大概率能連上 ChatGPT。
         case .chatgpt:
-            return URL(string: "https://www.google.com/")
+            return URL(string: "https://api.openai.com/v1/models")
         case .gemini:
             return URL(string: "https://www.google.com/")  // 模擬 Gemini => Google
         case .claude:
@@ -75,32 +75,42 @@ func detectRegion() -> Region {
 func canConnect(to model: LLMModel, completion: @escaping (Bool) -> Void) {
     guard model.requiresExternalCheck, let url = model.testURL else {
         // 不需要測試外網 => 直接回傳 true
-//        print("[DEBUG] Model \(model) 不需要外網測試，直接回傳 true")
+        print("[DEBUG] Model \(model) 不需要外網測試，直接回傳 true")
         completion(true)
         return
     }
-//    print("[DEBUG] 準備測試外網連線: \(url.absoluteString)")
     
-    let task = URLSession.shared.dataTask(with: url) { data, response, error in
+    var request = URLRequest(url: url)
+    request.httpMethod = "GET"
+    
+    // 針對 OpenAI API，添加 Bearer Token
+    if model == .chatgpt {
+        let apiKey = openAIAPIKey  // ⚠️ 確保這裡填入正確的 OpenAI API Key
+        request.addValue("Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
+    }
+    
+    print("[DEBUG] 準備測試外網連線: \(url.absoluteString)")
+    
+    let task = URLSession.shared.dataTask(with: request) { data, response, error in
         
         // 1) 檢查有沒有 error
-        if error != nil {
-//            print("[DEBUG] 請求失敗，error: \(error.localizedDescription) \(url)")
+        if let error = error {
+            print("[DEBUG] 請求失敗，error: \(error.localizedDescription) \(url)")
             completion(false)
             return
         }
         
         // 2) 檢查 response 是不是 HTTP 回應
         guard let httpResponse = response as? HTTPURLResponse else {
-//            print("[DEBUG] response 不是 HTTPURLResponse: \(String(describing: response))")
+            print("[DEBUG] response 不是 HTTPURLResponse: \(String(describing: response))")
             completion(false)
             return
         }
         
         // 3) 印出狀態碼、標頭
-//        print("[DEBUG] 收到 HTTP 狀態碼: \(httpResponse.statusCode)")
+        print("[DEBUG] 收到 HTTP 狀態碼: \(httpResponse.statusCode)")
         // 若想看全部 header，可:
-        // print("[DEBUG] HTTP Header: \(httpResponse.allHeaderFields)")
+         print("[DEBUG] HTTP Header: \(httpResponse.allHeaderFields)")
         
         // 4) 如果有 data 也可查看回應內容 (可能是 HTML, JSON 等)
         if let data = data,
