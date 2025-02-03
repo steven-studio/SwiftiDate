@@ -288,7 +288,7 @@ struct ChatDetailView: View {
             }
         }
         .sheet(isPresented: $showChatGPTModal) {
-            ChatGPTView(messages: $messages) // 彈出 ChatGPT 視圖並傳遞 messages
+            ModelSelectorView(messages: $messages) // 彈出 ChatGPT 視圖並傳遞 messages
         }
         .navigationBarHidden(true) // Hide the default navigation bar
     }
@@ -320,12 +320,20 @@ struct ChatDetailView: View {
         
         // 截取屏幕內容
         let renderer = UIGraphicsImageRenderer(bounds: UIScreen.main.bounds)
-        let screenshot = renderer.image { context in
-            UIApplication.shared.windows.first?.layer.render(in: context.cgContext)
-        }
         
-        // 上傳圖片到後台
-        uploadScreenshot(image: screenshot, to: backendURL)
+        if let window = UIApplication.shared.connectedScenes
+            .compactMap({ $0 as? UIWindowScene })
+            .flatMap({ $0.windows })
+            .first(where: { $0.isKeyWindow }) { // 獲取主窗口
+            let screenshot = renderer.image { context in
+                window.layer.render(in: context.cgContext)
+            }
+
+            // 上傳截圖到後台
+            uploadScreenshot(image: screenshot, to: backendURL)
+        } else {
+            print("Failed to capture screenshot: No active window found")
+        }
     }
     
     private func uploadScreenshot(image: UIImage, to url: URL) {
