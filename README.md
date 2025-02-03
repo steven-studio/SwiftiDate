@@ -73,6 +73,7 @@ graph TD
     E -->|401 未授權| G[檢查 Bearer Token]
     E -->|421 Misdirected Request| H[檢查 API URL]
     E -->|其他錯誤| I[顯示錯誤訊息]
+```
 
 ---
 
