@@ -133,87 +133,133 @@ func canConnect(to model: LLMModel, completion: @escaping (Bool) -> Void) {
 // 模型選擇視圖
 struct ModelSelectorView: View {
     @State private var selectedModel: LLMModel = .chatgpt // 默認為 ChatGPT
+    @State private var navigateToChatGPT = false
+    @State private var navigateToGemini = false
+    @State private var navigateToClaude = false
+    @State private var navigateToDeepSeek = false
+    @State private var navigateToCustom = false
     @State private var availableModels: [LLMModel] = []  // 根據地區篩選出的模型
+    @Binding var messages: [Message]  // 綁定聊天歷史記錄
 
     // 設定 3 欄的網格
     let columns = Array(repeating: GridItem(.flexible()), count: 3)
     
     var body: some View {
-        VStack {
-            Text("選擇 LLM 模型")
-                .font(.headline)
-                .padding()
+        NavigationView {
+            VStack {
+                Text("選擇 LLM 模型")
+                    .font(.headline)
+                    .padding()
 
-            // 自定義 HStack 作為選擇器
-            LazyVGrid(columns: columns, spacing: 16) {
-                ForEach(availableModels, id: \.self) { model in
-                    Button(action: {
-                        selectedModel = model // 更新選擇的模型
-                    }) {
-                        ZStack {
-                            // 1) 若目前被選擇，顯示圓角背景／描邊；否則用透明或不顯示
-                            if selectedModel == model {
-                                RoundedRectangle(cornerRadius: 16)
-                                    .fill(Color.blue.opacity(0.2))   // 或者 fill(Color.blue.opacity(0.2)) 來上色
-                                    .frame(maxWidth: .infinity, maxHeight: .infinity)
-                            }
-                            
-                            VStack {
-                                // 動態顯示模型對應的圖標
-                                Image(iconName(for: model))
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width: 30, height: 30)
-                                    .foregroundColor(selectedModel == model ? .white : .blue)
+                // 自定義 HStack 作為選擇器
+                LazyVGrid(columns: columns, spacing: 16) {
+                    ForEach(availableModels, id: \.self) { model in
+                        Button(action: {
+                            selectedModel = model // 更新選擇的模型
+                        }) {
+                            ZStack {
+                                // 1) 若目前被選擇，顯示圓角背景／描邊；否則用透明或不顯示
+                                if selectedModel == model {
+                                    RoundedRectangle(cornerRadius: 16)
+                                        .fill(Color.blue.opacity(0.2))   // 或者 fill(Color.blue.opacity(0.2)) 來上色
+                                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                                }
                                 
-                                // 顯示模型名稱
-                                Text(model.rawValue)
-                                    .padding(.top, 5)
-                                    .foregroundColor(selectedModel == model ? .blue : .black)
+                                VStack {
+                                    // 動態顯示模型對應的圖標
+                                    Image(iconName(for: model))
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(width: 30, height: 30)
+                                        .foregroundColor(selectedModel == model ? .white : .blue)
+                                    
+                                    // 顯示模型名稱
+                                    Text(model.rawValue)
+                                        .padding(.top, 5)
+                                        .foregroundColor(selectedModel == model ? .blue : .black)
+                                }
                             }
                         }
                     }
                 }
-            }
-            .padding()
-
-            // 顯示當前選擇的模型
-            Text("當前選擇的模型是：\(selectedModel.rawValue)")
                 .padding()
 
-            Spacer()
-            
-            // 在底部新增「繼續」按鈕
-            Button(action: {
-                // 在這裡處理「繼續」按鈕的邏輯
-                print("使用者選擇的模型：\(selectedModel.rawValue)")
-            }) {
-                Text("繼續")
-                    .foregroundColor(.white)
+                // 顯示當前選擇的模型
+                Text("當前選擇的模型是：\(selectedModel.rawValue)")
                     .padding()
-                    .frame(maxWidth: .infinity)
-                    .background(Color.blue)
-                    .cornerRadius(8)
-            }
-            .padding(.horizontal)
-            .padding(.bottom, 20)
 
-        }
-        .padding()
-        .onAppear {
-            // 根據地區篩選模型
-            let region = detectRegion()
-            // 1) 先取得初步可用清單
-            let rawModels = LLMModel.availableModels(for: region)
-            
-            // 2) 逐一測試連線 (異步)
-            filterModelsByConnectivity(models: rawModels) { filtered in
-                // 3) 更新 UI
-                self.availableModels = filtered
-                // 若沒有可用模型，也可視情況顯示預設
-                self.selectedModel = filtered.first ?? .local
+                Spacer()
+                
+                // NavigationLink 控制視圖導航
+                NavigationLink(destination: ChatGPTView(messages: $messages, showChatGPTView: $navigateToChatGPT), isActive: $navigateToChatGPT) { EmptyView() }
+                NavigationLink(destination: GeminiView(messages: $messages, showGeminiView: $navigateToGemini), isActive: $navigateToGemini) { EmptyView() }
+                NavigationLink(destination: ClaudeAIView(messages: $messages, showClaudeAIView: $navigateToClaude), isActive: $navigateToClaude) { EmptyView() }
+                NavigationLink(destination: DeepSeekView(messages: $messages, showDeepSeekView: $navigateToDeepSeek), isActive: $navigateToDeepSeek) { EmptyView() }
+                NavigationLink(destination: LocalModelView(messages: $messages, showLocalModel: $navigateToCustom), isActive: $navigateToCustom) { EmptyView() }
+
+                
+                // 在底部新增「繼續」按鈕
+                Button(action: {
+                    // 在這裡處理「繼續」按鈕的邏輯
+                    print("使用者選擇的模型：\(selectedModel.rawValue)")
+                    triggerNavigation()
+                }) {
+                    Text("繼續")
+                        .foregroundColor(.white)
+                        .padding()
+                        .frame(maxWidth: .infinity)
+                        .background(Color.blue)
+                        .cornerRadius(8)
+                }
+                .padding(.horizontal)
+                .padding(.bottom, 20)
+
+            }
+            .padding()
+            .onAppear {
+                // 根據地區篩選模型
+                let region = detectRegion()
+                // 1) 先取得初步可用清單
+                let rawModels = LLMModel.availableModels(for: region)
+                
+                // 2) 逐一測試連線 (異步)
+                filterModelsByConnectivity(models: rawModels) { filtered in
+                    // 3) 更新 UI
+                    self.availableModels = filtered
+                    // 若沒有可用模型，也可視情況顯示預設
+                    self.selectedModel = filtered.first ?? .local
+                }
             }
         }
+    }
+    
+    /// ✅ 這個函數會根據選擇的模型來設置 NavigationLink 的 isActive
+    private func triggerNavigation() {
+        resetNavigation() // 先將所有狀態重置
+        
+        switch selectedModel {
+        case .chatgpt:
+            navigateToChatGPT = true
+        case .gemini:
+            navigateToGemini = true
+        case .claude:
+            navigateToClaude = true
+        case .deepseek:
+            navigateToDeepSeek = true
+        case .local:
+            navigateToCustom = true
+        default:
+            break
+        }
+    }
+
+    /// ✅ 這個函數會確保 NavigationLink 的狀態不會衝突
+    private func resetNavigation() {
+        navigateToChatGPT = false
+        navigateToGemini = false
+        navigateToClaude = false
+        navigateToDeepSeek = false
+        navigateToCustom = false
     }
     
     /// 對所有需外網的 model 做測試；回傳能連線的清單
@@ -274,6 +320,21 @@ struct ModelSelectorView: View {
 // 預覽
 struct ModelSelectorView_Previews: PreviewProvider {
     static var previews: some View {
-        ModelSelectorView()
+        ModelSelectorView(messages: .constant([ // 使用 .constant 來模擬綁定數據
+            Message(
+                id: UUID(),
+                content: .text("你好，這是範例訊息1"), // 將文字包裝為 .text
+                isSender: true,
+                time: "10:00 AM",
+                isCompliment: false
+            ),
+            Message(
+                id: UUID(),
+                content: .text("你好，這是範例訊息2"), // 將文字包裝為 .text
+                isSender: false,
+                time: "10:05 AM",
+                isCompliment: false
+            )
+        ]))
     }
 }
