@@ -29,10 +29,26 @@ struct LoginView: View {
     var body: some View {
         ZStack {
             // 背景顏色
-            LinearGradient(gradient: Gradient(colors: [Color.blue.opacity(0.6), Color.blue]), startPoint: .top, endPoint: .bottom)
-                .ignoresSafeArea()
-            
+            LinearGradient(gradient: Gradient(colors: [Color.white.opacity(0.5), Color.blue]),
+                           startPoint: .top,
+                           endPoint: .bottom)
+                .edgesIgnoringSafeArea(.all)
+
             VStack {
+                HStack {
+                    Button(action: {
+                        // Handle Back Action (Pop to previous view)
+                        clearUserState()
+                    }) {
+                        Image(systemName: "chevron.left")
+                            .font(.title2)
+                            .foregroundColor(.gray.opacity(0.5)) // 設置文字顏色為黑色
+                            .padding(.leading)
+                    }
+                    Spacer()
+                }
+                .padding(.top)
+                
                 Spacer()
                 
                 // 中間的標誌
