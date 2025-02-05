@@ -1,0 +1,5 @@
+/Users/youzhewei/Desktop/SwiftiDate/build/lib/libmlc_llm.a
+/Users/youzhewei/Desktop/SwiftiDate/build/lib/libtokenizers_cpp.a
+/Users/youzhewei/Desktop/SwiftiDate/build/lib/libsentencepiece.a
+/Users/youzhewei/Desktop/SwiftiDate/build/lib/libtvm_runtime.a
+/Users/youzhewei/Desktop/SwiftiDate/build/lib/libtokenizers_c.a
