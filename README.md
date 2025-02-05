@@ -114,7 +114,7 @@ graph TD
 
 SwiftiDate 還在開發中（目前完成度約 75%）。若你看好這個專案的未來，並想協助我們加速開發：
 
-[![Donate with PayPal](https://img.shields.io/badge/Donate-PayPal-blue.svg)](https://www.paypal.com/donate?business=你的帳號)
+[![Donate with PayPal](https://img.shields.io/badge/Donate-PayPal-blue.svg)](https://paypal.me/donate648?country.x=TW&locale.x=zh_TW)
 [![Sponsor SwiftiDate](https://img.shields.io/badge/GitHub-Sponsor-pink.svg)](https://github.com/sponsors/你的GitHub帳號)
 
 你的贊助將用於：
