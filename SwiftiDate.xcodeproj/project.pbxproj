@@ -186,6 +186,8 @@
 		D0DDDB542CA25B4E00A78A87 /* PrivacyPolicyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB532CA25B4D00A78A87 /* PrivacyPolicyView.swift */; };
 		D0DDDB562CA29B1200A78A87 /* TermsOfServiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB552CA29B1100A78A87 /* TermsOfServiceView.swift */; };
 		D0DDDB582CA4ECD300A78A87 /* DataManagementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB572CA4ECD200A78A87 /* DataManagementView.swift */; };
+		D0DE77852D52F23D00E696A4 /* MLCSwift in Frameworks */ = {isa = PBXBuildFile; productRef = D0DE77842D52F23D00E696A4 /* MLCSwift */; };
+		D0DE77882D52F3BF00E696A4 /* bundle in Copy Files */ = {isa = PBXBuildFile; fileRef = D0DE77872D52F3BF00E696A4 /* bundle */; };
 		D0E3F1DB2D2E6BD5000FF556 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E3F1DA2D2E6BCF000FF556 /* NotificationManager.swift */; };
 		D0FA20B92C8CBAAB001C5D0E /* MeetWillingnessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FA20B82C8CBAAB001C5D0E /* MeetWillingnessView.swift */; };
 /* End PBXBuildFile section */
@@ -238,6 +240,17 @@
 				D06055C82D4472BE0004F463 /* SwiftiDateWatch Watch App.app in Embed Watch Content */,
 			);
 			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D0DE77862D52F3AA00E696A4 /* Copy Files */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 7;
+			files = (
+				D0DE77882D52F3BF00E696A4 /* bundle in Copy Files */,
+			);
+			name = "Copy Files";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -409,6 +422,7 @@
 		D0DDDB532CA25B4D00A78A87 /* PrivacyPolicyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyView.swift; sourceTree = "<group>"; };
 		D0DDDB552CA29B1100A78A87 /* TermsOfServiceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsOfServiceView.swift; sourceTree = "<group>"; };
 		D0DDDB572CA4ECD200A78A87 /* DataManagementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManagementView.swift; sourceTree = "<group>"; };
+		D0DE77872D52F3BF00E696A4 /* bundle */ = {isa = PBXFileReference; lastKnownFileType = folder; name = bundle; path = dist/bundle; sourceTree = "<group>"; };
 		D0E3F1DA2D2E6BCF000FF556 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		D0FA20B82C8CBAAB001C5D0E /* MeetWillingnessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetWillingnessView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -447,6 +461,7 @@
 				D0DDDB122CA1008B00A78A87 /* KeychainAccess in Frameworks */,
 				D018AD822C9ED5D4005A14B9 /* FirebaseInAppMessaging-Beta in Frameworks */,
 				D018AD922C9ED5D4005A14B9 /* FirebaseVertexAI-Preview in Frameworks */,
+				D0DE77852D52F23D00E696A4 /* MLCSwift in Frameworks */,
 				D018AD8C2C9ED5D4005A14B9 /* FirebaseRemoteConfig in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -604,6 +619,7 @@
 		D0445C222C71B3800059D522 = {
 			isa = PBXGroup;
 			children = (
+				D0DE77872D52F3BF00E696A4 /* bundle */,
 				D039FC572CCD08160082D2F3 /* SafetyRelated */,
 				D039FC562CCD074A0082D2F3 /* SettingsRelated */,
 				D0472D392CCC6CDA0047FE10 /* LoginOrRegister */,
@@ -769,6 +785,7 @@
 				D0445C282C71B3800059D522 /* Frameworks */,
 				D0445C292C71B3800059D522 /* Resources */,
 				D06055C72D4472BE0004F463 /* Embed Watch Content */,
+				D0DE77862D52F3AA00E696A4 /* Copy Files */,
 			);
 			buildRules = (
 			);
@@ -801,6 +818,7 @@
 				D018AD8F2C9ED5D4005A14B9 /* FirebaseStorageCombine-Community */,
 				D018AD912C9ED5D4005A14B9 /* FirebaseVertexAI-Preview */,
 				D0DDDB112CA1008B00A78A87 /* KeychainAccess */,
+				D0DE77842D52F23D00E696A4 /* MLCSwift */,
 			);
 			productName = SwiftiDate;
 			productReference = D0445C2B2C71B3800059D522 /* SwiftiDate.app */;
@@ -960,6 +978,7 @@
 			packageReferences = (
 				D018AD642C9ED3C2005A14B9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				D0DDDB102CA1008B00A78A87 /* XCRemoteSwiftPackageReference "KeychainAccess" */,
+				D0DE77832D52F23D00E696A4 /* XCLocalSwiftPackageReference "MLCSwift" */,
 			);
 			productRefGroup = D0445C2C2C71B3800059D522 /* Products */;
 			projectDirPath = "";
@@ -1411,7 +1430,17 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/dist/lib";
 				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"-Wl,-all_load",
+					"-lmodel_iphone",
+					"-lmlc_llm",
+					"-ltvm_runtime",
+					"-ltokenizers_cpp",
+					"-lsentencepiece",
+					"-ltokenizers_c",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = stevenstudio.SwiftiDate;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -1446,7 +1475,17 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/dist/lib";
 				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"-Wl,-all_load",
+					"-lmodel_iphone",
+					"-lmlc_llm",
+					"-ltvm_runtime",
+					"-ltokenizers_cpp",
+					"-lsentencepiece",
+					"-ltokenizers_c",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = stevenstudio.SwiftiDate;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -1740,6 +1779,13 @@
 		};
 /* End XCConfigurationList section */
 
+/* Begin XCLocalSwiftPackageReference section */
+		D0DE77832D52F23D00E696A4 /* XCLocalSwiftPackageReference "MLCSwift" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = MLCSwift;
+		};
+/* End XCLocalSwiftPackageReference section */
+
 /* Begin XCRemoteSwiftPackageReference section */
 		D018AD642C9ED3C2005A14B9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
@@ -1879,6 +1925,10 @@
 			isa = XCSwiftPackageProductDependency;
 			package = D0DDDB102CA1008B00A78A87 /* XCRemoteSwiftPackageReference "KeychainAccess" */;
 			productName = KeychainAccess;
+		};
+		D0DE77842D52F23D00E696A4 /* MLCSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = MLCSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
