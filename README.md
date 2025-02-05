@@ -108,3 +108,18 @@ graph TD
 
 - **預計時間**: [日期範圍，例如 2026 Q4 及以後]
 
+---
+
+## 🤝 支持 SwiftiDate
+
+SwiftiDate 還在開發中（目前完成度約 75%）。若你看好這個專案的未來，並想協助我們加速開發：
+
+[![Donate with PayPal](https://img.shields.io/badge/Donate-PayPal-blue.svg)](https://www.paypal.com/donate?business=你的帳號)
+[![Sponsor SwiftiDate](https://img.shields.io/badge/GitHub-Sponsor-pink.svg)](https://github.com/sponsors/你的GitHub帳號)
+
+你的贊助將用於：
+- 資助伺服器/測試環境費用
+- 聘請更多開發者協助完善 NLP 匹配功能
+- 推出 Beta 版本前的市場測試
+
+> **感謝每一位贊助者**，我們會在發佈正式版時在專案頁面公開鳴謝！
