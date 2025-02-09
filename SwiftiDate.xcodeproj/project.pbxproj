@@ -105,6 +105,16 @@
 		D055A7632D19931C00F11F18 /* GlobalVariables.swift in Sources */ = {isa = PBXBuildFile; fileRef = D055A7622D19931C00F11F18 /* GlobalVariables.swift */; };
 		D055A7672D19A2B800F11F18 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D055A7662D19A2B800F11F18 /* GoogleService-Info.plist */; };
 		D055E9922C8CCFBA00A97DD1 /* InterestSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D055E9912C8CCFBA00A97DD1 /* InterestSelectionView.swift */; };
+		D0903ABC2D589D0C00735323 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0903ABB2D589D0C00735323 /* AppDelegate.swift */; };
+		D0903ABE2D589D7C00735323 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0903ABD2D589D7C00735323 /* NotificationManager.swift */; };
+		D0903AC02D58A45200735323 /* modelSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0903ABF2D58A45200735323 /* modelSelector.swift */; };
+		D0903AC22D58A4DA00735323 /* GeminiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0903AC12D58A4DA00735323 /* GeminiView.swift */; };
+		D0903AC42D58A50000735323 /* ClaudeAIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0903AC32D58A50000735323 /* ClaudeAIView.swift */; };
+		D0903AC62D58A52500735323 /* DeepSeekView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0903AC52D58A52500735323 /* DeepSeekView.swift */; };
+		D0903AC82D58A54700735323 /* LocalModelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0903AC72D58A54700735323 /* LocalModelView.swift */; };
+		D0903ACA2D58A56F00735323 /* MessageListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0903AC92D58A56F00735323 /* MessageListView.swift */; };
+		D0903ACC2D58A59B00735323 /* TextViewRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0903ACB2D58A59B00735323 /* TextViewRepresentable.swift */; };
+		D0903ACE2D58A5C200735323 /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0903ACD2D58A5C200735323 /* Response.swift */; };
 		D09587B92CB6552100BCD04B /* ChatGPTView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09587B82CB6552100BCD04B /* ChatGPTView.swift */; };
 		D09587BB2CB7558600BCD04B /* SafetyCenterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09587BA2CB7558600BCD04B /* SafetyCenterView.swift */; };
 		D09587BD2CB77F5200BCD04B /* SafetyTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09587BC2CB77F5200BCD04B /* SafetyTestView.swift */; };
@@ -262,6 +272,16 @@
 		D055A7622D19931C00F11F18 /* GlobalVariables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalVariables.swift; sourceTree = "<group>"; };
 		D055A7662D19A2B800F11F18 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D055E9912C8CCFBA00A97DD1 /* InterestSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterestSelectionView.swift; sourceTree = "<group>"; };
+		D0903ABB2D589D0C00735323 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		D0903ABD2D589D7C00735323 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
+		D0903ABF2D58A45200735323 /* modelSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = modelSelector.swift; sourceTree = "<group>"; };
+		D0903AC12D58A4DA00735323 /* GeminiView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeminiView.swift; sourceTree = "<group>"; };
+		D0903AC32D58A50000735323 /* ClaudeAIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClaudeAIView.swift; sourceTree = "<group>"; };
+		D0903AC52D58A52500735323 /* DeepSeekView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepSeekView.swift; sourceTree = "<group>"; };
+		D0903AC72D58A54700735323 /* LocalModelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalModelView.swift; sourceTree = "<group>"; };
+		D0903AC92D58A56F00735323 /* MessageListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageListView.swift; sourceTree = "<group>"; };
+		D0903ACB2D58A59B00735323 /* TextViewRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextViewRepresentable.swift; sourceTree = "<group>"; };
+		D0903ACD2D58A5C200735323 /* Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
 		D09587B82CB6552100BCD04B /* ChatGPTView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatGPTView.swift; sourceTree = "<group>"; };
 		D09587BA2CB7558600BCD04B /* SafetyCenterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafetyCenterView.swift; sourceTree = "<group>"; wrapsLines = 1; };
 		D09587BC2CB77F5200BCD04B /* SafetyTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafetyTestView.swift; sourceTree = "<group>"; };
@@ -520,6 +540,7 @@
 				D018AD972C9F1A0F005A14B9 /* Info.plist */,
 				D055A7662D19A2B800F11F18 /* GoogleService-Info.plist */,
 				D0445C2E2C71B3800059D522 /* SwiftiDateApp.swift */,
+				D0903ABB2D589D0C00735323 /* AppDelegate.swift */,
 				D0445C302C71B3800059D522 /* ContentView.swift */,
 				D0472D3C2CCC7F600047FE10 /* MainView.swift */,
 				D0445C322C71B3820059D522 /* Assets.xcassets */,
@@ -555,6 +576,15 @@
 				D039FC5A2CD230050082D2F3 /* PersonalityView.swift */,
 				D0C99B2C2D0DBFEC00FA98AD /* Localizable.strings */,
 				D055A7622D19931C00F11F18 /* GlobalVariables.swift */,
+				D0903ABD2D589D7C00735323 /* NotificationManager.swift */,
+				D0903ABF2D58A45200735323 /* modelSelector.swift */,
+				D0903AC12D58A4DA00735323 /* GeminiView.swift */,
+				D0903AC32D58A50000735323 /* ClaudeAIView.swift */,
+				D0903AC52D58A52500735323 /* DeepSeekView.swift */,
+				D0903AC72D58A54700735323 /* LocalModelView.swift */,
+				D0903AC92D58A56F00735323 /* MessageListView.swift */,
+				D0903ACB2D58A59B00735323 /* TextViewRepresentable.swift */,
+				D0903ACD2D58A5C200735323 /* Response.swift */,
 			);
 			path = SwiftiDate;
 			sourceTree = "<group>";
@@ -788,12 +818,15 @@
 				D0DDDB092C9FDE0500A78A87 /* InteractiveContentView.swift in Sources */,
 				D017F4F42CAF77D900C71D18 /* MessageBubbleView.swift in Sources */,
 				D049387C2CBF465300754E46 /* EducationAndWorkView.swift in Sources */,
+				D0903ACC2D58A59B00735323 /* TextViewRepresentable.swift in Sources */,
 				D0DDDB4E2CA19D0800A78A87 /* PhotoUploadGuidelinesView.swift in Sources */,
 				D0445C832C73CBE70059D522 /* FitnessOptionsView.swift in Sources */,
 				D04729C62CC03D55007C33EC /* ProfileHeaderView.swift in Sources */,
+				D0903ABE2D589D7C00735323 /* NotificationManager.swift in Sources */,
 				D0DDDB1A2CA1282B00A78A87 /* WhatIsSwiftiDateView.swift in Sources */,
 				D0DDDB322CA16B7000A78A87 /* UndoSwipeView.swift in Sources */,
 				D051EF2C2CC02C33004563A3 /* PhotoUtility.swift in Sources */,
+				D0903ACA2D58A56F00735323 /* MessageListView.swift in Sources */,
 				D0445C6B2C7247050059D522 /* DegreePicker.swift in Sources */,
 				D0DDDB3C2CA1770400A78A87 /* RefundPolicyView.swift in Sources */,
 				D018AD632C9E87F6005A14B9 /* ChatView.swift in Sources */,
@@ -827,6 +860,7 @@
 				D017F4EE2CAEBC8700C71D18 /* QRCodeScannerView.swift in Sources */,
 				D04729E22CC1315F007C33EC /* SupremeBannerView.swift in Sources */,
 				D017F4F82CAFC9A200C71D18 /* PhoneNumberEntryView.swift in Sources */,
+				D0903AC42D58A50000735323 /* ClaudeAIView.swift in Sources */,
 				D0445C7F2C73C9080059D522 /* LookingForView.swift in Sources */,
 				D0DDDB3E2CA179AC00A78A87 /* WhatIsSwiftiDatePremiumDiscountPolicyView.swift in Sources */,
 				D09587D62CB8CDDA00BCD04B /* GenderSelectionView.swift in Sources */,
@@ -843,6 +877,7 @@
 				D0DDDB462CA18FDC00A78A87 /* HowToUseIncognitoModeView.swift in Sources */,
 				D04729CA2CC087AD007C33EC /* PreviewSectionView.swift in Sources */,
 				D0DDDB362CA16FF900A78A87 /* HowToPurchaseSwiftiDatePremiumView.swift in Sources */,
+				D0903AC02D58A45200735323 /* modelSelector.swift in Sources */,
 				D0DDDB442CA17FA700A78A87 /* HowToUseAdvancedFilteringView.swift in Sources */,
 				D055A7632D19931C00F11F18 /* GlobalVariables.swift in Sources */,
 				D018AD5B2C9E57DF005A14B9 /* UserGuideView.swift in Sources */,
@@ -851,6 +886,7 @@
 				D0DDDB302CA164BE00A78A87 /* WhatIsTurboAndHowToUseView.swift in Sources */,
 				D0DDDB282CA14FCC00A78A87 /* ReportUserView.swift in Sources */,
 				D0DDDB482CA191EE00A78A87 /* HowToPurchaseSwiftiDateSupremeView.swift in Sources */,
+				D0903AC82D58A54700735323 /* LocalModelView.swift in Sources */,
 				D0DDDB1C2CA1321300A78A87 /* IsSwiftiDatePaidView.swift in Sources */,
 				D09587CB2CB7D19B00BCD04B /* ReportAftermathView.swift in Sources */,
 				D09587B92CB6552100BCD04B /* ChatGPTView.swift in Sources */,
@@ -868,6 +904,7 @@
 				D04729E62CC1DA82007C33EC /* PremiumDetailsView.swift in Sources */,
 				D0DDDB0D2CA07A2400A78A87 /* FeaturedCardView.swift in Sources */,
 				D0DDDB2E2CA1628F00A78A87 /* WhatIsCrushAndHowToUseView.swift in Sources */,
+				D0903ACE2D58A5C200735323 /* Response.swift in Sources */,
 				D055E9922C8CCFBA00A97DD1 /* InterestSelectionView.swift in Sources */,
 				D0445C2F2C71B3800059D522 /* SwiftiDateApp.swift in Sources */,
 				D04729D82CC099BA007C33EC /* VerificationStatusView.swift in Sources */,
@@ -882,12 +919,14 @@
 				D04729EC2CC1FB16007C33EC /* SubscriptionScrollView.swift in Sources */,
 				D04729CC2CC08B62007C33EC /* MeetWillingnessSection.swift in Sources */,
 				D017F4F02CAECC5100C71D18 /* PersonalInfoView.swift in Sources */,
+				D0903ABC2D589D0C00735323 /* AppDelegate.swift in Sources */,
 				D0DDDB052C9FA8AF00A78A87 /* ChatDetailView.swift in Sources */,
 				D0445C652C72388D0059D522 /* FlowStack.swift in Sources */,
 				D04729C42CC03C4D007C33EC /* StatisticsSectionView.swift in Sources */,
 				D0DDDB2A2CA156A700A78A87 /* WhatIsSwiftiDatePremiumView.swift in Sources */,
 				D04729E02CC1149E007C33EC /* TopRightActionButtons.swift in Sources */,
 				D0DDDB542CA25B4E00A78A87 /* PrivacyPolicyView.swift in Sources */,
+				D0903AC22D58A4DA00735323 /* GeminiView.swift in Sources */,
 				D04729DC2CC0BDC4007C33EC /* ServiceSectionContainer.swift in Sources */,
 				D0445C732C72FB440059D522 /* HometownInputView.swift in Sources */,
 				D04729DA2CC09B54007C33EC /* EditSectionView.swift in Sources */,
@@ -898,6 +937,7 @@
 				D09587C92CB7CDB800BCD04B /* HowToReportView.swift in Sources */,
 				D0DDDB1E2CA138B200A78A87 /* HowToMatchAndChatView.swift in Sources */,
 				D04729E42CC13221007C33EC /* PremiumCardTabView.swift in Sources */,
+				D0903AC62D58A52500735323 /* DeepSeekView.swift in Sources */,
 				D0DDDB382CA171B400A78A87 /* HowToCancelSubscriptionView.swift in Sources */,
 				D0DDDB0F2CA0E65F00A78A87 /* LocationManager.swift in Sources */,
 				D0DDDB242CA1486E00A78A87 /* HowToUnmatchView.swift in Sources */,

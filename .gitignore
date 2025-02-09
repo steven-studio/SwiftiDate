@@ -1,4 +1,8 @@
 GoogleService-Info.plist
 SwiftiDate/GlobalVariables.swift
+*.xcuserstate
 firebase_chat_sorter.py
 swiftidate-cdff0-firebase-adminsdk-e2p44-7c5e06ebfc.json
+SwiftiDate.xcodeproj/project.pbxproj
+mlc-llm
+dist
