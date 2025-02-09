@@ -95,7 +95,7 @@ struct MessageBubbleView: View {
                     .background(Color.blue.opacity(0.2))
                     .cornerRadius(10)
                 }
-                
+
                 if !isCurrentUser {
                     // Add a heart icon for non-current users
                     Button(action: {

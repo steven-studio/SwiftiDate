@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 struct TurboView: View {
-    @ObservedObject var userSettings = UserSettings()
+    @EnvironmentObject var userSettings: UserSettings
     
     // Binding to control the ContentView's selectedTab
     @Binding var contentSelectedTab: Int

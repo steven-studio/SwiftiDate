@@ -2,9 +2,10 @@
 //  AppDelegate.swift
 //  SwiftiDate
 //
-//  Created by 游哲維 on 2024/12/26.
+//  Created by 游哲維 on 2025/2/9.
 //
 
+import Foundation
 import CoreLocation
 import UIKit
 import FirebaseCore
@@ -98,7 +99,7 @@ class AppDelegate: NSObject, UIApplicationDelegate, CLLocationManagerDelegate, U
     
     // 在前台顯示通知時的處理
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-        completionHandler([.alert, .sound, .badge]) // 顯示通知
+        completionHandler([.banner, .sound, .badge]) // 顯示通知
     }
         
     private func storeDeviceIdentifier() {

@@ -28,13 +28,6 @@ struct ContentView: View {
                     loadPhotosFromAppStorage()
                 }
         }
-        
-//        MainView()
-//            .environmentObject(appState) // 傳遞 appState
-//            .environmentObject(userSettings)
-//            .onAppear {
-//                loadPhotosFromAppStorage()
-//            }
     }
     
     // 加載照片
@@ -159,6 +152,12 @@ struct ContentView: View {
                                             userSettings.photos = downloadedPhotos.map { $0.imageName }
                                             userSettings.loadedPhotosString = userSettings.photos.joined(separator: ",")
                                             print("Updated photos array after download: \(userSettings.photos)")
+                                            // 檢查
+                                            if userSettings.loadedPhotosString.isEmpty {
+                                                print("下載結束，但 loadedPhotosString 依然是空的，表示沒有照片")
+                                            } else {
+                                                print("下載結束，成功存入 loadedPhotosString = \(userSettings.loadedPhotosString)")
+                                            }
                                         }
                                     }
                                 }
@@ -215,14 +214,6 @@ struct ContentView: View {
             return Int(urlString[range])
         }
         return nil
-    }
-    
-    // 添加圖片到照片列表
-    func addImageToPhotos(image: UIImage) {
-        let imageName = UUID().uuidString
-        PhotoUtility.saveImageToLocalStorage(image: image, withName: imageName)
-        userSettings.photos.append(imageName)
-        userSettings.loadedPhotosString = userSettings.photos.joined(separator: ",")
     }
 }
 

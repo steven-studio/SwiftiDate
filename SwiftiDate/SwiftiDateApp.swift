@@ -37,6 +37,10 @@ struct SwiftiDateApp: App {
                     ContentView()
                         .environmentObject(userSettings)
                         .environmentObject(appState)
+                        .onAppear {
+                            // 1. 在這裡呼叫一個方法，執行 Firebase 匿名登入
+                            signInAnonymously()
+                        }
                 } else {
                     LoginOrRegisterView()
                         .environmentObject(userSettings)
@@ -59,6 +63,27 @@ struct SwiftiDateApp: App {
                 userSettings.globalCrushCount = 10000
                 userSettings.globalPraiseCount = 10000
                 userSettings.isProfilePhotoVerified = true
+            }
+        }
+    }
+    
+    func signInAnonymously() {
+        if let user = Auth.auth().currentUser {
+            // 已登入過了
+            userSettings.globalUserID = user.uid
+            print("Already logged in, uid = \(user.uid)")
+        } else {
+            // 尚未登入 => 執行匿名登入
+            Auth.auth().signInAnonymously { (result, error) in
+                if let error = error {
+                    print("匿名登入失敗: \(error.localizedDescription)")
+                    return
+                }
+                if let user = result?.user {
+                    print("匿名登入成功, uid = \(user.uid)")
+                    // 這時可以把 user.uid 等資訊灌到 userSettings
+                    userSettings.globalUserID = user.uid
+                }
             }
         }
     }

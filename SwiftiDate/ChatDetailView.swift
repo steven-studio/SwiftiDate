@@ -26,6 +26,27 @@ import UIKit
  * ===============================================
  */
 
+import Foundation
+import SwiftUI
+import PhotosUI // by bryan_u.6_developer
+import UIKit
+
+/**
+ * ===============================================
+ * 📸 **PHPickerView**
+ * ===============================================
+ * 開發者: bryan_u.6_developer
+ * 功能: 自定義照片選取器，使用 PHPickerViewController 來選取圖片。
+ *
+ * 主要功能:
+ * - 使用者可以選取單張圖片
+ * - 支援非同步載入選取的圖片
+ * - 適合 SwiftUI 的 UIViewControllerRepresentable
+ *
+ * 日期: 2024-12-21
+ * ===============================================
+ */
+
 struct PHPickerView: UIViewControllerRepresentable {
     // 用於將選擇的圖片傳回父視圖
     @Binding var selectedImage: UIImage?
