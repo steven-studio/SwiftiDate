@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 60;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -130,6 +130,22 @@
 		D09587D12CB8623C00BCD04B /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09587D02CB8623C00BCD04B /* LoginView.swift */; };
 		D09587D42CB8BDEA00BCD04B /* PrivacySettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09587D32CB8BDEA00BCD04B /* PrivacySettingsView.swift */; };
 		D09587D62CB8CDDA00BCD04B /* GenderSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09587D52CB8CDDA00BCD04B /* GenderSelectionView.swift */; };
+		D0B388122D5B79A1003BC40C /* WebRTC in Frameworks */ = {isa = PBXBuildFile; productRef = D0B388112D5B79A1003BC40C /* WebRTC */; };
+		D0B388142D5B7A3E003BC40C /* SocialTrainingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B388132D5B7A3E003BC40C /* SocialTrainingView.swift */; };
+		D0B388292D5B7BAE003BC40C /* FaceTrackingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B388242D5B7BAE003BC40C /* FaceTrackingView.swift */; };
+		D0B3882A2D5B7BAE003BC40C /* CountryCodePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B388232D5B7BAE003BC40C /* CountryCodePickerView.swift */; };
+		D0B3882B2D5B7BAE003BC40C /* PasswordLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B388262D5B7BAE003BC40C /* PasswordLoginView.swift */; };
+		D0B3882C2D5B7BAE003BC40C /* OTPVerificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B388252D5B7BAE003BC40C /* OTPVerificationView.swift */; };
+		D0B3882D2D5B7BAE003BC40C /* RealVerificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B388272D5B7BAE003BC40C /* RealVerificationView.swift */; };
+		D0B3882E2D5B7BAE003BC40C /* UploadPhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B388282D5B7BAE003BC40C /* UploadPhotoView.swift */; };
+		D0B388302D5B7C12003BC40C /* SocialCourse.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B3882F2D5B7C12003BC40C /* SocialCourse.swift */; };
+		D0B388332D5B7C46003BC40C /* CourseRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B388322D5B7C46003BC40C /* CourseRowView.swift */; };
+		D0B388342D5B7C46003BC40C /* CourseDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B388312D5B7C46003BC40C /* CourseDetailView.swift */; };
+		D0B388362D5B7C58003BC40C /* AstrologyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B388352D5B7C58003BC40C /* AstrologyView.swift */; };
+		D0B388382D5B8263003BC40C /* WebRTCCallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B388372D5B8263003BC40C /* WebRTCCallView.swift */; };
+		D0B3883A2D5B8286003BC40C /* WebRTCManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B388392D5B8286003BC40C /* WebRTCManager.swift */; };
+		D0B3883C2D5B82DF003BC40C /* WebRTCVideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B3883B2D5B82DF003BC40C /* WebRTCVideoView.swift */; };
+		D0B3883E2D5B854A003BC40C /* SignalingClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B3883D2D5B854A003BC40C /* SignalingClient.swift */; };
 		D0C99B2E2D0DBFED00FA98AD /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D0C99B2C2D0DBFEC00FA98AD /* Localizable.strings */; };
 		D0DDDB052C9FA8AF00A78A87 /* ChatDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB042C9FA8AF00A78A87 /* ChatDetailView.swift */; };
 		D0DDDB072C9FDB1600A78A87 /* WhoLikedYouView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB062C9FDB1600A78A87 /* WhoLikedYouView.swift */; };
@@ -206,14 +222,14 @@
 		D018AD952C9EEA82005A14B9 /* AsyncImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncImageView.swift; sourceTree = "<group>"; };
 		D018AD972C9F1A0F005A14B9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		D039FC5A2CD230050082D2F3 /* PersonalityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalityView.swift; sourceTree = "<group>"; };
-		D0445C2B2C71B3800059D522 /* SwiftiDate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftiDate.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D0445C2B2C71B3800059D522 /* SwiftiDate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = SwiftiDate.app; path = "/Users/youzhewei/Desktop/SwiftiDate/build/Debug-iphoneos/SwiftiDate.app"; sourceTree = "<absolute>"; };
 		D0445C2E2C71B3800059D522 /* SwiftiDateApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftiDateApp.swift; sourceTree = "<group>"; };
 		D0445C302C71B3800059D522 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		D0445C322C71B3820059D522 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D0445C352C71B3820059D522 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		D0445C3B2C71B3820059D522 /* SwiftiDateTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftiDateTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D0445C3B2C71B3820059D522 /* SwiftiDateTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = SwiftiDateTests.xctest; path = "/Users/youzhewei/Desktop/SwiftiDate/build/Debug-iphoneos/SwiftiDate.app/PlugIns/SwiftiDateTests.xctest"; sourceTree = "<absolute>"; };
 		D0445C3F2C71B3830059D522 /* SwiftiDateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftiDateTests.swift; sourceTree = "<group>"; };
-		D0445C452C71B3830059D522 /* SwiftiDateUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftiDateUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D0445C452C71B3830059D522 /* SwiftiDateUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = SwiftiDateUITests.xctest; path = "/Users/youzhewei/Desktop/SwiftiDate/build/Debug-iphoneos/SwiftiDateUITests-Runner.app/PlugIns/SwiftiDateUITests.xctest"; sourceTree = "<absolute>"; };
 		D0445C492C71B3830059D522 /* SwiftiDateUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftiDateUITests.swift; sourceTree = "<group>"; };
 		D0445C4B2C71B3830059D522 /* SwiftiDateUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftiDateUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		D0445C582C71BFE70059D522 /* SwipeCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeCardView.swift; sourceTree = "<group>"; };
@@ -298,6 +314,21 @@
 		D09587D22CB8AC6900BCD04B /* SwiftiDate.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SwiftiDate.entitlements; sourceTree = "<group>"; };
 		D09587D32CB8BDEA00BCD04B /* PrivacySettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacySettingsView.swift; sourceTree = "<group>"; };
 		D09587D52CB8CDDA00BCD04B /* GenderSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenderSelectionView.swift; sourceTree = "<group>"; };
+		D0B388132D5B7A3E003BC40C /* SocialTrainingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialTrainingView.swift; sourceTree = "<group>"; };
+		D0B388232D5B7BAE003BC40C /* CountryCodePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryCodePickerView.swift; sourceTree = "<group>"; };
+		D0B388242D5B7BAE003BC40C /* FaceTrackingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceTrackingView.swift; sourceTree = "<group>"; };
+		D0B388252D5B7BAE003BC40C /* OTPVerificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTPVerificationView.swift; sourceTree = "<group>"; };
+		D0B388262D5B7BAE003BC40C /* PasswordLoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordLoginView.swift; sourceTree = "<group>"; };
+		D0B388272D5B7BAE003BC40C /* RealVerificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealVerificationView.swift; sourceTree = "<group>"; };
+		D0B388282D5B7BAE003BC40C /* UploadPhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadPhotoView.swift; sourceTree = "<group>"; };
+		D0B3882F2D5B7C12003BC40C /* SocialCourse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialCourse.swift; sourceTree = "<group>"; };
+		D0B388312D5B7C46003BC40C /* CourseDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseDetailView.swift; sourceTree = "<group>"; };
+		D0B388322D5B7C46003BC40C /* CourseRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseRowView.swift; sourceTree = "<group>"; };
+		D0B388352D5B7C58003BC40C /* AstrologyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AstrologyView.swift; sourceTree = "<group>"; };
+		D0B388372D5B8263003BC40C /* WebRTCCallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebRTCCallView.swift; sourceTree = "<group>"; };
+		D0B388392D5B8286003BC40C /* WebRTCManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebRTCManager.swift; sourceTree = "<group>"; };
+		D0B3883B2D5B82DF003BC40C /* WebRTCVideoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebRTCVideoView.swift; sourceTree = "<group>"; };
+		D0B3883D2D5B854A003BC40C /* SignalingClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignalingClient.swift; sourceTree = "<group>"; };
 		D0C99B2D2D0DBFEC00FA98AD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		D0C99B2F2D0DC00100FA98AD /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		D0C99B302D0DC00700FA98AD /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
@@ -356,6 +387,7 @@
 				D018AD862C9ED5D4005A14B9 /* FirebaseMLModelDownloader in Frameworks */,
 				D018AD6C2C9ED5D4005A14B9 /* FirebaseAppCheck in Frameworks */,
 				D018AD702C9ED5D4005A14B9 /* FirebaseAuth in Frameworks */,
+				D0B388122D5B79A1003BC40C /* WebRTC in Frameworks */,
 				D018AD662C9ED5D4005A14B9 /* FirebaseAnalytics in Frameworks */,
 				D018AD6E2C9ED5D4005A14B9 /* FirebaseAppDistribution-Beta in Frameworks */,
 				D018AD6A2C9ED5D4005A14B9 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
@@ -519,23 +551,17 @@
 				D0445C2D2C71B3800059D522 /* SwiftiDate */,
 				D0445C3E2C71B3830059D522 /* SwiftiDateTests */,
 				D0445C482C71B3830059D522 /* SwiftiDateUITests */,
-				D0445C2C2C71B3800059D522 /* Products */,
 			);
-			sourceTree = "<group>";
-		};
-		D0445C2C2C71B3800059D522 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				D0445C2B2C71B3800059D522 /* SwiftiDate.app */,
-				D0445C3B2C71B3820059D522 /* SwiftiDateTests.xctest */,
-				D0445C452C71B3830059D522 /* SwiftiDateUITests.xctest */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		D0445C2D2C71B3800059D522 /* SwiftiDate */ = {
 			isa = PBXGroup;
 			children = (
+				D0B388352D5B7C58003BC40C /* AstrologyView.swift */,
+				D0B388312D5B7C46003BC40C /* CourseDetailView.swift */,
+				D0B388322D5B7C46003BC40C /* CourseRowView.swift */,
+				D0B3882F2D5B7C12003BC40C /* SocialCourse.swift */,
+				D0B388132D5B7A3E003BC40C /* SocialTrainingView.swift */,
 				D09587D22CB8AC6900BCD04B /* SwiftiDate.entitlements */,
 				D018AD972C9F1A0F005A14B9 /* Info.plist */,
 				D055A7662D19A2B800F11F18 /* GoogleService-Info.plist */,
@@ -585,6 +611,10 @@
 				D0903AC92D58A56F00735323 /* MessageListView.swift */,
 				D0903ACB2D58A59B00735323 /* TextViewRepresentable.swift */,
 				D0903ACD2D58A5C200735323 /* Response.swift */,
+				D0B388372D5B8263003BC40C /* WebRTCCallView.swift */,
+				D0B388392D5B8286003BC40C /* WebRTCManager.swift */,
+				D0B3883B2D5B82DF003BC40C /* WebRTCVideoView.swift */,
+				D0B3883D2D5B854A003BC40C /* SignalingClient.swift */,
 			);
 			path = SwiftiDate;
 			sourceTree = "<group>";
@@ -618,6 +648,12 @@
 			isa = PBXGroup;
 			children = (
 				D017F4F72CAFC9A200C71D18 /* PhoneNumberEntryView.swift */,
+				D0B388232D5B7BAE003BC40C /* CountryCodePickerView.swift */,
+				D0B388242D5B7BAE003BC40C /* FaceTrackingView.swift */,
+				D0B388252D5B7BAE003BC40C /* OTPVerificationView.swift */,
+				D0B388262D5B7BAE003BC40C /* PasswordLoginView.swift */,
+				D0B388272D5B7BAE003BC40C /* RealVerificationView.swift */,
+				D0B388282D5B7BAE003BC40C /* UploadPhotoView.swift */,
 			);
 			path = LoginOrRegister;
 			sourceTree = "<group>";
@@ -685,6 +721,7 @@
 				D018AD8F2C9ED5D4005A14B9 /* FirebaseStorageCombine-Community */,
 				D018AD912C9ED5D4005A14B9 /* FirebaseVertexAI-Preview */,
 				D0DDDB112CA1008B00A78A87 /* KeychainAccess */,
+				D0B388112D5B79A1003BC40C /* WebRTC */,
 			);
 			productName = SwiftiDate;
 			productReference = D0445C2B2C71B3800059D522 /* SwiftiDate.app */;
@@ -765,8 +802,9 @@
 			packageReferences = (
 				D018AD642C9ED3C2005A14B9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				D0DDDB102CA1008B00A78A87 /* XCRemoteSwiftPackageReference "KeychainAccess" */,
+				D0B388102D5B79A1003BC40C /* XCLocalSwiftPackageReference "WebRTC" */,
 			);
-			productRefGroup = D0445C2C2C71B3800059D522 /* Products */;
+			productRefGroup = D0445C222C71B3800059D522;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
@@ -837,8 +875,10 @@
 				D0445C5B2C71E5850059D522 /* ProfileView.swift in Sources */,
 				D09587BF2CB7899D00BCD04B /* SafetyQuizView.swift in Sources */,
 				D0DDDB402CA17B3700A78A87 /* WhatIsSwiftiDateSupremeView.swift in Sources */,
+				D0B388382D5B8263003BC40C /* WebRTCCallView.swift in Sources */,
 				D0445C872C73CEFB0059D522 /* DrinkOptionsView.swift in Sources */,
 				D0445C7B2C73C74B0059D522 /* BloodTypePickerView.swift in Sources */,
+				D0B388142D5B7A3E003BC40C /* SocialTrainingView.swift in Sources */,
 				D018AD5D2C9E6581005A14B9 /* TurboPurchaseView.swift in Sources */,
 				D0445C772C73BF590059D522 /* HeightPickerView.swift in Sources */,
 				D018AD5F2C9E6976005A14B9 /* CrushPurchaseView.swift in Sources */,
@@ -859,7 +899,15 @@
 				D051EF2E2CC03360004563A3 /* VerifiedProfileProgressView.swift in Sources */,
 				D017F4EE2CAEBC8700C71D18 /* QRCodeScannerView.swift in Sources */,
 				D04729E22CC1315F007C33EC /* SupremeBannerView.swift in Sources */,
+				D0B388332D5B7C46003BC40C /* CourseRowView.swift in Sources */,
+				D0B388342D5B7C46003BC40C /* CourseDetailView.swift in Sources */,
 				D017F4F82CAFC9A200C71D18 /* PhoneNumberEntryView.swift in Sources */,
+				D0B388292D5B7BAE003BC40C /* FaceTrackingView.swift in Sources */,
+				D0B3882A2D5B7BAE003BC40C /* CountryCodePickerView.swift in Sources */,
+				D0B3882B2D5B7BAE003BC40C /* PasswordLoginView.swift in Sources */,
+				D0B3882C2D5B7BAE003BC40C /* OTPVerificationView.swift in Sources */,
+				D0B3882D2D5B7BAE003BC40C /* RealVerificationView.swift in Sources */,
+				D0B3882E2D5B7BAE003BC40C /* UploadPhotoView.swift in Sources */,
 				D0903AC42D58A50000735323 /* ClaudeAIView.swift in Sources */,
 				D0445C7F2C73C9080059D522 /* LookingForView.swift in Sources */,
 				D0DDDB3E2CA179AC00A78A87 /* WhatIsSwiftiDatePremiumDiscountPolicyView.swift in Sources */,
@@ -900,10 +948,12 @@
 				D04729D22CC08D34007C33EC /* PhotoSection.swift in Sources */,
 				D04938782CBF0A4700754E46 /* ChatRow.swift in Sources */,
 				D0445C852C73CDB60059D522 /* SmokingOptionsView.swift in Sources */,
+				D0B3883A2D5B8286003BC40C /* WebRTCManager.swift in Sources */,
 				D0445C6D2C72EA990059D522 /* SchoolInputView.swift in Sources */,
 				D04729E62CC1DA82007C33EC /* PremiumDetailsView.swift in Sources */,
 				D0DDDB0D2CA07A2400A78A87 /* FeaturedCardView.swift in Sources */,
 				D0DDDB2E2CA1628F00A78A87 /* WhatIsCrushAndHowToUseView.swift in Sources */,
+				D0B388302D5B7C12003BC40C /* SocialCourse.swift in Sources */,
 				D0903ACE2D58A5C200735323 /* Response.swift in Sources */,
 				D055E9922C8CCFBA00A97DD1 /* InterestSelectionView.swift in Sources */,
 				D0445C2F2C71B3800059D522 /* SwiftiDateApp.swift in Sources */,
@@ -921,6 +971,7 @@
 				D017F4F02CAECC5100C71D18 /* PersonalInfoView.swift in Sources */,
 				D0903ABC2D589D0C00735323 /* AppDelegate.swift in Sources */,
 				D0DDDB052C9FA8AF00A78A87 /* ChatDetailView.swift in Sources */,
+				D0B388362D5B7C58003BC40C /* AstrologyView.swift in Sources */,
 				D0445C652C72388D0059D522 /* FlowStack.swift in Sources */,
 				D04729C42CC03C4D007C33EC /* StatisticsSectionView.swift in Sources */,
 				D0DDDB2A2CA156A700A78A87 /* WhatIsSwiftiDatePremiumView.swift in Sources */,
@@ -931,6 +982,7 @@
 				D0445C732C72FB440059D522 /* HometownInputView.swift in Sources */,
 				D04729DA2CC09B54007C33EC /* EditSectionView.swift in Sources */,
 				D018AD612C9E6ACF005A14B9 /* PraisePurchaseView.swift in Sources */,
+				D0B3883C2D5B82DF003BC40C /* WebRTCVideoView.swift in Sources */,
 				D04729D62CC09749007C33EC /* ProfileImageView.swift in Sources */,
 				D0445C6F2C72EDF10059D522 /* IndustryPicker.swift in Sources */,
 				D09587C32CB7C0A900BCD04B /* SafetyTipsView.swift in Sources */,
@@ -941,6 +993,7 @@
 				D0DDDB382CA171B400A78A87 /* HowToCancelSubscriptionView.swift in Sources */,
 				D0DDDB0F2CA0E65F00A78A87 /* LocationManager.swift in Sources */,
 				D0DDDB242CA1486E00A78A87 /* HowToUnmatchView.swift in Sources */,
+				D0B3883E2D5B854A003BC40C /* SignalingClient.swift in Sources */,
 				D0DDDB4A2CA196FB00A78A87 /* UpdateProfileDetailsView.swift in Sources */,
 				D0DDDB262CA14B2700A78A87 /* HowToDeleteMessagesView.swift in Sources */,
 				D04729D02CC08CC1007C33EC /* SmartPhotoToggle.swift in Sources */,
@@ -1302,6 +1355,13 @@
 		};
 /* End XCConfigurationList section */
 
+/* Begin XCLocalSwiftPackageReference section */
+		D0B388102D5B79A1003BC40C /* XCLocalSwiftPackageReference "WebRTC" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = WebRTC;
+		};
+/* End XCLocalSwiftPackageReference section */
+
 /* Begin XCRemoteSwiftPackageReference section */
 		D018AD642C9ED3C2005A14B9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
@@ -1436,6 +1496,10 @@
 			isa = XCSwiftPackageProductDependency;
 			package = D018AD642C9ED3C2005A14B9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = "FirebaseVertexAI-Preview";
+		};
+		D0B388112D5B79A1003BC40C /* WebRTC */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = WebRTC;
 		};
 		D0DDDB112CA1008B00A78A87 /* KeychainAccess */ = {
 			isa = XCSwiftPackageProductDependency;

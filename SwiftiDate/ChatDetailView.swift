@@ -30,6 +30,7 @@ import Foundation
 import SwiftUI
 import PhotosUI // by bryan_u.6_developer
 import UIKit
+import WebRTC
 
 /**
  * ===============================================
@@ -120,7 +121,9 @@ struct ChatDetailView: View {
     @State private var showChatGPTModal = false // 控制 ChatGPT 彈框的顯示
     @State private var showActionSheet = false // 控制 ActionSheet 彈框的顯示
     var onBack: () -> Void // Add this line to accept the onBack closure
-
+    @State private var isShowingCallView = false
+    @StateObject var signalingClient = SignalingClient()
+    
     var body: some View {
         VStack {
             // Custom Navigation Bar
@@ -150,13 +153,7 @@ struct ChatDetailView: View {
                 Spacer()
                 
                 Button(action: {
-                    if let phoneURL = URL(string: "tel://\(userSettings.globalPhoneNumber)") {
-                        if UIApplication.shared.canOpenURL(phoneURL) {
-                            UIApplication.shared.open(phoneURL, options: [:], completionHandler: nil)
-                        } else {
-                            print("無法撥打電話，請檢查電話號碼格式")
-                        }
-                    }
+                    startWebRTCCall()
                 }) {
                     Image(systemName: "phone.fill")
                         .resizable() // 使圖標可以調整大小
@@ -164,6 +161,9 @@ struct ChatDetailView: View {
                         .frame(width: 25, height: 25) // 調整圖標的寬高，這裡設置為30x30
                         .foregroundColor(.green)
                         .padding(.trailing, 10)
+                }
+                .fullScreenCover(isPresented: $isShowingCallView) {
+                    WebRTCCallView() // 你自定義的通話 UI 視圖
                 }
                 
                 Button(action: {
@@ -385,6 +385,15 @@ struct ChatDetailView: View {
         let formatter = DateFormatter()
         formatter.dateFormat = "h:mm a"
         return formatter.string(from: Date())
+    }
+    
+    private func startWebRTCCall() {
+        // 假設 chat 有個 userId
+        let targetUserId = chat.id.uuidString  // 或 your back-end userId
+        // 這裡呼叫 signaling
+        signalingClient.send("callRequest", payload: ["targetId": targetUserId])
+        // 接著顯示 UI
+        isShowingCallView = true
     }
 }
 

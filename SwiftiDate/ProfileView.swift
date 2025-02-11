@@ -37,13 +37,6 @@ struct ProfileView: View {
         } else if showSafetyCenterView {
             SafetyCenterView(showSafetyCenterView: $showSafetyCenterView, photos: $userSettings.photos) // 如果全局变量为 true，则显示 SafetyCenterView
                 .environmentObject(userSettings)
-        } else if showHealthDataSectionView {
-            HealthDataSectionView(
-                onBack: {
-                    // 這裡的程式碼會在子視圖呼叫 onBack() 時執行
-                    showHealthDataSectionView = false
-                }
-            )
         } else {
             ZStack {
                 ScrollView {

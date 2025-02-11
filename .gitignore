@@ -6,8 +6,10 @@ swiftidate-cdff0-firebase-adminsdk-e2p44-7c5e06ebfc.json
 SwiftiDate.xcodeproj/project.pbxproj
 mlc-llm
 dist
+functions/.DS_Store
 google-cloud-sdk/
 google-cloud-cli-darwin-arm.tar.gz
+WebRTC
 # macOS
 *.DS_Store
 # Xcode
