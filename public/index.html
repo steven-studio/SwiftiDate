@@ -1,89 +1,184 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Welcome to Firebase Hosting</title>
-
-    <!-- update the version number as needed -->
-    <script defer src="/__/firebase/11.3.0/firebase-app-compat.js"></script>
-    <!-- include only the Firebase features as you need -->
-    <script defer src="/__/firebase/11.3.0/firebase-auth-compat.js"></script>
-    <script defer src="/__/firebase/11.3.0/firebase-database-compat.js"></script>
-    <script defer src="/__/firebase/11.3.0/firebase-firestore-compat.js"></script>
-    <script defer src="/__/firebase/11.3.0/firebase-functions-compat.js"></script>
-    <script defer src="/__/firebase/11.3.0/firebase-messaging-compat.js"></script>
-    <script defer src="/__/firebase/11.3.0/firebase-storage-compat.js"></script>
-    <script defer src="/__/firebase/11.3.0/firebase-analytics-compat.js"></script>
-    <script defer src="/__/firebase/11.3.0/firebase-remote-config-compat.js"></script>
-    <script defer src="/__/firebase/11.3.0/firebase-performance-compat.js"></script>
-    <!-- 
-      initialize the SDK after all desired features are loaded, set useEmulator to false
-      to avoid connecting the SDK to running emulators.
-    -->
-    <script defer src="/__/firebase/init.js?useEmulator=true"></script>
-
-    <style media="screen">
-      body { background: #ECEFF1; color: rgba(0,0,0,0.87); font-family: Roboto, Helvetica, Arial, sans-serif; margin: 0; padding: 0; }
-      #message { background: white; max-width: 360px; margin: 100px auto 16px; padding: 32px 24px; border-radius: 3px; }
-      #message h2 { color: #ffa100; font-weight: bold; font-size: 16px; margin: 0 0 8px; }
-      #message h1 { font-size: 22px; font-weight: 300; color: rgba(0,0,0,0.6); margin: 0 0 16px;}
-      #message p { line-height: 140%; margin: 16px 0 24px; font-size: 14px; }
-      #message a { display: block; text-align: center; background: #039be5; text-transform: uppercase; text-decoration: none; color: white; padding: 16px; border-radius: 4px; }
-      #message, #message a { box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); }
-      #load { color: rgba(0,0,0,0.4); text-align: center; font-size: 13px; }
-      @media (max-width: 600px) {
-        body, #message { margin-top: 0; background: white; box-shadow: none; }
-        body { border-top: 16px solid #ffa100; }
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>SwiftiDate - Connect, Match & Date!</title>
+    <!-- 你可自行連結 CSS / 字體 / 圖片等 -->
+    <!-- Favicon -->
+    <link rel="icon" href="img/favicon.ico">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
+    <!-- W3 Stylesheet -->
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <style>
+      body { margin: 0; font-family: Arial, sans-serif; }
+      /* 基本導覽列樣式 */
+      nav {
+        display: flex;
+        justify-content: space-between; /* 左右分散對齊 */
+        align-items: center;           /* 垂直置中 */
+        background: #ff6f61;
+        padding: 15px;
+      }
+      h1 {
+        font-weight: 700; /* 可加強標題的粗度 */
+        font-size: 28px;  /* 字體大小 */
+        margin: 0;
+        color: #fff;
+        letter-spacing: 1px; /* 字距，讓文字更有空間 */
+      }
+      nav h1 { color: #fff; margin: 0; flex: 1; }
+      nav a { margin-left: 20px; color: #fff; text-decoration: none; }
+      /* 讓 nav-left 內的元素水平排列，並置中對齊 */
+      .nav-left {
+        display: flex;
+        align-items: center; 
+        /* 如果要間距，可以加 margin 或 gap */
+        gap: 10px;
+      }
+      /* 漢堡按鈕 */
+      .checkbtn {
+        font-size: 1.5rem;
+        color: white;
+        cursor: pointer;
+      }
+      .nav-left a, .nav-left h1 {
+        text-decoration: none;
+        margin: 0;
+      }
+      .hero {
+        background: url("artiphoria-Left\ side_\ a\ friendl.png") no-repeat center center;
+        background-size: cover; /* 使圖片自動裁切或縮放充滿容器 */
+        text-align: center;
+        /* 增加最低高度 */
+        min-height: 80vh; /* 80% of the viewport height, 自行調整 */
+        display: flex; 
+        flex-direction: column;
+        justify-content: center; 
+        padding: 100px 20px;
+      }
+      .hero h2 {
+        font-size: 48px; margin-bottom: 10px; color: #fff;
+      }
+      .hero p {
+        font-size: 18px; margin-bottom: 30px; color: #fff;
+      }
+      .features, .social-media, .support {
+        max-width: 800px; margin: 0 auto; padding: 40px 20px;
+      }
+      .features h3, .support h3 {
+        font-size: 28px; margin-bottom: 16px;
+      }
+      .features ul {
+        list-style: none; padding: 0;
+      }
+      .features li {
+        margin: 10px 0; 
+      }
+      footer {
+        text-align: center; padding: 20px; background: #f0f0f0; font-size: 14px;
       }
     </style>
   </head>
   <body>
-    <div id="message">
-      <h2>Welcome</h2>
-      <h1>Firebase Hosting Setup Complete</h1>
-      <p>You're seeing this because you've successfully setup Firebase Hosting. Now it's time to go build something extraordinary!</p>
-      <a target="_blank" href="https://firebase.google.com/docs/hosting/">Open Hosting Documentation</a>
-    </div>
-    <p id="load">Firebase SDK Loading&hellip;</p>
+    <!-- 頂部導覽列 -->
+    <nav>
+      <!-- 左邊：網站名稱 + 目錄連結 -->
+      <div class="nav-left">
+        <!-- 漢堡按鈕 -->
+        <label for="check" class="checkbtn">
+          <i class="fas fa-bars"></i>
+        </label>
+        <h1>SwiftiDate</h1>
+        <!-- 可改成 drop-down、或連到更詳細的目錄頁面等 -->
+      </div>
 
-    <script>
-      document.addEventListener('DOMContentLoaded', function() {
-        const loadEl = document.querySelector('#load');
-        // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
-        // // The Firebase SDK is initialized and available here!
-        //
-        // firebase.auth().onAuthStateChanged(user => { });
-        // firebase.database().ref('/path/to/ref').on('value', snapshot => { });
-        // firebase.firestore().doc('/foo/bar').get().then(() => { });
-        // firebase.functions().httpsCallable('yourFunction')().then(() => { });
-        // firebase.messaging().requestPermission().then(() => { });
-        // firebase.storage().ref('/path/to/ref').getDownloadURL().then(() => { });
-        // firebase.analytics(); // call to activate
-        // firebase.analytics().logEvent('tutorial_completed');
-        // firebase.performance(); // call to activate
-        //
-        // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
+      <!-- 右邊：其他連結（Features, Support）等 -->
+      <div class="nav-right">
+        <a href="#features">Features</a>
+        <a href="#support">Support Us</a>
+      </div>
+    </nav>
 
-        try {
-          let app = firebase.app();
-          let features = [
-            'auth', 
-            'database', 
-            'firestore',
-            'functions',
-            'messaging', 
-            'storage', 
-            'analytics', 
-            'remoteConfig',
-            'performance',
-          ].filter(feature => typeof app[feature] === 'function');
-          loadEl.textContent = `Firebase SDK loaded with ${features.join(', ')}`;
-        } catch (e) {
-          console.error(e);
-          loadEl.textContent = 'Error loading the Firebase SDK, check the console.';
-        }
-      });
-    </script>
+    <!-- 主視覺區 -->
+    <section class="hero">
+      <h2>Find Your Perfect Match</h2>
+      <p>跨地區、跨文化，與世界各地有趣的人相遇！</p>
+      <p><em>Real People, Real Connections.</em></p>
+      <!-- 下載 / 註冊 按鈕，例如：
+      <a href="#" class="cta-button">立即下載</a>
+      -->
+    </section>
+
+    <!-- 特色介紹 -->
+    <section class="features" id="features">
+      <h3>Why SwiftiDate?</h3>
+      <ul>
+        <li><strong>跨國匹配：</strong>探索異國浪漫，輕鬆搜尋世界各地用戶。</li>
+        <li><strong>安全驗證：</strong>保障你的身份和隱私，安心交友。</li>
+        <li><strong>AI 智能配對：</strong>根據興趣愛好，行為模式，推薦最合適的對象。</li>
+        <li><strong>多元互動：</strong>文字、語音或影片通話，一步一步拉近彼此距離。</li>
+      </ul>
+    </section>
+
+    <section class="social-media" id="social-media">
+      <h3>社群平台</h3>
+      <!-- Feather Icons 的 Instagram SVG -->
+      <a href="https://instagram.com/swiftidate" target="_blank" rel="noopener">
+        <svg 
+          xmlns="http://www.w3.org/2000/svg" 
+          width="24" height="24" 
+          fill="none" 
+          stroke="currentColor" 
+          stroke-width="2" 
+          stroke-linecap="round" 
+          stroke-linejoin="round" 
+          class="feather feather-instagram"
+        >
+          <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+          <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+          <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+        </svg>
+      </a>
+    </section>
+
+    <!-- Buy Me A Coffee區 -->
+    <section class="support" id="support">
+      <h3>Support Our Development</h3>
+      <p>SwiftiDate 正在持續優化中，期待為你帶來更好的交友體驗。若你喜歡這個專案，歡迎贊助我們一杯咖啡！</p>
+      <!-- Buy Me A Coffee 按鈕 (純文字連結範例) -->
+      <a href="https://www.buymeacoffee.com/steven.studio" 
+          target="_blank" rel="noopener" 
+          style="
+            display: inline-flex;
+            align-items: center;
+            text-decoration: none;
+            background: #ff813f;
+            color: #fff;
+            padding: 8px 12px;
+            border-radius: 4px;
+        ">
+        <!-- 官方Logo -->
+        <img 
+          src="https://cdn.buymeacoffee.com/buttons/bmc-new-btn-logo.svg" 
+          alt="Buy me a coffee"
+          style="height: 24px; width: auto; margin-right: 8px;" 
+        />
+        <!-- 按鈕文字 -->
+        <span style="font-weight: bold;">Buy me a coffee</span>
+      </a>
+    </section>
+
+    <!-- 頁尾 -->
+    <footer>
+      <p>© 2025 SwiftiDate. All rights reserved.</p>
+      <!-- 可加隱私權條款 / 使用條款 / 聯絡資訊 / Social links 等 -->
+    </footer>
+
+    <!-- 若要載入 Firebase 初始化 (假設 firebase-init.js) -->
+    <script type="module" src="firebase-init.js"></script>
   </body>
 </html>
