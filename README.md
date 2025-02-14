@@ -123,3 +123,16 @@ SwiftiDate 還在開發中（目前完成度約 75%）。若你看好這個專�
 - 推出 Beta 版本前的市場測試
 
 > **感謝每一位贊助者**，我們會在發佈正式版時在專案頁面公開鳴謝！
+
+---
+
+## 🚀 Demo
+
+或直接點擊：
+https://swiftidate-cdff0.web.app/
+
+---
+
+版權與授權
+	•	© 2025 SwiftiDate. All rights reserved.
+	•	依據貢獻者的授權，部分程式碼可能以開源授權發布，請參考專案根目錄下的 LICENSE 檔案。
