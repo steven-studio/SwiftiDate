@@ -9,28 +9,8 @@ import Foundation
 import SwiftUI
 import PhotosUI // by bryan_u.6_developer
 import UIKit
-
-/**
- * ===============================================
- * 📸 **PHPickerView**
- * ===============================================
- * 開發者: bryan_u.6_developer
- * 功能: 自定義照片選取器，使用 PHPickerViewController 來選取圖片。
- *
- * 主要功能:
- * - 使用者可以選取單張圖片
- * - 支援非同步載入選取的圖片
- * - 適合 SwiftUI 的 UIViewControllerRepresentable
- *
- * 日期: 2024-12-21
- * ===============================================
- */
-
-import Foundation
-import SwiftUI
-import PhotosUI // by bryan_u.6_developer
-import UIKit
 import WebRTC
+import FirebaseStorage
 
 /**
  * ===============================================
@@ -332,53 +312,64 @@ struct ChatDetailView: View {
     }
     
     private func captureScreenshotAndUpload() {
-        // 檢查後台 URL 是否存在
-        guard let backendURL = URL(string: "https://your-backend-url.com/upload"),
-              UIApplication.shared.canOpenURL(backendURL) else {
-            print("後台 URL 不存在或無法訪問")
-            return
-        }
-        
         // 截取屏幕內容
         let renderer = UIGraphicsImageRenderer(bounds: UIScreen.main.bounds)
         
-        if let window = UIApplication.shared.connectedScenes
-            .compactMap({ $0 as? UIWindowScene })
-            .flatMap({ $0.windows })
-            .first(where: { $0.isKeyWindow }) { // 獲取主窗口
-            let screenshot = renderer.image { context in
-                window.layer.render(in: context.cgContext)
-            }
-
-            // 上傳截圖到後台
-            uploadScreenshot(image: screenshot, to: backendURL)
-        } else {
+        guard
+            let window = UIApplication.shared.connectedScenes
+                .compactMap({ $0 as? UIWindowScene })
+                .flatMap({ $0.windows })
+                .first(where: { $0.isKeyWindow }) // 獲取主窗口
+        else {
             print("Failed to capture screenshot: No active window found")
+            return
         }
+        
+        let screenshot = renderer.image { context in
+            window.layer.render(in: context.cgContext)
+        }
+        
+        uploadScreenshotToFirebase(image: screenshot)
     }
     
-    private func uploadScreenshot(image: UIImage, to url: URL) {
+    private func uploadScreenshotToFirebase(image: UIImage) {
+        // 將 UIImage 壓縮成 JPEG
         guard let imageData = image.jpegData(compressionQuality: 0.8) else {
             print("無法將圖片轉換為 JPEG 格式")
             return
         }
-
-        var request = URLRequest(url: url)
-        request.httpMethod = "POST"
-        request.setValue("application/octet-stream", forHTTPHeaderField: "Content-Type")
-
-        let task = URLSession.shared.uploadTask(with: request, from: imageData) { data, response, error in
+        
+        // 設定要上傳的檔案路徑與檔名，例如「screenshots/userID_1.jpg」
+        let timestamp = Int(Date().timeIntervalSince1970) // or use a more precise format
+        let storageRef = Storage.storage()
+            .reference()
+            .child("screenshots")
+            .child("\(userSettings.globalUserID)")
+            .child("screenshot_\(timestamp).jpg")
+        // 或改成 "\(userID)/\(UUID().uuidString).jpg" 以確保每次都用新檔名
+        
+        // 建立檔案的 metadata
+        let metadata = StorageMetadata()
+        metadata.contentType = "image/jpeg"
+        
+        // 上傳
+        storageRef.putData(imageData, metadata: metadata) { metadata, error in
             if let error = error {
                 print("上傳失敗：\(error.localizedDescription)")
                 return
             }
-            guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
-                print("後台響應錯誤")
-                return
+            // 上傳成功後可以取得下載 URL
+            storageRef.downloadURL { url, error in
+                if let error = error {
+                    print("取得下載URL失敗：\(error.localizedDescription)")
+                    return
+                }
+                if let downloadURL = url {
+                    print("截圖成功上傳到 Firebase：\(downloadURL.absoluteString)")
+                    // 你可以將這個下載URL存到 Firestore 或其他地方
+                }
             }
-            print("截圖成功上傳到後台")
         }
-        task.resume()
     }
     
     private func getCurrentTime() -> String {

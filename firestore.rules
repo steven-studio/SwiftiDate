@@ -2,8 +2,36 @@ rules_version = '2';
 
 service cloud.firestore {
   match /databases/{database}/documents {
-    match /{document=**} {
-      allow read, write: if true;
+    // 通配所有集合
+    match /{collectionName}/{userId} {
+      
+      // 如果collectionName是我們想要的九種之一
+      allow read, write: if request.auth != null
+                         && isAllowedCollection(collectionName)
+                         && request.auth.uid == userId;
+
+      match /photos/{photoId} {
+        allow read: if request.auth != null
+                    && isAllowedCollection(collectionName);
+        allow write: if request.auth != null
+                     && isAllowedCollection(collectionName)
+                     && request.auth.uid == userId;
+      }
     }
   }
+}
+
+// 在 rules 最底部可以定義function
+function isAllowedCollection(collectionName) {
+  return collectionName in [
+    "users",
+    "taiwan_users",
+    "japan_users",
+    "korea_users",
+    "shenzhen_users",
+    "zhuhai_users",
+    "macao_users",
+    "hongkong_users",
+    "hainan_users"
+  ];
 }

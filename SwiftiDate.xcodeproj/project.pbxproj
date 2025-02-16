@@ -105,6 +105,12 @@
 		D055A7632D19931C00F11F18 /* GlobalVariables.swift in Sources */ = {isa = PBXBuildFile; fileRef = D055A7622D19931C00F11F18 /* GlobalVariables.swift */; };
 		D055A7672D19A2B800F11F18 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D055A7662D19A2B800F11F18 /* GoogleService-Info.plist */; };
 		D055E9922C8CCFBA00A97DD1 /* InterestSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D055E9912C8CCFBA00A97DD1 /* InterestSelectionView.swift */; };
+		D07B40AD2D60FF610015C7AA /* FaceVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07B40AC2D60FF5A0015C7AA /* FaceVideo.swift */; };
+		D07B41DD2D618E9B0015C7AA /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07B41DC2D618E9B0015C7AA /* LocationService.swift */; };
+		D07B41DF2D6197570015C7AA /* FirebasePhotoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07B41DE2D6197570015C7AA /* FirebasePhotoManager.swift */; };
+		D07B41E12D61ABE80015C7AA /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07B41E02D61ABE80015C7AA /* ImagePicker.swift */; };
+		D07B41EC2D61C3630015C7AA /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07B41EA2D61C3630015C7AA /* FirebaseManager.swift */; };
+		D07B41EE2D61DA530015C7AA /* FirebaseAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07B41ED2D61DA530015C7AA /* FirebaseAuthManager.swift */; };
 		D0903ABC2D589D0C00735323 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0903ABB2D589D0C00735323 /* AppDelegate.swift */; };
 		D0903ABE2D589D7C00735323 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0903ABD2D589D7C00735323 /* NotificationManager.swift */; };
 		D0903AC02D58A45200735323 /* modelSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0903ABF2D58A45200735323 /* modelSelector.swift */; };
@@ -222,14 +228,11 @@
 		D018AD952C9EEA82005A14B9 /* AsyncImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncImageView.swift; sourceTree = "<group>"; };
 		D018AD972C9F1A0F005A14B9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		D039FC5A2CD230050082D2F3 /* PersonalityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalityView.swift; sourceTree = "<group>"; };
-		D0445C2B2C71B3800059D522 /* SwiftiDate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = SwiftiDate.app; path = "/Users/youzhewei/Desktop/SwiftiDate/build/Debug-iphoneos/SwiftiDate.app"; sourceTree = "<absolute>"; };
 		D0445C2E2C71B3800059D522 /* SwiftiDateApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftiDateApp.swift; sourceTree = "<group>"; };
 		D0445C302C71B3800059D522 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		D0445C322C71B3820059D522 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D0445C352C71B3820059D522 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		D0445C3B2C71B3820059D522 /* SwiftiDateTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = SwiftiDateTests.xctest; path = "/Users/youzhewei/Desktop/SwiftiDate/build/Debug-iphoneos/SwiftiDate.app/PlugIns/SwiftiDateTests.xctest"; sourceTree = "<absolute>"; };
 		D0445C3F2C71B3830059D522 /* SwiftiDateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftiDateTests.swift; sourceTree = "<group>"; };
-		D0445C452C71B3830059D522 /* SwiftiDateUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = SwiftiDateUITests.xctest; path = "/Users/youzhewei/Desktop/SwiftiDate/build/Debug-iphoneos/SwiftiDateUITests-Runner.app/PlugIns/SwiftiDateUITests.xctest"; sourceTree = "<absolute>"; };
 		D0445C492C71B3830059D522 /* SwiftiDateUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftiDateUITests.swift; sourceTree = "<group>"; };
 		D0445C4B2C71B3830059D522 /* SwiftiDateUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftiDateUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		D0445C582C71BFE70059D522 /* SwipeCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeCardView.swift; sourceTree = "<group>"; };
@@ -288,6 +291,15 @@
 		D055A7622D19931C00F11F18 /* GlobalVariables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalVariables.swift; sourceTree = "<group>"; };
 		D055A7662D19A2B800F11F18 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D055E9912C8CCFBA00A97DD1 /* InterestSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterestSelectionView.swift; sourceTree = "<group>"; };
+		D07B40A92D60FF160015C7AA /* SwiftiDate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftiDate.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D07B40AA2D60FF160015C7AA /* SwiftiDateTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftiDateTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D07B40AB2D60FF160015C7AA /* SwiftiDateUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftiDateUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D07B40AC2D60FF5A0015C7AA /* FaceVideo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceVideo.swift; sourceTree = "<group>"; };
+		D07B41DC2D618E9B0015C7AA /* LocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
+		D07B41DE2D6197570015C7AA /* FirebasePhotoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebasePhotoManager.swift; sourceTree = "<group>"; };
+		D07B41E02D61ABE80015C7AA /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		D07B41EA2D61C3630015C7AA /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
+		D07B41ED2D61DA530015C7AA /* FirebaseAuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAuthManager.swift; sourceTree = "<group>"; };
 		D0903ABB2D589D0C00735323 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D0903ABD2D589D7C00735323 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		D0903ABF2D58A45200735323 /* modelSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = modelSelector.swift; sourceTree = "<group>"; };
@@ -542,6 +554,7 @@
 		D0445C222C71B3800059D522 = {
 			isa = PBXGroup;
 			children = (
+				D07B41EB2D61C3630015C7AA /* FirebaseManager */,
 				D039FC572CCD08160082D2F3 /* SafetyRelated */,
 				D039FC562CCD074A0082D2F3 /* SettingsRelated */,
 				D0472D392CCC6CDA0047FE10 /* LoginOrRegister */,
@@ -551,12 +564,16 @@
 				D0445C2D2C71B3800059D522 /* SwiftiDate */,
 				D0445C3E2C71B3830059D522 /* SwiftiDateTests */,
 				D0445C482C71B3830059D522 /* SwiftiDateUITests */,
+				D07B40A92D60FF160015C7AA /* SwiftiDate.app */,
+				D07B40AA2D60FF160015C7AA /* SwiftiDateTests.xctest */,
+				D07B40AB2D60FF160015C7AA /* SwiftiDateUITests.xctest */,
 			);
 			sourceTree = "<group>";
 		};
 		D0445C2D2C71B3800059D522 /* SwiftiDate */ = {
 			isa = PBXGroup;
 			children = (
+				D07B41E02D61ABE80015C7AA /* ImagePicker.swift */,
 				D0B388352D5B7C58003BC40C /* AstrologyView.swift */,
 				D0B388312D5B7C46003BC40C /* CourseDetailView.swift */,
 				D0B388322D5B7C46003BC40C /* CourseRowView.swift */,
@@ -615,6 +632,7 @@
 				D0B388392D5B8286003BC40C /* WebRTCManager.swift */,
 				D0B3883B2D5B82DF003BC40C /* WebRTCVideoView.swift */,
 				D0B3883D2D5B854A003BC40C /* SignalingClient.swift */,
+				D07B41DC2D618E9B0015C7AA /* LocationService.swift */,
 			);
 			path = SwiftiDate;
 			sourceTree = "<group>";
@@ -647,6 +665,7 @@
 		D0472D392CCC6CDA0047FE10 /* LoginOrRegister */ = {
 			isa = PBXGroup;
 			children = (
+				D07B40AC2D60FF5A0015C7AA /* FaceVideo.swift */,
 				D017F4F72CAFC9A200C71D18 /* PhoneNumberEntryView.swift */,
 				D0B388232D5B7BAE003BC40C /* CountryCodePickerView.swift */,
 				D0B388242D5B7BAE003BC40C /* FaceTrackingView.swift */,
@@ -678,6 +697,16 @@
 				D051EF2D2CC03360004563A3 /* VerifiedProfileProgressView.swift */,
 			);
 			path = ProfileRelated;
+			sourceTree = "<group>";
+		};
+		D07B41EB2D61C3630015C7AA /* FirebaseManager */ = {
+			isa = PBXGroup;
+			children = (
+				D07B41EA2D61C3630015C7AA /* FirebaseManager.swift */,
+				D07B41DE2D6197570015C7AA /* FirebasePhotoManager.swift */,
+				D07B41ED2D61DA530015C7AA /* FirebaseAuthManager.swift */,
+			);
+			path = FirebaseManager;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -724,7 +753,7 @@
 				D0B388112D5B79A1003BC40C /* WebRTC */,
 			);
 			productName = SwiftiDate;
-			productReference = D0445C2B2C71B3800059D522 /* SwiftiDate.app */;
+			productReference = D07B40A92D60FF160015C7AA /* SwiftiDate.app */;
 			productType = "com.apple.product-type.application";
 		};
 		D0445C3A2C71B3820059D522 /* SwiftiDateTests */ = {
@@ -742,7 +771,7 @@
 			);
 			name = SwiftiDateTests;
 			productName = SwiftiDateTests;
-			productReference = D0445C3B2C71B3820059D522 /* SwiftiDateTests.xctest */;
+			productReference = D07B40AA2D60FF160015C7AA /* SwiftiDateTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		D0445C442C71B3830059D522 /* SwiftiDateUITests */ = {
@@ -760,7 +789,7 @@
 			);
 			name = SwiftiDateUITests;
 			productName = SwiftiDateUITests;
-			productReference = D0445C452C71B3830059D522 /* SwiftiDateUITests.xctest */;
+			productReference = D07B40AB2D60FF160015C7AA /* SwiftiDateUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -870,6 +899,7 @@
 				D018AD632C9E87F6005A14B9 /* ChatView.swift in Sources */,
 				D017F4F62CAFBFF700C71D18 /* LoginOrRegisterView.swift in Sources */,
 				D04729C22CC038B6007C33EC /* UnverifiedProfilePlaceholderView.swift in Sources */,
+				D07B40AD2D60FF610015C7AA /* FaceVideo.swift in Sources */,
 				D04729EA2CC1F999007C33EC /* Color.swift in Sources */,
 				D018AD962C9EEA83005A14B9 /* AsyncImageView.swift in Sources */,
 				D0445C5B2C71E5850059D522 /* ProfileView.swift in Sources */,
@@ -949,6 +979,7 @@
 				D04938782CBF0A4700754E46 /* ChatRow.swift in Sources */,
 				D0445C852C73CDB60059D522 /* SmokingOptionsView.swift in Sources */,
 				D0B3883A2D5B8286003BC40C /* WebRTCManager.swift in Sources */,
+				D07B41EC2D61C3630015C7AA /* FirebaseManager.swift in Sources */,
 				D0445C6D2C72EA990059D522 /* SchoolInputView.swift in Sources */,
 				D04729E62CC1DA82007C33EC /* PremiumDetailsView.swift in Sources */,
 				D0DDDB0D2CA07A2400A78A87 /* FeaturedCardView.swift in Sources */,
@@ -960,9 +991,11 @@
 				D04729D82CC099BA007C33EC /* VerificationStatusView.swift in Sources */,
 				D0DDDB342CA16D8B00A78A87 /* HowToEnablePremiumBadgeView.swift in Sources */,
 				D09587BB2CB7558600BCD04B /* SafetyCenterView.swift in Sources */,
+				D07B41EE2D61DA530015C7AA /* FirebaseAuthManager.swift in Sources */,
 				D09587CD2CB7D5C900BCD04B /* MeetingGuideView.swift in Sources */,
 				D09587BD2CB77F5200BCD04B /* SafetyTestView.swift in Sources */,
 				D0DDDB2C2CA160BB00A78A87 /* HowToUseWhoLikedMeAndCrushListView.swift in Sources */,
+				D07B41DF2D6197570015C7AA /* FirebasePhotoManager.swift in Sources */,
 				D0445C592C71BFE70059D522 /* SwipeCardView.swift in Sources */,
 				D0445C612C722EF50059D522 /* PhotoSectionView.swift in Sources */,
 				D0DDDB522CA251C600A78A87 /* CommunityGuidelinesView.swift in Sources */,
@@ -992,11 +1025,13 @@
 				D0903AC62D58A52500735323 /* DeepSeekView.swift in Sources */,
 				D0DDDB382CA171B400A78A87 /* HowToCancelSubscriptionView.swift in Sources */,
 				D0DDDB0F2CA0E65F00A78A87 /* LocationManager.swift in Sources */,
+				D07B41E12D61ABE80015C7AA /* ImagePicker.swift in Sources */,
 				D0DDDB242CA1486E00A78A87 /* HowToUnmatchView.swift in Sources */,
 				D0B3883E2D5B854A003BC40C /* SignalingClient.swift in Sources */,
 				D0DDDB4A2CA196FB00A78A87 /* UpdateProfileDetailsView.swift in Sources */,
 				D0DDDB262CA14B2700A78A87 /* HowToDeleteMessagesView.swift in Sources */,
 				D04729D02CC08CC1007C33EC /* SmartPhotoToggle.swift in Sources */,
+				D07B41DD2D618E9B0015C7AA /* LocationService.swift in Sources */,
 				D0DDDB562CA29B1200A78A87 /* TermsOfServiceView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

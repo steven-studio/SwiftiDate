@@ -95,7 +95,7 @@ struct OTPVerificationView: View {
                 print("🔍 當前選中的輸入框索引：\(String(describing: newValue))")
             }
             
-            Text("🔍 `focusedField` 變更: 從 \(focusedField)")
+            Text("🔍 `focusedField` 變更: 從 \(String(describing: focusedField))")
             
             Button(action: {
                 
@@ -133,16 +133,23 @@ struct OTPVerificationView: View {
     
     private func sendOTP() {
         let fullPhoneNumber = "\(selectedCountryCode)\(phoneNumber)"
-        PhoneAuthProvider.provider().verifyPhoneNumber(fullPhoneNumber, uiDelegate: nil) { newVerificationID, error in
-            DispatchQueue.main.async {
+        sendFirebaseOTP(to: fullPhoneNumber)  // ← 發送 OTP
+    }
+    
+    func sendFirebaseOTP(to phoneNumber: String) {
+        PhoneAuthProvider.provider()
+            .verifyPhoneNumber(phoneNumber, uiDelegate: nil) { verificationID, error in
                 if let error = error {
-                    print("❌ 初次發送驗證碼失敗: \(error.localizedDescription)")
-                } else {
-                    print("✅ 初次發送驗證碼成功，verificationID: \(newVerificationID ?? "無法取得")")
-                    verificationID = newVerificationID
+                    print("❌ 發送 OTP 驗證碼失敗: \(error.localizedDescription)")
+                    return
+                }
+                // 驗證碼發送成功，將 verificationID 暫存到 UserDefaults 或 ViewModel
+                print("✅ 發送 OTP 驗證碼成功，verificationID = \(verificationID ?? "")")
+                if let vid = verificationID {
+                    // 將 verificationID 存起來，後續在 OTP 驗證畫面時會用到
+                    UserDefaults.standard.set(vid, forKey: "FirebaseVerificationID")
                 }
             }
-        }
     }
     
     // 处理输入的函数
@@ -187,19 +194,8 @@ struct OTPVerificationView: View {
         isResending = true
         countdown = 59 // 重置倒數計時
 
-        let fullPhoneNumber = "\(selectedCountryCode)\(phoneNumber)"
-        PhoneAuthProvider.provider().verifyPhoneNumber(fullPhoneNumber, uiDelegate: nil) { newVerificationID, error in
-            DispatchQueue.main.async {
-                isResending = false
-                if let error = error {
-                    print("❌ 重新發送驗證碼失敗: \(error.localizedDescription)")
-                } else {
-                    print("✅ 新的驗證碼已發送，新的 verificationID: \(newVerificationID ?? "無法取得")")
-                    verificationID = newVerificationID
-                    startCountdown()
-                }
-            }
-        }
+        let fullPhoneNumber = "\(selectedCountryCode)\(phoneNumber)";
+        sendFirebaseOTP(to: fullPhoneNumber)  // ← 發送 OTP
     }
     
     // **🔹 倒數計時功能**

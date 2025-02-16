@@ -108,31 +108,14 @@ struct PhotoSectionView: View {
             print("Photo \(photoURL) added to deletedPhotos.")
         }) {
             Image(systemName: "xmark.circle.fill")
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(width: 30, height: 30) // 這裡可以調整你想要的大小
                 .foregroundColor(.white)
                 .background(Color.red)
                 .clipShape(Circle())
         }
-        .offset(x: -5, y: -5)
-    }
-    
-    // Button to add photos
-    func AddPhotoButton() -> some View {
-        Button(action: {
-            showImagePicker = true
-        }) {
-            VStack {
-                Image(systemName: "plus.circle")
-                    .resizable()
-                    .frame(width: 50, height: 50)
-                    .foregroundColor(.gray)
-                Text("添加照片")
-                    .font(.caption)
-                    .foregroundColor(.gray)
-            }
-        }
-        .frame(width: 100, height: 133)
-        .background(Color.gray.opacity(0.2))
-        .clipShape(RoundedRectangle(cornerRadius: 10))
+        .offset(x: 5, y: -5)
     }
     
     // 添加圖片到照片列表
@@ -281,46 +264,6 @@ struct PlaceholderView: View {
         .onTapGesture {
             // 點擊時顯示相簿
             showImagePicker = true
-        }
-    }
-}
-
-// ImagePicker: 用於選擇照片
-struct ImagePicker: UIViewControllerRepresentable {
-    var sourceType: UIImagePickerController.SourceType
-    @Binding var selectedImage: UIImage?
-    var onImagePicked: ((UIImage) -> Void)? // Closure to handle the image picked action
-
-    func makeUIViewController(context: Context) -> UIImagePickerController {
-        let imagePicker = UIImagePickerController()
-        imagePicker.sourceType = sourceType
-        imagePicker.delegate = context.coordinator
-        return imagePicker
-    }
-
-    func updateUIViewController(_ uiViewController: UIImagePickerController, context: Context) {}
-
-    func makeCoordinator() -> Coordinator {
-        Coordinator(self)
-    }
-
-    class Coordinator: NSObject, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-        let parent: ImagePicker
-
-        init(_ parent: ImagePicker) {
-            self.parent = parent
-        }
-
-        func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-            if let image = info[.originalImage] as? UIImage {
-                parent.selectedImage = image
-                parent.onImagePicked?(image) // Trigger the closure to handle the image
-            }
-            picker.dismiss(animated: true)
-        }
-
-        func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-            picker.dismiss(animated: true)
         }
     }
 }

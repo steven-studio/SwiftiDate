@@ -20,6 +20,7 @@ module.exports = {
   ignorePatterns: [
     "/lib/**/*", // Ignore built files.
     "/generated/**/*", // Ignore generated files.
+    "src/genkit-sample.ts", // <= 加上這行
   ],
   plugins: [
     "@typescript-eslint",

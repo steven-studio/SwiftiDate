@@ -10,7 +10,6 @@ import {gemini15Flash} from "@genkit-ai/vertexai";
 // function from a Genkit action. It automatically implements streaming if your flow does.
 // The https library also has other utility methods such as hasClaim, which verifies that
 // a caller's token has a specific claim (optionally matching a specific value)
-// 移除 hasClaim，因為它沒有被使用
 import { onCallGenkit } from "firebase-functions/https";
 
 // Genkit models generally depend on an API key. APIs should be stored in Cloud Secret Manager so that
@@ -31,7 +30,7 @@ const ai = genkit({
 // Define a simple flow that prompts an LLM to generate menu suggestions.
 const menuSuggestionFlow = ai.defineFlow({
     name: "menuSuggestionFlow",
-    inputSchema: z.string(),
+    inputSchema: z.string().describe("A restaurant theme").default("seafood"),
     outputSchema: z.string(),
     streamSchema: z.string(),
   }, async (subject, { sendChunk }) => {

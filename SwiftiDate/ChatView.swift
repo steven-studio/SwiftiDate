@@ -29,6 +29,7 @@ struct ChatView: View {
     @State private var chatData: [Chat] = []
     
     // Dictionary to store messages for each chat
+    @State private var interactiveMessage: [Message] = []
     @State private var chatMessages: [UUID: [Message]] = [:]
 
     init(contentSelectedTab: Binding<Int>) {
@@ -195,9 +196,10 @@ struct ChatView: View {
                         selectedChat = nil // Reset to show ChatView again
                     })
                 } else if showInteractiveContent {
-                    InteractiveContentView(onBack: { // Add this closure to handle onBack for InteractiveContentView
-                        showInteractiveContent = false // Reset to show ChatView again
-                    })
+                    // 找出 chat 名字 == "SwiftiDate"
+                    InteractiveContentView(onBack: {
+                        showInteractiveContent = false
+                    }, messages: $interactiveMessage)
                 } else {
                     // 聊天列表
                     ScrollView {

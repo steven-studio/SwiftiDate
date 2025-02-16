@@ -24,7 +24,7 @@ public class DefaultConnector {
 
   let dataConnect: DataConnect
 
-  public static let connectorConfig = ConnectorConfig(serviceId: "SwiftiDate", location: "asia-northeast1", connector: "default")
+  public static let connectorConfig = ConnectorConfig(serviceId: "SwiftiDate", location: "asia-east1", connector: "default")
 
   init(dataConnect: DataConnect) {
     self.dataConnect = dataConnect

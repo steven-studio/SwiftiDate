@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "firebase": "^11.3.1"
+  },
+  "devDependencies": {
+    "firebase-functions-test": "^3.4.0",
+    "jest": "^29.7.0"
+  }
+}

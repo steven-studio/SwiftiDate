@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSCameraUsageDescription</key>
+	<string>需要相機權限進行臉部追蹤</string>
 	<key>UNNotificationExtensionCategory</key>
 	<string>message</string>
 	<key>FirebaseMessagingAutoInitEnabled</key>

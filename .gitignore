@@ -16,3 +16,5 @@ WebRTC
 *.xcuserstate
 xcuserdata/
 *.xcscmblueprint
+public/firebase-init.js
+apphosting.local.yaml

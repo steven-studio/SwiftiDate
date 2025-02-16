@@ -155,38 +155,81 @@ struct PhoneNumberEntryView: View {
     // **✅ 先檢查手機號碼是否存在**
     private func checkPhoneNumber() {
         isChecking = true
-
-        let fullPhoneNumber = "\(selectedCountryCode)\(phoneNumber)"
-        let url = URL(string: "https://your-api.com/check-phone")! // ✅ 替換為你的後端 API
+        
+        // 替換為你實際部署的函式 URL，比如:
+        // https://us-central1-你的專案ID.cloudfunctions.net/checkTaiwanPhone
+        
+        var urlString = "https://us-central1-swiftidate-cdff0.cloudfunctions.net/checkTaiwanPhone"
+        
+        if selectedCountryCode == "+886" {
+            urlString = "https://us-central1-swiftidate-cdff0.cloudfunctions.net/checkTaiwanPhone"
+        }
+        
+        guard let url = URL(string: urlString) else {
+            isChecking = false
+            print("❌ 無法生成 URL，請確認網址是否正確")
+            return
+        }
+        
+        // 建立 POST 請求
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
 
-        let body: [String: Any] = ["phone": fullPhoneNumber]
-        request.httpBody = try? JSONSerialization.data(withJSONObject: body)
+        let body: [String: Any] = [
+            "data": [
+                "phone": phoneNumber
+            ]
+        ]
+
+        do {
+            request.httpBody = try JSONSerialization.data(withJSONObject: body)
+        } catch {
+            print("❌ JSON 編碼失敗: \(error)")
+            isChecking = false
+            return
+        }
 
         URLSession.shared.dataTask(with: request) { data, response, error in
+            // 在主執行緒更新 UI
             DispatchQueue.main.async {
                 isChecking = false
             }
 
-            guard let data = data, error == nil else {
-                print("❌ API 請求失敗: \(error?.localizedDescription ?? "未知錯誤")")
+            if let error = error {
+                print("❌ API 請求失敗: \(error.localizedDescription)")
+                return
+            }
+            
+            guard let data = data else {
+                print("❌ 回應資料為空")
                 return
             }
 
             do {
-                let result = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
-                let exists = result?["exists"] as? Bool ?? false
-
-                DispatchQueue.main.async {
-                    if exists {
-                        print("✅ 手機號碼已註冊，跳轉到密碼登入畫面")
-                        showPasswordLoginView = true
-                    } else {
-                        print("✅ 手機號碼未註冊，跳轉到 OTP 驗證畫面")
-                        showOTPView = true
+                // onCall 函式的回傳格式預設為:
+                // {
+                //   "result": {
+                //       "exists": true / false
+                //   }
+                // }
+                let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
+                if let result = json?["result"] as? [String: Any],
+                   let exists = result["exists"] as? Bool {
+                    
+                    DispatchQueue.main.async {
+                        if exists {
+                            // 手機號碼已註冊，導向「密碼登入」畫面
+                            print("✅ 手機號碼已註冊，跳轉到密碼登入畫面")
+                            self.showPasswordLoginView = true
+                        } else {
+                            // 手機號碼未註冊，導向「OTP 驗證」畫面
+                            print("✅ 手機號碼未註冊，跳轉到 OTP 驗證畫面")
+                            self.showOTPView = true
+                        }
                     }
+                } else {
+                    print("❌ JSON 格式不符合預期: \(String(describing: json))")
                 }
             } catch {
                 print("❌ API 回應解析失敗: \(error.localizedDescription)")
