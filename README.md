@@ -3,6 +3,27 @@ SwiftiDate 是一款專為約會交友設計的應用程序框架，完美地利
 
 ---
 
+## 技術架構與程式結構
+
+SwiftiDate 採用 Swift 語言，以及 Firebase 後端服務進行數據儲存、驗證和功能擴充。為了讓程式更具可維護性與可測試性，我們部分採用 [MVC](https://en.wikipedia.org/wiki/Model–view–controller)（Model-View-Controller）的設計理念：
+
+- **Model**: 負責數據處理與商業邏輯。例如使用者資料結構、興趣標籤模型、或與 Firestore 資料庫互動的邏輯等。
+- **View**: 以 SwiftUI 為基礎的 UI 元件，負責呈現使用者介面。
+- **Controller / Manager**: 我們將與 Firebase 相關的初始化與設定，獨立到 `FirebaseManager`，以便集中管理並與介面邏輯分離。  
+  - `FirebaseManager` 主要負責：  
+    1. `FirebaseApp.configure()` 進行初始設定  
+    2. Firestore、Crashlytics、App Check 等服務的啟用與設定  
+    3. （未來可新增）推播或其他 Firebase 服務的集中管理  
+
+透過這樣的拆分，我們可以：
+- 更容易測試與維護 Firebase 的設定與版本更新  
+- 降低視圖 (View) 與後端邏輯的耦合度  
+- 讓開發者能快速定位問題所在（是 UI、業務邏輯，還是 Firebase 設定？）
+
+未來我們也會考慮增設 `FirebaseAuthManager`、`FirebaseFunctionsManager` 等模組，以便更進一步分離各項 Firebase 服務的管理邏輯。
+
+---
+
 ## 🎯 願景與使命
 
 SwiftiDate 的誕生是為了讓數位時代的約會變得更簡單、更精準、更愉快。我們相信，透過高效的匹配算法、神經語言程式學（NLP）技術與個性化的用戶體驗，每個人都能輕鬆找到心儀的約會對象。
