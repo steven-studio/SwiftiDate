@@ -84,4 +84,7 @@ struct Chat: Identifiable, Codable {
     let name: String
     let time: String
     let unreadCount: Int
+    
+    // 假設多加一個屬性
+    let phoneNumber: String?
 }

@@ -38,7 +38,7 @@ struct LoginView: View {
                 HStack {
                     Button(action: {
                         // Handle Back Action (Pop to previous view)
-                        clearUserState()
+                        LocalStorageManager.shared.clearAll()
                     }) {
                         Image(systemName: "chevron.left")
                             .font(.title2)
@@ -75,22 +75,6 @@ struct LoginView: View {
                         .cornerRadius(25)
                         .padding(.horizontal)
                     }
-                    
-//                    Button(action: {
-//                        // Facebook 登入按鈕的動作
-//                    }) {
-//                        HStack {
-//                            Image(systemName: "f.square.fill")
-//                            Text("使用 Facebook 帳號登入")
-//                                .fontWeight(.bold)
-//                        }
-//                        .frame(maxWidth: .infinity)
-//                        .padding()
-//                        .foregroundColor(.white)
-//                        .background(Color.white.opacity(0.2))
-//                        .cornerRadius(25)
-//                        .padding(.horizontal)
-//                    }
                     
                     SignInWithAppleButton(
                         onRequest: { request in
@@ -179,7 +163,7 @@ struct LoginView: View {
                     
                     Button(action: {
                         // 更換帳號並清除所有已存資料
-                        clearUserState()
+                        LocalStorageManager.shared.clearAll()
                         print("換個帳號")
                         showExistingUserPopup.wrappedValue = false
                     }) {
@@ -195,10 +179,10 @@ struct LoginView: View {
                 .padding(.horizontal, 20)
             }
         }
-//        .onAppear {
-//            // 在 LoginView 出現時加載用戶狀態
-//            loadUserState()
-//        }
+        .onAppear {
+            // 在 LoginView 出現時加載用戶狀態
+            LocalStorageManager.shared.loadUserSettings(into: userSettings)
+        }
     }
     
     // 處理 Apple ID 登入結果
@@ -219,51 +203,6 @@ struct LoginView: View {
         if let fullName = fullName {
             print("Full Name: \(fullName)")
         }
-    }
-    
-    // 加載邏輯
-    func loadUserState() {
-        let defaults = UserDefaults.standard
-        userSettings.globalPhoneNumber = defaults.string(forKey: "phoneNumber") ?? "未設定"
-        print("Debug - globalPhoneNumber 加載為: \(userSettings.globalPhoneNumber)") // Debug phoneNumber
-        
-        userSettings.globalUserName = defaults.string(forKey: "userName") ?? "未設定"
-        print("Debug - globalUserName 加載為: \(userSettings.globalUserName)") // Debug userName
-        
-        if let genderValue = defaults.string(forKey: "userGender"), let gender = Gender(rawValue: genderValue) {
-            userSettings.globalUserGender = gender // Correctly set the Gender enum
-        }
-
-        userSettings.globalIsUserVerified = defaults.bool(forKey: "isUserVerified")
-
-        userSettings.globalTurboCount = defaults.integer(forKey: "turboCount")
-        userSettings.globalCrushCount = defaults.integer(forKey: "crushCount")
-        userSettings.globalPraiseCount = defaults.integer(forKey: "praiseCount")
-        
-        userSettings.globalLikesMeCount = defaults.integer(forKey: "likesMeCount")
-        userSettings.globalLikeCount = defaults.integer(forKey: "likeCount")
-        
-        userSettings.isSupremeUser = defaults.bool(forKey: "isSupremeUser")
-    }
-    
-    func clearUserState() {
-        let defaults = UserDefaults.standard
-        if let appDomain = Bundle.main.bundleIdentifier {
-            defaults.removePersistentDomain(forName: appDomain) // 清除所有的UserDefaults資料
-        }
-        defaults.synchronize() // 確保立即保存
-
-        // 清除全局變數
-        userSettings.globalPhoneNumber = ""
-        userSettings.globalUserName = ""
-        userSettings.storedGender = Gender.male // Use storedGender for reset
-        userSettings.globalIsUserVerified = false
-        userSettings.globalTurboCount = 0
-        userSettings.globalCrushCount = 0
-        userSettings.globalPraiseCount = 0
-        userSettings.globalLikesMeCount = 0
-        userSettings.globalLikeCount = 0
-        userSettings.isSupremeUser = false
     }
 }
 

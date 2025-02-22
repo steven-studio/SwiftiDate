@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI
 import PhotosUI
+import FirebaseAuth
 
 struct UploadPhotoView: View {
     @EnvironmentObject var appState: AppState // ✅ 讓 UploadPhotoView 存取 appState
@@ -174,8 +175,71 @@ struct UploadPhotoView: View {
     private func completeVerification() {
         print("✅ 驗證完成，進入主畫面")
         appState.isLoggedIn = true
+        
+        // 將手機號碼 & 國碼寫入 userSettings
         userSettings.globalPhoneNumber = phoneNumber
         userSettings.globalCountryCode = selectedCountryCode
+        
+        // ✅ 這裡新增把使用者資訊存到 Firestore 的動作
+        saveUserDataToFirestore()
+    }
+    
+    // MARK: - 寫入使用者資料到 Firestore
+    private func saveUserDataToFirestore() {
+        // 1. 拿到 userID (假設你有使用 Firebase Auth，會有 `Auth.auth().currentUser?.uid`)
+        guard let userID = Auth.auth().currentUser?.uid else {
+            print("❌ 尚未登入 Firebase Auth，無法取得 userID")
+            return
+        }
+        
+        // 2. 準備要寫入的資料字典 (示範)
+        let userData: [String: Any] = [
+            "aboutMe": userSettings.aboutMe ?? "default about me",
+            "crushCount": userSettings.globalCrushCount,
+            "isPremiumUser": userSettings.isPremiumUser,
+            "isProfilePhotoVerified": userSettings.isProfilePhotoVerified,
+            "isSupremeUser": userSettings.isSupremeUser,
+            "isUserVerified": userSettings.globalIsUserVerified,
+            "likeCount": 0,
+            "likesMeCount": 0,
+            // ... 你想要存的其它 key-value
+            "phoneNumber": userSettings.globalPhoneNumber,
+            "praiseCount": 0,
+            "selectedBloodType": "",
+            "selectedDegree": "",
+            "selectedDietPreference": "",
+            "selectedDrinkOption": "",
+            "selectedFitnessOption": "",
+            "selectedGender": userSettings.globalSelectedGender,
+            "selectedHeight": 0.0,
+            "selectedHometown": "",
+            "selectedIndustry": "",
+            "selectedInterests": [],
+            "selectedJob": "",
+            "selectedLanguages": [],
+            "selectedLookingFor": "",
+            "selectedMeetWillingness": "",
+            "selectedPet": "",
+            "selectedSchool": "",
+            "selectedSmokingOption": "",
+            "selectedVacationOption": "",
+            "selectedZodiac": "",
+            "storedGender": userSettings.globalUserGender,
+            "turboCount": 0,
+            "userName": "",
+            // ...
+            // 你也可以加入照片 URL 的清單
+        ]
+        
+        // 3. 呼叫 FirestoreManager 進行資料庫存取
+        FirestoreManager.shared.saveUserData(userID: userID, data: userData) { result in
+            switch result {
+            case .success():
+                print("✅ 成功寫入/更新使用者資料：\(userID)")
+            case .failure(let error):
+                print("❌ 寫入使用者資料失敗: \(error.localizedDescription)")
+            }
+        }
     }
 }
 

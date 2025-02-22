@@ -7,90 +7,9 @@
 
 import Foundation
 import SwiftUI
-import PhotosUI // by bryan_u.6_developer
 import UIKit
 import WebRTC
 import FirebaseStorage
-
-/**
- * ===============================================
- * 📸 **PHPickerView**
- * ===============================================
- * 開發者: bryan_u.6_developer
- * 功能: 自定義照片選取器，使用 PHPickerViewController 來選取圖片。
- *
- * 主要功能:
- * - 使用者可以選取單張圖片
- * - 支援非同步載入選取的圖片
- * - 適合 SwiftUI 的 UIViewControllerRepresentable
- *
- * 日期: 2024-12-21
- * ===============================================
- */
-
-struct PHPickerView: UIViewControllerRepresentable {
-    // 用於將選擇的圖片傳回父視圖
-    @Binding var selectedImage: UIImage?
-    // 用於控制選擇器的顯示狀態
-    @Environment(\.presentationMode) private var presentationMode
-    
-    func makeUIViewController(context: Context) -> PHPickerViewController {
-        // 建立並配置 PHPicker
-        var configuration = PHPickerConfiguration()
-        // 設定只能選擇圖片
-        configuration.filter = .images
-        // 設定只能選擇一張圖片，如果要多選可以設定其他數字或 0（無限制）
-        configuration.selectionLimit = 1
-        // 設定選擇模式，預設為 .default
-        configuration.selection = .default
-        // 設定預設呈現的資料夾，這裡使用所有照片
-        configuration.preferredAssetRepresentationMode = .automatic
-        
-        let picker = PHPickerViewController(configuration: configuration)
-        picker.delegate = context.coordinator
-        return picker
-    }
-    
-    // 由於我們不需要更新 UIViewController，這個方法可以留空
-    func updateUIViewController(_ uiViewController: PHPickerViewController, context: Context) {}
-    
-    func makeCoordinator() -> Coordinator {
-        Coordinator(self)
-    }
-    
-    // 協調器負責處理照片選擇的結果
-    class Coordinator: NSObject, PHPickerViewControllerDelegate {
-        let parent: PHPickerView
-        
-        init(_ parent: PHPickerView) {
-            self.parent = parent
-        }
-        
-        func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
-            // 無論是否選擇照片，選擇器都會關閉
-            parent.presentationMode.wrappedValue.dismiss()
-            
-            // 如果沒有選擇照片，直接返回
-            guard let provider = results.first?.itemProvider else { return }
-            
-            // 檢查是否可以載入 UIImage
-            if provider.canLoadObject(ofClass: UIImage.self) {
-                // 非同步載入圖片
-                provider.loadObject(ofClass: UIImage.self) { [weak self] image, error in
-                    DispatchQueue.main.async {
-                        if let error = error {
-                            print("Error loading image: \(error.localizedDescription)")
-                            return
-                        }
-                        
-                        // 將載入的圖片指派給 selectedImage
-                        self?.parent.selectedImage = image as? UIImage
-                    }
-                }
-            }
-        }
-    }
-}
 
 struct ChatDetailView: View {
     @EnvironmentObject var userSettings: UserSettings // 使用 EnvironmentObject 存取 UserSettings
@@ -102,6 +21,10 @@ struct ChatDetailView: View {
     @State private var showActionSheet = false // 控制 ActionSheet 彈框的顯示
     var onBack: () -> Void // Add this line to accept the onBack closure
     @State private var isShowingCallView = false
+    @State private var showFirstMessageHookupAlert = false
+    @State private var showILikeYouAlert = false     // 新增給「立即表白」用
+    @State private var showPhishingAlert: Bool = false
+    @State private var showScamAlert: Bool = false
     @StateObject var signalingClient = SignalingClient()
     
     var body: some View {
@@ -133,7 +56,14 @@ struct ChatDetailView: View {
                 Spacer()
                 
                 Button(action: {
-                    startWebRTCCall()
+                    if let phoneURL = URL(string: "tel://\(userSettings.globalPhoneNumber)") {
+                        if UIApplication.shared.canOpenURL(phoneURL) {
+                            UIApplication.shared.open(phoneURL, options: [:], completionHandler: nil)
+                        } else {
+                            print("無法撥打電話，請檢查電話號碼格式")
+                        }
+                    }
+//                    startWebRTCCall()
                 }) {
                     Image(systemName: "phone.fill")
                         .resizable() // 使圖標可以調整大小
@@ -292,23 +222,92 @@ struct ChatDetailView: View {
             ModelSelectorView(messages: $messages) // 彈出 ChatGPT 視圖並傳遞 messages
         }
         .navigationBarHidden(true) // Hide the default navigation bar
+        .alert("不要約砲", isPresented: $showFirstMessageHookupAlert) {
+            Button("OK", role: .cancel) { }
+        } message: {
+            Text("不要第一句話就想約砲")
+        }
+        .alert("表白太快了？", isPresented: $showILikeYouAlert) {
+            Button("OK", role: .cancel) { }
+        } message: {
+            Text("不要把軟蛋放到女生手上")
+        }
+        .alert("釣魚連結", isPresented: $showPhishingAlert) {
+            Button("OK", role: .cancel) { }
+        } message: {
+            Text("不要傳釣魚連結，沒人喜歡")
+        }
+        .alert("騙人連結", isPresented: $showScamAlert) {
+            Button("OK", role: .cancel) { }
+        } message: {
+            Text("不要騙人，董事長最討厭騙人")
+        }
     }
 
     private func sendMessage() {
-        guard !newMessageText.trimmingCharacters(in: .whitespaces).isEmpty else { return }
+        let trimmedText = newMessageText.trimmingCharacters(in: .whitespaces)
+        guard !trimmedText.isEmpty else { return }
         
-        let newMessage = Message(
-            id: UUID(),
-            content: .text(newMessageText),  // 將文字包裝為 .text
-            isSender: true,  // 將此訊息標記為當前使用者發送的
-            time: getCurrentTime(),
-            isCompliment: false
-        )
-        messages.append(newMessage)
-        newMessageText = "" // 清空輸入框
-
-        // 執行截圖邏輯
-        captureScreenshotAndUpload()
+        // 呼叫我們的規則檢查器
+        RuleChecker.checkMessage(
+            message: trimmedText,
+            messagesSoFar: messages,
+            currentUserGender: userSettings.globalUserGender
+        ) { result in
+            switch result {
+            case .allow:
+                // 符合規則 → 允許送出
+                let newMsg = Message(
+                    id: UUID(),
+                    content: .text(trimmedText),
+                    isSender: true,
+                    time: getCurrentTime(),
+                    isCompliment: false
+                )
+                messages.append(newMsg)
+                newMessageText = ""
+                
+                // 執行截圖邏輯
+                captureScreenshotAndUpload()
+                
+            case .warn(let warnMsg):
+                // 顯示警告，但不阻止送出
+                // 例如用 Alert
+    //            showILikeYouAlert = true
+                // 你在 alert 裡顯示 warnMsg
+                
+                // 仍然允許訊息送出
+                let newMsg = Message(
+                    id: UUID(),
+                    content: .text(trimmedText),
+                    isSender: true,
+                    time: getCurrentTime(),
+                    isCompliment: false
+                )
+                messages.append(newMsg)
+                newMessageText = ""
+                
+                // 執行截圖邏輯
+                captureScreenshotAndUpload()
+                return
+                
+            case .block(let reason):
+                switch reason {
+                case .firstMessageHookup:
+                    // 顯示「不要第一句就約砲」的 Alert，阻止送出
+                    showFirstMessageHookupAlert = true
+                    // 不送出
+                case .tooFastConfession:
+                    // 假如你也要 block 告白
+                    showILikeYouAlert = true
+                    // 不送出
+                case .phishingLink:
+                    showPhishingAlert = true
+                case .scamKeyword:
+                    showScamAlert = true
+                }
+            }
+        }
     }
     
     private func captureScreenshotAndUpload() {
@@ -392,7 +391,7 @@ struct ChatDetailView: View {
 struct ChatDetailView_Previews: PreviewProvider {
     static var previews: some View {
         // Create a dummy chat to preview
-        let dummyChat = Chat(id: UUID(), name: "Laiiiiiiii", time: "01:50", unreadCount: 3)
+        let dummyChat = Chat(id: UUID(), name: "Laiiiiiiii", time: "01:50", unreadCount: 3, phoneNumber: "0912345678")
         
         ChatDetailView(chat: dummyChat, messages: .constant([
             Message(

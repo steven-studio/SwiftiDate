@@ -2,8 +2,29 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <!-- 設定行動裝置友好，避免在手機上顯示不佳 -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <!-- ★ 建議：加入 SEO 友好的標題（<title>） -->
+    <!-- 可在標題中納入主要關鍵字，如 "交友平台"、"國際配對" 等，但也要簡潔有力 -->
     <title>SwiftiDate - Connect, Match & Date!</title>
+
+    <!-- ★ 建議：只放 ONE 個 <meta name="description"> 描述本頁內容，字數約 120~160 字元 -->
+    <meta name="description" content="SwiftiDate 提供跨國交友、AI 智能配對、安心驗證等功能，讓你輕鬆探索來自世界各地的單身男女，追求真實連結。立即體驗更有趣、安全的網路交友！" />
+
+    <!-- (可選) Open Graph / Social Meta Tags，方便在社群平台預覽時顯示資訊 -->
+    <meta property="og:title" content="SwiftiDate - Connect, Match & Date!" />
+    <meta property="og:description" content="輕鬆探索來自世界各地的單身男女，立即體驗更有趣、安全的網路交友平台！" />
+    <meta property="og:image" content="https://example.com/img/swiftidate-og.jpg" />
+    <meta property="og:url" content="https://example.com/" />
+    <meta property="og:type" content="website" />
+
+    <!-- (可選) Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="SwiftiDate - Connect, Match & Date!" />
+    <meta name="twitter:description" content="探索世界各地的單身男女，體驗更有趣安全的網路交友平台！" />
+    <meta name="twitter:image" content="https://example.com/img/swiftidate-og.jpg" />
+
     <!-- 你可自行連結 CSS / 字體 / 圖片等 -->
     <!-- Favicon -->
     <link rel="icon" href="img/favicon.ico">
@@ -13,6 +34,7 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
     <!-- W3 Stylesheet -->
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="canonical" href="https://swiftidate-cdff0.web.app/" />
     <style>
       body { margin: 0; font-family: Arial, sans-serif; }
       /* 基本導覽列樣式 */
@@ -49,8 +71,21 @@
         text-decoration: none;
         margin: 0;
       }
-      .hero {
+      .bg-wrapper {
+        background: #f5f5f5; /* 淺灰背景 */
+
+        /* 若要背景圖片 */
         background: url("artiphoria-Left\ side_\ a\ friendl.png") no-repeat center center;
+        background-size: cover;
+        background-attachment: fixed; /* 這個關鍵屬性讓背景固定 */
+
+        /* 若要漸層 */
+        /* background: linear-gradient(to right, #f5f5f5, #eee); */
+
+        /* 你也可以加 padding, margin, 其他樣式... */
+        padding: 40px 0; 
+      }
+      .hero {
         background-size: cover; /* 使圖片自動裁切或縮放充滿容器 */
         text-align: center;
         /* 增加最低高度 */
@@ -103,74 +138,76 @@
       </div>
     </nav>
 
-    <!-- 主視覺區 -->
-    <section class="hero">
-      <h2>Find Your Perfect Match</h2>
-      <p>跨地區、跨文化，與世界各地有趣的人相遇！</p>
-      <p><em>Real People, Real Connections.</em></p>
-      <!-- 下載 / 註冊 按鈕，例如：
-      <a href="#" class="cta-button">立即下載</a>
-      -->
-    </section>
+    <div class="bg-wrapper">
+      <!-- 主視覺區 -->
+      <section class="hero">
+        <h2>Find Your Perfect Match</h2>
+        <p>跨地區、跨文化，與世界各地有趣的人相遇！</p>
+        <p><em>Real People, Real Connections.</em></p>
+        <!-- 下載 / 註冊 按鈕，例如：
+        <a href="#" class="cta-button">立即下載</a>
+        -->
+      </section>
 
-    <!-- 特色介紹 -->
-    <section class="features" id="features">
-      <h3>Why SwiftiDate?</h3>
-      <ul>
-        <li><strong>跨國匹配：</strong>探索異國浪漫，輕鬆搜尋世界各地用戶。</li>
-        <li><strong>安全驗證：</strong>保障你的身份和隱私，安心交友。</li>
-        <li><strong>AI 智能配對：</strong>根據興趣愛好，行為模式，推薦最合適的對象。</li>
-        <li><strong>多元互動：</strong>文字、語音或影片通話，一步一步拉近彼此距離。</li>
-      </ul>
-    </section>
+      <!-- 特色介紹 -->
+      <section class="features" id="features">
+        <h3>Why SwiftiDate?</h3>
+        <ul>
+          <li><strong>跨國匹配：</strong>探索異國浪漫，輕鬆搜尋世界各地用戶。</li>
+          <li><strong>安全驗證：</strong>保障你的身份和隱私，安心交友。</li>
+          <li><strong>AI 智能配對：</strong>根據興趣愛好，行為模式，推薦最合適的對象。</li>
+          <li><strong>多元互動：</strong>文字、語音或影片通話，一步一步拉近彼此距離。</li>
+        </ul>
+      </section>
 
-    <section class="social-media" id="social-media">
-      <h3>社群平台</h3>
-      <!-- Feather Icons 的 Instagram SVG -->
-      <a href="https://instagram.com/swiftidate" target="_blank" rel="noopener">
-        <svg 
-          xmlns="http://www.w3.org/2000/svg" 
-          width="24" height="24" 
-          fill="none" 
-          stroke="currentColor" 
-          stroke-width="2" 
-          stroke-linecap="round" 
-          stroke-linejoin="round" 
-          class="feather feather-instagram"
-        >
-          <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-          <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-          <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-        </svg>
-      </a>
-    </section>
+      <section class="social-media" id="social-media">
+        <h3>社群平台</h3>
+        <!-- Feather Icons 的 Instagram SVG -->
+        <a href="https://instagram.com/swiftidate" target="_blank" rel="noopener">
+          <svg 
+            xmlns="http://www.w3.org/2000/svg" 
+            width="24" height="24" 
+            fill="none" 
+            stroke="currentColor" 
+            stroke-width="2" 
+            stroke-linecap="round" 
+            stroke-linejoin="round" 
+            class="feather feather-instagram"
+          >
+            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+          </svg>
+        </a>
+      </section>
 
-    <!-- Buy Me A Coffee區 -->
-    <section class="support" id="support">
-      <h3>Support Our Development</h3>
-      <p>SwiftiDate 正在持續優化中，期待為你帶來更好的交友體驗。若你喜歡這個專案，歡迎贊助我們一杯咖啡！</p>
-      <!-- Buy Me A Coffee 按鈕 (純文字連結範例) -->
-      <a href="https://www.buymeacoffee.com/steven.studio" 
-          target="_blank" rel="noopener" 
-          style="
-            display: inline-flex;
-            align-items: center;
-            text-decoration: none;
-            background: #ff813f;
-            color: #fff;
-            padding: 8px 12px;
-            border-radius: 4px;
-        ">
-        <!-- 官方Logo -->
-        <img 
-          src="https://cdn.buymeacoffee.com/buttons/bmc-new-btn-logo.svg" 
-          alt="Buy me a coffee"
-          style="height: 24px; width: auto; margin-right: 8px;" 
-        />
-        <!-- 按鈕文字 -->
-        <span style="font-weight: bold;">Buy me a coffee</span>
-      </a>
-    </section>
+      <!-- Buy Me A Coffee區 -->
+      <section class="support" id="support">
+        <h3>Support Our Development</h3>
+        <p>SwiftiDate 正在持續優化中，期待為你帶來更好的交友體驗。若你喜歡這個專案，歡迎贊助我們一杯咖啡！</p>
+        <!-- Buy Me A Coffee 按鈕 (純文字連結範例) -->
+        <a href="https://www.buymeacoffee.com/steven.studio" 
+            target="_blank" rel="noopener" 
+            style="
+              display: inline-flex;
+              align-items: center;
+              text-decoration: none;
+              background: #ff813f;
+              color: #fff;
+              padding: 8px 12px;
+              border-radius: 4px;
+          ">
+          <!-- 官方Logo -->
+          <img 
+            src="https://cdn.buymeacoffee.com/buttons/bmc-new-btn-logo.svg" 
+            alt="Buy me a coffee"
+            style="height: 24px; width: auto; margin-right: 8px;" 
+          />
+          <!-- 按鈕文字 -->
+          <span style="font-weight: bold;">Buy me a coffee</span>
+        </a>
+      </section>
+    </div>
 
     <!-- 頁尾 -->
     <footer>

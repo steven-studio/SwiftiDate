@@ -65,6 +65,9 @@ struct PhoneNumberEntryView: View {
                     .cornerRadius(10)
                     .padding(.horizontal)
                 }
+                .onChange(of: selectedCountryCode) { newValue in
+                    userSettings.globalCountryCode = newValue
+                }
                 
                 TextField("", text: $phoneNumber)
                     .keyboardType(.numberPad)
@@ -155,14 +158,39 @@ struct PhoneNumberEntryView: View {
     // **✅ 先檢查手機號碼是否存在**
     private func checkPhoneNumber() {
         isChecking = true
-        
+        userSettings.globalCountryCode = selectedCountryCode
+
         // 替換為你實際部署的函式 URL，比如:
         // https://us-central1-你的專案ID.cloudfunctions.net/checkTaiwanPhone
         
         var urlString = "https://us-central1-swiftidate-cdff0.cloudfunctions.net/checkTaiwanPhone"
         
-        if selectedCountryCode == "+886" {
-            urlString = "https://us-central1-swiftidate-cdff0.cloudfunctions.net/checkTaiwanPhone"
+        // 1. 建立「國碼 -> 雲函式路徑」的字典
+        let functionMap: [String: String] = [
+            "+886": "checkTaiwanPhone",
+            "+86":  "checkChinaPhone",
+            "+852": "checkHongKongPhone", // 其實 +853 是澳門，+852 是香港
+            "+853": "checkMacaoPhone",
+            "+1":   "checkUSPhone",
+            "+65":  "checkSingaporePhone",
+            "+62":  "checkIndonesianPhone",
+            "+81":  "checkJapanPhone",
+            "+61":  "checkAustralianPhone",
+            "+44":  "checkBritishPhone",
+            "+39":  "checkItalianPhone",
+            "+64":  "checkNewZealandPhone",
+            "+82":  "checkKoreaPhone"
+        ]
+
+        // 2. 以 selectedCountryCode 查字典
+        if let functionName = functionMap[selectedCountryCode] {
+            // 為了維護容易，可把雲函式主機放在一個常數
+            let baseURL = "https://us-central1-swiftidate-cdff0.cloudfunctions.net"
+            urlString = "\(baseURL)/\(functionName)"
+        } else {
+            // 沒對應到就給個預設 fallback
+            // 或者直接不改 urlString
+            print("⚠️ 未定義此國碼對應的雲函式，請補充")
         }
         
         guard let url = URL(string: urlString) else {

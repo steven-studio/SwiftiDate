@@ -1,5 +1,4 @@
 GoogleService-Info.plist
-SwiftiDate/GlobalVariables.swift
 *.xcuserstate
 firebase_chat_sorter.py
 swiftidate-cdff0-firebase-adminsdk-e2p44-7c5e06ebfc.json
@@ -7,6 +6,7 @@ SwiftiDate.xcodeproj/project.pbxproj
 mlc-llm
 dist
 functions/.DS_Store
+functions/node_modules
 google-cloud-sdk/
 google-cloud-cli-darwin-arm.tar.gz
 WebRTC
@@ -18,3 +18,5 @@ xcuserdata/
 *.xcscmblueprint
 public/firebase-init.js
 apphosting.local.yaml
+.firebase/hosting.cHVibGlj.cache
+

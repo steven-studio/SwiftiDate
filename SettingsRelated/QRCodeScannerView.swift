@@ -8,12 +8,16 @@
 import Foundation
 import SwiftUI
 import AVFoundation
+// 加入 Firebase Functions
+import FirebaseFunctions
 
 struct QRCodeScannerView: UIViewControllerRepresentable {
     var didFindCode: (String) -> Void
     var dismissView: () -> Void // Add this to handle dismiss action
     
     class Coordinator: NSObject, AVCaptureMetadataOutputObjectsDelegate {
+
+        private let functions = Functions.functions()
         var parent: QRCodeScannerView
 
         init(parent: QRCodeScannerView) {
@@ -27,6 +31,24 @@ struct QRCodeScannerView: UIViewControllerRepresentable {
 
                 AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
                 parent.didFindCode(stringValue)
+            }
+        }
+        
+        private func matchUsers(tokenId: String) {
+            let matchFunction = functions.httpsCallable("matchUsers")
+            matchFunction.call(["tokenId": tokenId]) { result, error in
+                if let error = error {
+                    print("matchUsers error: \(error)")
+                    // 也可彈 Alert
+                    return
+                }
+                if let data = result?.data as? [String: Any],
+                   let success = data["success"] as? Bool, success {
+                    print("成功 match! aUid: \(data["aUid"] ?? ""), bUid: \(data["bUid"] ?? "")")
+                    
+                    // 更新 UI, e.g. Toast / Alert
+                    // 也可以 callback 給 parent, e.g. parent.didFindCode(tokenId)
+                }
             }
         }
         

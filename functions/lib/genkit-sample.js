@@ -50,16 +50,11 @@ const menuSuggestionFlow = ai.defineFlow({
         },
     });
     try {
-        for (var _d = true, stream_1 = __asyncValues(stream), stream_1_1; stream_1_1 = await stream_1.next(), _a = stream_1_1.done, !_a;) {
+        for (var _d = true, stream_1 = __asyncValues(stream), stream_1_1; stream_1_1 = await stream_1.next(), _a = stream_1_1.done, !_a; _d = true) {
             _c = stream_1_1.value;
             _d = false;
-            try {
-                const chunk = _c;
-                sendChunk(chunk.text);
-            }
-            finally {
-                _d = true;
-            }
+            const chunk = _c;
+            sendChunk(chunk.text);
         }
     }
     catch (e_1_1) { e_1 = { error: e_1_1 }; }

@@ -85,8 +85,8 @@ func canConnect(to model: LLMModel, completion: @escaping (Bool) -> Void) {
     
     // 針對 OpenAI API，添加 Bearer Token
     if model == .chatgpt {
-        let apiKey = openAIAPIKey  // ⚠️ 確保這裡填入正確的 OpenAI API Key
-        request.addValue("Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
+//        let apiKey = openAIAPIKey  // ⚠️ 確保這裡填入正確的 OpenAI API Key
+//        request.addValue("Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
     }
     
     print("[DEBUG] 準備測試外網連線: \(url.absoluteString)")

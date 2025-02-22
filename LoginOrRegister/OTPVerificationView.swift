@@ -86,7 +86,7 @@ struct OTPVerificationView: View {
             .padding(.horizontal)
             .onAppear {
                 if verificationID == nil {
-                    sendOTP()  // ✅ 當 verificationID 為 nil，發送第一次驗證碼
+                    FirebaseAuthManager.shared.sendOTP()  // ✅ 當 verificationID 為 nil，發送第一次驗證碼
                 }
                 focusedField = 0 // Start by focusing on the first field
                 startCountdown()
@@ -129,27 +129,6 @@ struct OTPVerificationView: View {
                 .environmentObject(appState) // ✅ 傳遞 AppState
                 .environmentObject(userSettings) // ✅ 傳遞 UserSettings
         }
-    }
-    
-    private func sendOTP() {
-        let fullPhoneNumber = "\(selectedCountryCode)\(phoneNumber)"
-        sendFirebaseOTP(to: fullPhoneNumber)  // ← 發送 OTP
-    }
-    
-    func sendFirebaseOTP(to phoneNumber: String) {
-        PhoneAuthProvider.provider()
-            .verifyPhoneNumber(phoneNumber, uiDelegate: nil) { verificationID, error in
-                if let error = error {
-                    print("❌ 發送 OTP 驗證碼失敗: \(error.localizedDescription)")
-                    return
-                }
-                // 驗證碼發送成功，將 verificationID 暫存到 UserDefaults 或 ViewModel
-                print("✅ 發送 OTP 驗證碼成功，verificationID = \(verificationID ?? "")")
-                if let vid = verificationID {
-                    // 將 verificationID 存起來，後續在 OTP 驗證畫面時會用到
-                    UserDefaults.standard.set(vid, forKey: "FirebaseVerificationID")
-                }
-            }
     }
     
     // 处理输入的函数
@@ -195,7 +174,7 @@ struct OTPVerificationView: View {
         countdown = 59 // 重置倒數計時
 
         let fullPhoneNumber = "\(selectedCountryCode)\(phoneNumber)";
-        sendFirebaseOTP(to: fullPhoneNumber)  // ← 發送 OTP
+        FirebaseAuthManager.shared.sendFirebaseOTP(to: fullPhoneNumber)  // ← 發送 OTP
     }
     
     // **🔹 倒數計時功能**

@@ -19,7 +19,7 @@ struct ClaudeAIView: View {
     @State private var dynamicHeight: CGFloat = 150 // 初始高度
     private let maxHeight: CGFloat = 300 // 最大高度限制
 
-    let apiKey = openAIAPIKey  // 將這個替換為您的 API 密鑰
+//    let apiKey = openAIAPIKey  // 將這個替換為您的 API 密鑰
 
     var body: some View {
         NavigationStack {
@@ -94,7 +94,7 @@ struct ClaudeAIView: View {
         let url = URL(string: "https://api.openai.com/v1/chat/completions")!
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
-        request.setValue("Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
+//        request.setValue("Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         
         // 設置請求 body，將聊天記錄和新問題一起發送

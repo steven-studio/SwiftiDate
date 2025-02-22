@@ -9,11 +9,13 @@ import Foundation
 import UIKit
 import SwiftUI
 import MessageUI
+import FirebaseFunctions
 
 struct SettingsView: View {
     @EnvironmentObject var appState: AppState // 確保可以訪問 AppState
     @EnvironmentObject var userSettings: UserSettings // 使用 EnvironmentObject 來獲取 global 變數
     @Binding var showSettingsView: Bool // Binding variable to control the view dismissal
+    @Binding var contentSelectedTab: Int // <- 這樣我們能切 MainView 的 tab
     @State private var isQRCodeScannerView = false
     @State private var isHelpView = false // State variable to control HelpView presentation
     @State private var isCommunityGuidelinesView = false // State variable for CommunityGuidelinesView
@@ -26,6 +28,8 @@ struct SettingsView: View {
     @State private var isShowingCustomerServiceAlert = false
     @State private var isShowingMailComposer = false // 控制郵件視圖的顯示
     @State private var mailData: MailData? // 保存郵件數據
+    // 用於示範當掃碼完成後要配對
+    let functions = Functions.functions()
 
     var body: some View {
         ZStack {
@@ -34,6 +38,9 @@ struct SettingsView: View {
                     // Handle the scanned code
                     print("Scanned QR Code: \(scannedCode)")
                     isQRCodeScannerView = false // Dismiss QRCodeScannerView after scanning
+                    
+                    // 2. 呼叫 matchUsers
+                    matchUsers(tokenId: scannedCode)
                 }, dismissView: {
                     // Action to dismiss the QR code scanner
                     isQRCodeScannerView = false // Dismiss the scanner when the back button is tapped
@@ -310,7 +317,7 @@ struct SettingsView: View {
                                     title: Text("一旦登出，你的登入資料將被清除"),
                                     primaryButton: .default(Text("取消")),
                                     secondaryButton: .destructive(Text("確定"), action: {
-                                        saveUserState() // 在登出前保存用戶資料
+                                        LocalStorageManager.shared.saveUserSettings(userSettings) // 在登出前保存用戶資料
                                         // 更新登錄狀態
                                         appState.isLoggedIn = false // 切換到未登錄狀態
                                     })
@@ -383,23 +390,7 @@ struct SettingsView: View {
             }
         }
     }
-    
-    // No need for saveUserState as @AppStorage handles persistence
-    func saveUserState() {
-        let defaults = UserDefaults.standard
-        defaults.set(userSettings.globalPhoneNumber, forKey: "phoneNumber")
-        defaults.set(userSettings.globalUserName, forKey: "userName")
-        defaults.set(userSettings.globalUserGender.rawValue, forKey: "userGender")
-        defaults.set(userSettings.globalIsUserVerified, forKey: "isUserVerified")
-        defaults.set(userSettings.globalTurboCount, forKey: "turboCount")
-        defaults.set(userSettings.globalCrushCount, forKey: "crushCount")
-        defaults.set(userSettings.globalPraiseCount, forKey: "praiseCount")
-        defaults.set(userSettings.globalLikesMeCount, forKey: "likesMeCount")
-        defaults.set(userSettings.globalLikeCount, forKey: "likeCount")
-        defaults.set(userSettings.isSupremeUser, forKey: "isSupremeUser")
-        print("Debug - User data has been saved to UserDefaults.")
-    }
-    
+        
     // 檢查是否有設置郵箱帳戶
     func checkIfMailIsSetup() {
         if MFMailComposeViewController.canSendMail() {
@@ -409,6 +400,38 @@ struct SettingsView: View {
         } else {
             // 未設置郵箱，顯示提醒框
             isShowingCustomerServiceAlert = true
+        }
+    }
+    
+    private func matchUsers(tokenId: String) {
+        // 可以顯示一個 loading UI
+        functions.httpsCallable("matchUsers").call(["tokenId": tokenId]) { result, error in
+            if let error = error {
+                print("matchUsers error: \(error)")
+                return
+            }
+            // 如果成功
+            if let data = result?.data as? [String: Any],
+               let success = data["success"] as? Bool, success {
+                
+                let bName = data["bName"] as? String ?? "對方暱稱"
+                let bPhone = data["phoneNumber"] as? String ?? ""
+                let matchId = data["matchId"] as? String
+                // 3. 關閉 SettingsView
+                DispatchQueue.main.async {
+                    // 先把 SettingsView 關掉 → 回到 ProfileView
+                    self.showSettingsView = false
+                    // 4. 再把 MainView 的 tab 切到 ChatView
+                    self.contentSelectedTab = 3
+                    // 5. ChatView 會在 onAppear / 或 .onChange(...) 中做 selectedChat = newChat
+                    //    你可以用全域 / EnvironmentObject / AppStorage 共享 chatID
+                    //    或者你可以在 ChatView 做觀察
+                    // 記錄 matchId 到 userSettings
+                    userSettings.newMatchedChatID = matchId
+                    userSettings.newMatchedChatName = bName
+                    userSettings.newMatchedPhone = bPhone
+                }
+            }
         }
     }
 }
@@ -454,8 +477,14 @@ struct MailData {
 
 struct SettingsView_Previews: PreviewProvider {
     @State static var showSettingsView = true // Provide a sample state variable for the preview
+    @State static var selectedTab = 4         // 新增：Preview用的 contentSelectedTab 模擬變數
 
     static var previews: some View {
-        SettingsView(showSettingsView: $showSettingsView) // Use the binding variable in the preview
+        SettingsView(
+            showSettingsView: $showSettingsView,
+            contentSelectedTab: $selectedTab   // 傳遞 contentSelectedTab
+        )
+        .environmentObject(UserSettings())    // 如果你的 SettingsView 需要這些
+        .environmentObject(AppState())        // 同理
     }
 }

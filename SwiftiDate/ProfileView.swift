@@ -32,8 +32,12 @@ struct ProfileView: View {
 
     var body: some View {
         if showSettingsView {
-            SettingsView(showSettingsView: $showSettingsView) // Pass the binding to the SettingsView
-                .environmentObject(appState) // 傳遞 AppState
+            SettingsView(
+                showSettingsView: $showSettingsView,
+                contentSelectedTab: $contentSelectedTab // 新增這個參數
+            )
+            .environmentObject(appState)
+            .environmentObject(userSettings) // 如果需要也可以帶
         } else if showSafetyCenterView {
             SafetyCenterView(showSafetyCenterView: $showSafetyCenterView, photos: $userSettings.photos) // 如果全局变量为 true，则显示 SafetyCenterView
                 .environmentObject(userSettings)
@@ -84,7 +88,7 @@ struct ProfileView: View {
                 }
                 
                 // 使用新的 TopRightActionButtons 组件
-                TopRightActionButtons(showSettingsView: $showSettingsView, showSafetyCenterView: $showSafetyCenterView, showHealthDataSectionView: $showHealthDataSectionView)
+                TopRightActionButtons(showSettingsView: $showSettingsView, showSafetyCenterView: $showSafetyCenterView)
                 
                 // Show dimmed background and popup when isShowingInfoPopup is true
                 if isShowingInfoPopup {

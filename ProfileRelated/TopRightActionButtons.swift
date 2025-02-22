@@ -11,7 +11,7 @@ import SwiftUI
 struct TopRightActionButtons: View {
     @Binding var showSettingsView: Bool
     @Binding var showSafetyCenterView: Bool
-    @Binding var showHealthDataSectionView: Bool
+//    @Binding var showHealthDataSectionView: Bool
     
     var body: some View {
         // Gear icon in the top-right corner
@@ -40,14 +40,14 @@ struct TopRightActionButtons: View {
                         .foregroundColor(.gray)
                 }
                 
-                Button(action: {
-                    showHealthDataSectionView = true
-                }) {
-                    Image(systemName: "figure.walk")
-                        .font(.title2)
-                        .padding()
-                        .foregroundColor(.gray)
-                }
+//                Button(action: {
+//                    showHealthDataSectionView = true
+//                }) {
+//                    Image(systemName: "figure.walk")
+//                        .font(.title2)
+//                        .padding()
+//                        .foregroundColor(.gray)
+//                }
             }
             Spacer()
         }

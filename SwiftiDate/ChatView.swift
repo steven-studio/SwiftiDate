@@ -337,6 +337,21 @@ struct ChatView: View {
                     loadChatMessagesFromAppStorage()
                     print("Loaded data from local storage")
                 }
+                
+                if let newId = userSettings.newMatchedChatID {
+                    // 假設從 newId 產生 / 查詢 Chat model
+                    let newChat = Chat(
+                        id: UUID(),
+                        name: "對方暱稱",
+                        time: "00:00",
+                        unreadCount: 0,
+                        phoneNumber: "xxx"
+                    )
+                    selectedChat = newChat
+
+                    // 清空，避免下次進來又觸發
+                    userSettings.newMatchedChatID = nil
+                }
             }
             .fullScreenCover(isPresented: $showTurboView) {
                 // Pass the selectedTab to TurboView

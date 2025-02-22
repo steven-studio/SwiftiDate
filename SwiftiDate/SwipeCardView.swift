@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import FirebaseFirestore
 
 struct User {
     let id: String
@@ -18,14 +19,36 @@ struct User {
 }
 
 struct SwipeCardView: View {
+    
+    // MARK: - Firebase
+    private let db = Firestore.firestore()
+
+    // MARK: - Environment & Observed Objects
+    @EnvironmentObject var userSettings: UserSettings
     @StateObject private var locationManager = LocationManager()
+
+    // MARK: - State Variables
+    @State private var currentIndex = 0
     @State private var offset = CGSize.zero
+
+    // MARK: - UI Controls
     @State private var showCircleAnimation = false
     @State private var showPrivacySettings = false // 控制隱私設置頁面的顯示
-    @EnvironmentObject var userSettings: UserSettings
-    @State private var showWelcomePopup = false // 初始值為 true，代表剛登入時顯示彈出視窗
+    @State private var showWelcomePopup = false    // 初始值為 true，代表剛登入時顯示彈出視窗
     
-    @AppStorage("globalSelectedGender") private var selectedGender: String = "female" // ✅ 直接存取 `AppStorage`
+    @State private var swipedIDs: Set<String> = [] // 存放已滑過的 userIDs
+    private let currentUserID = "abc123" // 假設當前用戶的 ID
+    
+    @State private var lastDocument: DocumentSnapshot? = nil
+    @State private var isLoading: Bool = false
+
+    // MARK: - Undo Tracking
+    /// 記錄最後一次滑動資訊：
+    /// - user: 使用者資料
+    /// - index: 卡片在陣列中的索引
+    /// - isRightSwipe: 是否為向右滑 (Like)
+    /// - docID: 此筆滑動資料在 Firebase 中的文件 ID
+    @State private var lastSwipedData: (user: User, index: Int, isRightSwipe: Bool, docID: String)?
 
     // List of users and current index
     @State private var users: [User] = [
@@ -40,7 +63,6 @@ struct SwipeCardView: View {
         ])
         // Add more users here
     ]
-    @State private var currentIndex = 0
     
     var body: some View {
         ZStack {
@@ -48,7 +70,7 @@ struct SwipeCardView: View {
                locationManager.authorizationStatus == .authorizedAlways {
                 // 使用者已授權位置存取，顯示滑動卡片畫面
                 mainSwipeCardView
-                    .blur(radius: selectedGender == "none" ? 10 : 0) // ✅ 讓畫面模糊
+                    .blur(radius: userSettings.globalSelectedGender == "none" ? 10 : 0) // ✅ 讓畫面模糊
             } else {
                 // 使用者未授權位置存取，顯示提示畫面
                 locationPermissionPromptView
@@ -81,20 +103,12 @@ struct SwipeCardView: View {
         .fullScreenCover(isPresented: $showPrivacySettings) {
             PrivacySettingsView(isPresented: $showPrivacySettings)
         }
-        .background(
-            userSettings.globalUserGender == .female ?
-                LinearGradient(
-                    gradient: Gradient(colors: [Color.pink.opacity(0.1), Color.purple.opacity(0.2)]),
-                    startPoint: .topLeading,
-                    endPoint: .bottomTrailing
-                )
-            :
-                LinearGradient( // ✅ 確保男性用戶也使用 LinearGradient
-                    gradient: Gradient(colors: [Color.blue.opacity(0.1), Color.gray.opacity(0.2)]),
-                    startPoint: .topLeading,
-                    endPoint: .bottomTrailing
-                )
-        )
+        .onReceive(NotificationCenter.default.publisher(for: .undoSwipeNotification)) { _ in
+            self.undoSwipe()
+        }
+        .onAppear {
+            fetchSwipes()
+        }
     }
     
     // 主滑動卡片畫面
@@ -146,45 +160,185 @@ struct SwipeCardView: View {
                 }
             }
         }
-        .background(
-            userSettings.globalUserGender == .female ?
-                LinearGradient(
-                    gradient: Gradient(colors: [Color.pink.opacity(0.1), Color.purple.opacity(0.2)]),
-                    startPoint: .topLeading,
-                    endPoint: .bottomTrailing
-                )
-            :
-                LinearGradient( // ✅ 確保男性用戶也使用 LinearGradient
-                    gradient: Gradient(colors: [Color.blue.opacity(0.1), Color.gray.opacity(0.2)]),
-                    startPoint: .topLeading,
-                    endPoint: .bottomTrailing
-                )
-        )
+    }
+    
+    // 先抓「已滑過」的紀錄
+    func fetchSwipes() {
+        db.collection("swipes")
+            .whereField("userID", isEqualTo: currentUserID)
+            .getDocuments { snapshot, error in
+                if let error = error {
+                    print("取得 swipes 失敗：\(error)")
+                    return
+                }
+                
+                var swipedSet = Set<String>()
+                snapshot?.documents.forEach { doc in
+                    let data = doc.data()
+                    if let targetID = data["targetID"] as? String {
+                        swipedSet.insert(targetID)
+                    }
+                }
+                
+                self.swipedIDs = swipedSet
+                // 有了 swipedIDs 之後，再去抓潛在對象
+                self.loadUsers(pageSize: 20, lastDocument: nil)
+            }
+    }
+    
+    func loadUsers(pageSize: Int = 20, lastDocument: DocumentSnapshot? = nil) {
+        guard !isLoading else { return } // 防止重複加載
+        isLoading = true
+        
+        // 如果想先篩選資料，例如：只顯示男女、年齡區間，可在這裡加 .whereField(...)
+        var query = db.collection("users")
+            .order(by: "createdAt", descending: false)  // 假設你的 user document 有 "createdAt" 欄位
+            .limit(to: pageSize)
+        
+        // 若有上一批的最後一筆資料，就從那邊繼續
+        if let lastDoc = lastDocument {
+            query = query.start(afterDocument: lastDoc)
+        }
+        
+        query.getDocuments { snapshot, error in
+            self.isLoading = false
+            
+            if let error = error {
+                print("取得 users 失敗：\(error)")
+                return
+            }
+            
+            guard let docs = snapshot?.documents, !docs.isEmpty else {
+                print("沒有更多資料或 docs 為空")
+                return
+            }
+            
+            // 建立一個臨時陣列，去解析回傳文件
+            var tempUsers: [User] = []
+            
+            for doc in docs {
+                let data = doc.data()
+                let id = doc.documentID
+                
+                // 解析成 User 結構
+                if let name = data["name"] as? String,
+                   let age = data["age"] as? Int,
+                   let zodiac = data["zodiac"] as? String,
+                   let location = data["location"] as? String,
+                   let height = data["height"] as? Int,
+                   let photos = data["photos"] as? [String] {
+                    
+                    // 已滑過 or 自己 就跳過
+                    if self.swipedIDs.contains(id) || id == self.currentUserID {
+                        continue
+                    }
+                    
+                    let user = User(
+                        id: id,
+                        name: name,
+                        age: age,
+                        zodiac: zodiac,
+                        location: location,
+                        height: height,
+                        photos: photos
+                    )
+                    tempUsers.append(user)
+                }
+            }
+            
+            // 把新抓到的 user 陣列「接續」到 self.users
+            self.users.append(contentsOf: tempUsers)
+            
+            // 更新 lastDocument，為下一頁做準備
+            self.lastDocument = docs.last
+        }
     }
     
     // Handle swipe action
     func handleSwipe(rightSwipe: Bool) {
-        if rightSwipe {
-            print("Like")
-            userSettings.globalLikeCount += 1
-        } else {
-            print("Dislike")
-        }
-
-        // Move to the next user after a delay
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            // Go to the next user if available
-            if currentIndex < users.count - 1 {
-                currentIndex += 1
-            } else {
-                // No more users, show animation
-                withAnimation {
-                    showCircleAnimation = true
-                }
-                print("No more users")
+        // 先做本地端的暫時 UI 效果 (例如：卡片飛出去)
+        // ...
+        
+        // === 1. 建立 Firebase 參考 ===
+        let newDocRef = db.collection("swipes").document()
+        
+        // === 2. 準備要上傳的資料 ===
+        let data: [String: Any] = [
+            "userID": "<你當前使用者的ID>",
+            "targetID": users[currentIndex].id,
+            "isLike": rightSwipe,
+            "timestamp": FieldValue.serverTimestamp() // Firestore 會自動帶入雲端時間
+        ]
+        
+        // === 3. 寫進 Firestore ===
+        newDocRef.setData(data) { error in
+            if let error = error {
+                print("寫入 Firestore 失敗: \(error)")
+                // 這裡可以根據需求做錯誤處理 (UI 還原)
+                return
             }
-            // Reset offset
+            
+            // === 4. 成功後，紀錄這次滑卡資料 ===
+            self.lastSwipedData = (
+                user: self.users[self.currentIndex],
+                index: self.currentIndex,
+                isRightSwipe: rightSwipe,
+                docID: newDocRef.documentID
+            )
+            
+            // Like 的話，依你原本邏輯，加個計數：
+            if rightSwipe {
+                userSettings.globalLikeCount += 1
+            }
+            
+            // === UI：前往下一張卡 ===
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                if currentIndex < users.count - 1 {
+                    currentIndex += 1
+                } else {
+                    // 沒有更多卡了
+                    withAnimation {
+                        showCircleAnimation = true
+                    }
+                }
+                self.offset = .zero
+            }
+        }
+    }
+    
+    func undoSwipe() {
+        guard let data = lastSwipedData else {
+            // 沒有可以撤回的資料
+            return
+        }
+        
+        let docRef = db.collection("swipes").document(data.docID)
+        
+        // 這裡示範「刪除」的作法
+        docRef.delete { error in
+            if let error = error {
+                print("刪除 Firestore 紀錄失敗: \(error)")
+                return
+            }
+            
+            // 如果上次是 Like，就把 like count 加回來
+            if data.isRightSwipe {
+                userSettings.globalLikeCount -= 1
+            }
+            
+            // UI 邏輯：將 currentIndex 拉回上一張
+            self.currentIndex = data.index
+            
+            // 假如已經進到「沒卡了」，要把動畫關掉
+            withAnimation {
+                self.showCircleAnimation = false
+            }
+            
+            // 把卡片的偏移歸零
             self.offset = .zero
+            
+            // 清空，代表只能撤回最後一次
+            self.lastSwipedData = nil
         }
     }
     
@@ -385,8 +539,15 @@ struct SwipeCard: View {
                     
                     // 底部五個按鈕
                     HStack {
+                        
+                        // MARK: - 這裡把 Undo 實作加上去
                         Button(action: {
-                            // Undo action
+                            // 呼叫父視圖的 undoSwipe()
+                            // 因為這是獨立組件，要嘛用環境變數、要嘛直接改成 @Binding 或 callback
+                            // 最簡單方式：把 undoSwipe 寫在父 View，這裡改成通知父層
+                            // 可以將 undoSwipe() 搬到 EnvironmentObject 或者用 NotificationCenter 也可以。
+                            // 下面示範用 NotificationCenter 為例：
+                            NotificationCenter.default.post(name: .undoSwipeNotification, object: nil)
                         }) {
                             ZStack {
                                 // 圓形背景
@@ -481,7 +642,12 @@ struct SwipeCard: View {
             .padding()
         }
         .frame(maxWidth: UIScreen.main.bounds.width, maxHeight: UIScreen.main.bounds.height - 200)
+        .shadow(color: Color.black.opacity(0.2), radius: 5, x: 0, y: 5)  // <--- 加上這裡
     }
+}
+
+extension Notification.Name {
+    static let undoSwipeNotification = Notification.Name("undoSwipeNotification")
 }
 
 struct SwipeCardView_Previews: PreviewProvider {

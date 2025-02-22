@@ -111,6 +111,13 @@
 		D07B41E12D61ABE80015C7AA /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07B41E02D61ABE80015C7AA /* ImagePicker.swift */; };
 		D07B41EC2D61C3630015C7AA /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07B41EA2D61C3630015C7AA /* FirebaseManager.swift */; };
 		D07B41EE2D61DA530015C7AA /* FirebaseAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07B41ED2D61DA530015C7AA /* FirebaseAuthManager.swift */; };
+		D07B41F02D61EE2C0015C7AA /* FirestoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07B41EF2D61EE2C0015C7AA /* FirestoreManager.swift */; };
+		D07B41F22D621E9C0015C7AA /* LocalStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07B41F12D621E9C0015C7AA /* LocalStorageManager.swift */; };
+		D089DB532D6896CB00D6A1AB /* QRCodeGeneratorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D089DB522D6896CB00D6A1AB /* QRCodeGeneratorView.swift */; };
+		D089DB562D69531300D6A1AB /* SuspiciousCheckResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = D089DB552D69531300D6A1AB /* SuspiciousCheckResult.swift */; };
+		D089DB582D69534700D6A1AB /* RuleChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D089DB572D69534700D6A1AB /* RuleChecker.swift */; };
+		D089DB5A2D69830000D6A1AB /* PhishingChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D089DB592D69830000D6A1AB /* PhishingChecker.swift */; };
+		D089DB5D2D69862300D6A1AB /* PHPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D089DB5C2D69862300D6A1AB /* PHPickerView.swift */; };
 		D0903ABC2D589D0C00735323 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0903ABB2D589D0C00735323 /* AppDelegate.swift */; };
 		D0903ABE2D589D7C00735323 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0903ABD2D589D7C00735323 /* NotificationManager.swift */; };
 		D0903AC02D58A45200735323 /* modelSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0903ABF2D58A45200735323 /* modelSelector.swift */; };
@@ -300,6 +307,13 @@
 		D07B41E02D61ABE80015C7AA /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		D07B41EA2D61C3630015C7AA /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
 		D07B41ED2D61DA530015C7AA /* FirebaseAuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAuthManager.swift; sourceTree = "<group>"; };
+		D07B41EF2D61EE2C0015C7AA /* FirestoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreManager.swift; sourceTree = "<group>"; };
+		D07B41F12D621E9C0015C7AA /* LocalStorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalStorageManager.swift; sourceTree = "<group>"; };
+		D089DB522D6896CB00D6A1AB /* QRCodeGeneratorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeGeneratorView.swift; sourceTree = "<group>"; };
+		D089DB552D69531300D6A1AB /* SuspiciousCheckResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuspiciousCheckResult.swift; sourceTree = "<group>"; };
+		D089DB572D69534700D6A1AB /* RuleChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleChecker.swift; sourceTree = "<group>"; };
+		D089DB592D69830000D6A1AB /* PhishingChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhishingChecker.swift; sourceTree = "<group>"; };
+		D089DB5C2D69862300D6A1AB /* PHPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PHPickerView.swift; sourceTree = "<group>"; };
 		D0903ABB2D589D0C00735323 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D0903ABD2D589D7C00735323 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		D0903ABF2D58A45200735323 /* modelSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = modelSelector.swift; sourceTree = "<group>"; };
@@ -521,6 +535,7 @@
 				D0DDDB532CA25B4D00A78A87 /* PrivacyPolicyView.swift */,
 				D0DDDB552CA29B1100A78A87 /* TermsOfServiceView.swift */,
 				D0DDDB572CA4ECD200A78A87 /* DataManagementView.swift */,
+				D089DB522D6896CB00D6A1AB /* QRCodeGeneratorView.swift */,
 			);
 			path = SettingsRelated;
 			sourceTree = "<group>";
@@ -554,6 +569,8 @@
 		D0445C222C71B3800059D522 = {
 			isa = PBXGroup;
 			children = (
+				D089DB5B2D69861300D6A1AB /* ChatRelated */,
+				D089DB542D6952FA00D6A1AB /* SuspiciousManager */,
 				D07B41EB2D61C3630015C7AA /* FirebaseManager */,
 				D039FC572CCD08160082D2F3 /* SafetyRelated */,
 				D039FC562CCD074A0082D2F3 /* SettingsRelated */,
@@ -633,6 +650,7 @@
 				D0B3883B2D5B82DF003BC40C /* WebRTCVideoView.swift */,
 				D0B3883D2D5B854A003BC40C /* SignalingClient.swift */,
 				D07B41DC2D618E9B0015C7AA /* LocationService.swift */,
+				D07B41F12D621E9C0015C7AA /* LocalStorageManager.swift */,
 			);
 			path = SwiftiDate;
 			sourceTree = "<group>";
@@ -705,8 +723,27 @@
 				D07B41EA2D61C3630015C7AA /* FirebaseManager.swift */,
 				D07B41DE2D6197570015C7AA /* FirebasePhotoManager.swift */,
 				D07B41ED2D61DA530015C7AA /* FirebaseAuthManager.swift */,
+				D07B41EF2D61EE2C0015C7AA /* FirestoreManager.swift */,
 			);
 			path = FirebaseManager;
+			sourceTree = "<group>";
+		};
+		D089DB542D6952FA00D6A1AB /* SuspiciousManager */ = {
+			isa = PBXGroup;
+			children = (
+				D089DB552D69531300D6A1AB /* SuspiciousCheckResult.swift */,
+				D089DB572D69534700D6A1AB /* RuleChecker.swift */,
+				D089DB592D69830000D6A1AB /* PhishingChecker.swift */,
+			);
+			path = SuspiciousManager;
+			sourceTree = "<group>";
+		};
+		D089DB5B2D69861300D6A1AB /* ChatRelated */ = {
+			isa = PBXGroup;
+			children = (
+				D089DB5C2D69862300D6A1AB /* PHPickerView.swift */,
+			);
+			path = ChatRelated;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -878,6 +915,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D04729C82CC086F4007C33EC /* ProfileTabPicker.swift in Sources */,
+				D07B41F22D621E9C0015C7AA /* LocalStorageManager.swift in Sources */,
 				D0445C892C73CF610059D522 /* VacationOptionsView.swift in Sources */,
 				D0445C5F2C71F1070059D522 /* EditProfileView.swift in Sources */,
 				D0DDDB072C9FDB1600A78A87 /* WhoLikedYouView.swift in Sources */,
@@ -913,11 +951,13 @@
 				D0445C772C73BF590059D522 /* HeightPickerView.swift in Sources */,
 				D018AD5F2C9E6976005A14B9 /* CrushPurchaseView.swift in Sources */,
 				D049387A2CBF0A6F00754E46 /* Models.swift in Sources */,
+				D089DB5A2D69830000D6A1AB /* PhishingChecker.swift in Sources */,
 				D051EF312CC033C5004563A3 /* AchievementSectionView.swift in Sources */,
 				D051EF272CBF50CB004563A3 /* LifestyleView.swift in Sources */,
 				D0445C752C73B4EF0059D522 /* LanguageSelectionView.swift in Sources */,
 				D09587C12CB7B17E00BCD04B /* ResultsView.swift in Sources */,
 				D039FC5B2CD230060082D2F3 /* PersonalityView.swift in Sources */,
+				D089DB562D69531300D6A1AB /* SuspiciousCheckResult.swift in Sources */,
 				D0FA20B92C8CBAAB001C5D0E /* MeetWillingnessView.swift in Sources */,
 				D0445C712C72F7870059D522 /* JobInputView.swift in Sources */,
 				D0DDDB502CA1A01200A78A87 /* HowToEnableNotificationsView.swift in Sources */,
@@ -935,6 +975,7 @@
 				D0B388292D5B7BAE003BC40C /* FaceTrackingView.swift in Sources */,
 				D0B3882A2D5B7BAE003BC40C /* CountryCodePickerView.swift in Sources */,
 				D0B3882B2D5B7BAE003BC40C /* PasswordLoginView.swift in Sources */,
+				D089DB5D2D69862300D6A1AB /* PHPickerView.swift in Sources */,
 				D0B3882C2D5B7BAE003BC40C /* OTPVerificationView.swift in Sources */,
 				D0B3882D2D5B7BAE003BC40C /* RealVerificationView.swift in Sources */,
 				D0B3882E2D5B7BAE003BC40C /* UploadPhotoView.swift in Sources */,
@@ -952,6 +993,7 @@
 				D0DDDB142CA10EAD00A78A87 /* SettingsView.swift in Sources */,
 				D0DDDB582CA4ECD300A78A87 /* DataManagementView.swift in Sources */,
 				D04729DE2CC11320007C33EC /* InfoPopupView.swift in Sources */,
+				D089DB582D69534700D6A1AB /* RuleChecker.swift in Sources */,
 				D0DDDB462CA18FDC00A78A87 /* HowToUseIncognitoModeView.swift in Sources */,
 				D04729CA2CC087AD007C33EC /* PreviewSectionView.swift in Sources */,
 				D0DDDB362CA16FF900A78A87 /* HowToPurchaseSwiftiDatePremiumView.swift in Sources */,
@@ -1025,12 +1067,14 @@
 				D0903AC62D58A52500735323 /* DeepSeekView.swift in Sources */,
 				D0DDDB382CA171B400A78A87 /* HowToCancelSubscriptionView.swift in Sources */,
 				D0DDDB0F2CA0E65F00A78A87 /* LocationManager.swift in Sources */,
+				D07B41F02D61EE2C0015C7AA /* FirestoreManager.swift in Sources */,
 				D07B41E12D61ABE80015C7AA /* ImagePicker.swift in Sources */,
 				D0DDDB242CA1486E00A78A87 /* HowToUnmatchView.swift in Sources */,
 				D0B3883E2D5B854A003BC40C /* SignalingClient.swift in Sources */,
 				D0DDDB4A2CA196FB00A78A87 /* UpdateProfileDetailsView.swift in Sources */,
 				D0DDDB262CA14B2700A78A87 /* HowToDeleteMessagesView.swift in Sources */,
 				D04729D02CC08CC1007C33EC /* SmartPhotoToggle.swift in Sources */,
+				D089DB532D6896CB00D6A1AB /* QRCodeGeneratorView.swift in Sources */,
 				D07B41DD2D618E9B0015C7AA /* LocationService.swift in Sources */,
 				D0DDDB562CA29B1200A78A87 /* TermsOfServiceView.swift in Sources */,
 			);

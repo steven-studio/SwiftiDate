@@ -8,9 +8,39 @@
 import Foundation
 import FirebaseAuth
 
+/// 使用 Firebase Auth 進行各種登入驗證的管理類別
 class FirebaseAuthManager {
+    
+    // MARK: - Singleton
     static let shared = FirebaseAuthManager()
     private init() {}
+
+    // MARK: - OTP 驗證相關
+    
+    /// 結合 userSettings 的國碼 + 電話號碼，發送 OTP 驗證碼
+    func sendOTP() {
+        let fullPhoneNumber = "\(userSettings.globalCountryCode)\(userSettings.globalPhoneNumber)"
+        sendFirebaseOTP(to: fullPhoneNumber)
+    }
+
+    /// 直接發送 OTP 驗證碼到指定 phoneNumber
+    ///
+    /// - Parameter phoneNumber: 包含國碼的完整電話號碼 (e.g. "+886912345678")
+    func sendFirebaseOTP(to phoneNumber: String) {
+        PhoneAuthProvider.provider()
+            .verifyPhoneNumber(phoneNumber, uiDelegate: nil) { verificationID, error in
+                if let error = error {
+                    print("❌ 發送 OTP 驗證碼失敗: \(error.localizedDescription)")
+                    return
+                }
+                // 驗證碼發送成功，將 verificationID 暫存到 UserDefaults 或 ViewModel
+                print("✅ 發送 OTP 驗證碼成功，verificationID = \(verificationID ?? "")")
+                if let vid = verificationID {
+                    // 將 verificationID 存起來，後續在 OTP 驗證畫面時會用到
+                    LocalStorageManager.shared.saveVerificationID(vid)
+                }
+            }
+    }
 
     /// 以電話號碼進行登入（驗證碼流程）
     func signInWithPhoneNumber(

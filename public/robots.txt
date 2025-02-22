@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://swiftidate-cdff0.web.app/sitemap.xml
