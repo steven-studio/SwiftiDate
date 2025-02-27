@@ -58,6 +58,8 @@ struct LoginView: View {
                     .foregroundColor(.white)
                     .padding(.bottom, 50)
                 
+                Spacer()
+                
                 // 登入選項按鈕
                 VStack(spacing: 20) {
                     Button(action: {
@@ -94,8 +96,7 @@ struct LoginView: View {
                     .cornerRadius(25)
                     .padding(.horizontal)
                 }
-                
-                Spacer()
+                .padding(.vertical)
                 
                 // 隱私政策及服務條款
                 Text("SwiftiDate 不會在你的 Facebook 上發文")
@@ -154,20 +155,27 @@ struct LoginView: View {
 
 //                        showExistingUserPopup.wrappedValue = false
                     }) {
-                        Text("以此帳號登入")
+                        Text("以此帳號登錄")
                             .foregroundColor(.white)
                             .frame(width: 250, height: 45)
-                            .background(Color.blue)
+                            // 在背景使用漸層
+                            .background(
+                                LinearGradient(
+                                    gradient: Gradient(colors: [Color.cyan, Color.blue]),
+                                    startPoint: .top,
+                                    endPoint: .bottom
+                                )
+                            )
                             .cornerRadius(22.5)
                     }
                     
                     Button(action: {
                         // 更換帳號並清除所有已存資料
-                        LocalStorageManager.shared.clearAll()
+//                        LocalStorageManager.shared.clearAll()
                         print("換個帳號")
                         showExistingUserPopup.wrappedValue = false
                     }) {
-                        Text("換個帳號")
+                        Text("不是你？換個帳號")
                             .foregroundColor(.gray)
                             .padding(.top, 10)
                     }

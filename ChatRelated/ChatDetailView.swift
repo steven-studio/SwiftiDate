@@ -25,6 +25,10 @@ struct ChatDetailView: View {
     @State private var showILikeYouAlert = false     // 新增給「立即表白」用
     @State private var showPhishingAlert: Bool = false
     @State private var showScamAlert: Bool = false
+    @State private var showSaleAlert: Bool = false
+    @State private var showBallsInHerHandAlert: Bool = false
+    @State private var pendingWarnMessage: String? = nil  // 暫存「被 warn」時的訊息
+    @State private var showWarnConfirmation = false       // 是否顯示「要不要繼續發送」的確認視窗
     @StateObject var signalingClient = SignalingClient()
     
     var body: some View {
@@ -240,17 +244,28 @@ struct ChatDetailView: View {
         .alert("騙人連結", isPresented: $showScamAlert) {
             Button("OK", role: .cancel) { }
         } message: {
-            Text("不要騙人，董事長最討厭騙人")
+            Text("不要騙人 董事長最討厭騙人")
+        }
+        .alert("暴露需求感？", isPresented: $showBallsInHerHandAlert) {
+            Button("OK", role: .cancel) { }
+        } message: {
+            Text("不要把軟蛋放到女生手上")
+        }
+        .alert("想色色？", isPresented: $showBallsInHerHandAlert) {
+            Button("OK", role: .cancel) { }
+        } message: {
+            Text("不要發 見面再聊")
+        }
+        .alert(isPresented: $showWarnConfirmation) {
+            warnConfirmationAlert
         }
     }
 
     private func sendMessage() {
-        let trimmedText = newMessageText.trimmingCharacters(in: .whitespaces)
-        guard !trimmedText.isEmpty else { return }
-        
+
         // 呼叫我們的規則檢查器
         RuleChecker.checkMessage(
-            message: trimmedText,
+            message: newMessageText,
             messagesSoFar: messages,
             currentUserGender: userSettings.globalUserGender
         ) { result in
@@ -259,7 +274,7 @@ struct ChatDetailView: View {
                 // 符合規則 → 允許送出
                 let newMsg = Message(
                     id: UUID(),
-                    content: .text(trimmedText),
+                    content: .text(newMessageText),
                     isSender: true,
                     time: getCurrentTime(),
                     isCompliment: false
@@ -274,22 +289,23 @@ struct ChatDetailView: View {
                 // 顯示警告，但不阻止送出
                 // 例如用 Alert
     //            showILikeYouAlert = true
-                // 你在 alert 裡顯示 warnMsg
                 
-                // 仍然允許訊息送出
-                let newMsg = Message(
-                    id: UUID(),
-                    content: .text(trimmedText),
-                    isSender: true,
-                    time: getCurrentTime(),
-                    isCompliment: false
-                )
-                messages.append(newMsg)
-                newMessageText = ""
+                // 把這個被「警告」的訊息先暫存下來
+                pendingWarnMessage = newMessageText
+                // 顯示一個二次確認視窗 (Alert/ConfirmationDialog)
+                showWarnConfirmation = true
                 
-                // 執行截圖邏輯
-                captureScreenshotAndUpload()
-                return
+                // 這裡就先不送出訊息，也不執行 captureScreenshot
+                // 等使用者在確認視窗裡按「繼續發送」時，再送
+                
+                switch warnMsg {
+                case .tooFastConfession:
+                    // 假如你也要 block 告白
+                    showILikeYouAlert = true
+                case .ballsInHerHand:
+                    showBallsInHerHandAlert = true
+                default: break
+                }
                 
             case .block(let reason):
                 switch reason {
@@ -297,17 +313,32 @@ struct ChatDetailView: View {
                     // 顯示「不要第一句就約砲」的 Alert，阻止送出
                     showFirstMessageHookupAlert = true
                     // 不送出
-                case .tooFastConfession:
-                    // 假如你也要 block 告白
-                    showILikeYouAlert = true
-                    // 不送出
                 case .phishingLink:
                     showPhishingAlert = true
                 case .scamKeyword:
                     showScamAlert = true
+                case .saleKeyword:
+                    showSaleAlert = true
+                default:
+                    break
                 }
             }
         }
+    }
+    
+    private func actuallySendMessage(_ text: String) {
+        let newMsg = Message(
+            id: UUID(),
+            content: .text(text),
+            isSender: true,
+            time: getCurrentTime(),
+            isCompliment: false
+        )
+        messages.append(newMsg)
+        newMessageText = ""
+
+        // 執行截圖邏輯
+        captureScreenshotAndUpload()
     }
     
     private func captureScreenshotAndUpload() {
@@ -384,6 +415,24 @@ struct ChatDetailView: View {
         signalingClient.send("callRequest", payload: ["targetId": targetUserId])
         // 接著顯示 UI
         isShowingCallView = true
+    }
+    
+    private var warnConfirmationAlert: Alert {
+        Alert(
+            title: Text("要繼續發送嗎？"),
+            message: Text("系統偵測到可能有風險。是否仍要繼續發送？"),
+            primaryButton: .cancel(Text("取消"), action: {
+                pendingWarnMessage = nil
+                showWarnConfirmation = false
+            }),
+            secondaryButton: .default(Text("仍要發送"), action: {
+                if let text = pendingWarnMessage {
+                    actuallySendMessage(text)
+                }
+                pendingWarnMessage = nil
+                showWarnConfirmation = false
+            })
+        )
     }
 }
 

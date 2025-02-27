@@ -26,39 +26,42 @@ struct LoginOrRegisterView: View {
 
             Spacer()
             
-            // Button to navigate to registration
-            Button(action: {
-                isRegistering = true // Trigger the registration flow
-            }) {
-                Text("快速註冊新帳號")
-                    .font(.title2)
-                    .foregroundColor(.white)
-                    .padding()
-                    .frame(maxWidth: .infinity)
-                    .background(Color.white.opacity(0.1))
-                    .cornerRadius(25)
+            VStack {
+                
+                // Button to navigate to registration
+                Button(action: {
+                    isRegistering = true // Trigger the registration flow
+                }) {
+                    Text("快速註冊新帳號")
+                        .font(.title2)
+                        .foregroundColor(.white)
+                        .padding()
+                        .frame(maxWidth: .infinity)
+                        .background(Color.white.opacity(0.1))
+                        .cornerRadius(25)
+                }
+                .accessibilityIdentifier("RegisterButton") // <-- 新增這行
+                .padding(.horizontal)
+                .padding(.bottom, 10)
+                .fullScreenCover(isPresented: $isRegistering) {
+                    PhoneNumberEntryView(isRegistering: $isRegistering)
+                }
+                
+                // Button for existing account login
+                Button(action: {
+                    // Handle Login Action
+                }) {
+                    Text("我已有賬號")
+                        .font(.title2)
+                        .foregroundColor(.white)
+                        .padding()
+                        .frame(maxWidth: .infinity)
+                        .background(Color.clear)
+                        .cornerRadius(25)
+                }
+                .padding(.horizontal)
             }
-            .padding(.horizontal)
-            .padding(.bottom, 10)
-            .fullScreenCover(isPresented: $isRegistering) {
-                PhoneNumberEntryView(isRegistering: $isRegistering)
-            }
-            
-            // Button for existing account login
-            Button(action: {
-                // Handle Login Action
-            }) {
-                Text("我已有賬號")
-                    .font(.title2)
-                    .foregroundColor(.white)
-                    .padding()
-                    .frame(maxWidth: .infinity)
-                    .background(Color.clear)
-                    .cornerRadius(25)
-            }
-            .padding(.horizontal)
-            
-            Spacer()
+            .padding(.vertical, 30)
             
             HStack {
                 Text("服務協議")

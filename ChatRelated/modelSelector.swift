@@ -192,7 +192,7 @@ struct ModelSelectorView: View {
                 
                 // NavigationLink 控制視圖導航
                 NavigationLink(destination: ChatGPTView(messages: $messages, showChatGPTView: $navigateToChatGPT), isActive: $navigateToChatGPT) { EmptyView() }
-                NavigationLink(destination: GeminiView(messages: $messages, showGeminiView: $navigateToGemini), isActive: $navigateToGemini) { EmptyView() }
+                NavigationLink(destination: VertexAIView(messages: $messages, showVertexAIView: $navigateToGemini), isActive: $navigateToGemini) { EmptyView() }
                 NavigationLink(destination: ClaudeAIView(messages: $messages, showClaudeAIView: $navigateToClaude), isActive: $navigateToClaude) { EmptyView() }
                 NavigationLink(destination: DeepSeekView(messages: $messages, showDeepSeekView: $navigateToDeepSeek), isActive: $navigateToDeepSeek) { EmptyView() }
                 NavigationLink(destination: LocalModelView(messages: $messages, showLocalModel: $navigateToCustom), isActive: $navigateToCustom) { EmptyView() }

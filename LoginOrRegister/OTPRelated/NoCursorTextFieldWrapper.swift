@@ -13,7 +13,8 @@ struct NoCursorTextFieldWrapper: UIViewRepresentable {
     
     /// 綁定的字串
     @Binding var text: String
-    
+    var index: Int  // 你可以傳入 index
+
     /// 退格到空字時，可呼叫的 closure（用來通知外部）
     var onDeleteBackwardWhenEmpty: (() -> Void)? = nil
     
@@ -28,6 +29,9 @@ struct NoCursorTextFieldWrapper: UIViewRepresentable {
         textField.tintColor = .clear    // 游標顏色也可再設一次
         textField.borderStyle = .none
         textField.keyboardType = .numberPad
+        
+        // **關鍵**：把 accessibilityIdentifier 設在真正的 UITextField
+        textField.accessibilityIdentifier = "OTPTextField\(index)"
         
         // **重點**：設定文字置中 (水平 + 垂直)
         textField.textAlignment = .center

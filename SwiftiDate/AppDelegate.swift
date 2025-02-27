@@ -25,16 +25,31 @@ func uncaughtExceptionHandler(exception: NSException) {
 }
 
 class AppDelegate: NSObject, UIApplicationDelegate, CLLocationManagerDelegate, UNUserNotificationCenterDelegate {
+    var cloudService: CloudService?
+    
     let locationService = LocationService() // 建立實例
     let geocoder = CLGeocoder() // Initialize the geocoder
     
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         
-        FirebaseManager.shared.configureFirebase()
+        // 1. 嘗試初始化 Firebase
+        let firebaseCloud = FirebaseCloudService()
+        firebaseCloud.initialize()
         
-        FirebaseManager.shared.configureFirestore()
-        
+        // 2. 檢查 Firebase 是否可用 (例如測試 Firestore 或測試 Storage 連線)
+        testFirebaseConnection { success in
+            if success {
+                // 如果可用，就用 Firebase
+                self.cloudService = firebaseCloud
+            } else {
+                // 如果連不上，就用阿里雲 (示例)
+                let aliCloud = AliCloudService()
+                aliCloud.initialize()
+                self.cloudService = aliCloud
+            }
+        }
+
         // 初始化 App Check
         let providerFactory = DeviceCheckProviderFactory()
         AppCheck.setAppCheckProviderFactory(providerFactory)
@@ -111,4 +126,18 @@ class AppDelegate: NSObject, UIApplicationDelegate, CLLocationManagerDelegate, U
 //            }
 //        }
 //    }
+    
+    private func testFirebaseConnection(completion: @escaping (Bool) -> Void) {
+        // 簡單示範，做個 Firestore 測試
+        let db = Firestore.firestore()
+        db.collection("test").document("testDoc").getDocument { snapshot, error in
+            if let error = error {
+                print("Firebase 連線失敗：\(error)")
+                completion(false)
+            } else {
+                print("Firebase 連線成功")
+                completion(true)
+            }
+        }
+    }
 }

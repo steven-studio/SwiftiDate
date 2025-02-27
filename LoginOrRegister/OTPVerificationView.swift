@@ -13,7 +13,7 @@ struct OTPVerificationView: View {
     @EnvironmentObject var appState: AppState // ✅ 存取全局登入狀態
     @EnvironmentObject var userSettings: UserSettings // ✅ 存取用戶設置
 
-    @Binding var verificationID: String?
+    @State private var verificationID: String?
     @Binding var isRegistering: Bool
     @Binding var selectedCountryCode: String // 預設為台灣國碼
     @Binding var phoneNumber: String
@@ -24,6 +24,12 @@ struct OTPVerificationView: View {
     @State private var countdown = 30 // 倒數計時器
     @FocusState private var focusedIndex: Int? // Tracks which TextField is currently focused
     @State private var showRealVerification = false // ✅ 控制是否跳轉到真人認證
+    #if DEBUG
+    /// 利用環境變數 "XCODE_RUNNING_FOR_PREVIEWS" 判斷是否是 SwiftUI Preview
+    private var isPreview: Bool {
+        ProcessInfo.processInfo.environment["XCODE_RUNNING_FOR_PREVIEWS"] == "1"
+    }
+    #endif
 
     var attributedString: AttributedString {
         var text = AttributedString("驗證碼")
@@ -72,6 +78,7 @@ struct OTPVerificationView: View {
                     /// 這裡就是我們自訂的包裝
                     NoCursorTextFieldWrapper(
                         text: binding,
+                        index: index,
                         onDeleteBackwardWhenEmpty: {
                             // 若本格是空的又按退格，就跳到前一格
                             if index > 0, otpCode[index].isEmpty {
@@ -86,6 +93,8 @@ struct OTPVerificationView: View {
                     .multilineTextAlignment(.center)
                     .font(.title)
                     .focused($focusedIndex, equals: index) // Bind focus to this TextField
+                    // 這行很關鍵：在 SwiftUI 裡為該欄位指定 accessibilityIdentifier
+                    .accessibilityIdentifier("OTPTextField\(index)")
                     .overlay(
                         RoundedRectangle(cornerRadius: 10)
                             .stroke(focusedIndex == index ? Color.green : Color.clear, lineWidth: 2) // 綠色邊框
@@ -94,17 +103,29 @@ struct OTPVerificationView: View {
             }
             .padding(.horizontal)
             .onAppear {
-                if verificationID == nil {
-                    FirebaseAuthManager.shared.sendOTP()  // ✅ 當 verificationID 為 nil，發送第一次驗證碼
+                #if DEBUG
+                if isPreview {
+                    // 直接 Mock 一個假的 verificationID，或者什麼都不做
+                    self.verificationID = "MOCK_VERIFICATION_ID"
+                } else if ProcessInfo.processInfo.arguments.contains("-UI_TEST_MODE") {
+                    // Mock: 不要真的打 Firebase Phone Auth
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                        // 假裝成功拿到 verificationID
+                        self.verificationID = "123456"
+                    }
+                } else {
+                    // 真的呼叫 Firebase Auth
+                    FirebaseAuthManager.shared.sendOTP()
                 }
-                focusedIndex = 0 // Start by focusing on the first field
+                #endif
+                self.focusedIndex = 0
+                print("✅ 手動觸發 `focusedIndex = \(String(describing: focusedIndex))` after a small delay")
                 startCountdown()
             }
             .onChange(of: focusedIndex) { oldValue, newValue in
                 print("🔍 當前選中的輸入框索引：\(String(describing: newValue))")
             }
-            
-            Text("🔍 `focusedField` 變更: 從 \(String(describing: focusedIndex))")
+            .padding(.bottom)
             
             Button(action: {
                 
@@ -231,18 +252,12 @@ struct OTPVerificationView: View {
 struct OTPVerificationView_Previews: PreviewProvider {
     static var previews: some View {
         OTPVerificationView(
-            verificationID: .constant("123456"),  // 測試用的假 verificationID
             isRegistering: .constant(true),  // 測試時不會影響主 UI,
             selectedCountryCode: .constant("+886"),
             phoneNumber: .constant("0972516868")
         )
         .environmentObject(AppState())
         .environmentObject(UserSettings())
-        .onAppear {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                print("✅ 手動觸發 `focusedField = 0`")
-            }
-        }
         .previewDevice("iPhone 15 Pro")  // 指定模擬的裝置
     }
 }

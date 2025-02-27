@@ -30,6 +30,18 @@ struct SwiftiDateApp: App {
     @StateObject private var appState = AppState()
     @StateObject var userSettings = UserSettings() // Initialize UserSettings as a state object
     
+    init() {
+        // 在 App 初始化時檢查是否帶有 -UI_TEST_MODE
+        if ProcessInfo.processInfo.arguments.contains("-UI_TEST_MODE") {
+            // 這裡把 UserDefaults, Keychain 或資料庫等都清除
+            let domain = Bundle.main.bundleIdentifier!
+            UserDefaults.standard.removePersistentDomain(forName: domain)
+            // 清除 Keychain、登出 Firebase 等
+            userSettings.globalPhoneNumber = ""
+            userSettings.globalUserName = ""
+        }
+    }
+    
     var body: some Scene {
         WindowGroup {
             NavigationView {
@@ -48,8 +60,10 @@ struct SwiftiDateApp: App {
                 }
             }
             .onAppear {
-                userSettings.globalPhoneNumber = "0972516868"
-                userSettings.globalUserName = "玩玩"
+//                userSettings.globalPhoneNumber = "0972516868"
+//                userSettings.globalUserName = "玩玩"
+                userSettings.globalPhoneNumber = ""
+                userSettings.globalUserName = ""
                 userSettings.globalUserGender = Gender.male
                 userSettings.globalIsUserVerified = true
                 userSettings.globalSelectedGender = "女生"

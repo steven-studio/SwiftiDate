@@ -19,7 +19,18 @@ struct PhoneNumberEntryView: View {
     @State private var showOTPView = false // 控制 OTP 驗證畫面
     @State private var showPasswordLoginView = false // ✅ 控制是否顯示輸入密碼畫面
     @State private var isChecking = false // ✅ 控制是否顯示「檢查中」的 Loading
-
+    private var isPhoneValid: Bool {
+        switch selectedCountryCode {
+        case "+886": // 台灣
+            return PhoneValidator.isTaiwanNumber(phoneNumber)
+        case "+86":  // 大陸
+            return PhoneValidator.isMainlandChinaNumber(phoneNumber)
+        default:
+            // 其他國碼 → 看你是否也要檢查或直接返回 false
+            return false
+        }
+    }
+    
     var body: some View {
         VStack {
             HStack {
@@ -65,6 +76,7 @@ struct PhoneNumberEntryView: View {
                     .cornerRadius(10)
                     .padding(.horizontal)
                 }
+                .accessibilityIdentifier("CountryCodeButton") // <- 加上 Identifier
                 .onChange(of: selectedCountryCode) { newValue in
                     userSettings.globalCountryCode = newValue
                 }
@@ -76,6 +88,7 @@ struct PhoneNumberEntryView: View {
                     .padding(.vertical)
                     .background(Color.gray.opacity(0.1))
                     .cornerRadius(10)
+                    .accessibilityIdentifier("PhoneNumberTextField") // <- 加上 Identifier
                 
                 Spacer()
             }
@@ -101,7 +114,10 @@ struct PhoneNumberEntryView: View {
             .padding(.horizontal)
             .padding(.bottom, 5)
             
-            Button(action: checkPhoneNumber) {
+            Button(action: {
+                // 這裡是「按鈕被點擊時要做的事」
+                self.showAlert = true
+            }) {
 //                Text("繼續")
                 HStack {
                     if isChecking {
@@ -113,10 +129,11 @@ struct PhoneNumberEntryView: View {
                     .fontWeight(.bold)
                     .padding()
                     .frame(maxWidth: .infinity)
-                    .background(Color.gray.opacity(0.5))
+                    .background(isPhoneValid ? Color.green : Color.gray.opacity(0.5))  // <-- 依狀態切換顏色
                     .cornerRadius(25)
                     .foregroundColor(.white)
             }
+            .accessibilityIdentifier("ContinueButton") // <- 加上 Identifier
             .padding(.horizontal)
             .padding(.bottom)
             .alert(isPresented: $showAlert) {
@@ -125,7 +142,7 @@ struct PhoneNumberEntryView: View {
                     message: Text("我們需要驗證 \(selectedCountryCode) \(phoneNumber) 是你的手機號碼"),
                     primaryButton: .default(Text("確定"), action: {
                         // 確定按鈕的行為
-                        showOTPView = true // ✅ 點擊確定後進入 OTP 驗證
+                        checkPhoneNumber()
                     }),
                     secondaryButton: .cancel(Text("取消"))
                 )
@@ -134,7 +151,6 @@ struct PhoneNumberEntryView: View {
         .background(Color.white.edgesIgnoringSafeArea(.all))
         .fullScreenCover(isPresented: $showOTPView) { // ✅ 切換到 OTP 驗證畫面
             OTPVerificationView(
-                verificationID: .constant("123456"),  // 假設的驗證 ID（正式應用應該從後端獲取）
                 isRegistering: $isRegistering,
                 selectedCountryCode: $selectedCountryCode,
                 phoneNumber: $phoneNumber
