@@ -61,7 +61,16 @@ SwiftiDateTests 是本專案的**自動化「單元測試 (Unit Tests)」**模�
 
 ### AliCloud 部分
 
+### LocalStorageManager (本地儲存功能)
+- **功能**：將使用者資料（如手機號碼、用戶名稱、是否認證等）存入或讀出 UserDefaults。
+- **測試結果**：  
+  - 已針對 `saveUserSettings(_:)`、`loadUserSettings(into:)`、`clearAll()`、`saveVerificationID(_:)` 等方法進行單元測試，並驗證讀寫功能正常。  
+  - 在測試前後呼叫 `clearAll()`，可確保無殘留資料、不互相影響。  
+  - 實際測試結果顯示，確能成功儲存及載入 `UserSettings` 的多項屬性（如 `globalPhoneNumber`, `globalUserName` 等）。  
 
+- **意義**：  
+  - 確保本地端 UserDefaults 能正確保存用戶資訊，即使關閉 App 後也能復原。  
+  - 提供 App 對「離線暫存」或「快速讀取用戶資料」的基礎支援。 
     
 ---
 
