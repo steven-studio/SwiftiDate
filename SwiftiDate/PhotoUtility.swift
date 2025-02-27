@@ -36,7 +36,9 @@ struct PhotoUtility {
             userSettings.photos = userSettings.loadedPhotosString.components(separatedBy: ",")
         } else {
             print("No cached photos found in AppStorage, fetching from Firebase.")
-            FirebasePhotoManager.shared.fetchPhotosFromFirebase()
+            FirebasePhotoManager.shared.fetchPhotosFromFirebase {
+                
+            }
         }
     }
     

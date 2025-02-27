@@ -26,18 +26,9 @@ class FirebaseCloudService: CloudService {
     }
     
     func fetchPhotos(completion: @escaping ([String]) -> Void) {
-        // 直接呼叫 FirebasePhotoManager 的方法
-        photoManager.fetchPhotosFromFirebase()
-        
-        // 因為 fetchPhotosFromFirebase 裡面是非同步更新 userSettings.photos，
-        // 所以若要 callback，就得在 fetch 完後再通知。
-        // 這裡示範一種做法：可以在 FirebasePhotoManager.fetchPhotosFromFirebase() 結束後呼叫 completion
-        
-        // 比方說你可以先改寫 FirebasePhotoManager 裡面的方法，多增加 completion
-        // 然後在這邊接到就 completion(userSettings.photos) 類似這樣。
-        
-        // 為示範方便，先用 DispatchQueue.asyncAfter 模擬
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+        // 改用帶 completion 版本的 fetchPhotosFromFirebase
+        photoManager.fetchPhotosFromFirebase {
+            // 這個 closure 裡，代表所有照片都下載 & userSettings.photos 已更新
             completion(userSettings.photos)
         }
     }

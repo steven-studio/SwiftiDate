@@ -56,7 +56,7 @@ final class FirebaseCloudServiceTests: XCTestCase {
             expectation.fulfill()
         }
         
-        waitForExpectations(timeout: 5.0, handler: nil)
+        waitForExpectations(timeout: 10.0, handler: nil)
     }
     
     // MARK: - 3) 測試 uploadAllPhotos

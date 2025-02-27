@@ -27,7 +27,7 @@ class FirebasePhotoManager {
     }
 
     // Fetch photos from Firebase Storage
-    func fetchPhotosFromFirebase() {
+    func fetchPhotosFromFirebase(completion: @escaping () -> Void) {
         print("Fetching photos from Firebase started")
         userSettings.photos.removeAll() // Clear existing photos before fetching
         
@@ -65,43 +65,69 @@ class FirebasePhotoManager {
                         if let photoNumber = self.extractPhotoNumber(from: urlString) {
                             fetchedPhotoURLs.append((urlString, photoNumber))
                         }
-                        
-                        // Once all URLs are fetched, sort by photo number
-                        if processedItemCount == listResult.items.count {
-                            fetchedPhotoURLs.sort { $0.photoNumber < $1.photoNumber }
-                            
-                            // Download each photo and save it to local storage
-                            for (urlString, _) in fetchedPhotoURLs {
-                                self.downloadAndSavePhoto(from: urlString) { imageName in
-                                    if let imageName = imageName {
-                                        downloadedPhotos.append((url: urlString, imageName: imageName))
-                                    }
-                                    
-                                    // If all photos are downloaded, update the photos array
-                                    if downloadedPhotos.count == fetchedPhotoURLs.count {
-                                        // Sort the downloaded photos according to fetchedPhotoURLs order
-                                        downloadedPhotos.sort { lhs, rhs in
-                                            fetchedPhotoURLs.firstIndex(where: { $0.url == lhs.url })! < fetchedPhotoURLs.firstIndex(where: { $0.url == rhs.url })!
-                                        }
-                                        
-                                        DispatchQueue.main.async {
-                                            // Update the photos array and AppStorage
-                                            userSettings.photos = downloadedPhotos.map { $0.imageName }
-                                            userSettings.loadedPhotosString = userSettings.photos.joined(separator: ",")
-                                            print("Updated photos array after download: \(userSettings.photos)")
-                                            // 檢查
-                                            if userSettings.loadedPhotosString.isEmpty {
-                                                print("下載結束，但 loadedPhotosString 依然是空的，表示沒有照片")
-                                            } else {
-                                                print("下載結束，成功存入 loadedPhotosString = \(userSettings.loadedPhotosString)")
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
                     case .failure(let error):
                         print("Error getting download URL: \(error)")
+                    }
+                    
+                    // Once all URLs are fetched, sort by photo number
+                    if processedItemCount == listResult.items.count {
+                        fetchedPhotoURLs.sort { $0.photoNumber < $1.photoNumber }
+                        self.downloadAllPhotos(
+                            fetchedPhotoURLs: fetchedPhotoURLs,
+                            downloadedPhotos: downloadedPhotos
+                        ) {
+                            // 這是所有下載 & 更新完 userSettings.photos 的最後時機
+                            completion()
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    /// 這個 method 專門下載 & 更新 userSettings.photos
+    private func downloadAllPhotos(
+        fetchedPhotoURLs: [(url: String, photoNumber: Int)],
+        downloadedPhotos: [(url: String, imageName: String)],
+        completion: @escaping () -> Void
+    ) {
+        var downloadedPhotos = downloadedPhotos
+        if fetchedPhotoURLs.isEmpty {
+            // 若根本沒任何 URL
+            completion()
+            return
+        }
+
+        var completedCount = 0
+        for (urlString, _) in fetchedPhotoURLs {
+            self.downloadAndSavePhoto(from: urlString) { imageName in
+                if let imageName = imageName {
+                    downloadedPhotos.append((url: urlString, imageName: imageName))
+                }
+                completedCount += 1
+
+                // 全部下載完畢
+                if completedCount == fetchedPhotoURLs.count {
+                    // 按照 sorted URL 順序排
+                    downloadedPhotos.sort { lhs, rhs in
+                        fetchedPhotoURLs.firstIndex { $0.url == lhs.url }!
+                            < fetchedPhotoURLs.firstIndex { $0.url == rhs.url }!
+                    }
+                    
+                    DispatchQueue.main.async {
+                        // Update userSettings
+                        userSettings.photos = downloadedPhotos.map { $0.imageName }
+                        userSettings.loadedPhotosString = userSettings.photos.joined(separator: ",")
+                        print("Updated photos array after download: \(userSettings.photos)")
+                        
+                        if userSettings.loadedPhotosString.isEmpty {
+                            print("下載結束，但 loadedPhotosString 依然是空的，表示沒有照片")
+                        } else {
+                            print("下載結束，成功存入 loadedPhotosString = \(userSettings.loadedPhotosString)")
+                        }
+                        
+                        // 告知外部：所有流程都完成
+                        completion()
                     }
                 }
             }

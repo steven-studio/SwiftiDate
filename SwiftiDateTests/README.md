@@ -41,10 +41,8 @@ SwiftiDateTests 是本專案的**自動化「單元測試 (Unit Tests)」**模�
 **2.	使用者照片**
 - **FetchPhotos**：從 Firebase Storage 取得照片列表。
 - **UploadAllPhotos**：將本地照片上傳至 Storage。
-- 測試結果：
-	- 我們確實看見測試流程呼叫了 Firebase Storage，並開始下載對應 URL 的檔案（photo1.jpeg ~ photo6.jpeg），部分下載檔案也顯示「成功儲存」。
-	- 然而，由於目前所使用的「測試環境」存取規則受限，外加在模擬器上執行，過程中還出現 Missing or insufficient permissions. 之類訊息。
-	- 最終顯示的照片清單 [] 可能因權限問題，或檔案實際沒全部上傳 / 寫入陣列而為空。但整體連線、下載、解析流程已被驗證可行。
+- **測試結果**：流程完成，顯示資料結構正確。
+![截圖 2025-02-27 下午2.18.29](https://hackmd.io/_uploads/HJrTXtTcJl.png)
 
 **3.	使用者資料**
 - **saveUserData / fetchUserData**：向 Firestore 寫入「暱稱、年齡」等欄位後，再讀取驗證內容。
