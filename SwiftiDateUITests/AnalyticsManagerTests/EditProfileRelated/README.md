@@ -80,3 +80,17 @@
 ![EducationAndWorkView 測試通過](./EducationAndWorkViewTestResult.png)
 
 ---
+
+### FitnessOptionsView 測試結果
+
+我們針對 FitnessOptionsView 進行了 UI 互動測試，主要檢查以下幾點：
+
+- 當畫面出現時，能正確觸發 "fitness_options_view_appear" 事件。
+- 當用戶點擊「經常健身」按鈕時，對應的 binding 更新為 "經常健身"，並透過 Analytics 上報 "fitness_option_selected" 事件。
+- 當用戶點擊「清空」按鈕後，binding 被清空，並觸發 "fitness_option_cleared" 事件。
+- 當用戶點擊「有時候」按鈕後，binding 更新為 "有時候"；接著點擊「確定」按鈕時，能正確上報 "fitness_option_confirmed" 事件，並傳入當前所選選項。
+
+所有測試均已成功通過，確保 FitnessOptionsView 在用戶互動時能夠正確響應並上報分析數據。
+
+### 測試通過截圖：
+![FitnessOptionsView 測試通過](./FitnessOptionsTestResult.png)
