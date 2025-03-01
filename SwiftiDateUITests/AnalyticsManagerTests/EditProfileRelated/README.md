@@ -94,3 +94,22 @@
 
 ### 測試通過截圖：
 ![FitnessOptionsView 測試通過](./FitnessOptionsTestResult.png)
+
+---
+
+### HeightPickerView 測試結果
+
+我們針對 HeightPickerView 進行了 UI 互動測試，主要檢查以下幾點：
+
+- 當用戶透過 picker 選擇身高（例如選擇 180 cm）時，對應的 binding 能夠正確更新為所選身高。
+- 當用戶點擊「確定」按鈕時，會觸發 Analytics 上報事件 "update_height"，並傳入正確的身高參數（例如 180）。
+- 當用戶點擊「清空」按鈕時，能正確清空 binding（即設定為 nil）。
+
+所有測試均已成功通過，確保 HeightPickerView 在用戶互動時能夠正確更新綁定值並上報分析數據。
+
+### 測試通過截圖
+![HeightPickerView 測試通過](./HeightPickerTestResult.png)
+
+---
+
+
