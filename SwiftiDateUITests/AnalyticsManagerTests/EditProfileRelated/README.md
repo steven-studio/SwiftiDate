@@ -112,4 +112,16 @@
 
 ---
 
+### HometownInputView 測試結果
 
+我們針對 HometownInputView 進行了 UI 互動測試，主要檢查以下幾點：
+
+- 當畫面出現時，上報 "hometown_input_view_appear" 事件。
+- 當用戶在輸入框中輸入家鄉資料（例如輸入 "Taipei"）時，對應的 binding 能夠正確更新。
+- 當用戶點擊「確定」按鈕時，上報 "hometown_confirmed" 事件，並傳入正確的家鄉資料（如 "Taipei"）。
+- 當用戶點擊「清空」按鈕時，binding 被清空（設為 nil），並上報 "hometown_cleared" 事件。
+
+所有測試均已成功通過，確保 HometownInputView 在用戶互動時能夠正確更新資料並上報分析數據。
+
+### 測試通過截圖：
+![HomeTownInputView 測試通過](./HomeTownInputTestResult.png)
