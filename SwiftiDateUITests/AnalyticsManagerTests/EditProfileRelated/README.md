@@ -273,8 +273,21 @@
 所有測試均已成功通過，確保 PetSelectionView 在用戶互動時能夠正確更新資料並上報相關的 Analytics 數據。
 
 ### 測試通過截圖：
-![PetSelectionTestResult 測試通過](./PetSelectionTestResult.png)
+![PetSelectionView 測試通過](./PetSelectionTestResult.png)
 
 ---
 
+### PreviewSectionView 測試結果
 
+我們針對 PreviewSectionView 進行了 UI 互動測試，主要檢查以下幾點：
+
+- 當畫面出現時，上報 “preview_section_view_appear” 事件，並傳入正確的照片數量參數。
+- 用戶透過左右點擊區域切換照片時，能夠正確更新當前顯示照片的索引，並上報相應的 “preview_section_photo_next” 或 “preview_section_photo_previous” 事件。
+- 當用戶點擊左右點擊區域時，能夠正確觸發切換動作，確保介面正確反映當前選中的照片。
+
+所有測試均已成功通過，確保 PreviewSectionView 在用戶互動時能夠正確更新顯示並上報分析數據。
+
+### 測試通過截圖：
+![PreviewSectionView 測試通過](./PreviewSectionTestResult.png)
+
+---

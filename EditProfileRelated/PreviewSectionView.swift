@@ -90,6 +90,7 @@ struct PreviewSectionView: View {
                                 ])
                             }
                         }
+                        .accessibilityIdentifier("leftTapArea")
                     
                     // Right half tap gesture
                     Rectangle()
@@ -105,6 +106,7 @@ struct PreviewSectionView: View {
                                 ])
                             }
                         }
+                        .accessibilityIdentifier("rightTapArea")
                 }
             }
         }
