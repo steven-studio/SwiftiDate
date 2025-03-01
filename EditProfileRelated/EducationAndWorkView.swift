@@ -34,6 +34,7 @@ struct EducationWorkRowView<Icon: View>: View {
         .padding()
         .background(Color.white)
         .cornerRadius(10)
+        .accessibilityIdentifier("EducationWorkRow_HStack") // 新增識別符
         .onTapGesture {
             onTap()
         }
@@ -76,6 +77,7 @@ struct EducationAndWorkView: View {
                     showDegreePicker = true
                 }
             )
+            .accessibilityIdentifier("EducationWorkRow_degree")
             .sheet(isPresented: $showDegreePicker) {
                 DegreePicker(selectedDegree: $selectedDegree, degrees: degrees)
             }
@@ -95,6 +97,7 @@ struct EducationAndWorkView: View {
                     showSchoolInput = true
                 }
             )
+            .accessibilityIdentifier("EducationWorkRow_school")
             .sheet(isPresented: $showSchoolInput) {
                 SchoolInputView(selectedSchool: $selectedSchool)
             }
@@ -112,6 +115,7 @@ struct EducationAndWorkView: View {
                     showIndustryPicker = true
                 }
             )
+            .accessibilityIdentifier("EducationWorkRow_industry")
             .sheet(isPresented: $showIndustryPicker) {
                 IndustryPicker(selectedIndustry: $selectedIndustry, industries: industries)
             }
@@ -129,6 +133,7 @@ struct EducationAndWorkView: View {
                     showJobInput = true
                 }
             )
+            .accessibilityIdentifier("EducationWorkRow_job")
             .sheet(isPresented: $showJobInput) {
                 JobInputView(selectedJob: $selectedJob)
             }

@@ -63,3 +63,20 @@
 
 ### 測試通過截圖：
 ![DrinkOptionsView 測試通過](./DrinkOptionsTestResult.png)
+
+---
+
+### EducationAndWorkView 測試結果
+
+我們針對 EducationAndWorkView 進行了 UI 互動測試，主要檢查以下幾點：
+
+- 當用戶點擊「學歷」、「學校」、「工作行業」或「職業」這些 row 時，能正確觸發相應的 Analytics 事件 (例如 "education_row_tapped") 並附帶對應的參數（如 "degree"、"school" 等）。
+- 點擊後能正確設置顯示相應輸入頁面或選擇器的布林標誌（如 showDegreePicker、showSchoolInput、showIndustryPicker、showJobInput），確保用戶能夠進行資料更新。
+- 當整個視圖出現時，能正確觸發 "education_and_work_view_appear" 事件。
+
+所有測試均已成功通過，確保我們的 EducationAndWorkView 在用戶互動時能夠正確響應並上報分析數據。
+
+### 測試通過截圖：
+![EducationAndWorkView 測試通過](./EducationAndWorkViewTestResult.png)
+
+---
