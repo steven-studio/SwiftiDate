@@ -10,8 +10,8 @@ import Foundation
 import FirebaseAnalytics
 import Mixpanel
 
-class AnalyticsManager {
-    static let shared = AnalyticsManager()
+class AnalyticsManager: AnalyticsManagerProtocol {
+    static var shared = AnalyticsManager()
 
     private init() {
         // 若需要在這裡做額外初始化可加，如 FirebaseApp.configure() 等

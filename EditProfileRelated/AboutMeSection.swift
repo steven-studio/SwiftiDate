@@ -11,6 +11,7 @@ import SwiftUI
 // 關於我區域
 struct AboutMeSection: View {
     @Binding var aboutMe: String
+    var analyticsManager: AnalyticsManagerProtocol = AnalyticsManager.shared
 
     var body: some View {
         VStack(alignment: .leading) {
@@ -22,7 +23,7 @@ struct AboutMeSection: View {
                 .frame(height: 100)
                 .onChange(of: aboutMe) { newValue in
                     // 一旦文字有變動就上報行為分析
-                    AnalyticsManager.shared.trackEvent("aboutme_changed", parameters: [
+                    analyticsManager.trackEvent("aboutme_changed", parameters: [
                         "length": newValue.count
                     ])
                 }
