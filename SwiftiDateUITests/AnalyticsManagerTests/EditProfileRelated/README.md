@@ -20,7 +20,7 @@
 所有測試均已成功通過，確保我們的 BasicInfoView 在用戶互動時能夠正確響應並記錄使用者行為。
 
 ### 測試通過截圖：
-![BasicInfoView 測試通過](./BasicInfoViewTestResult.png)
+![BasicInfoView 測試通過](./BasicInfoTestResult.png)
 
 ---
 
@@ -39,6 +39,7 @@
 
 ### DietPreferencesView 測試結果
 我們針對 DietPreferencesView 進行了 UI 互動測試，主要檢查以下幾點：
+
 - 當用戶點擊某個飲食偏好按鈕時，能正確更新綁定值，並透過 Analytics 上報對應的 "diet_preference_selected" 事件。
 - 點擊「清空」按鈕後，能正確清空綁定值，並觸發 "diet_preference_cleared" 事件。
 - 當用戶在選擇完偏好後點擊「確定」按鈕時，能正確上報 "diet_preference_confirmed" 事件，並傳入當前選擇的偏好值。
@@ -48,4 +49,17 @@
 ### 測試通過截圖：
 ![DietPreferencesView 測試通過](./DietPreferencesTestResult.png)
 
+---
 
+### DrinkOptionsView 測試結果
+
+我們針對 DrinkOptionsView 進行了 UI 互動測試，主要檢查以下幾點：
+
+- 當用戶點擊某個飲酒選項按鈕（例如「只在社交場合」）時，能正確更新綁定值，並透過 Analytics 上報對應的 “drink_option_selected” 事件。
+- 點擊「清空」按鈕後，能正確清空綁定值，並觸發 “drink_option_cleared” 事件。
+- 當用戶在選擇完飲酒選項後點擊「確定」按鈕時，能正確上報 “drink_option_confirmed” 事件，並傳入當前選擇的選項值。
+
+所有測試均已成功通過，確保我們的 DrinkOptionsView 能夠正確響應用戶操作並上報分析數據。
+
+### 測試通過截圖：
+![DrinkOptionsView 測試通過](./DrinkOptionsTestResult.png)

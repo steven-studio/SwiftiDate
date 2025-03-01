@@ -217,6 +217,8 @@
 		D0B3F1F42D72FA61007A5EA0 /* AnalyticsSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B3F1F32D72FA61007A5EA0 /* AnalyticsSpy.swift */; };
 		D0B3F1F62D72FA8B007A5EA0 /* AnalyticsManager+Swizzle.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B3F1F52D72FA8B007A5EA0 /* AnalyticsManager+Swizzle.swift */; };
 		D0B3F1F72D72FB7E007A5EA0 /* DietPreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0445C8A2C73D0760059D522 /* DietPreferencesView.swift */; };
+		D0B3F1F92D730491007A5EA0 /* DrinkOptionsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B3F1F82D730491007A5EA0 /* DrinkOptionsUITests.swift */; };
+		D0B3F1FA2D730545007A5EA0 /* DrinkOptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0445C862C73CEFB0059D522 /* DrinkOptionsView.swift */; };
 		D0C99B2E2D0DBFED00FA98AD /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D0C99B2C2D0DBFEC00FA98AD /* Localizable.strings */; };
 		D0DDDB052C9FA8AF00A78A87 /* ChatDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB042C9FA8AF00A78A87 /* ChatDetailView.swift */; };
 		D0DDDB072C9FDB1600A78A87 /* WhoLikedYouView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB062C9FDB1600A78A87 /* WhoLikedYouView.swift */; };
@@ -432,6 +434,7 @@
 		D0B3F1F12D72F9BF007A5EA0 /* DietPreferencesUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DietPreferencesUITests.swift; sourceTree = "<group>"; };
 		D0B3F1F32D72FA61007A5EA0 /* AnalyticsSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsSpy.swift; sourceTree = "<group>"; };
 		D0B3F1F52D72FA8B007A5EA0 /* AnalyticsManager+Swizzle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AnalyticsManager+Swizzle.swift"; sourceTree = "<group>"; };
+		D0B3F1F82D730491007A5EA0 /* DrinkOptionsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkOptionsUITests.swift; sourceTree = "<group>"; };
 		D0C99B2D2D0DBFEC00FA98AD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		D0C99B2F2D0DC00100FA98AD /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		D0C99B302D0DC00700FA98AD /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
@@ -962,6 +965,7 @@
 				D0B3F1D32D72B7BF007A5EA0 /* BasicInfoUITests.swift */,
 				D0B3F1EE2D72E426007A5EA0 /* DegreePickerUITests.swift */,
 				D0B3F1F12D72F9BF007A5EA0 /* DietPreferencesUITests.swift */,
+				D0B3F1F82D730491007A5EA0 /* DrinkOptionsUITests.swift */,
 			);
 			path = EditProfileRelated;
 			sourceTree = "<group>";
@@ -1335,7 +1339,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D0B3F1FA2D730545007A5EA0 /* DrinkOptionsView.swift in Sources */,
 				D0B3F1F72D72FB7E007A5EA0 /* DietPreferencesView.swift in Sources */,
+				D0B3F1F92D730491007A5EA0 /* DrinkOptionsUITests.swift in Sources */,
 				D0B3F1F02D72E4BB007A5EA0 /* DegreePicker.swift in Sources */,
 				D0B3F1ED2D72CDF7007A5EA0 /* BloodTypePickerView.swift in Sources */,
 				D0B3F1F62D72FA8B007A5EA0 /* AnalyticsManager+Swizzle.swift in Sources */,
