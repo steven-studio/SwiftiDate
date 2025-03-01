@@ -70,6 +70,7 @@ struct InterestsView: View {
             .cornerRadius(10)
             .shadow(radius: 2)
             .padding(.horizontal)
+            .accessibilityIdentifier("InterestsTapArea")
             .onTapGesture {
                 showInterestSelection = true // 點擊時顯示 sheet
                 // 埋點：使用者點擊興趣區以打開選擇頁面

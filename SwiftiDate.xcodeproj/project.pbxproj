@@ -229,6 +229,9 @@
 		D0B3F2082D732316007A5EA0 /* HeightPickerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B3F2072D732316007A5EA0 /* HeightPickerUITests.swift */; };
 		D0B3F20A2D7324DC007A5EA0 /* HometownInputUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B3F2092D7324DC007A5EA0 /* HometownInputUITests.swift */; };
 		D0B3F20C2D732680007A5EA0 /* IndustryPickerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B3F20B2D732680007A5EA0 /* IndustryPickerUITests.swift */; };
+		D0B3F20E2D7327FC007A5EA0 /* InterestsViewUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B3F20D2D7327FC007A5EA0 /* InterestsViewUITests.swift */; };
+		D0B3F20F2D73284F007A5EA0 /* InterestsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0445C662C7239C80059D522 /* InterestsView.swift */; };
+		D0B3F2102D732876007A5EA0 /* InterestSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D055E9912C8CCFBA00A97DD1 /* InterestSelectionView.swift */; };
 		D0C99B2E2D0DBFED00FA98AD /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D0C99B2C2D0DBFEC00FA98AD /* Localizable.strings */; };
 		D0DDDB052C9FA8AF00A78A87 /* ChatDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB042C9FA8AF00A78A87 /* ChatDetailView.swift */; };
 		D0DDDB072C9FDB1600A78A87 /* WhoLikedYouView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB062C9FDB1600A78A87 /* WhoLikedYouView.swift */; };
@@ -450,6 +453,7 @@
 		D0B3F2072D732316007A5EA0 /* HeightPickerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeightPickerUITests.swift; sourceTree = "<group>"; };
 		D0B3F2092D7324DC007A5EA0 /* HometownInputUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HometownInputUITests.swift; sourceTree = "<group>"; };
 		D0B3F20B2D732680007A5EA0 /* IndustryPickerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndustryPickerUITests.swift; sourceTree = "<group>"; };
+		D0B3F20D2D7327FC007A5EA0 /* InterestsViewUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterestsViewUITests.swift; sourceTree = "<group>"; };
 		D0C99B2D2D0DBFEC00FA98AD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		D0C99B2F2D0DC00100FA98AD /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		D0C99B302D0DC00700FA98AD /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
@@ -986,6 +990,7 @@
 				D0B3F2072D732316007A5EA0 /* HeightPickerUITests.swift */,
 				D0B3F2092D7324DC007A5EA0 /* HometownInputUITests.swift */,
 				D0B3F20B2D732680007A5EA0 /* IndustryPickerUITests.swift */,
+				D0B3F20D2D7327FC007A5EA0 /* InterestsViewUITests.swift */,
 			);
 			path = EditProfileRelated;
 			sourceTree = "<group>";
@@ -1359,9 +1364,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D0B3F2102D732876007A5EA0 /* InterestSelectionView.swift in Sources */,
+				D0B3F20F2D73284F007A5EA0 /* InterestsView.swift in Sources */,
 				D0B3F2062D731CDD007A5EA0 /* FitnessOptionsView.swift in Sources */,
 				D0B3F2002D730CB5007A5EA0 /* SchoolInputView.swift in Sources */,
 				D0B3F1FF2D730CA6007A5EA0 /* IndustryPicker.swift in Sources */,
+				D0B3F20E2D7327FC007A5EA0 /* InterestsViewUITests.swift in Sources */,
 				D0B3F1FE2D730C97007A5EA0 /* JobInputView.swift in Sources */,
 				D0B3F1FD2D730C60007A5EA0 /* EducationAndWorkView.swift in Sources */,
 				D0B3F1FA2D730545007A5EA0 /* DrinkOptionsView.swift in Sources */,

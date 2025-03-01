@@ -140,3 +140,22 @@
 
 ### 測試通過截圖：
 ![IndustryPickerTestResult 測試通過](./IndustryPickerTestResult.png)
+
+---
+
+### InterestsView UITests 測試結果
+
+我們針對 InterestsView 進行了 UI 互動測試，主要檢查以下幾點：
+
+- 當畫面出現時，上報 "interests_view_appear" 事件，記錄使用者進入 InterestsView 的時間。
+- 當用戶點擊興趣區（透過設定了 accessibilityIdentifier 的容器）時，能正確觸發 onTapGesture，從而更新內部狀態並上報 "interest_selection_sheet_opened" 事件。
+- 當狀態更新後，能夠正確呈現 sheet，並顯示 InterestSelectionView 的內容，確保用戶能夠進一步進行興趣選擇。
+
+所有測試均已成功通過，確保 InterestsView 在用戶互動時能夠正確響應並上報分析數據。
+
+### 測試通過截圖：
+![InterestsViewTestResult 測試通過](./InterestsViewTestResult.png)
+
+---
+
+
