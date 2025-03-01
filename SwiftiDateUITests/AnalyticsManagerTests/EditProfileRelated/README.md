@@ -125,3 +125,18 @@
 
 ### 測試通過截圖：
 ![HomeTownInputView 測試通過](./HomeTownInputTestResult.png)
+
+---
+
+### IndustryPicker 測試結果
+
+我們針對 IndustryPicker 進行了 UI 互動測試，主要檢查以下幾點：
+
+- 當畫面出現時，能正確觸發頁面曝光事件 "industry_picker_view_appear"。
+- 當用戶點擊某個行業按鈕（例如「醫療」）時，對應的 binding 能夠正確更新為該行業，同時透過 Analytics 上報 "industry_selected" 事件，並傳入正確的行業參數（例如 "醫療"）。
+- 當用戶點擊「清空」按鈕時，binding 被清空（設為 nil），並上報 "industry_cleared" 事件。
+
+所有測試均已成功通過，確保我們的 IndustryPicker 在用戶互動時能夠正確更新資料並上報分析數據。
+
+### 測試通過截圖：
+![IndustryPickerTestResult 測試通過](./IndustryPickerTestResult.png)
