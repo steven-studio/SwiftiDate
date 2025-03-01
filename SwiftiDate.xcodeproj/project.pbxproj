@@ -245,6 +245,7 @@
 		D0B3F2222D733D5B007A5EA0 /* MeetWillingnessSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04729CB2CC08B62007C33EC /* MeetWillingnessSection.swift */; };
 		D0B3F2232D733D77007A5EA0 /* MeetWillingnessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FA20B82C8CBAAB001C5D0E /* MeetWillingnessView.swift */; };
 		D0B3F2252D733E0D007A5EA0 /* MeetWillingnessViewUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B3F2242D733E0D007A5EA0 /* MeetWillingnessViewUITests.swift */; };
+		D0B3F2272D73408E007A5EA0 /* PetSelectionViewUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B3F2262D73408E007A5EA0 /* PetSelectionViewUITests.swift */; };
 		D0C99B2E2D0DBFED00FA98AD /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D0C99B2C2D0DBFEC00FA98AD /* Localizable.strings */; };
 		D0DDDB052C9FA8AF00A78A87 /* ChatDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB042C9FA8AF00A78A87 /* ChatDetailView.swift */; };
 		D0DDDB072C9FDB1600A78A87 /* WhoLikedYouView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB062C9FDB1600A78A87 /* WhoLikedYouView.swift */; };
@@ -473,6 +474,7 @@
 		D0B3F2172D7338A1007A5EA0 /* LifestyleViewUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifestyleViewUITests.swift; sourceTree = "<group>"; };
 		D0B3F21E2D733B39007A5EA0 /* LookingForViewUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LookingForViewUITests.swift; sourceTree = "<group>"; };
 		D0B3F2242D733E0D007A5EA0 /* MeetWillingnessViewUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetWillingnessViewUITests.swift; sourceTree = "<group>"; };
+		D0B3F2262D73408E007A5EA0 /* PetSelectionViewUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetSelectionViewUITests.swift; sourceTree = "<group>"; };
 		D0C99B2D2D0DBFEC00FA98AD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		D0C99B2F2D0DC00100FA98AD /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		D0C99B302D0DC00700FA98AD /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
@@ -1016,6 +1018,7 @@
 				D0B3F2172D7338A1007A5EA0 /* LifestyleViewUITests.swift */,
 				D0B3F21E2D733B39007A5EA0 /* LookingForViewUITests.swift */,
 				D0B3F2242D733E0D007A5EA0 /* MeetWillingnessViewUITests.swift */,
+				D0B3F2262D73408E007A5EA0 /* PetSelectionViewUITests.swift */,
 			);
 			path = EditProfileRelated;
 			sourceTree = "<group>";
@@ -1422,6 +1425,7 @@
 				D0B3F1EA2D72CDCA007A5EA0 /* LanguageSelectionView.swift in Sources */,
 				D0B3F1E92D72CDA8007A5EA0 /* HometownInputView.swift in Sources */,
 				D0B3F1E82D72CD78007A5EA0 /* AnalyticsManager.swift in Sources */,
+				D0B3F2272D73408E007A5EA0 /* PetSelectionViewUITests.swift in Sources */,
 				D0B3F2252D733E0D007A5EA0 /* MeetWillingnessViewUITests.swift in Sources */,
 				D0B3F1E72D72CD52007A5EA0 /* AnalyticsManagerProtocol.swift in Sources */,
 				D0B3F1F42D72FA61007A5EA0 /* AnalyticsSpy.swift in Sources */,

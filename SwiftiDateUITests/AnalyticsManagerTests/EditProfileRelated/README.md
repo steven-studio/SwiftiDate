@@ -261,3 +261,20 @@
 
 ---
 
+### PetSelectionView 測試結果
+
+我們針對 PetSelectionView 進行了 UI 互動測試，主要檢查以下幾點：
+
+- 當畫面出現時，上報 "pet_selection_view_appear" 事件，確保頁面曝光統計正確。
+- 當用戶點擊某個寵物選項（例如「養貓」）時，對應的 binding 能夠正確更新，並透過 Analytics 上報 "pet_option_selected" 事件，附帶正確的選項參數。
+- 當用戶點擊「清空」按鈕後，所有寵物選擇均被清空（binding 設為 nil），並上報 "pet_selection_cleared" 事件。
+- 當用戶點擊「確定」按鈕時，會上報 "pet_selection_confirmed" 事件，並傳入當前所選寵物資訊（若無選擇則傳入 “none”）。
+
+所有測試均已成功通過，確保 PetSelectionView 在用戶互動時能夠正確更新資料並上報相關的 Analytics 數據。
+
+### 測試通過截圖：
+![PetSelectionTestResult 測試通過](./PetSelectionTestResult.png)
+
+---
+
+
