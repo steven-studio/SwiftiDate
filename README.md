@@ -5,7 +5,7 @@ SwiftiDate 是一款專為約會交友設計的應用程序框架，完美地利
 
 ## What / How / Why
 
-![SwiftiDate What-How-Why Diagram](assets/SwiftiDateDiagram.png)
+![SwiftiDate What-How-Why Diagram](assets/SwiftiDateDiagram.jpg)
 
 - **What：**  
   SwiftiDate 提供專為約會與交友設計的 AI 應用框架，利用先進技術優化匹配體驗且簡單易用。
