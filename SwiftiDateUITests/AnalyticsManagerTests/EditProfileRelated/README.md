@@ -204,3 +204,25 @@
 
 ### 測試通過截圖：
 ![LanguageSelectionView 測試通過](./LanguageSelectionViewTestResult.png)
+
+---
+
+### LifeStyleView 測試結果
+
+我們針對 LifeStyleView 進行了 UI 互動測試，主要檢查以下幾點：
+
+- 當畫面出現時，上報 "lifestyle_view_appear" 事件，確保用戶進入 LifeStyleView 時能夠正確記錄頁面曝光。
+- 當用戶點擊各個 LifestyleRowView 時，能夠正確觸發對應的 Analytics 事件，例如：
+    - 點擊「想找」行上報 "lifestyle_lookingfor_tapped" 事件。
+    - 點擊「寵物」行上報 "lifestyle_pet_tapped" 事件。
+    - 點擊「健身」行上報 "lifestyle_fitness_tapped" 事件。
+    - 點擊「抽煙」行上報 "lifestyle_smoking_tapped" 事件。
+    - 點擊「喝酒」行上報 "lifestyle_drink_tapped" 事件。
+    - 點擊「休假日」行上報 "lifestyle_vacation_tapped" 事件。
+    - 點擊「飲食習慣」行上報 "lifestyle_diet_tapped" 事件。
+    - 每一行的點擊操作均觸發了相應的狀態更新（例如，通過 sheet 呈現相關的選擇頁面）。
+
+所有測試均已成功通過，確保 LifeStyleView 在用戶互動時能夠正確響應操作並上報分析數據。
+
+### 測試通過截圖：
+![LifeStyleView 測試通過](./LifeStyleViewTestResult.png)

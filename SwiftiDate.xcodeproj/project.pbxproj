@@ -235,6 +235,12 @@
 		D0B3F2122D733186007A5EA0 /* InterestSelectionViewUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B3F2112D733186007A5EA0 /* InterestSelectionViewUITests.swift */; };
 		D0B3F2142D733436007A5EA0 /* JobInputViewUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B3F2132D733436007A5EA0 /* JobInputViewUITests.swift */; };
 		D0B3F2162D7335A5007A5EA0 /* LanguageSelectionViewUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B3F2152D7335A5007A5EA0 /* LanguageSelectionViewUITests.swift */; };
+		D0B3F2182D7338A1007A5EA0 /* LifestyleViewUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B3F2172D7338A1007A5EA0 /* LifestyleViewUITests.swift */; };
+		D0B3F2192D7338E7007A5EA0 /* LifestyleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D051EF262CBF50CB004563A3 /* LifestyleView.swift */; };
+		D0B3F21A2D73390F007A5EA0 /* LookingForView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0445C7E2C73C9080059D522 /* LookingForView.swift */; };
+		D0B3F21B2D73392F007A5EA0 /* PetSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0445C802C73CA130059D522 /* PetSelectionView.swift */; };
+		D0B3F21C2D73396E007A5EA0 /* SmokingOptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0445C842C73CDB60059D522 /* SmokingOptionsView.swift */; };
+		D0B3F21D2D733998007A5EA0 /* VacationOptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0445C882C73CF610059D522 /* VacationOptionsView.swift */; };
 		D0C99B2E2D0DBFED00FA98AD /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D0C99B2C2D0DBFEC00FA98AD /* Localizable.strings */; };
 		D0DDDB052C9FA8AF00A78A87 /* ChatDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB042C9FA8AF00A78A87 /* ChatDetailView.swift */; };
 		D0DDDB072C9FDB1600A78A87 /* WhoLikedYouView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB062C9FDB1600A78A87 /* WhoLikedYouView.swift */; };
@@ -460,6 +466,7 @@
 		D0B3F2112D733186007A5EA0 /* InterestSelectionViewUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterestSelectionViewUITests.swift; sourceTree = "<group>"; };
 		D0B3F2132D733436007A5EA0 /* JobInputViewUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobInputViewUITests.swift; sourceTree = "<group>"; };
 		D0B3F2152D7335A5007A5EA0 /* LanguageSelectionViewUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageSelectionViewUITests.swift; sourceTree = "<group>"; };
+		D0B3F2172D7338A1007A5EA0 /* LifestyleViewUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifestyleViewUITests.swift; sourceTree = "<group>"; };
 		D0C99B2D2D0DBFEC00FA98AD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		D0C99B2F2D0DC00100FA98AD /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		D0C99B302D0DC00700FA98AD /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
@@ -1000,6 +1007,7 @@
 				D0B3F2112D733186007A5EA0 /* InterestSelectionViewUITests.swift */,
 				D0B3F2132D733436007A5EA0 /* JobInputViewUITests.swift */,
 				D0B3F2152D7335A5007A5EA0 /* LanguageSelectionViewUITests.swift */,
+				D0B3F2172D7338A1007A5EA0 /* LifestyleViewUITests.swift */,
 			);
 			path = EditProfileRelated;
 			sourceTree = "<group>";
@@ -1373,6 +1381,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D0B3F21D2D733998007A5EA0 /* VacationOptionsView.swift in Sources */,
+				D0B3F21C2D73396E007A5EA0 /* SmokingOptionsView.swift in Sources */,
+				D0B3F21B2D73392F007A5EA0 /* PetSelectionView.swift in Sources */,
+				D0B3F21A2D73390F007A5EA0 /* LookingForView.swift in Sources */,
+				D0B3F2192D7338E7007A5EA0 /* LifestyleView.swift in Sources */,
 				D0B3F2102D732876007A5EA0 /* InterestSelectionView.swift in Sources */,
 				D0B3F20F2D73284F007A5EA0 /* InterestsView.swift in Sources */,
 				D0B3F2062D731CDD007A5EA0 /* FitnessOptionsView.swift in Sources */,
@@ -1380,6 +1393,7 @@
 				D0B3F1FF2D730CA6007A5EA0 /* IndustryPicker.swift in Sources */,
 				D0B3F2142D733436007A5EA0 /* JobInputViewUITests.swift in Sources */,
 				D0B3F20E2D7327FC007A5EA0 /* InterestsViewUITests.swift in Sources */,
+				D0B3F2182D7338A1007A5EA0 /* LifestyleViewUITests.swift in Sources */,
 				D0B3F1FE2D730C97007A5EA0 /* JobInputView.swift in Sources */,
 				D0B3F1FD2D730C60007A5EA0 /* EducationAndWorkView.swift in Sources */,
 				D0B3F1FA2D730545007A5EA0 /* DrinkOptionsView.swift in Sources */,
