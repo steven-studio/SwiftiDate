@@ -3,6 +3,21 @@ SwiftiDate 是一款專為約會交友設計的應用程序框架，完美地利
 
 ---
 
+## What / How / Why
+
+![SwiftiDate What-How-Why Diagram](assets/SwiftiDateDiagram.png)
+
+- **What：**  
+  SwiftiDate 提供專為約會與交友設計的 AI 應用框架，利用先進技術優化匹配體驗且簡單易用。
+
+- **How：**  
+  SwiftiDate 以 SwiftUI 前端和 Firebase 後端的模組化架構，並透過數據驅動的持續迭代來實現個性化興趣標籤、精準匹配與直觀互動。
+
+- **Why：**  
+  在資訊不確定的時代生活中，SwiftiDate 提供一個輕鬆、安全的平臺，降低尋找心儀對象的門檻，幫助用戶更有自信、更多效率地建立連結。
+
+---
+
 ## 技術架構與程式結構
 
 SwiftiDate 採用 Swift 語言，以及 Firebase 後端服務進行數據儲存、驗證和功能擴充。為了讓程式更具可維護性與可測試性，我們部分採用 [MVC](https://en.wikipedia.org/wiki/Model–view–controller)（Model-View-Controller）的設計理念：
