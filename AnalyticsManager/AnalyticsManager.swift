@@ -18,7 +18,7 @@ class AnalyticsManager: AnalyticsManagerProtocol {
     }
     
     /// 追蹤事件的統一方法
-    func trackEvent(_ eventName: String, parameters: [String: Any]? = nil) {
+    @objc dynamic func trackEvent(_ eventName: String, parameters: [String: Any]? = nil) {
         // Firebase
         Analytics.logEvent(eventName, parameters: parameters)
         

@@ -25,10 +25,27 @@
 ---
 
 ### DegreePicker 測試結果
-我們針對  進行了 UI 互動測試，主要檢查以下幾點：
-- 當用戶點擊「學士」按鈕時，綁定值能正確更新為「學士」。
-- 當用戶點擊「取消」按鈕時，綁定值能被清空（變為 nil）。
-所有測試均已成功通過，確保我們的 DegreePicker 在用戶操作時能夠正確更新並響應。
+我們針對 **DegreePicker** 進行了 UI 互動測試，主要檢查以下幾點：
+
+- 當用戶點擊某個學歷按鈕（例如「學士」）時，對應的綁定值會正確更新為該選項。
+- 當用戶點擊「取消」按鈕時，學歷選擇會被清空（變為 nil）。
+
+所有測試均已成功通過，確保 DegreePicker 能夠正確響應用戶操作並更新綁定狀態。
 
 ### 測試通過截圖：
 ![DegreePicker 測試通過](./DegreePickerTestResult.png)
+
+---
+
+### DietPreferencesView 測試結果
+我們針對 DietPreferencesView 進行了 UI 互動測試，主要檢查以下幾點：
+- 當用戶點擊某個飲食偏好按鈕時，能正確更新綁定值，並透過 Analytics 上報對應的 "diet_preference_selected" 事件。
+- 點擊「清空」按鈕後，能正確清空綁定值，並觸發 "diet_preference_cleared" 事件。
+- 當用戶在選擇完偏好後點擊「確定」按鈕時，能正確上報 "diet_preference_confirmed" 事件，並傳入當前選擇的偏好值。
+
+所有測試均已成功通過，確保我們的 DietPreferencesView 能夠正確響應用戶操作並上報分析數據。
+
+### 測試通過截圖：
+![DietPreferencesView 測試通過](./DietPreferencesTestResult.png)
+
+

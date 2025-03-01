@@ -9,6 +9,9 @@ import Foundation
 import SwiftUI
 
 struct DegreePicker: View {
+    // 原本的 @Binding 屬性維持不變
+    var analyticsManager: AnalyticsManagerProtocol = AnalyticsManager.shared
+    
     @Binding var selectedDegree: String?
     let degrees: [String]
 
@@ -19,7 +22,7 @@ struct DegreePicker: View {
             HStack {
                 Button(action: {
                     // 埋點：點擊右上角的關閉按鈕
-                    AnalyticsManager.shared.trackEvent("degree_picker_dismissed")
+                    analyticsManager.trackEvent("degree_picker_dismissed", parameters: nil)
                     presentationMode.wrappedValue.dismiss()  // 点击关闭按钮时关闭 sheet
                 }) {
                     Image(systemName: "xmark")
@@ -37,7 +40,7 @@ struct DegreePicker: View {
                 Button(action: {
                     selectedDegree = degree
                     // 埋點：使用者選擇學歷
-                    AnalyticsManager.shared.trackEvent("degree_selected", parameters: [
+                    analyticsManager.trackEvent("degree_selected", parameters: [
                         "degree": degree
                     ])
                 }) {
@@ -57,7 +60,7 @@ struct DegreePicker: View {
                 Button(action: {
                     selectedDegree = nil
                     // 埋點：使用者點擊取消 (清空)
-                    AnalyticsManager.shared.trackEvent("degree_selection_canceled")
+                    analyticsManager.trackEvent("degree_selection_canceled", parameters: nil)
                 }) {
                     Text("取消")
                         .foregroundColor(.primary)
@@ -74,7 +77,7 @@ struct DegreePicker: View {
         .padding()
         .onAppear {
             // 埋點：頁面曝光
-            AnalyticsManager.shared.trackEvent("degree_picker_view_appear")
+            analyticsManager.trackEvent("degree_picker_view_appear", parameters: nil)
         }
     }
 }
