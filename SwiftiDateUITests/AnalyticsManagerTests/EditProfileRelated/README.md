@@ -173,4 +173,20 @@
 
 ---
 
+### JobInputView 測試結果
+
+我們針對 JobInputView 進行了 UI 互動測試，主要檢查以下幾點：
+
+- 當畫面出現時，上報 "job_input_view_appear" 事件，確保用戶進入 JobInputView 時進行頁面曝光統計。
+- 當用戶在輸入框中輸入職業資訊（例如輸入 "軟體工程師"）時，對應的 binding 能夠正確更新。
+- 當用戶點擊「清空」按鈕時，binding 被清空（變為 nil），同時上報 "job_input_cleared" 事件。
+- 當用戶點擊「確定」按鈕時，會上報 "job_input_confirmed" 事件，並傳入正確的職業資訊（如 "軟體工程師"）。
+
+所有測試均已成功通過，確保 JobInputView 在用戶互動時能夠正確更新資料並上報分析數據。
+
+### 測試通過截圖：
+![JobInputView 測試通過](./JobInputViewTestResult.png)
+
+---
+
 
