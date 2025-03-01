@@ -158,4 +158,19 @@
 
 ---
 
+### InterestSelectionView 測試結果
+
+我們針對 InterestSelectionView 進行了 UI 互動測試，主要檢查以下幾點：
+
+- 當畫面出現時，上報 "interest_selection_view_appear" 事件，確保用戶進入該頁面時能夠進行統計。
+- 當用戶點擊某個興趣標籤（例如「閱讀」）時，對應的 binding 能夠正確更新，並在後台透過 Analytics 上報選中該標籤事件，同時記錄該興趣的顏色資訊。
+- 測試模擬了用戶多次點擊不同標籤的行為，確保選中和取消選中的邏輯均能正確運作，且資料能正確儲存在 binding 中。
+
+所有測試均已成功通過，確保 InterestSelectionView 在用戶互動時能夠正確更新狀態並上報相關 Analytics 數據。
+
+### 測試通過截圖：
+![InterestSelectionView 測試通過](./InterestsSelectionViewTestResult.png)
+
+---
+
 

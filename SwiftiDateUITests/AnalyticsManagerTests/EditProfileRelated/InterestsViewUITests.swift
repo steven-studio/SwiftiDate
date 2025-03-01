@@ -18,8 +18,6 @@ extension InterestsView {
     }
 }
 
-extension InterestsView: Inspectable {}
-
 final class InterestsViewUITests: XCTestCase {
     var analyticsSpy: AnalyticsSpy!
     
