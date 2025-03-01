@@ -246,6 +246,16 @@
 		D0B3F2232D733D77007A5EA0 /* MeetWillingnessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FA20B82C8CBAAB001C5D0E /* MeetWillingnessView.swift */; };
 		D0B3F2252D733E0D007A5EA0 /* MeetWillingnessViewUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B3F2242D733E0D007A5EA0 /* MeetWillingnessViewUITests.swift */; };
 		D0B3F2272D73408E007A5EA0 /* PetSelectionViewUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B3F2262D73408E007A5EA0 /* PetSelectionViewUITests.swift */; };
+		D0B3F22B2D73458E007A5EA0 /* PhotoSectionViewUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B3F22A2D73458E007A5EA0 /* PhotoSectionViewUITests.swift */; };
+		D0B3F22C2D7346A7007A5EA0 /* PhotoSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0445C602C722EF50059D522 /* PhotoSectionView.swift */; };
+		D0B3F22D2D7346B6007A5EA0 /* PhotoSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04729D12CC08D34007C33EC /* PhotoSection.swift */; };
+		D0B3F22E2D734714007A5EA0 /* GlobalVariables.swift in Sources */ = {isa = PBXBuildFile; fileRef = D055A7622D19931C00F11F18 /* GlobalVariables.swift */; };
+		D0B3F22F2D734732007A5EA0 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07B41E02D61ABE80015C7AA /* ImagePicker.swift */; };
+		D0B3F2302D734752007A5EA0 /* PhotoUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = D051EF2B2CC02C33004563A3 /* PhotoUtility.swift */; };
+		D0B3F2312D73477A007A5EA0 /* FirebasePhotoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07B41DE2D6197570015C7AA /* FirebasePhotoManager.swift */; };
+		D0B3F2322D73479A007A5EA0 /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07B41EA2D61C3630015C7AA /* FirebaseManager.swift */; };
+		D0B3F2342D734970007A5EA0 /* uncaughtExceptionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B3F2332D73496B007A5EA0 /* uncaughtExceptionHandler.swift */; };
+		D0B3F2352D7349C3007A5EA0 /* uncaughtExceptionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B3F2332D73496B007A5EA0 /* uncaughtExceptionHandler.swift */; };
 		D0C99B2E2D0DBFED00FA98AD /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D0C99B2C2D0DBFEC00FA98AD /* Localizable.strings */; };
 		D0DDDB052C9FA8AF00A78A87 /* ChatDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB042C9FA8AF00A78A87 /* ChatDetailView.swift */; };
 		D0DDDB072C9FDB1600A78A87 /* WhoLikedYouView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB062C9FDB1600A78A87 /* WhoLikedYouView.swift */; };
@@ -475,6 +485,8 @@
 		D0B3F21E2D733B39007A5EA0 /* LookingForViewUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LookingForViewUITests.swift; sourceTree = "<group>"; };
 		D0B3F2242D733E0D007A5EA0 /* MeetWillingnessViewUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetWillingnessViewUITests.swift; sourceTree = "<group>"; };
 		D0B3F2262D73408E007A5EA0 /* PetSelectionViewUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetSelectionViewUITests.swift; sourceTree = "<group>"; };
+		D0B3F22A2D73458E007A5EA0 /* PhotoSectionViewUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSectionViewUITests.swift; sourceTree = "<group>"; };
+		D0B3F2332D73496B007A5EA0 /* uncaughtExceptionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = uncaughtExceptionHandler.swift; sourceTree = "<group>"; };
 		D0C99B2D2D0DBFEC00FA98AD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		D0C99B2F2D0DC00100FA98AD /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		D0C99B302D0DC00700FA98AD /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
@@ -746,6 +758,7 @@
 		D0445C2D2C71B3800059D522 /* SwiftiDate */ = {
 			isa = PBXGroup;
 			children = (
+				D0B3F2332D73496B007A5EA0 /* uncaughtExceptionHandler.swift */,
 				D0B388352D5B7C58003BC40C /* AstrologyView.swift */,
 				D07B41E02D61ABE80015C7AA /* ImagePicker.swift */,
 				D0B388312D5B7C46003BC40C /* CourseDetailView.swift */,
@@ -1019,6 +1032,7 @@
 				D0B3F21E2D733B39007A5EA0 /* LookingForViewUITests.swift */,
 				D0B3F2242D733E0D007A5EA0 /* MeetWillingnessViewUITests.swift */,
 				D0B3F2262D73408E007A5EA0 /* PetSelectionViewUITests.swift */,
+				D0B3F22A2D73458E007A5EA0 /* PhotoSectionViewUITests.swift */,
 			);
 			path = EditProfileRelated;
 			sourceTree = "<group>";
@@ -1375,6 +1389,7 @@
 				D089DB532D6896CB00D6A1AB /* QRCodeGeneratorView.swift in Sources */,
 				D07B41DD2D618E9B0015C7AA /* LocationService.swift in Sources */,
 				D0DDDB562CA29B1200A78A87 /* TermsOfServiceView.swift in Sources */,
+				D0B3F2342D734970007A5EA0 /* uncaughtExceptionHandler.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1392,6 +1407,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D0B3F2352D7349C3007A5EA0 /* uncaughtExceptionHandler.swift in Sources */,
+				D0B3F2322D73479A007A5EA0 /* FirebaseManager.swift in Sources */,
+				D0B3F2312D73477A007A5EA0 /* FirebasePhotoManager.swift in Sources */,
+				D0B3F2302D734752007A5EA0 /* PhotoUtility.swift in Sources */,
+				D0B3F22F2D734732007A5EA0 /* ImagePicker.swift in Sources */,
+				D0B3F22E2D734714007A5EA0 /* GlobalVariables.swift in Sources */,
+				D0B3F22D2D7346B6007A5EA0 /* PhotoSection.swift in Sources */,
+				D0B3F22C2D7346A7007A5EA0 /* PhotoSectionView.swift in Sources */,
 				D0B3F2232D733D77007A5EA0 /* MeetWillingnessView.swift in Sources */,
 				D0B3F2222D733D5B007A5EA0 /* MeetWillingnessSection.swift in Sources */,
 				D0B3F21D2D733998007A5EA0 /* VacationOptionsView.swift in Sources */,
@@ -1439,6 +1462,7 @@
 				D0B3F20A2D7324DC007A5EA0 /* HometownInputUITests.swift in Sources */,
 				D0B3F2082D732316007A5EA0 /* HeightPickerUITests.swift in Sources */,
 				D0B3F1E42D72CCDA007A5EA0 /* MockAnalyticsManager.swift in Sources */,
+				D0B3F22B2D73458E007A5EA0 /* PhotoSectionViewUITests.swift in Sources */,
 				D0B3F2122D733186007A5EA0 /* InterestSelectionViewUITests.swift in Sources */,
 				D0445C4A2C71B3830059D522 /* SwiftiDateUITests.swift in Sources */,
 				D0B3F1492D70079F007A5EA0 /* PhoneValidator.swift in Sources */,

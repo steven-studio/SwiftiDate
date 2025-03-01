@@ -15,15 +15,6 @@ import FirebaseAppCheck
 import FirebaseFirestore
 import UserNotifications
 
-// 全局未捕獲異常處理函數
-func uncaughtExceptionHandler(exception: NSException) {
-    let error = NSError(domain: exception.name.rawValue,
-                        code: 0,
-                        userInfo: [NSLocalizedDescriptionKey: exception.reason ?? "No reason"])
-    Crashlytics.crashlytics().record(error: error)
-    print("Uncaught exception logged to Crashlytics: \(exception.name.rawValue)")
-}
-
 class AppDelegate: NSObject, UIApplicationDelegate, CLLocationManagerDelegate, UNUserNotificationCenterDelegate {
     var cloudService: CloudService?
     

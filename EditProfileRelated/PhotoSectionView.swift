@@ -115,6 +115,7 @@ struct PhotoSectionView: View {
                 .background(Color.red)
                 .clipShape(Circle())
         }
+        .accessibilityIdentifier("removePhotoButton") // 添加識別符
         .offset(x: 5, y: -5)
     }
     
