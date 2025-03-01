@@ -189,4 +189,18 @@
 
 ---
 
+### LanguageSelectionView 測試結果
 
+我們針對 LanguageSelectionView 進行了 UI 互動測試，主要檢查以下幾點：
+
+- 當畫面出現時，應正確呈現所有可選語言，並在背景執行中不影響使用體驗。
+- 當用戶點擊某個語言（例如「English」）時，對應的 binding 能夠正確更新，並透過 Analytics 上報 “language_selected” 事件，附帶正確的語言參數。
+- 當用戶再次點擊已選中的語言時，該語言會被取消選中，並上報 “language_deselected” 事件。
+- 當用戶同時選中多個語言（例如 “中文”、“日本語”），binding 能夠正確記錄所有選項，且各自的選中事件均已上報。
+- 當用戶點擊「清空」按鈕後，所有語言選擇均被清空，並上報 “languages_cleared” 事件。
+- 當用戶點擊「確定」按鈕後，會上報 “languages_confirmed” 事件，並傳入選中語言的總數。
+
+所有測試均已成功通過，確保 LanguageSelectionView 在用戶互動時能夠正確更新綁定狀態並上報相關的 Analytics 數據。
+
+### 測試通過截圖：
+![LanguageSelectionView 測試通過](./LanguageSelectionViewTestResult.png)
