@@ -21,3 +21,14 @@
 
 ### 測試通過截圖：
 ![BasicInfoView 測試通過](./BasicInfoViewTestResult.png)
+
+---
+
+### DegreePicker 測試結果
+我們針對  進行了 UI 互動測試，主要檢查以下幾點：
+- 當用戶點擊「學士」按鈕時，綁定值能正確更新為「學士」。
+- 當用戶點擊「取消」按鈕時，綁定值能被清空（變為 nil）。
+所有測試均已成功通過，確保我們的 DegreePicker 在用戶操作時能夠正確更新並響應。
+
+### 測試通過截圖：
+![DegreePicker 測試通過](./DegreePickerTestResult.png)
