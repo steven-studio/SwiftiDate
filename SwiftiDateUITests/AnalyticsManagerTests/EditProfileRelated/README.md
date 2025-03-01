@@ -226,3 +226,19 @@
 
 ### 測試通過截圖：
 ![LifeStyleView 測試通過](./LifeStyleViewTestResult.png)
+
+---
+
+### LookingForView 測試結果
+
+我們針對 LookingForView 進行了 UI 互動測試，主要檢查以下幾點：
+
+- 當畫面出現時，上報 "lookingfor_view_appear" 事件，確保頁面曝光統計正確。
+- 當用戶點擊某個尋找選項（例如「終身伴侶」）時，對應的 binding 能夠正確更新，並透過 Analytics 上報 "lookingfor_option_selected" 事件，附帶正確的選項參數。
+- 當用戶點擊「清空」按鈕時，所有尋找選項均被清空，並上報 "lookingfor_cleared" 事件。
+- 當用戶點擊「確定」按鈕時，會上報 "lookingfor_confirmed" 事件，並傳入當前選擇的選項值（例如 "穩定的關係"）。
+
+所有測試均已成功通過，確保 LookingForView 在用戶互動時能夠正確更新資料並上報相關的 Analytics 數據。
+
+### 測試通過截圖：
+![LookingForView 測試通過](./LookingForViewTestResult.png)
