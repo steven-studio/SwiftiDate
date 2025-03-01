@@ -9,3 +9,15 @@
 
 ### 測試通過截圖：
 ![AboutMeSection 測試通過](./AboutMeSectionTestResult.png)
+
+---
+
+接著，我們針對 **BasicInfoView** 進行了 UI 互動測試，主要檢查以下幾點：
+
+- 當用戶點擊「來自」這一基本資料列時，能正確觸發 Analytics 事件，並上報 "tap_edit_hometown" 事件。
+- 點擊後能正確設置顯示 hometown 輸入頁面的標誌，確保用戶能夠進行資料更新。
+
+所有測試均已成功通過，確保我們的 BasicInfoView 在用戶互動時能夠正確響應並記錄使用者行為。
+
+### 測試通過截圖：
+![BasicInfoView 測試通過](./BasicInfoViewTestResult.png)

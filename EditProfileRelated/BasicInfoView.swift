@@ -38,6 +38,9 @@ struct BasicInfoRowView<Icon: View>: View {
 }
 
 struct BasicInfoView: View {
+    // 原本的 @Binding 屬性維持不變
+    var analyticsManager: AnalyticsManagerProtocol = AnalyticsManager.shared
+    
     @Binding var selectedHometown: String?
     @Binding var showHometownInput: Bool
     @Binding var selectedLanguages: [String]
@@ -63,9 +66,10 @@ struct BasicInfoView: View {
                 isValueEmpty: selectedHometown == nil,
                 onTap: {
                     showHometownInput = true
-                    AnalyticsManager.shared.trackEvent("tap_edit_hometown")
+                    analyticsManager.trackEvent("tap_edit_hometown", parameters: nil)
                 }
             )
+            .id("來自") // <--- 必須補上這行
             .sheet(isPresented: $showHometownInput) {
                 HometownInputView(selectedHometown: $selectedHometown)
             }
@@ -77,9 +81,10 @@ struct BasicInfoView: View {
                 isValueEmpty: selectedLanguages.isEmpty,
                 onTap: {
                     showLanguageSelection = true
-                    AnalyticsManager.shared.trackEvent("tap_edit_language")
+                    analyticsManager.trackEvent("tap_edit_language", parameters: nil)
                 }
             )
+            .id("語言") // <--- 必須補上這行
             .sheet(isPresented: $showLanguageSelection) {
                 LanguageSelectionView(selectedLanguages: $selectedLanguages)
             }
@@ -91,9 +96,10 @@ struct BasicInfoView: View {
                 isValueEmpty: selectedHeight == nil,
                 onTap: {
                     showHeightPicker = true
-                    AnalyticsManager.shared.trackEvent("tap_edit_height")
+                    analyticsManager.trackEvent("tap_edit_height", parameters: nil)
                 }
             )
+            .id("身高") // <--- 必須補上這行
             .sheet(isPresented: $showHeightPicker) {
                 HeightPickerView(selectedHeight: $selectedHeight)
             }
@@ -108,9 +114,10 @@ struct BasicInfoView: View {
                 isValueEmpty: selectedZodiac.isEmpty,
                 onTap: {
                     showZodiacPicker = true
-                    AnalyticsManager.shared.trackEvent("tap_edit_zodiac")
+                    analyticsManager.trackEvent("tap_edit_zodiac", parameters: nil)
                 }
             )
+            .id("星座") // <--- 必須補上這行
             .sheet(isPresented: $showZodiacPicker) {
                 ZodiacPickerView(selectedZodiac: $selectedZodiac)
             }
@@ -125,9 +132,10 @@ struct BasicInfoView: View {
                 isValueEmpty: selectedBloodType == nil,
                 onTap: {
                     showBloodTypePicker = true
-                    AnalyticsManager.shared.trackEvent("tap_edit_blood_type")
+                    analyticsManager.trackEvent("tap_edit_blood_type", parameters: nil)
                 }
             )
+            .id("血型") // <--- 必須補上這行
             .sheet(isPresented: $showBloodTypePicker) {
                 BloodTypePickerView(selectedBloodType: $selectedBloodType)
             }

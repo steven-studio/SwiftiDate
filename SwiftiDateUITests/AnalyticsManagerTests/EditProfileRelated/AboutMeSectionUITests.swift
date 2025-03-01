@@ -10,18 +10,6 @@ import SwiftUI
 import ViewInspector
 @testable import SwiftiDate
 
-// 測試替身
-class MockAnalyticsManager: AnalyticsManagerProtocol {
-    var trackedEvents: [(event: String, parameters: [String: Any]?)] = []
-    
-    func trackEvent(_ event: String, parameters: [String: Any]?) {
-        trackedEvents.append((event: event, parameters: parameters))
-    }
-}
-
-// 擴展 AboutMeSection 讓它可被 ViewInspector 測試
-extension AboutMeSection: Inspectable {}
-
 class AboutMeSectionTests: XCTestCase {
     
     func testAboutMeChangeTriggersAnalyticsEvent() throws {
