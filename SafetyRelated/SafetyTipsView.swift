@@ -15,7 +15,8 @@ struct SafetyTipsView: View {
         VStack {
             HStack {
                 Button(action: {
-                    // 返回到上個頁面
+                    // 返回到上個頁面並記錄事件
+                    AnalyticsManager.shared.trackEvent("SafetyTips_BackTapped", parameters: nil)
                     showSafetyTipsView = false
                 }) {
                     Image(systemName: "chevron.left")
@@ -55,7 +56,8 @@ struct SafetyTipsView: View {
             Spacer()
 
             Button(action: {
-                // 返回到安全中心
+                // 返回到安全中心並記錄事件
+                AnalyticsManager.shared.trackEvent("SafetyTips_Dismissed", parameters: nil)
                 showSafetyTipsView = false
             }) {
                 Text("好的")

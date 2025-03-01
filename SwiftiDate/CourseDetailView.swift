@@ -43,9 +43,20 @@ struct CourseDetailView: View {
                         .frame(maxWidth: .infinity)
                         .background(Color.orange)
                         .cornerRadius(10)
+                        // 如有需要，也可以在 Link 外層加入 onTapGesture 埋點
+                        .onTapGesture {
+                            AnalyticsManager.shared.trackEvent("course_website_link_clicked", parameters: [
+                                "course_title": course.title
+                            ])
+                        }
                 } else if course.isInAppPurchase {
                     Button(action: {
                         isPurchasing = true
+                        // 埋點：點擊購買按鈕
+                        AnalyticsManager.shared.trackEvent("course_purchase_button_tapped", parameters: [
+                            "course_title": course.title,
+                            "price": course.price
+                        ])
                         purchaseSocialTraining()
                     }) {
                         Text("🔥 立即購買")
@@ -70,6 +81,13 @@ struct CourseDetailView: View {
             .padding()
         }
         .navigationTitle("課程詳情")
+        .onAppear {
+            // 埋點：頁面曝光
+            AnalyticsManager.shared.trackEvent("course_detail_view_appear", parameters: [
+                "course_title": course.title,
+                "course_instructor": course.instructor
+            ])
+        }
     }
 
     // 內購處理邏輯
@@ -77,6 +95,10 @@ struct CourseDetailView: View {
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             purchaseSuccess = true
             isPurchasing = false
+            // 埋點：購買成功
+            AnalyticsManager.shared.trackEvent("course_purchase_success", parameters: [
+                "course_title": course.title
+            ])
         }
     }
 }

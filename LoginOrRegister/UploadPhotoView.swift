@@ -74,6 +74,7 @@ struct UploadPhotoView: View {
 
             // ✅ 繼續按鈕（僅在至少上傳 1 張照片時可用）
             Button(action: {
+                AnalyticsManager.shared.trackEvent("UploadPhoto_ContinueTapped", parameters: ["uploadedCount": selectedImages.compactMap { $0 }.count])
                 FirebasePhotoManager.shared.uploadAllPhotos()
                 completeVerification()
             }) {
@@ -88,7 +89,10 @@ struct UploadPhotoView: View {
             .padding()
         }
         .padding()
-        
+        // MARK: - 畫面出現時記錄事件
+        .onAppear {
+            AnalyticsManager.shared.trackEvent("UploadPhotoView_Appeared", parameters: nil)
+        }
         // MARK: - 選擇相簿
         .sheet(isPresented: $showImagePicker) {
             ImagePicker(sourceType: .photoLibrary, selectedImage: $selectedImage)
@@ -96,12 +100,9 @@ struct UploadPhotoView: View {
                     // ✅ 使用者關閉相簿後，若有選擇到照片就存到 selectedImages
                     if let newlyPickedImage = selectedImage {
                         selectedImages[selectedIndex] = newlyPickedImage
-                        
-                        print("hello")
-                        
+                        AnalyticsManager.shared.trackEvent("UploadPhoto_ImageSelected", parameters: ["source": "photoLibrary", "index": selectedIndex])
+
                         PhotoUtility.addImageToPhotos(newlyPickedImage, to: userSettings)
-                        
-                        print("hello1")
                         
                         print("✅ 用戶選了照片，並已存本地檔案名: \(newlyPickedImage)")
                         // 若想要此時就同步上傳，也可在這裡呼叫 uploadPhoto(…)
@@ -115,9 +116,9 @@ struct UploadPhotoView: View {
                 .onDisappear {
                     if let newlyTaken = selectedImage {
                         selectedImages[selectedIndex] = newlyTaken
-                        
+                        AnalyticsManager.shared.trackEvent("UploadPhoto_ImageSelected", parameters: ["source": "camera", "index": selectedIndex])
+
                         PhotoUtility.addImageToPhotos(newlyTaken, to: userSettings)
-                        
                         print("✅ 用戶拍照成功, 存本地檔案名: \(newlyTaken)")
                     }
                 }
@@ -128,8 +129,14 @@ struct UploadPhotoView: View {
             ActionSheet(
                 title: Text("選擇照片來源"),
                 buttons: [
-                    .default(Text("拍照")) { showCameraPicker = true },
-                    .default(Text("從相簿選擇")) { showImagePicker = true },
+                    .default(Text("拍照")) {
+                        AnalyticsManager.shared.trackEvent("UploadPhoto_CameraOptionSelected", parameters: ["index": selectedIndex])
+                        showCameraPicker = true
+                    },
+                    .default(Text("從相簿選擇")) {
+                        AnalyticsManager.shared.trackEvent("UploadPhoto_PhotoLibraryOptionSelected", parameters: ["index": selectedIndex])
+                        showImagePicker = true
+                    },
                     .cancel()
                 ]
             )
@@ -144,6 +151,7 @@ struct UploadPhotoView: View {
             if index < userSettings.photos.count {
                 let photoName = userSettings.photos[index]
                 removePhoto(photoName: photoName)
+                AnalyticsManager.shared.trackEvent("UploadPhoto_RemoveTapped", parameters: ["index": index, "photoName": photoName])
             }
             // 移除當前 selectedImages
             selectedImages[index] = nil
@@ -182,6 +190,7 @@ struct UploadPhotoView: View {
         
         // ✅ 這裡新增把使用者資訊存到 Firestore 的動作
         saveUserDataToFirestore()
+        AnalyticsManager.shared.trackEvent("UploadPhoto_VerificationComplete", parameters: ["uploadedCount": selectedImages.compactMap { $0 }.count])
     }
     
     // MARK: - 寫入使用者資料到 Firestore

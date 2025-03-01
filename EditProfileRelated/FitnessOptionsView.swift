@@ -22,6 +22,10 @@ struct FitnessOptionsView: View {
             ForEach(["經常健身", "有時候", "幾乎從不"], id: \.self) { option in
                 Button(action: {
                     selectedFitnessOption = option
+                    // 埋點：使用者選擇健身偏好
+                    AnalyticsManager.shared.trackEvent("fitness_option_selected", parameters: [
+                        "option": option
+                    ])
                 }) {
                     Text(option)
                         .frame(maxWidth: .infinity)
@@ -39,6 +43,8 @@ struct FitnessOptionsView: View {
             HStack {
                 Button(action: {
                     selectedFitnessOption = nil // Clear the selection
+                    // 埋點：使用者清空健身偏好
+                    AnalyticsManager.shared.trackEvent("fitness_option_cleared")
                 }) {
                     Text("清空")
                         .foregroundColor(.primary)
@@ -48,8 +54,10 @@ struct FitnessOptionsView: View {
                 }
                 Spacer()
                 Button(action: {
-                    // Confirm and dismiss the view
-                    // You might want to add dismissal logic here
+                    // 埋點：使用者確認健身偏好，並傳入最終選擇（若無則傳 "none"）
+                    AnalyticsManager.shared.trackEvent("fitness_option_confirmed", parameters: [
+                        "option": selectedFitnessOption ?? "none"
+                    ])
                     presentationMode.wrappedValue.dismiss() // Dismiss the view
                 }) {
                     Text("確定")
@@ -63,5 +71,9 @@ struct FitnessOptionsView: View {
             .padding(.bottom)
         }
         .padding()
+        .onAppear {
+            // 埋點：頁面曝光
+            AnalyticsManager.shared.trackEvent("fitness_options_view_appear")
+        }
     }
 }

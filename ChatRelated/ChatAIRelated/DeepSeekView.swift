@@ -90,17 +90,26 @@ struct DeepSeekView: View {
         // 添加用戶輸入的問題作為最後一條記錄
         let finalMessages = jsonMessages + [["role": "user", "content": userInput]]
 
-        // 準備 API 請求
-        let url = URL(string: "https://api.openai.com/v1/chat/completions")!
+        // 2) 準備 DeepSeek API 的請求
+        //    請確認已向 DeepSeek 申請 API Key
+        let url = URL(string: "https://api.deepseek.com/chat/completions")!
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
-//        request.setValue("Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         
-        // 設置請求 body，將聊天記錄和新問題一起發送
+        // 這裡替換成你的 DeepSeek API Key
+        // e.g. "Bearer sk-deepseek-xxxxxx"
+        let deepSeekApiKey = "sk-deepseek-XXXXX"
+        request.setValue("Bearer \(deepSeekApiKey)", forHTTPHeaderField: "Authorization")
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+
+        // 3) 組合 JSON Body
+        //    DeepSeek API 格式與 OpenAI 相似，可指定 "model": "deepseek-chat" 或 "deepseek-reasoner"
         let body: [String: Any] = [
-            "model": "gpt-4", // 使用 gpt-4 模型
-            "messages": finalMessages
+            "model": "deepseek-chat",    // 或 "deepseek-reasoner"
+            "messages": finalMessages,
+            "stream": false              // 若要串流，可改成 true
+            // 可以自行加入 temperature, top_p, max_tokens 等參數
+            // e.g. "temperature": 0.7
         ]
 
         request.httpBody = try? JSONSerialization.data(withJSONObject: body)
@@ -164,6 +173,6 @@ struct DeepSeekView_Previews: PreviewProvider {
                 time: "10:05 AM",
                 isCompliment: false
             )
-                                         ]), showDeepSeekView: .constant(true))
+        ]), showDeepSeekView: .constant(true))
     }
 }

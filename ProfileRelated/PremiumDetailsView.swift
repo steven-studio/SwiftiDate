@@ -93,6 +93,11 @@ struct PremiumDetailsView: View {
         .padding()
         .background(selectedTab == .premium ? Color.yellow.opacity(0.1) : Color.black)
         .edgesIgnoringSafeArea(.all)
+        .onAppear {
+            AnalyticsManager.shared.trackEvent("premium_details_view_appear", parameters: [
+                "selected_tab": selectedTab.id
+            ])
+        }
     }
     
     // Top Bar with Close Button
@@ -100,6 +105,7 @@ struct PremiumDetailsView: View {
         // Close button at the top left
         HStack {
             Button(action: {
+                AnalyticsManager.shared.trackEvent("premium_details_close_pressed")
                 presentationMode.wrappedValue.dismiss() // Dismiss the view when tapped
             }) {
                 Image(systemName: "xmark")
@@ -122,6 +128,7 @@ struct PremiumDetailsView: View {
                 unselectedColor: .platinum,
                 action: {
                     selectedTab = .premium
+                    AnalyticsManager.shared.trackEvent("premium_details_tab_changed", parameters: ["tab": "premium"])
                 }
             )
             
@@ -139,6 +146,7 @@ struct PremiumDetailsView: View {
                 unselectedColor: .black,
                 action: {
                     selectedTab = .supreme
+                    AnalyticsManager.shared.trackEvent("premium_details_tab_changed", parameters: ["tab": "supreme"])
                 }
             )
         }
@@ -147,8 +155,9 @@ struct PremiumDetailsView: View {
     // Continue button view
     private var continueButton: some View {
         Button(action: {
-            // Handle continue action here
+            AnalyticsManager.shared.trackEvent("premium_details_continue_pressed", parameters: ["selected_tab": selectedTab.id])
             print("繼續 button tapped")
+            // 在這裡處理繼續按鈕的動作
         }) {
             Text("繼續")
                 .font(.headline)

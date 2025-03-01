@@ -38,6 +38,9 @@ struct SafetyCenterView: View {
             MeetingGuideView(showMeetingGuideView: $showMeetingGuideView) // New view for "相約見面"
         } else {
             mainContentView
+                .onAppear {
+                    AnalyticsManager.shared.trackEvent("safety_center_view_appear")
+                }
         }
     }
     
@@ -61,7 +64,7 @@ struct SafetyCenterView: View {
                     // 左上角的返回按鈕
                     HStack {
                         Button(action: {
-                            // 當按下返回按鈕時關閉 SafetyCenterView
+                            AnalyticsManager.shared.trackEvent("safety_center_back_pressed")
                             showSafetyCenterView = false
                         }) {
                             Image(systemName: "chevron.left")
@@ -117,6 +120,7 @@ struct SafetyCenterView: View {
                     backgroundColor: Color(red: 240/255, green: 250/255, blue: 255/255),
                     iconColor: .blue
                 ) {
+                    AnalyticsManager.shared.trackEvent("safety_test_option_tapped")
                     showSafetyTestView = true
                 }
                 .padding(.bottom, 10)
@@ -128,6 +132,7 @@ struct SafetyCenterView: View {
                     backgroundColor: Color(red: 255/255, green: 240/255, blue: 240/255),
                     iconColor: .pink,
                     action: {
+                        AnalyticsManager.shared.trackEvent("safety_tips_option_tapped")
                         showSafetyTipsView = true // 點擊後顯示安全提示視圖
                     }
                 )
@@ -173,6 +178,7 @@ struct SafetyCenterView: View {
                     backgroundColor: Color(red: 240/255, green: 250/255, blue: 255/255),
                     iconColor: .blue,
                     action: {
+                        AnalyticsManager.shared.trackEvent("real_name_verification_option_tapped")
                         showRealNameVerificationView = true // 點擊後顯示真人認證畫面
                     }
                 )
@@ -202,6 +208,7 @@ struct SafetyCenterView: View {
                         .shadow(radius: 1)
                         .padding(.horizontal, 16)
                         .onTapGesture {
+                            AnalyticsManager.shared.trackEvent("report_conditions_tapped")
                             showReportConditionsView = true // 點擊後顯示檢舉提示頁面
                         }
 
@@ -222,6 +229,7 @@ struct SafetyCenterView: View {
                         .shadow(radius: 1)
                         .padding(.horizontal, 16)
                         .onTapGesture {
+                            AnalyticsManager.shared.trackEvent("how_to_report_tapped")
                             showHowToReportView = true // 點擊後顯示如何檢舉頁面
                         }
                                     
@@ -242,6 +250,7 @@ struct SafetyCenterView: View {
                         .shadow(radius: 1)
                         .padding(.horizontal, 16)
                         .onTapGesture {
+                            AnalyticsManager.shared.trackEvent("report_aftermath_tapped")
                             showReportAftermathView = true // 點擊後顯示如何檢舉頁面
                         }
                     }
@@ -259,6 +268,7 @@ struct SafetyCenterView: View {
                     backgroundColor: Color(red: 255/255, green: 240/255, blue: 240/255),
                     iconColor: .cyan,
                     action: {
+                        AnalyticsManager.shared.trackEvent("meeting_guide_tapped")
                         showMeetingGuideView = true // Navigate to "相約見面" view
                     }
                 )

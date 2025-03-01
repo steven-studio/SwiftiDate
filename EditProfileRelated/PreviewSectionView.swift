@@ -85,6 +85,9 @@ struct PreviewSectionView: View {
                             // Decrease index if not at the first photo
                             if currentPhotoIndex > 0 {
                                 currentPhotoIndex -= 1
+                                AnalyticsManager.shared.trackEvent("preview_section_photo_previous", parameters: [
+                                    "new_index": currentPhotoIndex
+                                ])
                             }
                         }
                     
@@ -97,10 +100,18 @@ struct PreviewSectionView: View {
                             // Increase index if not at the last photo
                             if currentPhotoIndex < photos.count - 1 {
                                 currentPhotoIndex += 1
+                                AnalyticsManager.shared.trackEvent("preview_section_photo_next", parameters: [
+                                    "new_index": currentPhotoIndex
+                                ])
                             }
                         }
                 }
             }
+        }
+        .onAppear {
+            AnalyticsManager.shared.trackEvent("preview_section_view_appear", parameters: [
+                "photo_count": photos.count
+            ])
         }
     }
 }

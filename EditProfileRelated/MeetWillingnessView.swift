@@ -17,7 +17,8 @@ struct MeetWillingnessView: View {
             // 頂部顯示圖標和清空按鈕
             HStack {
                 Button(action: {
-                    // Dismiss the view when back button is tapped
+                    // 埋點：使用者點擊返回按鈕
+                    AnalyticsManager.shared.trackEvent("meet_willingness_view_dismissed")
                     isPresented = false
                 }) {
                     Image(systemName: "xmark")
@@ -26,7 +27,9 @@ struct MeetWillingnessView: View {
                 }
                 Spacer()
                 Button(action: {
-                    // 點擊清空按鈕的動作
+                    // 埋點：使用者點擊清空按鈕（如果你要實作清空操作）
+                    AnalyticsManager.shared.trackEvent("meet_willingness_cleared")
+                    selectedOption = nil
                 }) {
                     Text("清空")
                         .foregroundColor(.green)
@@ -61,13 +64,20 @@ struct MeetWillingnessView: View {
             Spacer()
         }
         .padding()
+        .onAppear {
+            // 埋點：頁面曝光
+            AnalyticsManager.shared.trackEvent("meet_willingness_view_appear")
+        }
     }
 
     // 自定義按鈕組件
     func meetOptionButton(icon: String, text: String) -> some View {
         Button(action: {
-            // 點擊按鈕後的操作：設置選中的按鈕
             selectedOption = text
+            // 埋點：記錄使用者選擇了哪個見面意願
+            AnalyticsManager.shared.trackEvent("meet_option_selected", parameters: [
+                "option": text
+            ])
         }) {
             HStack {
                 Text(icon)

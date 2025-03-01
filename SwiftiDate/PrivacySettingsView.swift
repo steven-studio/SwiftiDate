@@ -33,6 +33,9 @@ struct PrivacySettingsView: View {
             // 向我展示（性別選擇）
             if showGenderSelection {
                 GenderSelectionView(selectedGender: $selectedGender, showGenderSelection: $showGenderSelection)
+                    .onAppear {
+                        AnalyticsManager.shared.trackEvent("privacy_gender_selection_view_appear")
+                    }
             } else {
                 VStack {
 //                    // 標題
@@ -140,6 +143,7 @@ struct PrivacySettingsView: View {
                     }
                     .padding()
                     .onTapGesture {
+                        AnalyticsManager.shared.trackEvent("privacy_settings_gender_selection_tapped")
                         showGenderSelection = true
                     }
 
@@ -195,6 +199,9 @@ struct PrivacySettingsView: View {
                 .navigationBarItems(
                     leading: backButton
                 )
+                .onAppear {
+                    AnalyticsManager.shared.trackEvent("privacy_settings_view_appear")
+                }
             }
         }
     }
@@ -207,7 +214,10 @@ struct PrivacySettingsView: View {
     
     // "返回" 按鈕的行為
     private var backButton: some View {
-        Button(action: buttonAction) {
+        Button(action: {
+            AnalyticsManager.shared.trackEvent("privacy_settings_back_tapped")
+            buttonAction()
+        }) {
             HStack {
                 Image(systemName: "chevron.left")
                     .foregroundColor(.gray)

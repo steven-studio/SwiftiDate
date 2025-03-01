@@ -16,6 +16,7 @@ struct PrivacyPolicyView: View {
             // Custom Navigation Bar
             HStack {
                 Button(action: {
+                    AnalyticsManager.shared.trackEvent("PrivacyPolicyView_BackTapped", parameters: nil)
                     isPrivacyPolicyView = false // Dismiss PrivacyPolicyView
                 }) {
                     Image(systemName: "chevron.left")
@@ -347,6 +348,9 @@ struct PrivacyPolicyView: View {
                 }
                 .padding()
             }
+        }
+        .onAppear {
+            AnalyticsManager.shared.trackEvent("PrivacyPolicyView_Appeared", parameters: nil)
         }
     }
 }

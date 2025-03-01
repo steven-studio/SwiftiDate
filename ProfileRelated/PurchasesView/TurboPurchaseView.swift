@@ -25,6 +25,7 @@ struct TurboPurchaseView: View {
                 
                 // Add the "X" button on top of the image
                 Button(action: {
+                    AnalyticsManager.shared.trackEvent("turbo_purchase_view_dismissed")
                     presentationMode.wrappedValue.dismiss() // Dismiss the view
                 }) {
                     Image(systemName: "xmark")
@@ -51,18 +52,24 @@ struct TurboPurchaseView: View {
             HStack(spacing: 10) {
                 TurboOptionView(title: "10 Turbo", price: "NT$99 /次", discount: "省 34%", isSelected: selectedOption == "10 Turbo") {
                     selectedOption = "10 Turbo"
+                    AnalyticsManager.shared.trackEvent("turbo_option_selected", parameters: ["option": "10 Turbo"])
                 }
                 TurboOptionView(title: "5 Turbo", price: "NT$138 /次", discount: "省 8%", isSelected: selectedOption == "5 Turbo") {
                     selectedOption = "5 Turbo"
+                    AnalyticsManager.shared.trackEvent("turbo_option_selected", parameters: ["option": "5 Turbo"])
                 }
                 TurboOptionView(title: "1 Turbo", price: "NT$150 /次", discount: "", isSelected: selectedOption == "1 Turbo") {
                     selectedOption = "1 Turbo"
+                    AnalyticsManager.shared.trackEvent("turbo_option_selected", parameters: ["option": "1 Turbo"])
                 }
             }
             .padding(.horizontal)
             
             // Purchase button
             Button(action: {
+                AnalyticsManager.shared.trackEvent("turbo_purchase_button_tapped", parameters: [
+                    "selected_option": selectedOption
+                ])
                 print("立即獲取 \(selectedOption)")
                 // Handle the purchase logic here
             }) {
@@ -84,6 +91,9 @@ struct TurboPurchaseView: View {
         }
         .navigationTitle("Turbo")
         .navigationBarTitleDisplayMode(.inline)
+        .onAppear {
+            AnalyticsManager.shared.trackEvent("turbo_purchase_view_appear")
+        }
     }
 }
 

@@ -50,6 +50,10 @@ struct ClaudeAIView: View {
                 }
 
                 Button(action: {
+                    // 埋點：點擊發送按鈕
+                    AnalyticsManager.shared.trackEvent("claude_send_message_button_tapped", parameters: [
+                        "message_length": userInput.count
+                    ])
                     sendMessageToChatGPT()  // 發送用戶輸入給 ChatGPT
                 }) {
                     Text("發送")
@@ -62,6 +66,10 @@ struct ClaudeAIView: View {
                 .padding()
             }
             .padding()
+            .onAppear {
+                // 埋點：頁面曝光
+                AnalyticsManager.shared.trackEvent("claude_view_appear")
+            }
         }
         .ignoresSafeArea(.keyboard) // 忽略键盘的安全区域
     }
@@ -71,6 +79,11 @@ struct ClaudeAIView: View {
         guard !userInput.isEmpty else { return }
 
         isLoading = true
+        
+        // 埋點：開始發送訊息
+        AnalyticsManager.shared.trackEvent("claude_send_message", parameters: [
+            "message_length": userInput.count
+        ])
         
         // 確保 messages 裡面的內容可以被正確轉換成 JSON
         let jsonMessages: [[String: String]] = messages.compactMap { message in
@@ -111,29 +124,48 @@ struct ClaudeAIView: View {
                 self.isLoading = false
             }
             
-            // 確保沒有錯誤且數據正確
-            guard let data = data, error == nil else {
-                print("API請求失敗：\(error?.localizedDescription ?? "未知錯誤")")
+            if let error = error {
+                print("API請求失敗：\(error.localizedDescription)")
+                // 埋點：API 請求錯誤
+                AnalyticsManager.shared.trackEvent("claude_api_error", parameters: [
+                    "error": error.localizedDescription
+                ])
                 return
             }
             
+            guard let data = data else {
+                print("未收到數據")
+                AnalyticsManager.shared.trackEvent("claude_api_error", parameters: [
+                    "error": "No data received"
+                ])
+                return
+            }
+
             // 解碼 API 回應
-            if let response = try? JSONDecoder().decode(Response.self, from: data) {
+            do {
+                let response = try? JSONDecoder().decode(Response.self, from: data)
                 DispatchQueue.main.async {
-                    if let chatResponseText = response.choices.first?.message.content {
-                        // 顯示 GPT 回應
+                    if let chatResponseText = response?.choices.first?.message.content {
                         claudeAIResponse = chatResponseText
+                        // 埋點：成功收到回應
+                        AnalyticsManager.shared.trackEvent("claude_response_received", parameters: [
+                            "response_length": chatResponseText.count
+                        ])
                     } else {
-                        // 如果沒有回應，顯示 "對方未回應"
                         claudeAIResponse = "對方未回應"
+                        AnalyticsManager.shared.trackEvent("claude_response_empty")
                     }
                     userInput = ""  // 清空用戶輸入
                 }
-            } else {
-                print("無法解析回應數據")
+            } catch {
+                print("解析回應失敗: \(error.localizedDescription)")
                 DispatchQueue.main.async {
                     claudeAIResponse = "對方未回應"
                 }
+                // 埋點：回應解析錯誤
+                AnalyticsManager.shared.trackEvent("claude_parse_error", parameters: [
+                    "error": error.localizedDescription
+                ])
             }
         }.resume()
     }
@@ -164,6 +196,6 @@ struct ClaudeAIView_Previews: PreviewProvider {
                 time: "10:05 AM",
                 isCompliment: false
             )
-                                         ]), showClaudeAIView: .constant(true))
+        ]), showClaudeAIView: .constant(true))
     }
 }

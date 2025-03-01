@@ -60,6 +60,9 @@ struct SafetyQuizView: View {
         if navigateToResults {
             // Pass the binding to the ResultsView
             ResultsView(score: score, totalQuestions: questions.count, showSafetyTestView: $showSafetyTestView)
+                .onAppear {
+                    AnalyticsManager.shared.trackEvent("SafetyQuiz_ResultsViewed", parameters: ["score": score, "total": questions.count])
+                }
         } else {
             VStack {
                 // Current question text and progress bar
@@ -81,6 +84,9 @@ struct SafetyQuizView: View {
                     ExplanationView(explanation: questions[currentQuestionIndex].explanation)
                         .transition(.move(edge: .bottom))
                         .animation(.easeInOut(duration: 0.5))
+                        .onAppear {
+                            AnalyticsManager.shared.trackEvent("SafetyQuiz_ExplanationShown", parameters: ["questionIndex": currentQuestionIndex])
+                        }
                 } else {
                     if showMessage {
                         MessageView(isCorrect: selectedOption == questions[currentQuestionIndex].correctAnswer)
@@ -92,8 +98,12 @@ struct SafetyQuizView: View {
                             selectedOption = option
                             showMessage = true
                             
+                            let isCorrect = selectedOption == questions[currentQuestionIndex].correctAnswer
+                            // 記錄選擇答案事件
+                            AnalyticsManager.shared.trackEvent("SafetyQuiz_OptionSelected", parameters: ["questionIndex": currentQuestionIndex, "option": option, "isCorrect": isCorrect])
+                            
                             // Check if the selected option is correct and increment the score
-                            if selectedOption == questions[currentQuestionIndex].correctAnswer {
+                            if isCorrect {
                                 score += 1 // Increment score
                                 print("Debug: Correct answer selected. Current score: \(score)")
                             } else {
@@ -112,8 +122,10 @@ struct SafetyQuizView: View {
                 // "Next" button or "View Results" button for the last question
                 Button(action: {
                     if currentQuestionIndex == questions.count - 1 {
+                        AnalyticsManager.shared.trackEvent("SafetyQuiz_NextQuestion", parameters: ["questionIndex": currentQuestionIndex, "action": "viewResults"])
                         navigateToResults = true // Trigger navigation to results
                     } else {
+                        AnalyticsManager.shared.trackEvent("SafetyQuiz_NextQuestion", parameters: ["questionIndex": currentQuestionIndex, "action": "next"])
                         moveToNextQuestionOrShowResults()
                     }
                 }) {
@@ -130,6 +142,9 @@ struct SafetyQuizView: View {
             }
             .padding()
             .background(Color.white.ignoresSafeArea())
+            .onAppear {
+                AnalyticsManager.shared.trackEvent("SafetyQuizView_Appeared", parameters: nil)
+            }
         }
     }
     

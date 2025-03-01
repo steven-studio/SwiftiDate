@@ -64,6 +64,9 @@ struct LoginView: View {
                 VStack(spacing: 20) {
                     Button(action: {
                         // 行動電話登入按鈕的動作
+                        AnalyticsManager.shared.trackEvent("click_login_phone", parameters: [
+                            "screen": "LoginView"
+                        ])
                     }) {
                         HStack {
                             Image(systemName: "phone.fill")
@@ -81,12 +84,19 @@ struct LoginView: View {
                     SignInWithAppleButton(
                         onRequest: { request in
                             request.requestedScopes = [.fullName, .email]
+                            AnalyticsManager.shared.trackEvent("apple_id_login_requested")
                         },
                         onCompletion: { result in
                             switch result {
                             case .success(let authResults):
+                                // 記錄成功事件
+                                AnalyticsManager.shared.trackEvent("apple_id_login_success")
                                 handleAuthorizationResult(authResults)
                             case .failure(let error):
+                                // 記錄失敗事件，並帶上錯誤資訊
+                                AnalyticsManager.shared.trackEvent("apple_id_login_failed", parameters: [
+                                    "error": error.localizedDescription
+                                ])
                                 print("Authorization failed: \(error.localizedDescription)")
                             }
                         }
@@ -149,11 +159,10 @@ struct LoginView: View {
                         // 確定以此帳號登入
                         print("繼續使用帳號 \(userSettings.globalUserName)")
                         print("Debug - globalPhoneNumber: \(userSettings.globalPhoneNumber)") // Debug globalPhoneNumber
-                        
+                        AnalyticsManager.shared.trackEvent("existing_user_continue", parameters: [
+                            "username": userSettings.globalUserName
+                        ])
                         appState.isLoggedIn = true // 更新登入狀態
-//                        userSettings.objectWillChange.send() // Notify SwiftUI of changes in userSettings
-
-//                        showExistingUserPopup.wrappedValue = false
                     }) {
                         Text("以此帳號登錄")
                             .foregroundColor(.white)
@@ -173,6 +182,7 @@ struct LoginView: View {
                         // 更換帳號並清除所有已存資料
 //                        LocalStorageManager.shared.clearAll()
                         print("換個帳號")
+                        AnalyticsManager.shared.trackEvent("existing_user_switch_account")
                         showExistingUserPopup.wrappedValue = false
                     }) {
                         Text("不是你？換個帳號")

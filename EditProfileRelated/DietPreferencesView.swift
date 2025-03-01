@@ -22,6 +22,10 @@ struct DietPreferencesView: View {
             ForEach(["從不挑食", "純素主義", "素食", "潔食", "清真", "其他飲食偏好"], id: \.self) { option in
                 Button(action: {
                     selectedDietPreference = option
+                    // 埋點：使用者選擇某個飲食偏好
+                    AnalyticsManager.shared.trackEvent("diet_preference_selected", parameters: [
+                        "option": option
+                    ])
                 }) {
                     Text(option)
                         .frame(maxWidth: .infinity)
@@ -39,6 +43,8 @@ struct DietPreferencesView: View {
             HStack {
                 Button(action: {
                     selectedDietPreference = nil // Clear the selection
+                    // 埋點：清空操作
+                    AnalyticsManager.shared.trackEvent("diet_preference_cleared")
                 }) {
                     Text("清空")
                         .foregroundColor(.primary)
@@ -48,6 +54,10 @@ struct DietPreferencesView: View {
                 }
                 Spacer()
                 Button(action: {
+                    // 埋點：確認操作，並傳入最終選擇的偏好（若無則用 "none"）
+                    AnalyticsManager.shared.trackEvent("diet_preference_confirmed", parameters: [
+                        "selected": selectedDietPreference ?? "none"
+                    ])
                     presentationMode.wrappedValue.dismiss() // Confirm and dismiss the view
                 }) {
                     Text("確定")
@@ -61,5 +71,9 @@ struct DietPreferencesView: View {
             .padding(.bottom)
         }
         .padding()
+        .onAppear {
+            // 埋點：頁面曝光
+            AnalyticsManager.shared.trackEvent("diet_preferences_view_appear")
+        }
     }
 }

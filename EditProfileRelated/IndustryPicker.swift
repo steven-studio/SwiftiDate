@@ -23,6 +23,10 @@ struct IndustryPicker: View {
                     ForEach(industries, id: \.self) { industry in
                         Button(action: {
                             selectedIndustry = industry
+                            // 埋點：使用者選擇了某個行業
+                            AnalyticsManager.shared.trackEvent("industry_selected", parameters: [
+                                "industry": industry
+                            ])
                         }) {
                             Text(industry)
                                 .foregroundColor(selectedIndustry == industry ? .white : .primary)
@@ -40,6 +44,8 @@ struct IndustryPicker: View {
             HStack {
                 Button(action: {
                     selectedIndustry = nil // 清空选择
+                    // 埋點：清空行業選擇
+                    AnalyticsManager.shared.trackEvent("industry_cleared")
                 }) {
                     Text("清空")
                         .foregroundColor(.primary)
@@ -54,5 +60,9 @@ struct IndustryPicker: View {
             .padding(.bottom)
         }
         .padding()
+        .onAppear {
+            // 埋點：頁面曝光
+            AnalyticsManager.shared.trackEvent("industry_picker_view_appear")
+        }
     }
 }

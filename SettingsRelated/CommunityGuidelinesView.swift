@@ -16,6 +16,7 @@ struct CommunityGuidelinesView: View {
             // Custom Navigation Bar
             HStack {
                 Button(action: {
+                    AnalyticsManager.shared.trackEvent("CommunityGuidelines_BackTapped", parameters: nil)
                     isCommunityGuidelinesView = false // Dismiss CommunityGuidelinesView
                 }) {
                     Image(systemName: "chevron.left")
@@ -147,6 +148,9 @@ struct CommunityGuidelinesView: View {
                 }
                 .padding()
             }
+        }
+        .onAppear {
+            AnalyticsManager.shared.trackEvent("CommunityGuidelinesView_Appeared", parameters: nil)
         }
     }
 }

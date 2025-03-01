@@ -20,7 +20,16 @@ struct AboutMeSection: View {
             
             TextEditor(text: $aboutMe)
                 .frame(height: 100)
-                .overlay(RoundedRectangle(cornerRadius: 8).stroke(Color.gray.opacity(0.5), lineWidth: 1))
+                .onChange(of: aboutMe) { newValue in
+                    // 一旦文字有變動就上報行為分析
+                    AnalyticsManager.shared.trackEvent("aboutme_changed", parameters: [
+                        "length": newValue.count
+                    ])
+                }
+                .overlay(
+                    RoundedRectangle(cornerRadius: 8)
+                        .stroke(Color.gray.opacity(0.5), lineWidth: 1)
+                )
         }
         .padding()
     }

@@ -140,11 +140,20 @@ struct SubscriptionScrollView: View {
                         subscriptionType: subscriptionType,
                         action: {
                             selectedIndex = index // Update the selected index when tapped
+                            AnalyticsManager.shared.trackEvent("subscription_option_selected", parameters: [
+                                "subscription_type": subscriptionType == .premium ? "premium" : "supreme",
+                                "option_index": index
+                            ])
                         }
                     )
                 }
             }
             .padding(.horizontal)
+        }
+        .onAppear {
+            AnalyticsManager.shared.trackEvent("subscription_scroll_view_appear", parameters: [
+                "subscription_type": subscriptionType == .premium ? "premium" : "supreme"
+            ])
         }
     }
 }

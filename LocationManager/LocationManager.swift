@@ -15,6 +15,7 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     // 使用 @Published 發布用戶位置和授權狀態
     @Published var userLocation: CLLocationCoordinate2D?
     @Published var authorizationStatus: CLAuthorizationStatus = .notDetermined
+    @Published var hasLoggedLocationEvent = false // 控制只發一次事件
 
     override init() {
         super.init()
@@ -44,13 +45,22 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         guard let location = locations.last else { return }
         userLocation = location.coordinate
         
-        // Print the latitude and longitude
-//        print("User's location: \(location.coordinate.latitude), \(location.coordinate.longitude)")
+        if !hasLoggedLocationEvent {
+            hasLoggedLocationEvent = true
+            AnalyticsManager.shared.trackEvent("location_update_first_time", parameters: [
+                "latitude": location.coordinate.latitude,
+                "longitude": location.coordinate.longitude
+            ])
+        }
     }
     
     // CLLocationManagerDelegate 方法，當授權狀態改變時被呼叫
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         authorizationStatus = status
+        AnalyticsManager.shared.trackEvent("location_auth_changed", parameters: [
+            "new_status": "\(status)"
+        ])
+        
         if status == .authorizedWhenInUse || status == .authorizedAlways {
             startUpdatingLocation()
         } else {
@@ -60,5 +70,8 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print("Failed to get user location: \(error)")
+        AnalyticsManager.shared.trackEvent("location_failed", parameters: [
+            "error": error.localizedDescription
+        ])
     }
 }

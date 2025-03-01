@@ -193,11 +193,15 @@ struct ChatView: View {
                     }, set: { newValue in
                         chatMessages[chat.id] = newValue
                     }), onBack: {
+                        // 埋點：返回聊天列表
+                        AnalyticsManager.shared.trackEvent("chat_detail_back")
                         selectedChat = nil // Reset to show ChatView again
                     })
                 } else if showInteractiveContent {
                     // 找出 chat 名字 == "SwiftiDate"
                     InteractiveContentView(onBack: {
+                        // 埋點：關閉互動內容
+                        AnalyticsManager.shared.trackEvent("interactive_content_closed")
                         showInteractiveContent = false
                     }, messages: $interactiveMessage)
                 } else {
@@ -241,6 +245,8 @@ struct ChatView: View {
                                             .foregroundColor(.purple)
                                     }
                                     .onTapGesture {
+                                        // 埋點：點擊「更多配對」
+                                        AnalyticsManager.shared.trackEvent("more_matches_tapped")
                                         showTurboPurchaseView = true // Navigate to TurboPurchaseView
                                     }
                                     
@@ -276,6 +282,8 @@ struct ChatView: View {
                             
                             // Add the 'WhoLikedYouView' at the top
                             Button(action: {
+                                // 埋點：點擊 WhoLikedYouView
+                                AnalyticsManager.shared.trackEvent("who_liked_you_tapped")
                                 showTurboView = true // Navigate to TurboView
                             }) {
                                 WhoLikedYouView()
@@ -286,7 +294,14 @@ struct ChatView: View {
                             ForEach(chatData) { chat in
                                 if let messages = chatMessages[chat.id] {
                                     Button(action: {
+                                        // 埋點：點擊聊天列表中的某個聊天
+                                        AnalyticsManager.shared.trackEvent("chat_row_tapped", parameters: [
+                                            "chat_id": chat.id.uuidString,
+                                            "chat_name": chat.name
+                                        ])
                                         if chat.name == "SwiftiDate" { // Adjust to your actual name for SwiftiDate
+                                            // 埋點：選擇打開互動內容
+                                            AnalyticsManager.shared.trackEvent("interactive_content_opened")
                                             showInteractiveContent = true // Navigate to InteractiveContentView
                                             selectedChat = nil
                                         } else {
@@ -298,7 +313,10 @@ struct ChatView: View {
                                             .swipeActions(edge: .trailing, allowsFullSwipe: false) {
                                                 // "解除配對" button
                                                 Button {
-                                                    // Handle unmatch action
+                                                    // 埋點：點擊解除配對
+                                                    AnalyticsManager.shared.trackEvent("chat_unmatch_tapped", parameters: [
+                                                        "chat_id": chat.id.uuidString
+                                                    ])
                                                     print("解除配對 tapped")
                                                 } label: {
                                                     Text("解除配對")
@@ -307,7 +325,10 @@ struct ChatView: View {
 
                                                 // "修改備註名稱" button
                                                 Button {
-                                                    // Handle rename action
+                                                    // 埋點：點擊修改備註名稱
+                                                    AnalyticsManager.shared.trackEvent("chat_rename_tapped", parameters: [
+                                                        "chat_id": chat.id.uuidString
+                                                    ])
                                                     print("修改備註名稱 tapped")
                                                 } label: {
                                                     Text("修改備註名稱")
@@ -326,9 +347,14 @@ struct ChatView: View {
             }
             .navigationTitle("聊天") // Ensure this is applied to the VStack
             .onAppear {
+                // 埋點：ChatView 畫面曝光
+                AnalyticsManager.shared.trackEvent("chat_view_appear")
+                
                 if chatDataString.isEmpty || chatMessagesString.isEmpty {
                     // 如果本地的 chatDataString 或 chatMessagesString 為空，就從 Firebase 加載
                     print("Loading data from Firebase as local storage is empty")
+                    // 埋點：從 Firebase 加載聊天資料
+                    AnalyticsManager.shared.trackEvent("chat_data_load_from_firebase")
                     readDataFromFirebase()
                 } else {
                     // 如果本地有儲存的數據，從本地載入
@@ -336,10 +362,15 @@ struct ChatView: View {
                     loadChatDataFromAppStorage()
                     loadChatMessagesFromAppStorage()
                     print("Loaded data from local storage")
+                    // 埋點：從本地載入聊天資料
+                    AnalyticsManager.shared.trackEvent("chat_data_load_from_local")
                 }
                 
                 if let newId = userSettings.newMatchedChatID {
-                    // 假設從 newId 產生 / 查詢 Chat model
+                    // 埋點：檢測到 newMatchedChatID，進入新的聊天
+                    AnalyticsManager.shared.trackEvent("new_matched_chat_found", parameters: [
+                        "newMatchedChatID": newId
+                    ])
                     let newChat = Chat(
                         id: UUID(),
                         name: "對方暱稱",
@@ -357,10 +388,14 @@ struct ChatView: View {
                 // Pass the selectedTab to TurboView
                 TurboView(contentSelectedTab: $contentSelectedTab, turboSelectedTab: $selectedTurboTab, showBackButton: true, onBack: {
                     showTurboView = false // This dismisses the TurboView
+                    AnalyticsManager.shared.trackEvent("turbo_view_closed")
                 })
             }
             .sheet(isPresented: $showTurboPurchaseView) {
                 TurboPurchaseView() // Present TurboPurchaseView when showTurboPurchaseView is true
+                    .onAppear {
+                        AnalyticsManager.shared.trackEvent("turbo_purchase_view_appear")
+                    }
             }
         }
     }
@@ -376,6 +411,10 @@ struct ChatView: View {
             let decoder = JSONDecoder()
             if let data = userMatchesString.data(using: .utf8) {
                 userMatches = try decoder.decode([UserMatch].self, from: data)
+                // 埋點：成功從本地載入 userMatches
+                AnalyticsManager.shared.trackEvent("user_matches_loaded", parameters: [
+                    "count": userMatches.count
+                ])
             }
         } catch {
             print("Failed to decode userMatches: \(error)")
@@ -393,6 +432,9 @@ struct ChatView: View {
             let decoder = JSONDecoder()
             if let data = chatDataString.data(using: .utf8) {
                 chatData = try decoder.decode([Chat].self, from: data)
+                AnalyticsManager.shared.trackEvent("chat_data_loaded", parameters: [
+                    "chat_count": chatData.count
+                ])
             }
         } catch {
             print("Failed to decode chatData: \(error)")
@@ -420,6 +462,9 @@ struct ChatView: View {
                 // 尝试解码为 [UUID: [Message]]
                 chatMessages = try decoder.decode([UUID: [Message]].self, from: data)
                 print("Decoded chatMessages: \(chatMessages)")
+                AnalyticsManager.shared.trackEvent("chat_messages_loaded", parameters: [
+                    "chats_loaded": chatMessages.count
+                ])
             }
         } catch {
             print("Failed to decode chatMessages: \(error)")
@@ -430,6 +475,10 @@ struct ChatView: View {
     private func updateChatMessages(for chatID: UUID, messages: [Message]) {
         chatMessages[chatID] = messages
         saveChatMessagesToAppStorage() // 保存至 AppStorage
+        AnalyticsManager.shared.trackEvent("chat_messages_updated", parameters: [
+            "chat_id": chatID.uuidString,
+            "message_count": messages.count
+        ])
     }
 }
 

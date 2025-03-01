@@ -18,6 +18,10 @@ struct ProfileHeaderView: View {
             ProfileImageView(photoName: photos.first)
 
             Button(action: {
+                // 埋點：點擊編輯按鈕
+                AnalyticsManager.shared.trackEvent("edit_profile_button_pressed", parameters: [
+                    "user_name": userSettings.globalUserName
+                ])
                 isShowingEditProfileView = true // 顯示 EditProfileView
             }) {
                 Image(systemName: "pencil.circle.fill")
@@ -78,5 +82,11 @@ struct ProfileHeaderView: View {
             Spacer()
         }
         .padding()
+        .onAppear {
+            // 埋點：頁面曝光
+            AnalyticsManager.shared.trackEvent("profile_header_view_appear", parameters: [
+                "user_name": userSettings.globalUserName
+            ])
+        }
     }
 }

@@ -36,6 +36,10 @@ struct ZodiacPickerView: View {
             LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 3), spacing: 20) {
                 ForEach(zodiacSigns, id: \.0) { zodiac, imageName in
                     Button(action: {
+                        // 埋點：使用者選擇了某個星座
+                        AnalyticsManager.shared.trackEvent("zodiac_selected", parameters: [
+                            "zodiac": zodiac
+                        ])
                         selectedZodiac = zodiac
                         presentationMode.wrappedValue.dismiss() // 选择后关闭页面
                     }) {
@@ -59,6 +63,7 @@ struct ZodiacPickerView: View {
 
             HStack {
                 Button(action: {
+                    AnalyticsManager.shared.trackEvent("zodiac_cleared")
                     selectedZodiac = ""
                     presentationMode.wrappedValue.dismiss() // 清空选择后关闭页面
                 }) {
@@ -72,6 +77,7 @@ struct ZodiacPickerView: View {
                 Spacer()
 
                 Button(action: {
+                    AnalyticsManager.shared.trackEvent("zodiac_picker_confirm")
                     presentationMode.wrappedValue.dismiss() // 关闭页面
                 }) {
                     Text("確定")
@@ -85,5 +91,8 @@ struct ZodiacPickerView: View {
             .padding(.bottom)
         }
         .padding()
+        .onAppear {
+            AnalyticsManager.shared.trackEvent("zodiac_picker_view_appear")
+        }
     }
 }

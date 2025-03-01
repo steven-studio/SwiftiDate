@@ -46,6 +46,10 @@ struct PHPickerView: UIViewControllerRepresentable {
         
         let picker = PHPickerViewController(configuration: configuration)
         picker.delegate = context.coordinator
+        
+        // 當 PHPickerView 被呈現時，記錄一次事件
+        AnalyticsManager.shared.trackEvent("PHPickerView_Presented", parameters: nil)
+        
         return picker
     }
     
@@ -68,6 +72,12 @@ struct PHPickerView: UIViewControllerRepresentable {
             // 無論是否選擇照片，選擇器都會關閉
             parent.presentationMode.wrappedValue.dismiss()
             
+            // 如果使用者取消選取（results 為空），記錄取消事件
+            if results.isEmpty {
+                AnalyticsManager.shared.trackEvent("PHPickerView_Cancelled", parameters: nil)
+                return
+            }
+            
             // 如果沒有選擇照片，直接返回
             guard let provider = results.first?.itemProvider else { return }
             
@@ -78,11 +88,13 @@ struct PHPickerView: UIViewControllerRepresentable {
                     DispatchQueue.main.async {
                         if let error = error {
                             print("Error loading image: \(error.localizedDescription)")
+                            AnalyticsManager.shared.trackEvent("PHPickerView_ImageLoadError", parameters: ["error": error.localizedDescription])
                             return
                         }
                         
                         // 將載入的圖片指派給 selectedImage
                         self?.parent.selectedImage = image as? UIImage
+                        AnalyticsManager.shared.trackEvent("PHPickerView_ImageSelected", parameters: nil)
                     }
                 }
             }

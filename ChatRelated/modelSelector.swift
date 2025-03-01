@@ -150,12 +150,21 @@ struct ModelSelectorView: View {
                 Text("選擇 LLM 模型")
                     .font(.headline)
                     .padding()
+                
+                // 埋點：畫面曝光
+                .onAppear {
+                    AnalyticsManager.shared.trackEvent("model_selector_view_appear")
+                }
 
                 // 自定義 HStack 作為選擇器
                 LazyVGrid(columns: columns, spacing: 16) {
                     ForEach(availableModels, id: \.self) { model in
                         Button(action: {
                             selectedModel = model // 更新選擇的模型
+                            // 埋點：使用者點選了某模型
+                            AnalyticsManager.shared.trackEvent("model_selected", parameters: [
+                                "model": model.rawValue
+                            ])
                         }) {
                             ZStack {
                                 // 1) 若目前被選擇，顯示圓角背景／描邊；否則用透明或不顯示
@@ -200,6 +209,10 @@ struct ModelSelectorView: View {
                 
                 // 在底部新增「繼續」按鈕
                 Button(action: {
+                    // 埋點：使用者點選「繼續」按鈕
+                    AnalyticsManager.shared.trackEvent("continue_button_pressed", parameters: [
+                        "selected_model": selectedModel.rawValue
+                    ])
                     // 在這裡處理「繼續」按鈕的邏輯
                     print("使用者選擇的模型：\(selectedModel.rawValue)")
                     triggerNavigation()
@@ -228,6 +241,10 @@ struct ModelSelectorView: View {
                     self.availableModels = filtered
                     // 若沒有可用模型，也可視情況顯示預設
                     self.selectedModel = filtered.first ?? .local
+                    // 埋點：可追蹤篩選完成的模型清單（選填）
+                    AnalyticsManager.shared.trackEvent("model_filter_complete", parameters: [
+                        "available_models_count": filtered.count
+                    ])
                 }
             }
         }
@@ -251,6 +268,11 @@ struct ModelSelectorView: View {
         default:
             break
         }
+        
+        // 埋點：完成導航觸發
+        AnalyticsManager.shared.trackEvent("trigger_navigation", parameters: [
+            "selected_model": selectedModel.rawValue
+        ])
     }
 
     /// ✅ 這個函數會確保 NavigationLink 的狀態不會衝突

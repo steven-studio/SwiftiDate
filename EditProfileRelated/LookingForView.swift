@@ -31,6 +31,10 @@ struct LookingForView: View {
             ForEach(options, id: \.self) { option in
                 Button(action: {
                     selectedLookingFor = option
+                    // 埋點：用戶選擇了某個尋找選項
+                    AnalyticsManager.shared.trackEvent("lookingfor_option_selected", parameters: [
+                        "option": option
+                    ])
                     presentationMode.wrappedValue.dismiss() // 选择后关闭页面
                 }) {
                     HStack {
@@ -54,6 +58,8 @@ struct LookingForView: View {
             HStack {
                 Button(action: {
                     selectedLookingFor = nil // 清空选择
+                    // 埋點：用戶清空尋找選項
+                    AnalyticsManager.shared.trackEvent("lookingfor_cleared")
                     presentationMode.wrappedValue.dismiss() // 关闭页面
                 }) {
                     Text("清空")
@@ -64,6 +70,10 @@ struct LookingForView: View {
                 }
                 Spacer()
                 Button(action: {
+                    // 埋點：用戶確認尋找選項
+                    AnalyticsManager.shared.trackEvent("lookingfor_confirmed", parameters: [
+                        "selected": selectedLookingFor ?? "none"
+                    ])
                     presentationMode.wrappedValue.dismiss() // 确定并关闭页面
                 }) {
                     Text("確定")
@@ -77,5 +87,9 @@ struct LookingForView: View {
             .padding(.bottom)
         }
         .padding()
+        .onAppear {
+            // 埋點：頁面曝光
+            AnalyticsManager.shared.trackEvent("lookingfor_view_appear")
+        }
     }
 }

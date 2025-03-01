@@ -15,7 +15,8 @@ struct HowToReportView: View {
         VStack {
             HStack {
                 Button(action: {
-                    // 回到上一個視圖
+                    // 記錄返回事件並回到上一個視圖
+                    AnalyticsManager.shared.trackEvent("HowToReport_BackTapped", parameters: nil)
                     showHowToReportView = false
                 }) {
                     Image(systemName: "chevron.left")
@@ -55,6 +56,9 @@ struct HowToReportView: View {
             Spacer()
         }
         .background(Color.white.ignoresSafeArea())
+        .onAppear {
+            AnalyticsManager.shared.trackEvent("HowToReportView_Appeared", parameters: nil)
+        }
     }
 }
 

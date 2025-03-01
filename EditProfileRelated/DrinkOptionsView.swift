@@ -21,6 +21,10 @@ struct DrinkOptionsView: View {
             ForEach(["只在社交場合", "不喝酒", "經常", "有時候"], id: \.self) { option in
                 Button(action: {
                     selectedDrinkOption = option
+                    // 埋點：記錄使用者選擇飲酒選項
+                    AnalyticsManager.shared.trackEvent("drink_option_selected", parameters: [
+                        "option": option
+                    ])
                 }) {
                     Text(option)
                         .frame(maxWidth: .infinity)
@@ -37,6 +41,8 @@ struct DrinkOptionsView: View {
             HStack {
                 Button(action: {
                     selectedDrinkOption = nil
+                    // 埋點：記錄使用者清空飲酒選項
+                    AnalyticsManager.shared.trackEvent("drink_option_cleared")
                 }) {
                     Text("清空")
                         .foregroundColor(.primary)
@@ -46,6 +52,10 @@ struct DrinkOptionsView: View {
                 }
                 Spacer()
                 Button(action: {
+                    // 埋點：記錄使用者確認飲酒選項
+                    AnalyticsManager.shared.trackEvent("drink_option_confirmed", parameters: [
+                        "option": selectedDrinkOption ?? "none"
+                    ])
                     presentationMode.wrappedValue.dismiss()
                 }) {
                     Text("確定")
@@ -59,5 +69,9 @@ struct DrinkOptionsView: View {
             .padding(.bottom)
         }
         .padding()
+        .onAppear {
+            // 埋點：頁面曝光
+            AnalyticsManager.shared.trackEvent("drink_options_view_appear")
+        }
     }
 }

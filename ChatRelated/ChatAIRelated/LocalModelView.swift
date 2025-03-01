@@ -86,11 +86,22 @@ struct LocalModelView: View {
             }
             .padding()
             .navigationTitle("本地 AI 模型")
+            .onAppear {
+                AnalyticsManager.shared.trackEvent("LocalModelView_Appeared", parameters: nil)
+            }
         }
     }
 
     // 模擬本地推理處理
     func generateResponse() {
+        // 記錄點擊生成回應按鈕事件
+        AnalyticsManager.shared.trackEvent("LocalModelView_GenerateResponse_Tapped", parameters: [
+            "selectedModel": selectedModel ?? "未知模型",
+            "temperature": temperature,
+            "maxTokens": maxTokens,
+            "userInputLength": userInput.count
+        ])
+        
         isProcessing = true
         responseText = "處理中..."
         
@@ -100,6 +111,11 @@ struct LocalModelView: View {
             DispatchQueue.main.async {
                 responseText = generatedText
                 isProcessing = false
+                
+                // 記錄回應生成完成事件
+                AnalyticsManager.shared.trackEvent("LocalModelView_ResponseGenerated", parameters: [
+                    "generatedTextLength": generatedText.count
+                ])
             }
         }
     }
@@ -122,6 +138,6 @@ struct LocalModelView_Previews: PreviewProvider {
                 time: "10:05 AM",
                 isCompliment: false
             )
-                                           ]), showLocalModel: .constant(true))
+        ]), showLocalModel: .constant(true))
     }
 }

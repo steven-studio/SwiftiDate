@@ -180,7 +180,6 @@ struct ServiceSectionContainer: View {
                         ("24小時專屬客服", false, nil, false, 95),
                         ("已讀回執", true, nil, false, 95),
                         ("專屬會員標誌", true, nil, false, 95),
-                        ("不限次數的「緣分合盤」解讀", true, nil, false, 95)
                     ],
                     hasMultipleIcons: true,
                     isSupremeUser: false,

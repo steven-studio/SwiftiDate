@@ -15,6 +15,7 @@ struct MeetingGuideView: View {
         VStack {
             HStack {
                 Button(action: {
+                    AnalyticsManager.shared.trackEvent("MeetingGuide_BackTapped", parameters: nil)
                     showMeetingGuideView = false
                 }) {
                     Image(systemName: "chevron.left")
@@ -57,6 +58,9 @@ struct MeetingGuideView: View {
                 .padding()
 
             Spacer()
+        }
+        .onAppear {
+            AnalyticsManager.shared.trackEvent("MeetingGuideView_Appeared", parameters: nil)
         }
     }
 }

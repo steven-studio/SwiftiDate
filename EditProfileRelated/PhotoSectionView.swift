@@ -124,6 +124,8 @@ struct PhotoSectionView: View {
         PhotoUtility.saveImageToLocalStorage(image: image, withName: imageName)
         photos.append(imageName)
         userSettings.loadedPhotosString = photos.joined(separator: ",")
+        // 埋點：記錄照片新增事件，傳入照片名稱或ID
+        AnalyticsManager.shared.trackEvent("photo_added", parameters: ["photo_name": imageName])
     }
     
     // 移除照片的函數
@@ -131,6 +133,8 @@ struct PhotoSectionView: View {
         if let index = photos.firstIndex(of: photo) {
             photos.remove(at: index)
             userSettings.loadedPhotosString = photos.joined(separator: ",") // 更新已加載的照片
+            // 埋點：記錄照片移除事件
+            AnalyticsManager.shared.trackEvent("photo_removed", parameters: ["photo_name": photo])
         }
     }
 }

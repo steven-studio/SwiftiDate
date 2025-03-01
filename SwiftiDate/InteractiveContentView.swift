@@ -19,6 +19,8 @@ struct InteractiveContentView: View {
             // Custom Navigation Bar
             HStack {
                 Button(action: {
+                    // 埋點：返回按鈕被點擊
+                    AnalyticsManager.shared.trackEvent("interactive_content_back_pressed")
                     onBack() // Call the onBack closure when the button is pressed
                 }) {
                     Image(systemName: "chevron.left")
@@ -78,6 +80,8 @@ struct InteractiveContentView: View {
                     
                     // "Continue" button
                     Button(action: {
+                        // 埋點：點擊「繼續」按鈕返回聊天列表
+                        AnalyticsManager.shared.trackEvent("interactive_content_continue_pressed")
                         onBack() // Call onBack when pressing "Continue" button to go back
                     }) {
                         Text("繼續")
@@ -98,7 +102,13 @@ struct InteractiveContentView: View {
                     .background(Color.gray.opacity(0.1))
                     .cornerRadius(10)
                 
-                Button(action: sendMessage) {
+                Button(action: {
+                    // 埋點：點擊發送訊息按鈕
+                    AnalyticsManager.shared.trackEvent("interactive_message_send_button_pressed", parameters: [
+                        "message_length": newMessageText.count
+                    ])
+                    sendMessage()
+                }) {
                     Image(systemName: "paperplane.fill")
                         .resizable()
                         .frame(width: 24, height: 24)
@@ -135,10 +145,21 @@ struct InteractiveContentView: View {
         }
         .ignoresSafeArea(.keyboard, edges: .bottom) // 讓鍵盤彈出時，輸入列能跟著上移
         .navigationBarHidden(true) // Hide the default navigation bar
+        .onAppear {
+            // 埋點：頁面曝光
+            AnalyticsManager.shared.trackEvent("interactive_content_view_appear", parameters: [
+                "message_count": messages.count
+            ])
+        }
     }
     
     private func sendMessage() {
         guard !newMessageText.trimmingCharacters(in: .whitespaces).isEmpty else { return }
+        
+        // 埋點：在發送訊息之前上報事件
+        AnalyticsManager.shared.trackEvent("interactive_message_send", parameters: [
+            "message_length": newMessageText.count
+        ])
         
         let newMessage = Message(
             id: UUID(),

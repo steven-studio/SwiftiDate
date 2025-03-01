@@ -16,11 +16,15 @@ struct SafetyTestView: View {
         if isQuizStarted {
             // Pass the binding to the SafetyQuizView
             SafetyQuizView(showSafetyTestView: $showSafetyTestView)
+                .onAppear {
+                    AnalyticsManager.shared.trackEvent("SafetyTest_QuizStarted", parameters: nil)
+                }
         } else {
             VStack {
                 HStack {
                     Button(action: {
-                        // Close the SafetyTestView
+                        // Close the SafetyTestView and record the event
+                        AnalyticsManager.shared.trackEvent("SafetyTest_Closed", parameters: nil)
                         showSafetyTestView = false
                     }) {
                         Image(systemName: "xmark")
@@ -55,6 +59,7 @@ struct SafetyTestView: View {
                 
                 // Button for starting the test
                 Button(action: {
+                    AnalyticsManager.shared.trackEvent("SafetyTest_Started", parameters: nil)
                     // Start the quiz by setting isQuizStarted to true
                     isQuizStarted = true
                 }) {
@@ -72,6 +77,9 @@ struct SafetyTestView: View {
             }
             .padding(.top, 50)
             .background(Color.white.ignoresSafeArea())
+            .onAppear {
+                AnalyticsManager.shared.trackEvent("SafetyTestView_Appeared", parameters: nil)
+            }
         }
     }
 }

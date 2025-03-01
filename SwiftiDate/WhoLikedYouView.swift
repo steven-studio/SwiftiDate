@@ -45,7 +45,8 @@ struct WhoLikedYouView: View {
             Spacer()
 
             Button(action: {
-                // Action when '查看' button is pressed
+                AnalyticsManager.shared.trackEvent("who_liked_you_check_pressed")
+                // 在這裡添加「查看」按鈕點擊後的具體操作
             }) {
                 Text("查看")
                     .font(.subheadline)
@@ -57,6 +58,9 @@ struct WhoLikedYouView: View {
             }
         }
         .background(Color.white)
+        .onAppear {
+            AnalyticsManager.shared.trackEvent("who_liked_you_view_appear")
+        }
     }
 }
 

@@ -258,6 +258,7 @@ struct CountryCodePickerView: View {
             // 顯示左上角的返回按鈕
             HStack {
                 Button(action: {
+                    AnalyticsManager.shared.trackEvent("CountryCodePicker_BackTapped", parameters: nil)
                     presentationMode.wrappedValue.dismiss() // 返回上一頁
                 }) {
                     Image(systemName: "chevron.left")
@@ -271,6 +272,7 @@ struct CountryCodePickerView: View {
 
             List(countries, id: \.1) { country, code in
                 Button(action: {
+                    AnalyticsManager.shared.trackEvent("CountryCodePicker_CountrySelected", parameters: ["country": country, "code": code])
                     selectedCountryCode = code // 更新選中的國碼
                     presentationMode.wrappedValue.dismiss() // 關閉選擇器
                 }) {
@@ -301,6 +303,9 @@ struct CountryCodePickerView: View {
                 }
             }
             .listStyle(GroupedListStyle()) // 設定 GroupedListStyle
+        }
+        .onAppear {
+            AnalyticsManager.shared.trackEvent("CountryCodePickerView_Appeared", parameters: nil)
         }
     }
 }

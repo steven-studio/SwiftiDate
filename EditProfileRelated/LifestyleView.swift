@@ -69,6 +69,7 @@ struct LifestyleView: View {
                 icon: Image(systemName: "magnifyingglass"),
                 isValueEmpty: selectedLookingFor == nil,
                 onTap: {
+                    AnalyticsManager.shared.trackEvent("lifestyle_lookingfor_tapped")
                     showLookingForView = true
                 }
             )
@@ -82,6 +83,7 @@ struct LifestyleView: View {
                 icon: Image(systemName: "pawprint"),
                 isValueEmpty: selectedPet == nil,
                 onTap: {
+                    AnalyticsManager.shared.trackEvent("lifestyle_pet_tapped")
                     showPetSelectionView = true
                 }
             )
@@ -95,6 +97,7 @@ struct LifestyleView: View {
                 icon: Image(systemName: "dumbbell"),
                 isValueEmpty: selectedFitnessOption == nil,
                 onTap: {
+                    AnalyticsManager.shared.trackEvent("lifestyle_fitness_tapped")
                     showFitnessOptions = true
                 }
             )
@@ -111,6 +114,7 @@ struct LifestyleView: View {
                     .frame(width: 24, height: 24),
                 isValueEmpty: selectedSmokingOption == nil,
                 onTap: {
+                    AnalyticsManager.shared.trackEvent("lifestyle_smoking_tapped")
                     showSmokingOptions = true
                 }
             )
@@ -124,6 +128,7 @@ struct LifestyleView: View {
                 icon: Image(systemName: "wineglass.fill"),
                 isValueEmpty: selectedDrinkOption == nil,
                 onTap: {
+                    AnalyticsManager.shared.trackEvent("lifestyle_drink_tapped")
                     showDrinkOptions = true
                 }
             )
@@ -137,6 +142,7 @@ struct LifestyleView: View {
                 icon: Image(systemName: "tree.fill"),
                 isValueEmpty: selectedVacationOption == nil,
                 onTap: {
+                    AnalyticsManager.shared.trackEvent("lifestyle_vacation_tapped")
                     showVacationOptions = true
                 }
             )
@@ -150,6 +156,7 @@ struct LifestyleView: View {
                 icon: Image(systemName: "fork.knife"),
                 isValueEmpty: selectedDietPreference == nil,
                 onTap: {
+                    AnalyticsManager.shared.trackEvent("lifestyle_diet_tapped")
                     showDietPreferences = true
                 }
             )
@@ -160,6 +167,10 @@ struct LifestyleView: View {
             Spacer()
         }
         .padding(.horizontal)
+        .onAppear {
+            // 埋點：頁面曝光
+            AnalyticsManager.shared.trackEvent("lifestyle_view_appear")
+        }
     }
 }
 

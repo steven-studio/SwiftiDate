@@ -51,6 +51,8 @@ struct ResultsView: View {
             Spacer()
 
             Button(action: {
+                // 記錄關閉結果頁事件
+                AnalyticsManager.shared.trackEvent("ResultsView_Closed", parameters: ["score": score, "total": totalQuestions])
                 // Close the ResultsView and return to SafetyTestView
                 showSafetyTestView = false
             }) {
@@ -68,6 +70,9 @@ struct ResultsView: View {
         }
         .padding()
         .background(Color.white.ignoresSafeArea())
+        .onAppear {
+            AnalyticsManager.shared.trackEvent("ResultsView_Appeared", parameters: ["score": score, "total": totalQuestions])
+        }
     }
 }
 

@@ -31,6 +31,10 @@ struct PetSelectionView: View {
             ForEach(options, id: \.self) { option in
                 Button(action: {
                     selectedPet = option
+                    // 埋點：選擇某個寵物選項
+                    AnalyticsManager.shared.trackEvent("pet_option_selected", parameters: [
+                        "option": option
+                    ])
                     presentationMode.wrappedValue.dismiss() // 选择后关闭页面
                 }) {
                     HStack {
@@ -54,6 +58,8 @@ struct PetSelectionView: View {
             HStack {
                 Button(action: {
                     selectedPet = nil // 清空选择
+                    // 埋點：清空寵物選擇
+                    AnalyticsManager.shared.trackEvent("pet_selection_cleared")
                     presentationMode.wrappedValue.dismiss() // 关闭页面
                 }) {
                     Text("清空")
@@ -64,6 +70,10 @@ struct PetSelectionView: View {
                 }
                 Spacer()
                 Button(action: {
+                    // 埋點：確認寵物選擇
+                    AnalyticsManager.shared.trackEvent("pet_selection_confirmed", parameters: [
+                        "selected": selectedPet ?? "none"
+                    ])
                     presentationMode.wrappedValue.dismiss() // 确定并关闭页面
                 }) {
                     Text("確定")
@@ -77,5 +87,9 @@ struct PetSelectionView: View {
             .padding(.bottom)
         }
         .padding()
+        .onAppear {
+            // 埋點：頁面曝光
+            AnalyticsManager.shared.trackEvent("pet_selection_view_appear")
+        }
     }
 }

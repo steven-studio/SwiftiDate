@@ -13,6 +13,9 @@ enum SuspiciousReason {
     // 也可以加 .scam, .spam, ... 等等
     case phishingLink
     case scamKeyword
+    case saleKeyword
+    case ballsInHerHand
+    case NSFWKeyword
 }
 
 /// 規則檢查的結果

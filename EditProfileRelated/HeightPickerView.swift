@@ -43,6 +43,9 @@ struct HeightPickerView: View {
                 }
                 Spacer()
                 Button(action: {
+                    AnalyticsManager.shared.trackEvent("update_height", parameters: [
+                        "height": selectedHeight ?? 0
+                    ])
                     presentationMode.wrappedValue.dismiss() // 关闭页面
                 }) {
                     Text("確定")

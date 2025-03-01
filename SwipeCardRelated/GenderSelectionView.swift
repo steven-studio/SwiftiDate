@@ -19,6 +19,8 @@ struct GenderSelectionView: View {
                 // 返回按鈕，放在左側
                 HStack {
                     Button(action: {
+                        // 點擊返回時也記錄事件
+                        AnalyticsManager.shared.trackEvent("GenderSelection_BackTapped", parameters: nil)
                         showGenderSelection = false // 返回到上一頁
                     }) {
                         Image(systemName: "chevron.left")
@@ -45,6 +47,7 @@ struct GenderSelectionView: View {
             .padding()
             .onTapGesture {
                 selectedGender = "女生"
+                AnalyticsManager.shared.trackEvent("GenderSelected", parameters: ["gender": "女生"])
             }
 
             HStack {
@@ -58,6 +61,7 @@ struct GenderSelectionView: View {
             .padding()
             .onTapGesture {
                 selectedGender = "男生"
+                AnalyticsManager.shared.trackEvent("GenderSelected", parameters: ["gender": "男生"])
             }
 
             HStack {
@@ -71,6 +75,7 @@ struct GenderSelectionView: View {
             .padding()
             .onTapGesture {
                 selectedGender = "不限"
+                AnalyticsManager.shared.trackEvent("GenderSelected", parameters: ["gender": "不限"])
             }
             
             HStack {
@@ -84,6 +89,7 @@ struct GenderSelectionView: View {
             .padding()
             .onTapGesture {
                 selectedGender = "不想滑"
+                AnalyticsManager.shared.trackEvent("GenderSelected", parameters: ["gender": "不想滑"])
             }
             
             Spacer() // 使用 Spacer 將所有元素推至頂部

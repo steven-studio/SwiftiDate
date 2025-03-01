@@ -187,6 +187,10 @@ struct InterestSelectionView: View {
                                     selectedCategories.insert(category)   // 添加選中分類
                                 }
                             }
+                            // 埋點：記錄使用者切換分類
+                            AnalyticsManager.shared.trackEvent("interest_category_toggled", parameters: [
+                                "selected_categories": Array(selectedCategories)
+                            ])
                         }) {
                             Text(category)
                                 .font(.subheadline)
@@ -203,6 +207,10 @@ struct InterestSelectionView: View {
                 // 展開/收起的按鈕
                 Button(action: {
                     isExpanded.toggle()  // 切換展開狀態
+                    // 埋點：記錄用戶展開或收起分類
+                    AnalyticsManager.shared.trackEvent("interest_categories_expanded_toggled", parameters: [
+                        "isExpanded": isExpanded
+                    ])
                 }) {
                     HStack {
                         Spacer()
@@ -298,6 +306,9 @@ struct InterestSelectionView: View {
 
                 Spacer()
             }
+        }
+        .onAppear {
+            AnalyticsManager.shared.trackEvent("interest_selection_view_appear")
         }
     }
 }

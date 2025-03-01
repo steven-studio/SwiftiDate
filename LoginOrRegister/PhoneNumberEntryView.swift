@@ -35,7 +35,8 @@ struct PhoneNumberEntryView: View {
         VStack {
             HStack {
                 Button(action: {
-                    // Handle Back Action (Pop to previous view)
+                    // 返回上一頁前記錄事件
+                    AnalyticsManager.shared.trackEvent("PhoneNumberEntry_BackTapped", parameters: nil)
                     isRegistering = false
                 }) {
                     Image(systemName: "chevron.left")
@@ -115,7 +116,8 @@ struct PhoneNumberEntryView: View {
             .padding(.bottom, 5)
             
             Button(action: {
-                // 這裡是「按鈕被點擊時要做的事」
+                // 記錄使用者點擊「繼續」按鈕
+                AnalyticsManager.shared.trackEvent("PhoneNumberEntry_ContinueTapped", parameters: ["phone": "\(selectedCountryCode) \(phoneNumber)"])
                 self.showAlert = true
             }) {
 //                Text("繼續")
@@ -141,7 +143,8 @@ struct PhoneNumberEntryView: View {
                     title: Text("請驗證你的手機號碼：\n\(selectedCountryCode) \(phoneNumber)"),
                     message: Text("我們需要驗證 \(selectedCountryCode) \(phoneNumber) 是你的手機號碼"),
                     primaryButton: .default(Text("確定"), action: {
-                        // 確定按鈕的行為
+                        // 記錄確認檢查手機號碼的事件
+                        AnalyticsManager.shared.trackEvent("PhoneNumberEntry_CheckPhoneNumber", parameters: ["phone": "\(selectedCountryCode) \(phoneNumber)"])
                         checkPhoneNumber()
                     }),
                     secondaryButton: .cancel(Text("取消"))
@@ -168,6 +171,10 @@ struct PhoneNumberEntryView: View {
         }
         .fullScreenCover(isPresented: $isShowingCountryCodePicker) {
             CountryCodePickerView(selectedCountryCode: $selectedCountryCode)
+        }
+        .onAppear {
+            // 畫面出現時記錄 Analytics 事件
+            AnalyticsManager.shared.trackEvent("PhoneNumberEntryView_Appeared", parameters: nil)
         }
     }
     

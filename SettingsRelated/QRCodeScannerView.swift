@@ -30,6 +30,8 @@ struct QRCodeScannerView: UIViewControllerRepresentable {
                 guard let stringValue = readableObject.stringValue else { return }
 
                 AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
+                // 記錄掃描到 QRCode 事件
+                AnalyticsManager.shared.trackEvent("QRCodeScannerView_CodeFound", parameters: ["code": stringValue])
                 parent.didFindCode(stringValue)
             }
         }
@@ -54,12 +56,13 @@ struct QRCodeScannerView: UIViewControllerRepresentable {
         
         // Function to dismiss the QRCodeScannerView when the back button is tapped
         @objc func dismissScanner() {
+            AnalyticsManager.shared.trackEvent("QRCodeScannerView_Dismissed", parameters: nil)
             parent.dismissView()
         }
         
         // Function to handle the "顯示行動條碼" button action
         @objc func showBarcode() {
-            // Handle the action to show the barcode
+            AnalyticsManager.shared.trackEvent("QRCodeScannerView_ShowBarcodeTapped", parameters: nil)
             print("顯示行動條碼按鈕被點擊")
         }
     }
@@ -104,6 +107,8 @@ struct QRCodeScannerView: UIViewControllerRepresentable {
         viewController.view.layer.addSublayer(previewLayer)
 
         captureSession.startRunning()
+        // 記錄掃描器畫面出現事件
+        AnalyticsManager.shared.trackEvent("QRCodeScannerView_Appeared", parameters: nil)
         
         // Add a square frame overlay to guide the user
         let overlayView = UIView(frame: viewController.view.bounds)

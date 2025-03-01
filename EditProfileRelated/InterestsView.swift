@@ -72,9 +72,15 @@ struct InterestsView: View {
             .padding(.horizontal)
             .onTapGesture {
                 showInterestSelection = true // 點擊時顯示 sheet
+                // 埋點：使用者點擊興趣區以打開選擇頁面
+                AnalyticsManager.shared.trackEvent("interest_selection_sheet_opened")
             }
             .sheet(isPresented: $showInterestSelection) {
                 InterestSelectionView(selectedInterests: $selectedInterests, interestColors: $interestColors) // 彈出的視圖
+            }
+            .onAppear {
+                // 埋點：頁面曝光，記錄使用者何時進入 InterestsView
+                AnalyticsManager.shared.trackEvent("interests_view_appear")
             }
         }
         .padding(.horizontal)

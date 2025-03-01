@@ -69,6 +69,10 @@ struct EducationAndWorkView: View {
                 icon: Image(systemName: "graduationcap.fill"),
                 isValueEmpty: selectedDegree == nil,
                 onTap: {
+                    // 埋點：點擊學歷 row
+                    AnalyticsManager.shared.trackEvent("education_row_tapped", parameters: [
+                        "row": "degree"
+                    ])
                     showDegreePicker = true
                 }
             )
@@ -84,6 +88,10 @@ struct EducationAndWorkView: View {
                     .aspectRatio(contentMode: .fit),
                 isValueEmpty: selectedSchool == nil,
                 onTap: {
+                    // 埋點：點擊學校 row
+                    AnalyticsManager.shared.trackEvent("education_row_tapped", parameters: [
+                        "row": "school"
+                    ])
                     showSchoolInput = true
                 }
             )
@@ -97,6 +105,10 @@ struct EducationAndWorkView: View {
                 icon: Image(systemName: "building.fill"),
                 isValueEmpty: selectedIndustry == nil,
                 onTap: {
+                    // 埋點：點擊工作行業 row
+                    AnalyticsManager.shared.trackEvent("education_row_tapped", parameters: [
+                        "row": "industry"
+                    ])
                     showIndustryPicker = true
                 }
             )
@@ -110,6 +122,10 @@ struct EducationAndWorkView: View {
                 icon: Image(systemName: "building.fill"),
                 isValueEmpty: selectedJob == nil,
                 onTap: {
+                    // 埋點：點擊職業 row
+                    AnalyticsManager.shared.trackEvent("education_row_tapped", parameters: [
+                        "row": "job"
+                    ])
                     showJobInput = true
                 }
             )
@@ -118,6 +134,10 @@ struct EducationAndWorkView: View {
             }
         }
         .padding(.horizontal)
+        // 可選：當整個畫面出現時上報事件
+        .onAppear {
+            AnalyticsManager.shared.trackEvent("education_and_work_view_appear")
+        }
     }
 }
 

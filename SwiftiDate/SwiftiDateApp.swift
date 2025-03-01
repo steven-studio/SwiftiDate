@@ -40,6 +40,7 @@ struct SwiftiDateApp: App {
             userSettings.globalPhoneNumber = ""
             userSettings.globalUserName = ""
         }
+        AnalyticsManager.shared.trackEvent("app_launch")
     }
     
     var body: some Scene {
@@ -52,6 +53,9 @@ struct SwiftiDateApp: App {
                         .onAppear {
                             // 1. 在這裡呼叫一個方法，執行 Firebase 匿名登入
                             signInAnonymously()
+                            AnalyticsManager.shared.trackEvent("content_view_appear", parameters: [
+                                "isLoggedIn": appState.isLoggedIn
+                            ])
                         }
                 } else {
                     LoginOrRegisterView()

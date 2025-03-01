@@ -21,7 +21,7 @@ struct TopRightActionButtons: View {
                 
                 // 將 shield.fill 圖標放入 Button
                 Button(action: {
-                    // 點擊時顯示 SafetyCenterView
+                    AnalyticsManager.shared.trackEvent("top_right_safety_center_pressed")
                     showSafetyCenterView = true
                 }) {
                     Image(systemName: "shield.fill")
@@ -32,6 +32,7 @@ struct TopRightActionButtons: View {
                 }
                 
                 Button(action: {
+                    AnalyticsManager.shared.trackEvent("top_right_settings_pressed")
                     showSettingsView = true
                 }) {
                     Image(systemName: "gearshape.fill")

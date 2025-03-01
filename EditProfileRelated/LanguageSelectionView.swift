@@ -76,8 +76,16 @@ struct LanguageSelectionView: View {
                 .onTapGesture {
                     if let index = selectedLanguages.firstIndex(of: language) {
                         selectedLanguages.remove(at: index)
+                        // 埋點：取消選中語言
+                        AnalyticsManager.shared.trackEvent("language_deselected", parameters: [
+                            "language": language
+                        ])
                     } else {
                         selectedLanguages.append(language)
+                        // 埋點：選中語言
+                        AnalyticsManager.shared.trackEvent("language_selected", parameters: [
+                            "language": language
+                        ])
                     }
                 }
             }
@@ -88,12 +96,18 @@ struct LanguageSelectionView: View {
             HStack {
                 Button("清空") {
                     selectedLanguages.removeAll() // 清空所有选择
+                    // 埋點：清空所有語言選擇
+                    AnalyticsManager.shared.trackEvent("languages_cleared")
                 }
                 .padding()
                 
                 Spacer()
                 
                 Button("確定") {
+                    // 埋點：確認語言選擇，並傳入選中數量
+                    AnalyticsManager.shared.trackEvent("languages_confirmed", parameters: [
+                        "selected_count": selectedLanguages.count
+                    ])
                     // 关闭语言选择界面
                     UIApplication.shared.windows.first?.rootViewController?.dismiss(animated: true, completion: nil)
                 }

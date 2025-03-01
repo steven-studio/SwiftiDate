@@ -186,6 +186,9 @@ struct EditProfileView: View {
     
     // 處理 "返回" 的邏輯
     private func handleBack() {
+        // 1. 可先埋點，代表使用者按下了返回、未做保存
+        AnalyticsManager.shared.trackEvent("edit_profile_back_clicked")
+        
         // 將 deletedPhotos 中的照片移回到 photos
         deletedPhotos.sort(by: >) // 逆序排序
         photos.append(contentsOf: deletedPhotos)
@@ -203,6 +206,13 @@ struct EditProfileView: View {
     // 處理 "保存" 的邏輯
     private func handleSave() {
         print("handleSave called")
+        AnalyticsManager.shared.trackEvent("edit_profile_save_clicked", parameters: [
+            "photos_count": photos.count,
+            "deleted_count": deletedPhotos.count,
+            "aboutMe_length": aboutMe.count,
+            "interests_count": selectedInterests.count
+            // ...其他欄位
+        ])
         
         // 遍歷 deletedPhotos，逐一從 Firebase 刪除
         for photoURL in deletedPhotos {

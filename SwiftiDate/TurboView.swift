@@ -30,6 +30,7 @@ struct TurboView: View {
                     HStack {
                         if showBackButton {
                             Button(action: {
+                                AnalyticsManager.shared.trackEvent("turbo_view_back_pressed")
                                 onBack?() // 執行返回操作
                             }) {
                                 Image(systemName: "chevron.left")
@@ -45,6 +46,7 @@ struct TurboView: View {
                     HStack {
                         Button(action: {
                             turboSelectedTab = 0
+                            AnalyticsManager.shared.trackEvent("turbo_tab_changed", parameters: ["tab": "喜歡我的人"])
                         }) {
                             Text("喜歡我的人")
                                 .font(.headline)
@@ -54,6 +56,7 @@ struct TurboView: View {
                                             
                         Button(action: {
                             turboSelectedTab = 1
+                            AnalyticsManager.shared.trackEvent("turbo_tab_changed", parameters: ["tab": "我的心動對象"])
                         }) {
                             Text("我的心動對象")
                                 .font(.headline)
@@ -102,7 +105,7 @@ struct TurboView: View {
                     // Action button
                     Button(action: {
                         if userSettings.globalTurboCount > 0 {
-                            // Show confirmation popup if TurboCount is greater than 0
+                            AnalyticsManager.shared.trackEvent("turbo_start_button_pressed", parameters: ["globalTurboCount": userSettings.globalTurboCount])
                             showConfirmationPopup = true
                         }
                     }) {
@@ -125,7 +128,7 @@ struct TurboView: View {
                     
                     Button(action: {
                         if userSettings.globalTurboCount > 0 {
-                            // Show confirmation popup if TurboCount is greater than 0
+                            AnalyticsManager.shared.trackEvent("turbo_icon_button_pressed", parameters: ["globalTurboCount": userSettings.globalTurboCount])
                             showConfirmationPopup = true
                         }
                     }) {
@@ -153,6 +156,7 @@ struct TurboView: View {
                                 .padding(.top, 16)
                             
                             Button(action: {
+                                AnalyticsManager.shared.trackEvent("turbo_go_to_swipe_pressed")
                                 onBack?() // Dismiss TurboView
                                 contentSelectedTab = 0 // Navigate to the SwipeCardView
                             }) {
@@ -193,7 +197,8 @@ struct TurboView: View {
                         .fontWeight(.bold)
                     
                     Button(action: {
-                        // Confirm action to use Turbo
+                        // 埋點：用戶確認使用Turbo
+                        AnalyticsManager.shared.trackEvent("turbo_confirmation_accepted", parameters: ["globalTurboCount": userSettings.globalTurboCount])
                         showConfirmationPopup = false
                     }) {
                         Text("確認使用")
@@ -207,7 +212,8 @@ struct TurboView: View {
                     .padding(.horizontal)
                     
                     Button(action: {
-                        // Dismiss the confirmation popup
+                        // 埋點：用戶取消Turbo確認
+                        AnalyticsManager.shared.trackEvent("turbo_confirmation_cancelled")
                         showConfirmationPopup = false
                     }) {
                         Text("取消")

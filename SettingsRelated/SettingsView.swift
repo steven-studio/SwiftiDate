@@ -76,7 +76,7 @@ struct SettingsView: View {
                         // 左上角的返回按鈕
                         HStack {
                             Button(action: {
-                                // 當按下返回按鈕時關閉 SafetyCenterView
+                                AnalyticsManager.shared.trackEvent("SettingsView_BackTapped", parameters: nil)
                                 showSettingsView = false
                             }) {
                                 Image(systemName: "chevron.left")
@@ -94,6 +94,7 @@ struct SettingsView: View {
                     List {
                         Section {
                             Button(action: {
+                                AnalyticsManager.shared.trackEvent("SettingsView_QRCodeScannerTapped", parameters: nil)
                                 isQRCodeScannerView = true // Navigate to QR Code Scanner
                             }) {
                                 HStack {
@@ -148,6 +149,7 @@ struct SettingsView: View {
                             .padding(.vertical, 10) // Adjust this value to increase the height
                             
                             Button(action: {
+                                AnalyticsManager.shared.trackEvent("SettingsView_PersonalInfoTapped", parameters: nil)
                                 isPersonalInfoView = true // Navigate to Personal Info View
                             }) {
                                 HStack {
@@ -166,6 +168,7 @@ struct SettingsView: View {
                         
                         Section {
                             Button(action: {
+                                AnalyticsManager.shared.trackEvent("SettingsView_CustomerServiceTapped", parameters: nil)
                                 checkIfMailIsSetup()
                             }) {
                                 HStack {
@@ -192,6 +195,7 @@ struct SettingsView: View {
                             }
 
                             Button(action: {
+                                AnalyticsManager.shared.trackEvent("SettingsView_HelpTapped", parameters: nil)
                                 isHelpView = true // Show HelpView
                             }) {
                                 HStack {
@@ -213,6 +217,7 @@ struct SettingsView: View {
                             }
 
                             Button(action: {
+                                AnalyticsManager.shared.trackEvent("SettingsView_CommunityGuidelinesTapped", parameters: nil)
                                 isCommunityGuidelinesView = true
                             }) {
                                 HStack {
@@ -226,6 +231,7 @@ struct SettingsView: View {
                             }
 
                             Button(action: {
+                                AnalyticsManager.shared.trackEvent("SettingsView_PrivacyPolicyTapped", parameters: nil)
                                 isPrivacyPolicyView = true // Show PrivacyPolicyView
                             }) {
                                 HStack {
@@ -239,6 +245,7 @@ struct SettingsView: View {
                             }
 
                             Button(action: {
+                                AnalyticsManager.shared.trackEvent("SettingsView_TermsOfServiceTapped", parameters: nil)
                                 isTermsOfServiceView = true // Show TermsOfServiceView
                             }) {
                                 HStack {
@@ -252,6 +259,7 @@ struct SettingsView: View {
                             .foregroundColor(.black) // Keep the text color unchanged when the button is tapped
 
                             Button(action: {
+                                AnalyticsManager.shared.trackEvent("SettingsView_DataManagementTapped", parameters: nil)
                                 isDataManagementView = true // Navigate to DataManagementView
                             }) {
                                 HStack {
@@ -273,6 +281,7 @@ struct SettingsView: View {
                             }
 
                             Button(action: {
+                                AnalyticsManager.shared.trackEvent("SettingsView_CheckUpdateTapped", parameters: nil)
                                 showUpdatePopup = true // Show the update popup when tapped
                             }) {
                                 HStack {
@@ -304,6 +313,7 @@ struct SettingsView: View {
                         
                         Section {
                             Button(action: {
+                                AnalyticsManager.shared.trackEvent("SettingsView_LogoutTapped", parameters: nil)
                                 isShowingLogoutAlert = true // Show the alert when tapped
                             }) {
                                 Text("登出")
@@ -346,6 +356,7 @@ struct SettingsView: View {
                         HStack {
                             Spacer() // Push the X button to the right
                             Button(action: {
+                                AnalyticsManager.shared.trackEvent("SettingsView_UpdatePopup_Dismissed", parameters: nil)
                                 showUpdatePopup = false // Close the popup when "X" is tapped
                             }) {
                                 Image(systemName: "xmark")
@@ -372,6 +383,7 @@ struct SettingsView: View {
                             .padding(.horizontal, 20)
                         
                         Button(action: {
+                            AnalyticsManager.shared.trackEvent("SettingsView_UpdatePopup_Confirmed", parameters: nil)
                             showUpdatePopup = false // Close the popup when "好的" button is tapped
                         }) {
                             Text("好的")
@@ -388,6 +400,9 @@ struct SettingsView: View {
                     .shadow(radius: 10)
                 }
             }
+        }
+        .onAppear {
+            AnalyticsManager.shared.trackEvent("SettingsView_Appeared", parameters: nil)
         }
     }
         

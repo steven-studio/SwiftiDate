@@ -20,6 +20,9 @@ struct ContentView: View {
                 .environmentObject(userSettings)
                 .onAppear {
                     PhotoUtility.loadPhotosFromAppStorage()
+                    AnalyticsManager.shared.trackEvent("content_view_logged_in_appear", parameters: [
+                        "user_name": userSettings.globalUserName
+                    ])
                 }
         } else {
             LoginView()
@@ -27,6 +30,7 @@ struct ContentView: View {
                 .environmentObject(userSettings)
                 .onAppear {
                     PhotoUtility.loadPhotosFromAppStorage()
+                    AnalyticsManager.shared.trackEvent("content_view_logged_out_appear")
                 }
         }
     }

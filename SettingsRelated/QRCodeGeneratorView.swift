@@ -55,6 +55,7 @@ struct QRCodeGeneratorView: View {
             }
 
             Button(action: {
+                AnalyticsManager.shared.trackEvent("QRCodeGeneratorView_GenerateQRCode_Tapped", parameters: ["currentToken": tokenId])
                 createTokenAndGenerateQR()
             }) {
                 Text("生成 Token 並產生 QRCode")
@@ -67,6 +68,9 @@ struct QRCodeGeneratorView: View {
             Spacer()
         }
         .padding()
+        .onAppear {
+            AnalyticsManager.shared.trackEvent("QRCodeGeneratorView_Appeared", parameters: nil)
+        }
     }
     
     /// 呼叫 Cloud Function，拿到 tokenId 後生成 QR Code
@@ -80,6 +84,7 @@ struct QRCodeGeneratorView: View {
 
                 if let error = error {
                     self.errorMessage = "createMatchToken error: \(error.localizedDescription)"
+                    AnalyticsManager.shared.trackEvent("QRCodeGeneratorView_Error", parameters: ["error": error.localizedDescription])
                     return
                 }
                 
@@ -87,12 +92,14 @@ struct QRCodeGeneratorView: View {
                       let token = data["tokenId"] as? String
                 else {
                     self.errorMessage = "回傳資料格式錯誤"
+                    AnalyticsManager.shared.trackEvent("QRCodeGeneratorView_Error", parameters: ["error": "回傳資料格式錯誤"])
                     return
                 }
                 
                 self.tokenId = token
                 // 產生 QR code
                 self.qrImage = generateQRCode(from: token)
+                AnalyticsManager.shared.trackEvent("QRCodeGeneratorView_TokenGenerated", parameters: ["tokenLength": token.count])
             }
         }
     }

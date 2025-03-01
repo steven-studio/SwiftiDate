@@ -278,6 +278,12 @@ struct SwipeCardView: View {
                 return
             }
             
+            // ★ 在這裡加上行為分析 (Card Swipe) ★
+            AnalyticsManager.shared.trackEvent("card_swipe", parameters: [
+                "target_id": self.users[self.currentIndex].id,
+                "is_like": rightSwipe
+            ])
+            
             // === 4. 成功後，紀錄這次滑卡資料 ===
             self.lastSwipedData = (
                 user: self.users[self.currentIndex],
@@ -320,6 +326,12 @@ struct SwipeCardView: View {
                 print("刪除 Firestore 紀錄失敗: \(error)")
                 return
             }
+            
+            // ★ 在這裡加上行為分析 (Swipe Undo) ★
+            AnalyticsManager.shared.trackEvent("card_swipe_undo", parameters: [
+                "target_id": data.user.id,
+                "was_like": data.isRightSwipe
+            ])
             
             // 如果上次是 Like，就把 like count 加回來
             if data.isRightSwipe {

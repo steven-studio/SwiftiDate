@@ -31,6 +31,8 @@ struct SchoolInputView: View {
             HStack {
                 Button(action: {
                     selectedSchool = nil
+                    // 埋點：用戶清空學校輸入
+                    AnalyticsManager.shared.trackEvent("school_input_cleared")
                 }) {
                     Text("清空")
                         .foregroundColor(.primary)
@@ -43,6 +45,10 @@ struct SchoolInputView: View {
                 Spacer()
 
                 Button(action: {
+                    // 埋點：用戶確認學校輸入
+                    AnalyticsManager.shared.trackEvent("school_input_confirmed", parameters: [
+                        "school": selectedSchool ?? "none"
+                    ])
                     presentationMode.wrappedValue.dismiss()
                 }) {
                     Text("確定")
@@ -56,5 +62,9 @@ struct SchoolInputView: View {
             .padding(.bottom)
         }
         .padding()
+        .onAppear {
+            // 埋點：頁面曝光
+            AnalyticsManager.shared.trackEvent("school_input_view_appear")
+        }
     }
 }

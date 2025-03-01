@@ -170,6 +170,9 @@
 		D0B3F1482D70079F007A5EA0 /* PhoneValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B3F1472D70079F007A5EA0 /* PhoneValidator.swift */; };
 		D0B3F1492D70079F007A5EA0 /* PhoneValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B3F1472D70079F007A5EA0 /* PhoneValidator.swift */; };
 		D0B3F14D2D70258A007A5EA0 /* FirebaseCloudServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B3F14C2D70258A007A5EA0 /* FirebaseCloudServiceTests.swift */; };
+		D0B3F14F2D70336C007A5EA0 /* LocalStorageManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B3F14E2D70336C007A5EA0 /* LocalStorageManagerTests.swift */; };
+		D0B3F1912D70C9C7007A5EA0 /* AnalyticsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B3F1902D70C9C7007A5EA0 /* AnalyticsManager.swift */; };
+		D0B3F1942D713B60007A5EA0 /* Mixpanel in Frameworks */ = {isa = PBXBuildFile; productRef = D0B3F1932D713B60007A5EA0 /* Mixpanel */; };
 		D0C99B2E2D0DBFED00FA98AD /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D0C99B2C2D0DBFEC00FA98AD /* Localizable.strings */; };
 		D0DDDB052C9FA8AF00A78A87 /* ChatDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB042C9FA8AF00A78A87 /* ChatDetailView.swift */; };
 		D0DDDB072C9FDB1600A78A87 /* WhoLikedYouView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB062C9FDB1600A78A87 /* WhoLikedYouView.swift */; };
@@ -375,6 +378,8 @@
 		D0B3F1302D6F0F8F007A5EA0 /* OTPVerificationUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTPVerificationUITests.swift; sourceTree = "<group>"; };
 		D0B3F1472D70079F007A5EA0 /* PhoneValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneValidator.swift; sourceTree = "<group>"; };
 		D0B3F14C2D70258A007A5EA0 /* FirebaseCloudServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseCloudServiceTests.swift; sourceTree = "<group>"; };
+		D0B3F14E2D70336C007A5EA0 /* LocalStorageManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalStorageManagerTests.swift; sourceTree = "<group>"; };
+		D0B3F1902D70C9C7007A5EA0 /* AnalyticsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsManager.swift; sourceTree = "<group>"; };
 		D0C99B2D2D0DBFEC00FA98AD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		D0C99B2F2D0DC00100FA98AD /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		D0C99B302D0DC00700FA98AD /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
@@ -443,6 +448,7 @@
 				D018AD722C9ED5D4005A14B9 /* FirebaseAuthCombine-Community in Frameworks */,
 				D018AD8E2C9ED5D4005A14B9 /* FirebaseStorage in Frameworks */,
 				D018AD682C9ED5D4005A14B9 /* FirebaseAnalyticsOnDeviceConversion in Frameworks */,
+				D0B3F1942D713B60007A5EA0 /* Mixpanel in Frameworks */,
 				D018AD7E2C9ED5D4005A14B9 /* FirebaseFunctions in Frameworks */,
 				D018AD842C9ED5D4005A14B9 /* FirebaseInstallations in Frameworks */,
 				D018AD8A2C9ED5D4005A14B9 /* FirebasePerformance in Frameworks */,
@@ -594,6 +600,7 @@
 		D0445C222C71B3800059D522 = {
 			isa = PBXGroup;
 			children = (
+				D0B3F18F2D70A0DF007A5EA0 /* AnalyticsManager */,
 				D06724E22D6EC03C00FD566F /* CloudService */,
 				D089DB642D699B4D00D6A1AB /* LocalStorageManager */,
 				D089DB632D699A0700D6A1AB /* NotificationManager */,
@@ -671,6 +678,7 @@
 			children = (
 				D0445C3F2C71B3830059D522 /* SwiftiDateTests.swift */,
 				D0B3F14C2D70258A007A5EA0 /* FirebaseCloudServiceTests.swift */,
+				D0B3F14E2D70336C007A5EA0 /* LocalStorageManagerTests.swift */,
 			);
 			path = SwiftiDateTests;
 			sourceTree = "<group>";
@@ -796,7 +804,6 @@
 				D09587B82CB6552100BCD04B /* ChatGPTView.swift */,
 				D0903AC32D58A50000735323 /* ClaudeAIView.swift */,
 				D0903AC52D58A52500735323 /* DeepSeekView.swift */,
-				D09587D52CB8CDDA00BCD04B /* GenderSelectionView.swift */,
 				D0903AC72D58A54700735323 /* LocalModelView.swift */,
 				D0903ACD2D58A5C200735323 /* Response.swift */,
 				D0903ACB2D58A59B00735323 /* TextViewRepresentable.swift */,
@@ -809,6 +816,7 @@
 			isa = PBXGroup;
 			children = (
 				D09587CE2CB7E44400BCD04B /* CircleExpansionView.swift */,
+				D09587D52CB8CDDA00BCD04B /* GenderSelectionView.swift */,
 				D0445C582C71BFE70059D522 /* SwipeCardView.swift */,
 			);
 			path = SwipeCardRelated;
@@ -846,6 +854,14 @@
 				D0B3F1292D6F04B7007A5EA0 /* NoCursorTextFieldWrapper.swift */,
 			);
 			path = OTPRelated;
+			sourceTree = "<group>";
+		};
+		D0B3F18F2D70A0DF007A5EA0 /* AnalyticsManager */ = {
+			isa = PBXGroup;
+			children = (
+				D0B3F1902D70C9C7007A5EA0 /* AnalyticsManager.swift */,
+			);
+			path = AnalyticsManager;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -891,6 +907,7 @@
 				D0DDDB112CA1008B00A78A87 /* KeychainAccess */,
 				D0B388112D5B79A1003BC40C /* WebRTC */,
 				D0B3F12C2D6F096E007A5EA0 /* SwiftUIIntrospect */,
+				D0B3F1932D713B60007A5EA0 /* Mixpanel */,
 			);
 			productName = SwiftiDate;
 			productReference = D07B40A92D60FF160015C7AA /* SwiftiDate.app */;
@@ -973,6 +990,7 @@
 				D0DDDB102CA1008B00A78A87 /* XCRemoteSwiftPackageReference "KeychainAccess" */,
 				D0B388102D5B79A1003BC40C /* XCLocalSwiftPackageReference "WebRTC" */,
 				D0B3F12B2D6F096E007A5EA0 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
+				D0B3F1922D713B60007A5EA0 /* XCRemoteSwiftPackageReference "mixpanel-swift" */,
 			);
 			productRefGroup = D0445C222C71B3800059D522;
 			projectDirPath = "";
@@ -1126,6 +1144,7 @@
 				D09587CF2CB7E44400BCD04B /* CircleExpansionView.swift in Sources */,
 				D06724E82D6EC22000FD566F /* FirebaseCloudService.swift in Sources */,
 				D09587D42CB8BDEA00BCD04B /* PrivacySettingsView.swift in Sources */,
+				D0B3F1912D70C9C7007A5EA0 /* AnalyticsManager.swift in Sources */,
 				D0DDDB222CA1413600A78A87 /* WhyIsItHardToMatchView.swift in Sources */,
 				D0DDDB182CA11E5100A78A87 /* HelpView.swift in Sources */,
 				D04729D22CC08D34007C33EC /* PhotoSection.swift in Sources */,
@@ -1196,6 +1215,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D0B3F14D2D70258A007A5EA0 /* FirebaseCloudServiceTests.swift in Sources */,
+				D0B3F14F2D70336C007A5EA0 /* LocalStorageManagerTests.swift in Sources */,
 				D0445C402C71B3830059D522 /* SwiftiDateTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1572,6 +1592,14 @@
 				minimumVersion = 1.3.0;
 			};
 		};
+		D0B3F1922D713B60007A5EA0 /* XCRemoteSwiftPackageReference "mixpanel-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/mixpanel/mixpanel-swift";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		D0DDDB102CA1008B00A78A87 /* XCRemoteSwiftPackageReference "KeychainAccess" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/kishikawakatsumi/KeychainAccess";
@@ -1706,6 +1734,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = D0B3F12B2D6F096E007A5EA0 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */;
 			productName = SwiftUIIntrospect;
+		};
+		D0B3F1932D713B60007A5EA0 /* Mixpanel */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D0B3F1922D713B60007A5EA0 /* XCRemoteSwiftPackageReference "mixpanel-swift" */;
+			productName = Mixpanel;
 		};
 		D0DDDB112CA1008B00A78A87 /* KeychainAccess */ = {
 			isa = XCSwiftPackageProductDependency;

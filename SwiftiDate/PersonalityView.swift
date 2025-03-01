@@ -32,7 +32,11 @@ struct PersonalityView: View {
                 HStack {
                     Spacer()
                     Button(action: {
-                        // Close action
+                        // 埋點：使用者點擊關閉按鈕
+                        AnalyticsManager.shared.trackEvent("personality_view_close_pressed", parameters: [
+                            "personality": personality.name
+                        ])
+                        // 此處添加關閉動作，例如 dismiss 或呼叫回傳閉包
                     }) {
                         Image(systemName: "xmark")
                             .foregroundColor(.gray)
@@ -80,7 +84,11 @@ struct PersonalityView: View {
                 
                 // Button
                 Button(action: {
-                    // Action for the test button
+                    // 埋點：點擊「測測看」按鈕
+                    AnalyticsManager.shared.trackEvent("personality_test_button_pressed", parameters: [
+                        "personality": personality.name
+                    ])
+                    // 執行測試行動，例如導向下一頁
                 }) {
                     Text("測測看")
                         .foregroundColor(.white)
@@ -91,6 +99,12 @@ struct PersonalityView: View {
                 .padding(.bottom, 30)
             }
             .padding()
+        }
+        .onAppear {
+            // 埋點：頁面曝光
+            AnalyticsManager.shared.trackEvent("personality_view_appear", parameters: [
+                "personality": personality.name
+            ])
         }
     }
 }

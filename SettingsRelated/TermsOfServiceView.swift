@@ -15,6 +15,7 @@ struct TermsOfServiceView: View {
             // Custom Navigation Bar
             HStack {
                 Button(action: {
+                    AnalyticsManager.shared.trackEvent("TermsOfServiceView_BackTapped", parameters: nil)
                     isTermsOfServiceView = false // Dismiss TermsOfServiceView
                 }) {
                     Image(systemName: "chevron.left")
@@ -374,6 +375,9 @@ struct TermsOfServiceView: View {
                 }
                 .padding()
             }
+        }
+        .onAppear {
+            AnalyticsManager.shared.trackEvent("PrivacyPolicyView_Appeared", parameters: nil)
         }
     }
 }

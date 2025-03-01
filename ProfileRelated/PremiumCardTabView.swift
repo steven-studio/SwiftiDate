@@ -78,7 +78,7 @@ struct PremiumCardTabView: View {
                 buttonText: "開啟",
                 backgroundColor: Color.yellow.opacity(0.3),
                 buttonAction: {
-                    // Set selectedType to .premium when button is clicked
+                    AnalyticsManager.shared.trackEvent("premium_card_tapped", parameters: ["type": "Premium"])
                     selectedType = .premium
                 }
             )
@@ -91,7 +91,7 @@ struct PremiumCardTabView: View {
                 buttonText: "開啟",
                 backgroundColor: Color.black,
                 buttonAction: {
-                    // Set selectedType to .supreme when button is clicked
+                    AnalyticsManager.shared.trackEvent("premium_card_tapped", parameters: ["type": "Supreme"])
                     selectedType = .supreme
                 }
             )
@@ -109,6 +109,9 @@ struct PremiumCardTabView: View {
                 set: { selectedType = $0 }
             )
             PremiumDetailsView(selectedTab: bindingType)
+        }
+        .onAppear {
+            AnalyticsManager.shared.trackEvent("premium_card_tab_view_appear")
         }
     }
 }

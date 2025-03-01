@@ -30,6 +30,9 @@ struct LoginOrRegisterView: View {
                 
                 // Button to navigate to registration
                 Button(action: {
+                    // 埋點：使用者點擊「快速註冊新帳號」按鈕
+                    AnalyticsManager.shared.trackEvent("click_register_button")
+                    
                     isRegistering = true // Trigger the registration flow
                 }) {
                     Text("快速註冊新帳號")
@@ -49,6 +52,9 @@ struct LoginOrRegisterView: View {
                 
                 // Button for existing account login
                 Button(action: {
+                    // 埋點：使用者點擊「已有帳號」按鈕
+                    AnalyticsManager.shared.trackEvent("click_login_button")
+                    
                     // Handle Login Action
                 }) {
                     Text("我已有賬號")

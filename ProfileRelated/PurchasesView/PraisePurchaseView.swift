@@ -25,6 +25,7 @@ struct PraisePurchaseView: View {
                 
                 // Add the "X" button on top of the image
                 Button(action: {
+                    AnalyticsManager.shared.trackEvent("praise_purchase_view_dismissed")
                     presentationMode.wrappedValue.dismiss() // Dismiss the view
                 }) {
                     Image(systemName: "xmark")
@@ -63,8 +64,11 @@ struct PraisePurchaseView: View {
             
             // Purchase button
             Button(action: {
+                AnalyticsManager.shared.trackEvent("praise_purchase_button_tapped", parameters: [
+                    "selected_option": selectedOption
+                ])
                 print("立即獲取 clicked")
-                // Handle the purchase logic here
+                // 在這裡添加購買邏輯
             }) {
                 Text("立即獲取")
                     .font(.headline)
@@ -84,6 +88,9 @@ struct PraisePurchaseView: View {
         }
         .navigationTitle("讚美")
         .navigationBarTitleDisplayMode(.inline)
+        .onAppear {
+            AnalyticsManager.shared.trackEvent("praise_purchase_view_appear")
+        }
     }
 }
 

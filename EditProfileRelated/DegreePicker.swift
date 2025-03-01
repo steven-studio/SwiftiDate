@@ -18,6 +18,8 @@ struct DegreePicker: View {
         VStack {
             HStack {
                 Button(action: {
+                    // 埋點：點擊右上角的關閉按鈕
+                    AnalyticsManager.shared.trackEvent("degree_picker_dismissed")
                     presentationMode.wrappedValue.dismiss()  // 点击关闭按钮时关闭 sheet
                 }) {
                     Image(systemName: "xmark")
@@ -34,6 +36,10 @@ struct DegreePicker: View {
             ForEach(degrees, id: \.self) { degree in
                 Button(action: {
                     selectedDegree = degree
+                    // 埋點：使用者選擇學歷
+                    AnalyticsManager.shared.trackEvent("degree_selected", parameters: [
+                        "degree": degree
+                    ])
                 }) {
                     Text(degree)
                         .foregroundColor(selectedDegree == degree ? .white : .primary)
@@ -50,6 +56,8 @@ struct DegreePicker: View {
             HStack {
                 Button(action: {
                     selectedDegree = nil
+                    // 埋點：使用者點擊取消 (清空)
+                    AnalyticsManager.shared.trackEvent("degree_selection_canceled")
                 }) {
                     Text("取消")
                         .foregroundColor(.primary)
@@ -64,6 +72,10 @@ struct DegreePicker: View {
             .padding(.bottom)
         }
         .padding()
+        .onAppear {
+            // 埋點：頁面曝光
+            AnalyticsManager.shared.trackEvent("degree_picker_view_appear")
+        }
     }
 }
 

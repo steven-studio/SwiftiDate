@@ -22,8 +22,9 @@ struct RealVerificationView: View {
         VStack {
             HStack {
                 Button(action: {
-                    // Handle Back Action (Pop to previous view)
-//                    isRegistering = false
+                    // 返回上一頁前記錄事件
+                    AnalyticsManager.shared.trackEvent("RealVerification_BackTapped", parameters: nil)
+                    // 這裡可以加入返回的行為，例如關閉頁面或其他邏輯
                 }) {
                     Image(systemName: "chevron.left")
                         .font(.title2)
@@ -53,6 +54,7 @@ struct RealVerificationView: View {
                     .padding()
                 
                 Button(action: {
+                    AnalyticsManager.shared.trackEvent("RealVerification_ContinuePhotoVerificationTapped", parameters: nil)
                     showUploadPhoto = true
                 }) {
                     Text("繼續進行照片驗證")
@@ -70,6 +72,15 @@ struct RealVerificationView: View {
             UploadPhotoView(selectedCountryCode: $selectedCountryCode, phoneNumber: $phoneNumber)
                 .environmentObject(appState) // ✅ 傳遞 AppState
                 .environmentObject(userSettings) // ✅ 傳遞 UserSettings
+        }
+        .onAppear {
+            // 畫面出現時記錄 Analytics 事件
+            AnalyticsManager.shared.trackEvent("RealVerificationView_Appeared", parameters: nil)
+        }
+        .onChange(of: isVerified) { newValue in
+            if newValue {
+                AnalyticsManager.shared.trackEvent("RealVerification_Verified", parameters: nil)
+            }
         }
     }
 }

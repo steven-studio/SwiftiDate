@@ -23,7 +23,7 @@ struct ChatGPTView: View {
     ? [
         // 你可以在一開始先放一個 system 訊息（選擇性）
         ["role": "system", "content": """
-你是一位擅長分析語境與潛台詞的戀愛教練，目標是在對話中提升女生對使用者的興趣，並在合適時機進行邀約。  
+你是一位擅長分析語境與潛台詞的戀愛Mikey教練，目標是在對話中提升女生對使用者的興趣，並在合適時機進行邀約。  
 請嚴格依照以下規範進行回應：  
 
 【角色任務】
@@ -103,6 +103,10 @@ struct ChatGPTView: View {
                 .padding()
             }
             .padding()
+            // 當視圖顯示時上報事件
+            .onAppear {
+                AnalyticsManager.shared.trackEvent("chatgpt_view_appear")
+            }
         }
         .ignoresSafeArea(.keyboard) // 忽略键盘的安全区域
         .onDisappear {
@@ -113,6 +117,11 @@ struct ChatGPTView: View {
     // 與 OpenAI API 進行交互的函數
     func sendMessageToChatGPT() {
         guard !userInput.isEmpty else { return }
+        
+        // 當使用者點擊發送時上報事件，並傳入訊息長度等資訊
+        AnalyticsManager.shared.trackEvent("chatgpt_send_message", parameters: [
+            "message_length": userInput.count
+        ])
 
         isLoading = true
         
@@ -191,8 +200,13 @@ struct ChatGPTView: View {
                     // 拿到 first choice 的 content
                     if let chatResponseText = openAiResponse.choices.first?.message.content {
                         chatGPTResponse = chatResponseText
+                        // 上報回應成功事件，並傳入回應字數
+                        AnalyticsManager.shared.trackEvent("chatgpt_response_received", parameters: [
+                            "response_length": chatResponseText.count
+                        ])
                     } else {
                         chatGPTResponse = "對方未回應"
+                        AnalyticsManager.shared.trackEvent("chatgpt_response_empty")
                     }
                     userInput = ""
                 }
@@ -202,6 +216,9 @@ struct ChatGPTView: View {
                 DispatchQueue.main.async {
                     chatGPTResponse = "解析回應失敗"
                 }
+                AnalyticsManager.shared.trackEvent("chatgpt_parse_error", parameters: [
+                    "error": error.localizedDescription
+                ])
             }
         }.resume()
     }

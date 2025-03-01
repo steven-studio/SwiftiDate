@@ -38,9 +38,15 @@ struct ProfileView: View {
             )
             .environmentObject(appState)
             .environmentObject(userSettings) // 如果需要也可以帶
+            .onAppear {
+                AnalyticsManager.shared.trackEvent("profile_view_settings_appear")
+            }
         } else if showSafetyCenterView {
             SafetyCenterView(showSafetyCenterView: $showSafetyCenterView, photos: $userSettings.photos) // 如果全局变量为 true，则显示 SafetyCenterView
                 .environmentObject(userSettings)
+                .onAppear {
+                    AnalyticsManager.shared.trackEvent("profile_view_safety_center_appear")
+                }
         } else {
             ZStack {
                 ScrollView {
@@ -96,6 +102,13 @@ struct ProfileView: View {
                         .edgesIgnoringSafeArea(.all) // Make it cover the entire screen
                     InfoPopupView(isShowing: $isShowingInfoPopup, userRankPercentage: userRankPercentage)
                 }
+            }
+            .onAppear {
+                AnalyticsManager.shared.trackEvent("profile_view_appear", parameters: [
+                    "user_name": userSettings.globalUserName,
+                    "is_verified": userSettings.globalIsUserVerified,
+                    "is_supreme": userSettings.isSupremeUser
+                ])
             }
         }
     }

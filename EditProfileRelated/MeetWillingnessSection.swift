@@ -33,12 +33,22 @@ struct MeetWillingnessSection: View {
             .background(Color.white)
             .cornerRadius(10)
             .onTapGesture {
+                // 埋點：用戶點擊見面意願區域，打開見面意願視圖
+                AnalyticsManager.shared.trackEvent("meet_willingness_view_opened")
                 isShowingMeetWillingnessView = true
             }
             .fullScreenCover(isPresented: $isShowingMeetWillingnessView) {
                 MeetWillingnessView(isPresented: $isShowingMeetWillingnessView, selectedOption: $selectedMeetWillingness)
+                    .onAppear {
+                        // 埋點：見面意願的 Sheet 出現時上報事件
+                        AnalyticsManager.shared.trackEvent("meet_willingness_sheet_appear")
+                    }
             }
         }
         .padding()
+        .onAppear {
+            // 埋點：頁面曝光，記錄 MeetWillingnessSection 的展示
+            AnalyticsManager.shared.trackEvent("meet_willingness_section_view_appear")
+        }
     }
 }

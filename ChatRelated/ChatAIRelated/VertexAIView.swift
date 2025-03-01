@@ -62,6 +62,10 @@ struct VertexAIView: View {
                 .padding()
             }
             .padding()
+            .navigationTitle("Vertex AI 模型")
+            .onAppear {
+                AnalyticsManager.shared.trackEvent("VertexAIView_Appeared", parameters: nil)
+            }
         }
         .ignoresSafeArea(.keyboard) // 忽略键盘的安全区域
     }
@@ -69,6 +73,11 @@ struct VertexAIView: View {
     // 與 Vertex AI API 進行交互的函數
     func sendMessageToVertexAI() {
         guard !userInput.isEmpty else { return }
+        
+        // 記錄用戶發送訊息事件
+        AnalyticsManager.shared.trackEvent("VertexAI_MessageSent", parameters: [
+            "userInputLength": userInput.count
+        ])
 
         isLoading = true
         
@@ -135,6 +144,11 @@ struct VertexAIView: View {
                         // 把 content 當作我們的回覆
                         VertexAIResponse = content
                         userInput = ""
+                        
+                        // 記錄回應生成完成事件
+                        AnalyticsManager.shared.trackEvent("VertexAI_ResponseReceived", parameters: [
+                            "responseLength": content.count
+                        ])
                     }
                 } else {
                     print("回應格式不符合預期。")

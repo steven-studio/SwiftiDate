@@ -65,6 +65,9 @@ class FaceTrackingViewController: UIViewController, ARSessionDelegate, AVCapture
         // 如果想立即開始錄製，就在這裡設定
         setupVideoWriter()
         startRecording()
+        
+        // 畫面開始時記錄事件
+        AnalyticsManager.shared.trackEvent("FaceTrackingView_Started", parameters: nil)
     }
 
     /// 設定 ARKit 臉部追蹤
@@ -99,10 +102,14 @@ class FaceTrackingViewController: UIViewController, ARSessionDelegate, AVCapture
                 if yaw > 0.4 && self.canDetectRightTurn {
                     // 完成一次右轉
                     self.canDetectRightTurn = false
+                    // 記錄成功右轉事件
+                    AnalyticsManager.shared.trackEvent("FaceTracking_RightTurnDetected", parameters: ["yaw": yaw, "count": self.count])
                     
                     if self.count == 1 {
                         self.message = "✅ 向右轉成功！驗證完成"
                         self.isVerified = true
+                        // 驗證完成，記錄事件
+                        AnalyticsManager.shared.trackEvent("FaceTracking_VerificationCompleted", parameters: ["direction": "right"])
                         self.stopRecordingIfNeeded()
                     } else {
                         // 尚未到達最後一次轉頭
@@ -131,10 +138,13 @@ class FaceTrackingViewController: UIViewController, ARSessionDelegate, AVCapture
                 
                 if yaw < -0.4 && self.canDetectLeftTurn {
                     self.canDetectLeftTurn = false
-                    
+                    // 記錄成功左轉事件
+                    AnalyticsManager.shared.trackEvent("FaceTracking_LeftTurnDetected", parameters: ["yaw": yaw, "count": self.count])
+
                     if self.count == 1 {
                         self.message = "✅ 向左轉成功！驗證完成"
                         self.isVerified = true
+                        AnalyticsManager.shared.trackEvent("FaceTracking_VerificationCompleted", parameters: ["direction": "left"])
                         self.stopRecordingIfNeeded()
                     } else {
                         // 尚未到達最後一次轉頭

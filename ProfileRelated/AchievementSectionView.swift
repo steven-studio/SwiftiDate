@@ -17,12 +17,18 @@ struct AchievementSectionView: View {
     var body: some View {
         HStack(spacing: 20) {
             AchievementCardView(title: "TURBO", count: userSettings.globalTurboCount, color: Color.purple) {
+                // 埋點：點擊TURBO卡片
+                AnalyticsManager.shared.trackEvent("achievement_card_turbo_tapped")
                 isShowingTurboPurchaseView = true
             }
             AchievementCardView(title: "CRUSH", count: userSettings.globalCrushCount, color: Color.green) {
+                // 埋點：點擊CRUSH卡片
+                AnalyticsManager.shared.trackEvent("achievement_card_crush_tapped")
                 isShowingCrushPurchaseView = true
             }
             AchievementCardView(title: "讚美", count: userSettings.globalPraiseCount, color: Color.orange) {
+                // 埋點：點擊讚美卡片
+                AnalyticsManager.shared.trackEvent("achievement_card_praise_tapped")
                 isShowingPraisePurchaseView = true
             }
         }

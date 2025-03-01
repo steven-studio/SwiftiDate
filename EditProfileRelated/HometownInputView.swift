@@ -30,6 +30,8 @@ struct HometownInputView: View {
             HStack {
                 Button(action: {
                     selectedHometown = nil // 清空输入
+                    // 埋點：用戶清空家鄉輸入
+                    AnalyticsManager.shared.trackEvent("hometown_cleared")
                 }) {
                     Text("清空")
                         .foregroundColor(.primary)
@@ -39,8 +41,11 @@ struct HometownInputView: View {
                 }
                 Spacer()
                 Button(action: {
+                    // 埋點：用戶按下確定
+                    AnalyticsManager.shared.trackEvent("hometown_confirmed", parameters: [
+                        "hometown": selectedHometown ?? "none"
+                    ])
                     // 確定並關閉頁面
-                    // 在这里可以添加关闭页面的逻辑
                     presentationMode.wrappedValue.dismiss()
                 }) {
                     Text("確定")
@@ -54,5 +59,9 @@ struct HometownInputView: View {
             .padding(.bottom)
         }
         .padding()
+        .onAppear {
+            // 埋點：頁面曝光
+            AnalyticsManager.shared.trackEvent("hometown_input_view_appear")
+        }
     }
 }

@@ -114,6 +114,7 @@ struct HelpView: View {
                 // Custom Navigation Bar
                 HStack {
                     Button(action: {
+                        AnalyticsManager.shared.trackEvent("HelpView_BackTapped", parameters: nil)
                         isHelpView = false // Dismiss HelpView and return to SettingsView
                     }) {
                         Image(systemName: "chevron.left")
@@ -138,6 +139,7 @@ struct HelpView: View {
                                 .padding(.vertical, 5)) {
                         // Convert HStack to Button
                         Button(action: {
+                            AnalyticsManager.shared.trackEvent("HelpView_WhatIsSwiftiDateTapped", parameters: nil)
                             isWhatIsSwiftiDate = true // Set the state variable to true
                         }) {
                             HStack {
@@ -152,6 +154,7 @@ struct HelpView: View {
                         
                         // Convert HStack to Button
                         Button(action: {
+                            AnalyticsManager.shared.trackEvent("HelpView_SwiftiDatePaidTapped", parameters: nil)
                             isSwiftiDatePaid = true // Set the state variable to true
                         }) {
                             HStack {
@@ -170,6 +173,7 @@ struct HelpView: View {
                                 .foregroundColor(.gray)
                                 .padding(.vertical, 5)) {
                         Button(action: {
+                            AnalyticsManager.shared.trackEvent("HelpView_HowToMatchAndChatTapped", parameters: nil)
                             isHowToMatchAndChat = true // Set the state variable to true
                         }) {
                             HStack {
@@ -184,6 +188,7 @@ struct HelpView: View {
                         
                         // Convert "我能查看誰喜歡了我嗎？" to Button
                         Button(action: {
+                            AnalyticsManager.shared.trackEvent("HelpView_WhoLikedMeTapped", parameters: nil)
                             isWhoLikedMeView = true // Set the state variable to true
                         }) {
                             HStack {
@@ -198,6 +203,7 @@ struct HelpView: View {
                         
                         // Convert "為什麼我很難配對成功？" to Button
                         Button(action: {
+                            AnalyticsManager.shared.trackEvent("HelpView_WhyIsItHardToMatchTapped", parameters: nil)
                             isWhyIsItHardToMatch = true // Set the state variable to true
                         }) {
                             HStack {
@@ -211,6 +217,7 @@ struct HelpView: View {
                         .foregroundColor(.black)
                         
                         Button(action: {
+                            AnalyticsManager.shared.trackEvent("HelpView_HowToUnmatchTapped", parameters: nil)
                             isHowToUnmatchView = true // Set the state variable to true
                         }) {
                             HStack {
@@ -224,6 +231,7 @@ struct HelpView: View {
                         .foregroundColor(.black)
             
                         Button(action: {
+                            AnalyticsManager.shared.trackEvent("HelpView_HowToDeleteMessagesTapped", parameters: nil)
                             isHowToDeleteMessagesView = true
                         }) {
                             HStack {
@@ -237,6 +245,7 @@ struct HelpView: View {
                         .foregroundColor(.black)
             
                         Button(action: {
+                            AnalyticsManager.shared.trackEvent("HelpView_ReportUserTapped", parameters: nil)
                             isReportUserView = true
                         }) {
                             HStack {
@@ -257,6 +266,7 @@ struct HelpView: View {
                                 .padding(.vertical, 5)) {
                                     
                         Button(action: {
+                            AnalyticsManager.shared.trackEvent("HelpView_WhatIsSwiftiDatePremiumTapped", parameters: nil)
                             isWhatIsSwiftiDatePremium = true
                         }) {
                             HStack {
@@ -270,6 +280,7 @@ struct HelpView: View {
                         .foregroundColor(.black)
                                 
                         Button(action: {
+                            AnalyticsManager.shared.trackEvent("HelpView_HowToUseWhoLikedMeAndCrushListTapped", parameters: nil)
                             isHowToUseWhoLikedMeAndCrushListView = true
                         }) {
                             HStack {
@@ -283,6 +294,7 @@ struct HelpView: View {
                         .foregroundColor(.black)
                                     
                         Button(action: {
+                            AnalyticsManager.shared.trackEvent("HelpView_WhatIsCrushAndHowToUseTapped", parameters: nil)
                             isWhatIsCrushAndHowToUseView = true
                         }) {
                             HStack {
@@ -296,6 +308,7 @@ struct HelpView: View {
                         .foregroundColor(.black)
                                     
                         Button(action: {
+                            AnalyticsManager.shared.trackEvent("HelpView_WhatIsTurboAndHowToUseTapped", parameters: nil)
                             isWhatIsTurboAndHowToUseView = true
                         }) {
                             HStack {
@@ -309,6 +322,7 @@ struct HelpView: View {
                         .foregroundColor(.black)
                                     
                         Button(action: {
+                            AnalyticsManager.shared.trackEvent("HelpView_UndoSwipeTapped", parameters: nil)
                             isUndoSwipeView = true
                         }) {
                             HStack {
@@ -322,6 +336,7 @@ struct HelpView: View {
                         .foregroundColor(.black)
 
                         Button(action: {
+                            AnalyticsManager.shared.trackEvent("HelpView_HowToEnablePremiumBadgeTapped", parameters: nil)
                             isHowToEnablePremiumBadgeView = true
                         }) {
                             HStack {
@@ -335,6 +350,7 @@ struct HelpView: View {
                         .foregroundColor(.black)
 
                         Button(action: {
+                            AnalyticsManager.shared.trackEvent("HelpView_HowToPurchaseSwiftiDatePremiumTapped", parameters: nil)
                             isHowToPurchaseSwiftiDatePremiumView = true
                         }) {
                             HStack {
@@ -348,6 +364,7 @@ struct HelpView: View {
                         .foregroundColor(.black)
 
                         Button(action: {
+                            AnalyticsManager.shared.trackEvent("HelpView_HowToCancelSubscriptionTapped", parameters: nil)
                             isHowToCancelSubscriptionView = true
                         }) {
                             HStack {
@@ -361,6 +378,7 @@ struct HelpView: View {
                         .foregroundColor(.black)
 
                         Button(action: {
+                            AnalyticsManager.shared.trackEvent("HelpView_RestorePurchaseTapped", parameters: nil)
                             isRestorePurchaseView = true
                         }) {
                             HStack {
@@ -374,6 +392,7 @@ struct HelpView: View {
                         .foregroundColor(.black)
                                
                         Button(action: {
+                            AnalyticsManager.shared.trackEvent("HelpView_RefundPolicyTapped", parameters: nil)
                             isRefundPolicyView = true
                         }) {
                             HStack {
@@ -387,6 +406,7 @@ struct HelpView: View {
                         .foregroundColor(.black)
 
                         Button(action: {
+                            AnalyticsManager.shared.trackEvent("HelpView_WhatIsSwiftiDatePremiumDiscountPolicyTapped", parameters: nil)
                             isWhatIsSwiftiDatePremiumDiscountPolicyView = true
                         }) {
                             HStack {
@@ -407,6 +427,7 @@ struct HelpView: View {
                                 .padding(.vertical, 5)) {
                                     
                         Button(action: {
+                            AnalyticsManager.shared.trackEvent("HelpView_WhatIsSwiftiDateSupremeTapped", parameters: nil)
                             isWhatIsSwiftiDateSupremeView = true
                         }) {
                             HStack {
@@ -420,6 +441,7 @@ struct HelpView: View {
                         .foregroundColor(.black)
 
                         Button(action: {
+                            AnalyticsManager.shared.trackEvent("HelpView_HowToUseDailyPraiseOpportunityTapped", parameters: nil)
                             isHowToUseDailyPraiseOpportunityView = true
                         }) {
                             HStack {
@@ -433,6 +455,7 @@ struct HelpView: View {
                         .foregroundColor(.black)
 
                         Button(action: {
+                            AnalyticsManager.shared.trackEvent("HelpView_HowToUseAdvancedFilteringTapped", parameters: nil)
                             isHowToUseAdvancedFilteringView = true
                         }) {
                             HStack {
@@ -446,6 +469,7 @@ struct HelpView: View {
                         .foregroundColor(.black)
 
                         Button(action: {
+                            AnalyticsManager.shared.trackEvent("HelpView_HowToUseIncognitoModeTapped", parameters: nil)
                             isHowToUseIncognitoModeView = true
                         }) {
                             HStack {
@@ -459,6 +483,7 @@ struct HelpView: View {
                         .foregroundColor(.black)
 
                         Button(action: {
+                            AnalyticsManager.shared.trackEvent("HelpView_HowToPurchaseSwiftiDateSupremeTapped", parameters: nil)
                             isHowToPurchaseSwiftiDateSupremeView = true
                         }) {
                             HStack {
@@ -479,6 +504,7 @@ struct HelpView: View {
                                 .padding(.vertical, 5)) {
                                   
                         Button(action: {
+                            AnalyticsManager.shared.trackEvent("HelpView_UpdateProfileDetailsTapped", parameters: nil)
                             isUpdateProfileDetailsView = true
                         }) {
                             HStack {
@@ -492,6 +518,7 @@ struct HelpView: View {
                         .foregroundColor(.black)
 
                         Button(action: {
+                            AnalyticsManager.shared.trackEvent("HelpView_ManageProfilePhotosTapped", parameters: nil)
                             isManageProfilePhotosView = true
                         }) {
                             HStack {
@@ -505,6 +532,7 @@ struct HelpView: View {
                         .foregroundColor(.black)
 
                         Button(action: {
+                            AnalyticsManager.shared.trackEvent("HelpView_PhotoUploadGuidelinesTapped", parameters: nil)
                             isPhotoUploadGuidelinesView = true
                         }) {
                             HStack {
@@ -550,6 +578,7 @@ struct HelpView: View {
                         }
                         
                         Button(action: {
+                            AnalyticsManager.shared.trackEvent("HelpView_HowToEnableNotificationsTapped", parameters: nil)
                             isHowToEnableNotificationsView = true
                         }) {
                             HStack {
@@ -572,6 +601,9 @@ struct HelpView: View {
                     }
                 }
                 .listStyle(GroupedListStyle()) // To create the grouped appearance like in your image
+                .onAppear {
+                    AnalyticsManager.shared.trackEvent("HelpView_Appeared", parameters: nil)
+                }
             }
         }
     }

@@ -49,7 +49,8 @@ struct OTPVerificationView: View {
         VStack {
             HStack {
                 Button(action: {
-                    // Handle Back Action (Pop to previous view)
+                    // 返回上一頁前追蹤返回事件
+                    AnalyticsManager.shared.trackEvent("OTPVerification_BackTapped", parameters: nil)
                     isRegistering = false
                 }) {
                     Image(systemName: "chevron.left")
@@ -103,6 +104,9 @@ struct OTPVerificationView: View {
             }
             .padding(.horizontal)
             .onAppear {
+                // 畫面出現時記錄 Analytics 事件
+                AnalyticsManager.shared.trackEvent("OTPVerification_Appeared", parameters: nil)
+                
                 #if DEBUG
                 if isPreview {
                     // 直接 Mock 一個假的 verificationID，或者什麼都不做
@@ -128,7 +132,8 @@ struct OTPVerificationView: View {
             .padding(.bottom)
             
             Button(action: {
-                
+                AnalyticsManager.shared.trackEvent("OTPVerification_ResendOTP", parameters: ["phone": "\(selectedCountryCode)\(phoneNumber)"])
+                resendOTP()
             }) {
                 countdown == 0 ? Text("重新獲取")
                     .foregroundColor(.green)
@@ -137,7 +142,11 @@ struct OTPVerificationView: View {
             
             Spacer()
 
-            Button(action: verifyOTPCode) {
+            Button(action: {
+                // 驗證按鈕被點擊時，記錄事件並開始驗證流程
+                AnalyticsManager.shared.trackEvent("OTPVerification_VerifyTapped", parameters: ["otp": otpCode.joined()])
+                verifyOTPCode()
+            }) {
                 HStack {
                     if isVerifying {
                         ProgressView()

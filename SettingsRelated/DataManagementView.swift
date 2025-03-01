@@ -15,6 +15,7 @@ struct DataManagementView: View {
             // Custom Navigation Bar
             HStack {
                 Button(action: {
+                    AnalyticsManager.shared.trackEvent("DataManagementView_BackTapped", parameters: nil)
                     isDataManagementView = false // Dismiss DataManagementView
                 }) {
                     Image(systemName: "chevron.left")
@@ -48,6 +49,7 @@ struct DataManagementView: View {
                     Divider()
                     
                     Button(action: {
+                        AnalyticsManager.shared.trackEvent("DataManagementView_ClearCacheTapped", parameters: nil)
                         // Add action to clear cache
                     }) {
                         Text("清除快取")
@@ -63,6 +65,9 @@ struct DataManagementView: View {
                 }
                 .padding()
             }
+        }
+        .onAppear {
+            AnalyticsManager.shared.trackEvent("DataManagementView_Appeared", parameters: nil)
         }
     }
 }

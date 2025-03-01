@@ -67,6 +67,11 @@ struct MainView: View {
             }
             .tag(4) // Assign a tag for ProfileView tab
         }
+        .onChange(of: selectedTab) { newValue in
+            AnalyticsManager.shared.trackEvent("tab_switched", parameters: [
+                "new_tab_index": newValue
+            ])
+        }
     }
 }
 

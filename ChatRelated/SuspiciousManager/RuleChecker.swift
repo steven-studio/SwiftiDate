@@ -20,6 +20,8 @@ struct RuleChecker {
         currentUserGender: Gender,
         completion: @escaping (SuspiciousCheckResult) -> Void
     ) {
+        let trimmedText = message.trimmingCharacters(in: .whitespaces)
+        guard !trimmedText.isEmpty else { return }
         
         // 1) 先做「男性用戶第一句就約砲」的規則
         if currentUserGender == .male {
@@ -35,7 +37,18 @@ struct RuleChecker {
             // 2) 男性用戶第一階段就告白
             // 假設只要出現「我喜歡你」就提醒
             if isExactConfession(message) {
-                completion(.block(.tooFastConfession))
+                completion(.warn(.tooFastConfession))
+                return
+            }
+        }
+        
+        // 1) 在 checkMessage(...) 中，插入一段邏輯：
+        //    若使用者性別為女性，且訊息包含「我們來點刺激的」，就視為詐騙。
+        if currentUserGender == .female {
+            let loweredMsg = message.lowercased()
+            // 這裡可依需求：完整相等、或只要包含關鍵字
+            if loweredMsg == "我們來點刺激的" || loweredMsg == "要不要來點刺激的" || loweredMsg == "要不來點刺激的" {
+                completion(.block(.scamKeyword)) // 或你想用別的 reason
                 return
             }
         }
@@ -56,10 +69,28 @@ struct RuleChecker {
                 // 如果雲端判定有惡意網址 → 直接 Block
                 completion(.block(.phishingLink))
                 return
-            } else {
-                // 這裡可以再接續其他同步規則 (若有更多規則)，
-                // 或者直接回傳 .allow 表示沒被攔截
-                completion(.allow)
+            }
+        }
+        
+        NLPChecker.isScamOrSale(message) { isScamSale in
+            if isScamSale {
+                completion(.block(.scamKeyword)) // 或另外定義 reason
+                return
+            }
+        }
+        
+        // 在 checkMessage(...) 裡
+        NLPChecker.isBallsInHerHandNLP(message) { isBalls in
+            if isBalls {
+                completion(.warn(.ballsInHerHand))
+                return
+            }
+        }
+        
+        NLPChecker.isNSFW(message) { isNSFW in
+            if isNSFW {
+                // 執行你的攔截或提示邏輯
+                completion(.block(.NSFWKeyword))
                 return
             }
         }

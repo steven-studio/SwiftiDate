@@ -17,6 +17,7 @@ struct PersonalInfoView: View {
             // Custom Navigation Bar
             HStack {
                 Button(action: {
+                    AnalyticsManager.shared.trackEvent("PersonalInfoView_BackTapped", parameters: nil)
                     isPersonalInfoView = false // Dismiss the view when back is tapped
                 }) {
                     Image(systemName: "chevron.left")
@@ -54,6 +55,9 @@ struct PersonalInfoView: View {
                 .padding(.vertical, 10)
             }
             .listStyle(GroupedListStyle()) // Optional: Set the list style to match the look
+        }
+        .onAppear {
+            AnalyticsManager.shared.trackEvent("PersonalInfoView_Appeared", parameters: nil)
         }
     }
     

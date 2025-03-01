@@ -63,6 +63,7 @@ struct BasicInfoView: View {
                 isValueEmpty: selectedHometown == nil,
                 onTap: {
                     showHometownInput = true
+                    AnalyticsManager.shared.trackEvent("tap_edit_hometown")
                 }
             )
             .sheet(isPresented: $showHometownInput) {
@@ -76,6 +77,7 @@ struct BasicInfoView: View {
                 isValueEmpty: selectedLanguages.isEmpty,
                 onTap: {
                     showLanguageSelection = true
+                    AnalyticsManager.shared.trackEvent("tap_edit_language")
                 }
             )
             .sheet(isPresented: $showLanguageSelection) {
@@ -89,6 +91,7 @@ struct BasicInfoView: View {
                 isValueEmpty: selectedHeight == nil,
                 onTap: {
                     showHeightPicker = true
+                    AnalyticsManager.shared.trackEvent("tap_edit_height")
                 }
             )
             .sheet(isPresented: $showHeightPicker) {
@@ -105,6 +108,7 @@ struct BasicInfoView: View {
                 isValueEmpty: selectedZodiac.isEmpty,
                 onTap: {
                     showZodiacPicker = true
+                    AnalyticsManager.shared.trackEvent("tap_edit_zodiac")
                 }
             )
             .sheet(isPresented: $showZodiacPicker) {
@@ -121,6 +125,7 @@ struct BasicInfoView: View {
                 isValueEmpty: selectedBloodType == nil,
                 onTap: {
                     showBloodTypePicker = true
+                    AnalyticsManager.shared.trackEvent("tap_edit_blood_type")
                 }
             )
             .sheet(isPresented: $showBloodTypePicker) {

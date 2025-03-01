@@ -23,6 +23,7 @@ struct InfoPopupView: View {
                         .font(.headline)
                     Spacer()
                     Button(action: {
+                        AnalyticsManager.shared.trackEvent("info_popup_close_tapped")
                         isShowing = false // Close the popup
                     }) {
                         Image(systemName: "xmark")
@@ -66,6 +67,7 @@ struct InfoPopupView: View {
                 .padding(.horizontal)
                 
                 Button(action: {
+                    AnalyticsManager.shared.trackEvent("info_popup_get_more_exposure_tapped")
                     isShowing = false // Dismiss the popup
                 }) {
                     Text("獲得更多曝光的機會")
@@ -87,6 +89,11 @@ struct InfoPopupView: View {
         }
         .transition(.opacity) // Smooth transition when appearing/disappearing
         .animation(.easeInOut)
+        .onAppear {
+            AnalyticsManager.shared.trackEvent("info_popup_view_appear", parameters: [
+                "user_rank_percentage": userRankPercentage
+            ])
+        }
     }
 }
 

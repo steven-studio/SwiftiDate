@@ -19,5 +19,11 @@ struct ProfileTabPicker: View {
         }
         .pickerStyle(SegmentedPickerStyle())
         .padding()
+        .onChange(of: selectedTab) { newTab in
+             AnalyticsManager.shared.trackEvent("profile_tab_changed", parameters: ["selected_tab": newTab.rawValue])
+        }
+        .onAppear {
+             AnalyticsManager.shared.trackEvent("profile_tab_picker_view_appear")
+        }
     }
 }

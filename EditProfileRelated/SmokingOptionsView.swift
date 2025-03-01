@@ -22,6 +22,9 @@ struct SmokingOptionsView: View {
             ForEach(["只在社交場合", "在喝酒時抽煙", "不抽煙", "經常", "有時候"], id: \.self) { option in
                 Button(action: {
                     selectedSmokingOption = option
+                    AnalyticsManager.shared.trackEvent("smoking_option_selected", parameters: [
+                        "option": option
+                    ])
                 }) {
                     Text(option)
                         .frame(maxWidth: .infinity)
@@ -39,6 +42,7 @@ struct SmokingOptionsView: View {
             HStack {
                 Button(action: {
                     selectedSmokingOption = nil // Clear the selection
+                    AnalyticsManager.shared.trackEvent("smoking_option_cleared")
                 }) {
                     Text("清空")
                         .foregroundColor(.primary)
@@ -48,6 +52,9 @@ struct SmokingOptionsView: View {
                 }
                 Spacer()
                 Button(action: {
+                    AnalyticsManager.shared.trackEvent("smoking_option_confirmed", parameters: [
+                        "option": selectedSmokingOption ?? "none"
+                    ])
                     presentationMode.wrappedValue.dismiss() // Dismiss the view
                 }) {
                     Text("確定")

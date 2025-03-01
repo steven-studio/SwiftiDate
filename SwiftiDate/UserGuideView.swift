@@ -8,11 +8,26 @@
 import Foundation
 import SwiftUI
 
+// 定義 PreferenceKey 來傳遞滾動偏移量
+struct ScrollOffsetPreferenceKey: PreferenceKey {
+    static var defaultValue: CGFloat = 0
+    static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) {
+        value = nextValue()
+    }
+}
+
 struct UserGuideView: View {
     @State private var showSocialCourse = false  // 用來控制是否
-    
+    @State private var scrollOffset: CGFloat = 0
+
     var body: some View {
         ScrollView {
+            GeometryReader { geo in
+                Color.clear
+                    .preference(key: ScrollOffsetPreferenceKey.self, value: geo.frame(in: .global).minY)
+            }
+            .frame(height: 0) // 隱藏 GeometryReader 本身
+            
             VStack(alignment: .leading, spacing: 10) {
                 Text("歡迎來到 SwiftiDate！在這裡，使用「讚美」與「超級喜歡」的功能，就好比在現實生活中向女生搭訕，表達您的興趣和好感。在這份指南中，我們將引導您如何運用這些功能，讓您能更自然地向心儀的對象搭訕，並增加互動機會。")
                     .padding(.bottom)
@@ -22,6 +37,8 @@ struct UserGuideView: View {
                 
                 // 🔥 按鈕：顯示社交課程視窗
                 Button(action: {
+                    // 埋點：使用者點擊進入社交課程按鈕
+                    AnalyticsManager.shared.trackEvent("social_course_button_tapped")
                     showSocialCourse = true
                 }) {
                     Text("🎓 進入社交課程")
@@ -152,7 +169,19 @@ struct UserGuideView: View {
             }
             .padding()
         }
+        .onPreferenceChange(ScrollOffsetPreferenceKey.self) { value in
+            scrollOffset = value
+            // 你可以根據 scrollOffset 的數值來判斷用戶是否滑到某個區塊
+            // 例如，當 scrollOffset 小於某個閾值時，觸發事件
+            if scrollOffset < -200 {
+                AnalyticsManager.shared.trackEvent("user_guide_scrolled_past_intro")
+            }
+        }
         .navigationTitle("使用說明")
+        .onAppear {
+            // 埋點：整個使用說明頁面曝光
+            AnalyticsManager.shared.trackEvent("user_guide_view_appear")
+        }
     }
 }
 

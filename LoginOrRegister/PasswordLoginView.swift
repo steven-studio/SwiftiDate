@@ -20,8 +20,10 @@ struct PasswordLoginView: View {
         VStack {
             HStack {
                 Button(action: {
+                    // 返回上一頁前記錄事件
+                    AnalyticsManager.shared.trackEvent("PasswordLogin_BackTapped", parameters: nil)
                     // Handle Back Action (Pop to previous view)
-//                    isRegistering = false
+                    // isRegistering = false
                 }) {
                     Image(systemName: "chevron.left")
                         .font(.title2)
@@ -70,10 +72,17 @@ struct PasswordLoginView: View {
             .padding()
         }
         .padding()
+        .onAppear {
+            // 畫面出現時記錄 Analytics 事件
+            AnalyticsManager.shared.trackEvent("PasswordLoginView_Appeared", parameters: nil)
+        }
     }
 
     private func loginUser() {
         isLoggingIn = true
+        
+        // 記錄使用者嘗試登入
+        AnalyticsManager.shared.trackEvent("PasswordLogin_LoginAttempt", parameters: ["phone": "\(selectedCountryCode)\(phoneNumber)"])
 
         let fullPhoneNumber = "\(selectedCountryCode)\(phoneNumber)"
         let url = URL(string: "https://your-api.com/login")! // ✅ 替換為你的後端 API
@@ -90,6 +99,7 @@ struct PasswordLoginView: View {
             }
 
             guard let data = data, error == nil else {
+                let errorMessage = error?.localizedDescription ?? "未知錯誤"
                 print("❌ 登入失敗: \(error?.localizedDescription ?? "未知錯誤")")
                 return
             }
@@ -101,15 +111,19 @@ struct PasswordLoginView: View {
                 DispatchQueue.main.async {
                     if success {
                         print("✅ 登入成功")
+                        AnalyticsManager.shared.trackEvent("PasswordLogin_LoginSuccess", parameters: nil)
                         // 跳轉到主畫面
                         userSettings.globalPhoneNumber = phoneNumber
                         appState.isLoggedIn = true
                     } else {
                         print("❌ 密碼錯誤")
+                        AnalyticsManager.shared.trackEvent("PasswordLogin_LoginFailure", parameters: ["reason": "密碼錯誤"])
                     }
                 }
             } catch {
+                let parseError = error.localizedDescription
                 print("❌ API 回應解析失敗: \(error.localizedDescription)")
+                AnalyticsManager.shared.trackEvent("PasswordLogin_LoginFailure", parameters: ["error": parseError])
             }
         }.resume()
     }

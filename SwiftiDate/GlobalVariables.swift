@@ -7,6 +7,8 @@
 
 import Foundation
 import SwiftUI
+import Firebase
+import Mixpanel
 
 // MARK: - Gender Enum
 enum Gender: String {
@@ -388,6 +390,34 @@ class UserSettings: ObservableObject {
         self.globalLatitude      = 0.0
         self.globalLongitude     = 0.0
         self.globalSubadministrativeArea = ""
+    }
+    
+    // MARK: - 🔥 以下為行為分析平台的示範方法
+
+    // 範例: Firebase Analytics 設定 userID
+    func setCurrentUserId(_ userId: String) {
+        // Firebase
+        Analytics.setUserID(userId)
+
+        // Mixpanel
+        // 若你還沒針對使用者呼叫 identify，需先呼叫
+        Mixpanel.mainInstance().identify(distinctId: userId)
+
+        print("Debug: setCurrentUserId => \(userId)")
+    }
+    
+    // 範例: Mixpanel 設定 userProfile
+    func setUserProfile(name: String, phone: String) {
+        // --- Firebase ---
+        // Firebase 沒有預設的「name」或「phone」屬性，需要使用自訂屬性:
+        Analytics.setUserProperty(name, forName: "user_name")
+        Analytics.setUserProperty(phone, forName: "user_phone")
+
+        // --- Mixpanel ---
+        // 若已經 identify 過此使用者，可透過 Mixpanel People API 設定
+        Mixpanel.mainInstance().people.set(properties: ["name": name, "phone": phone])
+
+        print("Debug: setUserProfile => name=\(name), phone=\(phone)")
     }
 }
 

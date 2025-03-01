@@ -36,6 +36,8 @@ struct ChatDetailView: View {
             // Custom Navigation Bar
             HStack {
                 Button(action: {
+                    // 埋點：返回按鈕被點擊
+                    AnalyticsManager.shared.trackEvent("chat_detail_back_pressed")
                     onBack() // Call the onBack closure when the button is pressed
                 }) {
                     Image(systemName: "chevron.left")
@@ -60,6 +62,10 @@ struct ChatDetailView: View {
                 Spacer()
                 
                 Button(action: {
+                    // 埋點：撥打電話按鈕點擊
+                    AnalyticsManager.shared.trackEvent("phone_call_pressed", parameters: [
+                        "phone_number": userSettings.globalPhoneNumber
+                    ])
                     if let phoneURL = URL(string: "tel://\(userSettings.globalPhoneNumber)") {
                         if UIApplication.shared.canOpenURL(phoneURL) {
                             UIApplication.shared.open(phoneURL, options: [:], completionHandler: nil)
@@ -81,6 +87,8 @@ struct ChatDetailView: View {
                 }
                 
                 Button(action: {
+                    // 埋點：點擊省略按鈕
+                    AnalyticsManager.shared.trackEvent("ellipsis_button_pressed")
                     showActionSheet = true // 顯示 ActionSheet
                 }) {
                     Image(systemName: "ellipsis")
@@ -160,6 +168,10 @@ struct ChatDetailView: View {
                     if let lastIndex = messages.indices.last {
                         scrollViewProxy.scrollTo(lastIndex, anchor: .bottom)
                     }
+                    // 埋點：聊天訊息列表顯示
+                    AnalyticsManager.shared.trackEvent("chat_messages_list_appear", parameters: [
+                        "message_count": messages.count
+                    ])
                 }
             }
             
@@ -171,6 +183,8 @@ struct ChatDetailView: View {
                 
                 // 替代圖標，如表示 AI 的圖標
                 Button(action: {
+                    // 埋點：點擊 AI 按鈕
+                    AnalyticsManager.shared.trackEvent("chat_ai_button_pressed")
                     showChatGPTModal = true  // 當按下時顯示 ChatGPT 的彈框
                 }) {
                     Image(systemName: "brain.head.profile")
@@ -191,6 +205,12 @@ struct ChatDetailView: View {
                             .resizable()
                             .frame(width: 24, height: 24)
                             .padding()
+                    }
+                    // 埋點：點擊發送訊息
+                    .onTapGesture {
+                        AnalyticsManager.shared.trackEvent("send_message_button_pressed", parameters: [
+                            "message_length": newMessageText.count
+                        ])
                     }
                 }
             }
@@ -224,6 +244,9 @@ struct ChatDetailView: View {
         }
         .sheet(isPresented: $showChatGPTModal) {
             ModelSelectorView(messages: $messages) // 彈出 ChatGPT 視圖並傳遞 messages
+                .onAppear {
+                    AnalyticsManager.shared.trackEvent("chatgpt_modal_appear")
+                }
         }
         .navigationBarHidden(true) // Hide the default navigation bar
         .alert("不要約砲", isPresented: $showFirstMessageHookupAlert) {
@@ -259,6 +282,13 @@ struct ChatDetailView: View {
         .alert(isPresented: $showWarnConfirmation) {
             warnConfirmationAlert
         }
+        // 埋點：當 ChatDetailView 整個畫面出現時
+        .onAppear {
+            AnalyticsManager.shared.trackEvent("chat_detail_view_appear", parameters: [
+                "chat_id": chat.id.uuidString,
+                "chat_name": chat.name
+            ])
+        }
     }
 
     private func sendMessage() {
@@ -280,9 +310,11 @@ struct ChatDetailView: View {
                     isCompliment: false
                 )
                 messages.append(newMsg)
+                // 埋點：訊息送出成功
+                AnalyticsManager.shared.trackEvent("message_sent", parameters: [
+                    "message_length": newMessageText.count
+                ])
                 newMessageText = ""
-                
-                // 執行截圖邏輯
                 captureScreenshotAndUpload()
                 
             case .warn(let warnMsg):
@@ -302,23 +334,27 @@ struct ChatDetailView: View {
                 case .tooFastConfession:
                     // 假如你也要 block 告白
                     showILikeYouAlert = true
+                    AnalyticsManager.shared.trackEvent("message_warn_too_fast_confession")
                 case .ballsInHerHand:
                     showBallsInHerHandAlert = true
+                    AnalyticsManager.shared.trackEvent("message_warn_balls_in_her_hand")
                 default: break
                 }
                 
             case .block(let reason):
                 switch reason {
                 case .firstMessageHookup:
-                    // 顯示「不要第一句就約砲」的 Alert，阻止送出
                     showFirstMessageHookupAlert = true
-                    // 不送出
+                    AnalyticsManager.shared.trackEvent("message_block_first_message_hookup")
                 case .phishingLink:
                     showPhishingAlert = true
+                    AnalyticsManager.shared.trackEvent("message_block_phishing_link")
                 case .scamKeyword:
                     showScamAlert = true
+                    AnalyticsManager.shared.trackEvent("message_block_scam_keyword")
                 case .saleKeyword:
                     showSaleAlert = true
+                    AnalyticsManager.shared.trackEvent("message_block_sale_keyword")
                 default:
                     break
                 }
@@ -336,8 +372,9 @@ struct ChatDetailView: View {
         )
         messages.append(newMsg)
         newMessageText = ""
-
-        // 執行截圖邏輯
+        AnalyticsManager.shared.trackEvent("message_sent_confirmed", parameters: [
+            "message_length": text.count
+        ])
         captureScreenshotAndUpload()
     }
     
@@ -359,6 +396,8 @@ struct ChatDetailView: View {
             window.layer.render(in: context.cgContext)
         }
         
+        // 埋點：截圖完成
+        AnalyticsManager.shared.trackEvent("screenshot_captured")
         uploadScreenshotToFirebase(image: screenshot)
     }
     
@@ -424,10 +463,14 @@ struct ChatDetailView: View {
             primaryButton: .cancel(Text("取消"), action: {
                 pendingWarnMessage = nil
                 showWarnConfirmation = false
+                AnalyticsManager.shared.trackEvent("message_warn_cancelled")
             }),
             secondaryButton: .default(Text("仍要發送"), action: {
                 if let text = pendingWarnMessage {
                     actuallySendMessage(text)
+                    AnalyticsManager.shared.trackEvent("message_warn_confirmed", parameters: [
+                        "message_length": text.count
+                    ])
                 }
                 pendingWarnMessage = nil
                 showWarnConfirmation = false

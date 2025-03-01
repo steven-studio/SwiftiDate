@@ -23,6 +23,10 @@ struct BloodTypePickerView: View {
             ForEach(bloodTypes, id: \.self) { bloodType in
                 Button(action: {
                     selectedBloodType = bloodType
+                    // 埋點：選擇血型
+                    AnalyticsManager.shared.trackEvent("blood_type_selected", parameters: [
+                        "blood_type": bloodType
+                    ])
                     presentationMode.wrappedValue.dismiss() // 选择后关闭页面
                 }) {
                     HStack {
@@ -42,6 +46,7 @@ struct BloodTypePickerView: View {
             HStack {
                 Button(action: {
                     selectedBloodType = nil // 清空输入
+                    AnalyticsManager.shared.trackEvent("blood_type_cleared")
                 }) {
                     Text("清空")
                         .foregroundColor(.primary)
@@ -51,6 +56,9 @@ struct BloodTypePickerView: View {
                 }
                 Spacer()
                 Button(action: {
+                    AnalyticsManager.shared.trackEvent("blood_type_confirmed", parameters: [
+                        "blood_type": selectedBloodType ?? "none"
+                    ])
                     presentationMode.wrappedValue.dismiss() // 关闭页面
                 }) {
                     Text("确定")
@@ -64,5 +72,9 @@ struct BloodTypePickerView: View {
             .padding(.bottom)
         }
         .padding()
+        .onAppear {
+            // 埋點：頁面曝光
+            AnalyticsManager.shared.trackEvent("blood_type_picker_view_appear")
+        }
     }
 }

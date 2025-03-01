@@ -25,6 +25,7 @@ struct CrushPurchaseView: View {
                 
                 // Add the "X" button on top of the image
                 Button(action: {
+                    AnalyticsManager.shared.trackEvent("crush_purchase_view_dismissed")
                     presentationMode.wrappedValue.dismiss() // Dismiss the view
                 }) {
                     Image(systemName: "xmark")
@@ -51,19 +52,25 @@ struct CrushPurchaseView: View {
             HStack(spacing: 10) {
                 CrushOptionView(title: "60 Crushes", price: "NT$34/個", discount: "省 48%", isSelected: selectedOption == "60 Crushes") {
                     selectedOption = "60 Crushes"
+                    AnalyticsManager.shared.trackEvent("crush_option_selected", parameters: ["option": "60 Crushes"])
                 }
                 CrushOptionView(title: "30 Crushes", price: "NT$43/個", discount: "省 33%", isSelected: selectedOption == "30 Crushes") {
                     selectedOption = "30 Crushes"
+                    AnalyticsManager.shared.trackEvent("crush_option_selected", parameters: ["option": "30 Crushes"])
                 }
                 CrushOptionView(title: "5 Crushes", price: "NT$64/個", discount: "", isSelected: selectedOption == "5 Crushes") {
                     selectedOption = "5 Crushes"
+                    AnalyticsManager.shared.trackEvent("crush_option_selected", parameters: ["option": "5 Crushes"])
                 }
             }
             .padding(.horizontal)
             
             // Purchase button
             Button(action: {
-                print("立即擁有 clicked")
+                AnalyticsManager.shared.trackEvent("crush_purchase_button_tapped", parameters: [
+                    "selected_option": selectedOption
+                ])
+                print("立即擁有 clicked with \(selectedOption)")
                 // Handle the purchase logic here
             }) {
                 Text("立即擁有")

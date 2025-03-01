@@ -44,11 +44,22 @@ struct SocialTrainingView: View {
                     ForEach(courses) { course in
                         NavigationLink(destination: CourseDetailView(course: course)) {
                             CourseRowView(course: course)
+                                .simultaneousGesture(TapGesture().onEnded {
+                                    // 埋點：使用者點擊某個課程
+                                    AnalyticsManager.shared.trackEvent("social_course_tapped", parameters: [
+                                        "course_title": course.title,
+                                        "instructor": course.instructor
+                                    ])
+                                })
                         }
                         .buttonStyle(PlainButtonStyle()) // 讓整個 row 可點擊
                     }
                 }
                 .padding()
+                // 埋點：頁面曝光
+                .onAppear {
+                    AnalyticsManager.shared.trackEvent("social_training_view_appear")
+                }
             }
             .navigationTitle("社交課程")
         }

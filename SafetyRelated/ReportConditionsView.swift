@@ -73,6 +73,9 @@ struct ReportConditionsView: View {
             Spacer()
         }
         .background(Color.white.ignoresSafeArea())
+        .onAppear {
+            AnalyticsManager.shared.trackEvent("SafetyTipsView_Appeared", parameters: nil)
+        }
     }
 }
 

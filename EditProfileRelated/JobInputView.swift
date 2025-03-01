@@ -30,6 +30,8 @@ struct JobInputView: View {
             HStack {
                 Button(action: {
                     selectedJob = nil // 清空输入
+                    // 埋點：記錄用戶清空職業輸入
+                    AnalyticsManager.shared.trackEvent("job_input_cleared")
                 }) {
                     Text("清空")
                         .foregroundColor(.primary)
@@ -39,8 +41,11 @@ struct JobInputView: View {
                 }
                 Spacer()
                 Button(action: {
+                    // 埋點：記錄用戶確認輸入，傳入最終選擇的職業（若無則為 "none"）
+                    AnalyticsManager.shared.trackEvent("job_input_confirmed", parameters: [
+                        "job": selectedJob ?? "none"
+                    ])
                     // 確定並關閉頁面
-                    // 你可以选择在这里关闭页面
                     presentationMode.wrappedValue.dismiss()
                 }) {
                     Text("確定")
@@ -53,6 +58,10 @@ struct JobInputView: View {
             .padding(.trailing)
         }
         .padding()
+        .onAppear {
+            // 埋點：頁面曝光
+            AnalyticsManager.shared.trackEvent("job_input_view_appear")
+        }
     }
 }
 
