@@ -25,6 +25,7 @@ struct MeetWillingnessView: View {
                         .font(.title)
                         .foregroundColor(.black)
                 }
+                .accessibilityIdentifier("dismissButton")
                 Spacer()
                 Button(action: {
                     // 埋點：使用者點擊清空按鈕（如果你要實作清空操作）

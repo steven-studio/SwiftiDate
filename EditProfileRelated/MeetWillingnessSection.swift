@@ -46,9 +46,5 @@ struct MeetWillingnessSection: View {
             }
         }
         .padding()
-        .onAppear {
-            // 埋點：頁面曝光，記錄 MeetWillingnessSection 的展示
-            AnalyticsManager.shared.trackEvent("meet_willingness_section_view_appear")
-        }
     }
 }

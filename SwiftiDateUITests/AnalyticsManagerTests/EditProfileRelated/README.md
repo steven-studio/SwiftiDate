@@ -242,3 +242,22 @@
 
 ### 測試通過截圖：
 ![LookingForView 測試通過](./LookingForViewTestResult.png)
+
+---
+
+### MeetWillingnessView 測試結果
+
+我們針對 MeetWillingnessView 進行了 UI 互動測試，主要檢查以下幾點：
+
+- 當畫面出現時，上報 "meet_willingness_view_appear" 事件，確保用戶進入該頁面時能夠正確統計頁面曝光。
+- 當用戶點擊見面意願選項（例如「期待立刻見面」）時，對應的 binding 能夠正確更新，並透過 Analytics 上報 "meet_option_selected" 事件，附帶正確的選項參數。
+- 當用戶點擊「清空」按鈕時，會清空所選意願並上報 "meet_willingness_cleared" 事件。
+- 當用戶點擊返回 (xmark) 按鈕時，會更新綁定使頁面關閉，並上報 "meet_willingness_view_dismissed" 事件。
+
+所有測試均已成功通過，確保 MeetWillingnessView 在用戶互動時能夠正確更新狀態並上報相關 Analytics 數據。
+
+### 測試通過截圖：
+![MeetWillingnessView 測試通過](./MeetWillingnessTestResult.png)
+
+---
+
