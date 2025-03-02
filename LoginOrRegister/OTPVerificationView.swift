@@ -23,7 +23,10 @@ struct OTPVerificationView: View {
     @State private var isResending = false
     @State private var countdown = 30 // 倒數計時器
     @FocusState private var focusedIndex: Int? // Tracks which TextField is currently focused
+    @State private var showResetPasswordView = false
     @State private var showRealVerification = false // ✅ 控制是否跳轉到真人認證
+    // 新增的參數，用來判斷是否為重設密碼流程
+    var isResetPassword: Bool = false
     #if DEBUG
     /// 利用環境變數 "XCODE_RUNNING_FOR_PREVIEWS" 判斷是否是 SwiftUI Preview
     private var isPreview: Bool {
@@ -163,6 +166,14 @@ struct OTPVerificationView: View {
             .padding()
         }
         .padding()
+        .fullScreenCover(isPresented: $showResetPasswordView) {
+            ResetPasswordView(
+                selectedCountryCode: $selectedCountryCode,
+                phoneNumber: $phoneNumber
+            )
+            .environmentObject(appState)
+            .environmentObject(userSettings)
+        }
         .fullScreenCover(isPresented: $showRealVerification) { // ✅ 驗證成功後跳轉真人認證
             RealVerificationView(selectedCountryCode: $selectedCountryCode, phoneNumber: $phoneNumber)
                 .environmentObject(appState) // ✅ 傳遞 AppState
@@ -251,7 +262,11 @@ struct OTPVerificationView: View {
                     print("❌ 驗證失敗: \(error.localizedDescription)")
                 } else {
                     print("✅ 驗證成功！用戶登入成功")
-                    showRealVerification = true // ✅ 觸發真人認證畫面
+                    if isResetPassword {
+                        showResetPasswordView = true
+                    } else {
+                        showRealVerification = true // ✅ 觸發真人認證畫面
+                    }
                 }
             }
         }

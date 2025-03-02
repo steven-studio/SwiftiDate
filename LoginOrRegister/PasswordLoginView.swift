@@ -15,6 +15,7 @@ struct PasswordLoginView: View {
     @Binding var phoneNumber: String
     @State private var password: String = ""
     @State private var isLoggingIn = false
+    @State private var showOTPForResetPassword = false  // 新增這個狀態
 
     var body: some View {
         VStack {
@@ -49,10 +50,17 @@ struct PasswordLoginView: View {
                 .cornerRadius(10)
                 .accessibilityIdentifier("PasswordTextField") // <- 加上 Identifier
             
-            Text("忘記密碼？")
-                .font(.body)
-                .foregroundColor(Color.green)
-                .padding(.top)
+            // 將 "忘記密碼？" 改成 Button
+            Button(action: {
+                // 記錄事件，並切換到 OTP 驗證（密碼重設模式）
+                AnalyticsManager.shared.trackEvent("PasswordLogin_ForgotPasswordTapped", parameters: nil)
+                showOTPForResetPassword = true
+            }) {
+                Text("忘記密碼？")
+                    .font(.headline)
+                    .foregroundColor(.green)
+                    .padding(.top)
+            }
 
             Spacer()
 
@@ -76,6 +84,17 @@ struct PasswordLoginView: View {
         .onAppear {
             // 畫面出現時記錄 Analytics 事件
             AnalyticsManager.shared.trackEvent("PasswordLoginView_Appeared", parameters: nil)
+        }
+        // 使用 fullScreenCover 導向 OTPVerificationView，並傳入密碼重設模式參數
+        .fullScreenCover(isPresented: $showOTPForResetPassword) {
+            OTPVerificationView(
+                isRegistering: .constant(false), // 若非註冊流程
+                selectedCountryCode: $selectedCountryCode,
+                phoneNumber: $phoneNumber,
+                isResetPassword: true // 新增參數，告知 OTPVerificationView 是用於重設密碼
+            )
+            .environmentObject(appState)
+            .environmentObject(userSettings)
         }
     }
 
