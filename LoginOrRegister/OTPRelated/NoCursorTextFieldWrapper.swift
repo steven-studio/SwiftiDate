@@ -28,6 +28,7 @@ struct NoCursorTextFieldWrapper: UIViewRepresentable {
         textField.textColor = .black
         textField.tintColor = .clear    // 游標顏色也可再設一次
         textField.borderStyle = .none
+        textField.textContentType = .oneTimeCode
         textField.keyboardType = .numberPad
         
         // **關鍵**：把 accessibilityIdentifier 設在真正的 UITextField
