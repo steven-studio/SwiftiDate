@@ -56,7 +56,7 @@ struct TermsOfServiceView: View {
                     Text("欲在SwiftiDate上創建帳戶，您需向我們提供您的姓名、電子郵件地址和/或手機號碼，設定密碼，並同意SwiftiDate的用戶協議。該協議設定了SwiftiDate如何處理您的信息。在註冊過程中，您還可以提供其他信息（如性別、年齡、職位、公司、愛好等）以創建您的個人資料，並在SwiftiDate上獲得更多個性化的服務。")
                         .padding(.bottom, 10)
                     
-                    Text("在SwiftiDate上使用某些功能，您可能需要使用SwiftiDate的通訊錄或“聯繫人”導入器（或其他類似功能）將您的電話通訊錄上傳到SwiftiDate的服務。您上傳或同步的任何信息都將受到用戶協議的約束。您可以隨時刪除您的通訊錄和任何其他同步信息。使用Omi的服務，表示您同意SwiftiDate按照其服務條款收集、使用和共享您的信息。如果有任何變更，您繼續使用Omi的服務即表示您接受修訂後的服務條款。通過使用Omi的服務，您聲明並保證：")
+                    Text("在SwiftiDate上使用某些功能，您可能需要使用SwiftiDate的通訊錄或“聯繫人”導入器（或其他類似功能）將您的電話通訊錄上傳到SwiftiDate的服務。您上傳或同步的任何信息都將受到用戶協議的約束。您可以隨時刪除您的通訊錄和任何其他同步信息。使用SwiftiDate的服務，表示您同意SwiftiDate按照其服務條款收集、使用和共享您的信息。如果有任何變更，您繼續使用SwiftiDate的服務即表示您接受修訂後的服務條款。通過使用SwiftiDate的服務，您聲明並保證：")
                         .padding(.bottom, 10)
 
                     Text("(a) 您提交的所有註冊信息都是真實準確； (b) 您將保持此類信息的準確性； (c) 您使用SwiftiDate提供的服務不違反任何適用的法律或法規。")
@@ -68,7 +68,7 @@ struct TermsOfServiceView: View {
                     Text("在提供服務的過程中，SwiftiDate將收集、存儲和使用以下與您相關的信息：")
                         .padding(.bottom, 10)
 
-                    Text("1. 您在創建帳戶或使用Omi提供的服務時提供的信息，例如姓名、電話號碼、電子郵件地址和信用卡詳細信息；")
+                    Text("1. 您在創建帳戶或使用SwiftiDate提供的服務時提供的信息，例如姓名、電話號碼、電子郵件地址和信用卡詳細信息；")
                         .padding(.bottom, 10)
 
                     Text("2. 您在使用SwiftiDate提供的服務時提供的信息，包括您共享的信息和您使用SwiftiDate提供的服務存儲的信息，以供他人分享；")
@@ -77,16 +77,16 @@ struct TermsOfServiceView: View {
                     Text("3. 其他人使用SwiftiDate提供的服務提供的關於您的共享信息，例如包含在他們發布的帖子中的信息或您與其他使用SwiftiDate提供的服務的人之間交換的信息；")
                         .padding(.bottom, 10)
 
-                    Text("4. Omi在您使用服務時收集的信息，例如位置數據、日誌數據和公共信息。")
+                    Text("4. SwiftiDate在您使用服務時收集的信息，例如位置數據、日誌數據和公共信息。")
                         .padding(.bottom, 10)
                     
-                    Text("在提供服務時，Omi將收集、存儲和使用位置數據。如果您不再希望Omi收集您的位置數據，您可以通過Omi的服務刪除這些數據。")
+                    Text("在提供服務時，SwiftiDate將收集、存儲和使用位置數據。如果您不再希望SwiftiDate收集您的位置數據，您可以通過SwiftiDate的服務刪除這些數據。")
                         .padding(.bottom, 10)
 
-                    Text("Omi會在您使用服務時收集、存儲和使用“日誌數據”，這是Omi在提供服務過程中自動收集的技術信息。")
+                    Text("SwiftiDate會在您使用服務時收集、存儲和使用“日誌數據”，這是SwiftiDate在提供服務過程中自動收集的技術信息。")
                         .padding(.bottom, 10)
 
-                    Text("本協議在您註冊成為Omi的服務使用者時生效，並在您的會員資格期間持續有效。您可以隨時終止您的會員資格。Omi也可以隨時終止您的會員資格，恕不另行通知。即使會員資格終止，本協議仍將繼續有效。")
+                    Text("本協議在您註冊成為SwiftiDate的服務使用者時生效，並在您的會員資格期間持續有效。您可以隨時終止您的會員資格。SwiftiDate也可以隨時終止您的會員資格，恕不另行通知。即使會員資格終止，本協議仍將繼續有效。")
                         .padding(.bottom, 10)
                 }
                 .padding()
@@ -98,10 +98,10 @@ struct TermsOfServiceView: View {
                     .padding(.horizontal) // Apply padding if needed
 
                 VStack(alignment: .leading, spacing: 15) {
-                    Text("除了在本服務條款中許可或經您單獨同意之外，Omi不會將您的個人資訊轉讓給任何第三方。 然而，SwiftiDate及其關聯公司可能會在集團內部，以及與合作夥伴和第三方服務供應商、承包商和代理商（例如，負責代表SwiftiDate發送電子郵件或推播通知的提供者、協助SwiftiDate和您共享位置 資料的地圖服務提供者、協助SwiftiDate進行業務分析的合作夥伴以及廣告合作夥伴）分享您的個人資訊。 此外，SwiftiDate可能允許這些第三方在提供服務的過程中收集您的個人資訊。 在每種情況下，Omi允許這些資訊的共享和/或收集的目的包括：(i) 提供SwiftiDate的服務給您；(ii) 輔助Omi實現在「我們如何使用您的資訊」部分中規定的目標 ；(iii) 履行SwiftiDate的義務並執行SwiftiDate在服務條款下的權利；和/或(iv) 支持SwiftiDate的業務運作，包括改進SwiftiDate的服務。 這些第三方可能會在其管轄區之外儲存和使用您的個人資訊。 在允許任何第三方按照上述規定收集和使用您的個人資訊時，SwiftiDate將盡合理努力確保這些第三方只會：(i) 遵守Omi的服務條款；(ii) 遵守給予他們的指示，包括SwiftiDate實施 的任何適當的保密和安全措施。")
+                    Text("除了在本服務條款中許可或經您單獨同意之外，SwiftiDate不會將您的個人資訊轉讓給任何第三方。 然而，SwiftiDate及其關聯公司可能會在集團內部，以及與合作夥伴和第三方服務供應商、承包商和代理商（例如，負責代表SwiftiDate發送電子郵件或推播通知的提供者、協助SwiftiDate和您共享位置 資料的地圖服務提供者、協助SwiftiDate進行業務分析的合作夥伴以及廣告合作夥伴）分享您的個人資訊。 此外，SwiftiDate可能允許這些第三方在提供服務的過程中收集您的個人資訊。 在每種情況下，SwiftiDate允許這些資訊的共享和/或收集的目的包括：(i) 提供SwiftiDate的服務給您；(ii) 輔助SwiftiDate實現在「我們如何使用您的資訊」部分中規定的目標 ；(iii) 履行SwiftiDate的義務並執行SwiftiDate在服務條款下的權利；和/或(iv) 支持SwiftiDate的業務運作，包括改進SwiftiDate的服務。 這些第三方可能會在其管轄區之外儲存和使用您的個人資訊。 在允許任何第三方按照上述規定收集和使用您的個人資訊時，SwiftiDate將盡合理努力確保這些第三方只會：(i) 遵守SwiftiDate的服務條款；(ii) 遵守給予他們的指示，包括SwiftiDate實施 的任何適當的保密和安全措施。")
                         .padding(.bottom, 10)
                     
-                    Text("您同意SwiftiDate或其關聯公司可能需要保留、保存或披露您的個人信息，以：(i) 遵守適用的法律或法規；(ii) 遵守法院命令、傳票或其他法律程序；(iii) 響應政府、 執法機構或類似機構的要求（無論他們位於您的司法管轄區或其他地方）；或(iv) 在SwiftiDate認為合理必要的情況下，遵守適用的法律或法規。 您也同意SwiftiDate或其關聯公司可能需要揭露您的個人資訊，以執行服務條款，或保護SwiftiDate、其關聯公司或Omi的其他使用者的權利、財產或安全。")
+                    Text("您同意SwiftiDate或其關聯公司可能需要保留、保存或披露您的個人信息，以：(i) 遵守適用的法律或法規；(ii) 遵守法院命令、傳票或其他法律程序；(iii) 響應政府、 執法機構或類似機構的要求（無論他們位於您的司法管轄區或其他地方）；或(iv) 在SwiftiDate認為合理必要的情況下，遵守適用的法律或法規。 您也同意SwiftiDate或其關聯公司可能需要揭露您的個人資訊，以執行服務條款，或保護SwiftiDate、其關聯公司或SwiftiDate的其他使用者的權利、財產或安全。")
                         .padding(.bottom, 10)
                 }
                 .padding()
@@ -113,7 +113,7 @@ struct TermsOfServiceView: View {
                     .padding(.horizontal) // Apply padding if needed
 
                 VStack(alignment: .leading, spacing: 15) {
-                    Text("當您註冊成為會員時，您將需要設定一個密碼。您需全權負責保護您的密碼的機密性。您同意不將您的帳戶、用戶名或密碼提供給其他會員使用，或將您的密碼透露給任何第三方。如果您懷疑您的帳戶或密碼被未經授權的使用或訪問，您應立即通知Omi，請以電子郵件方式聯繫 support@SwiftiDate.sg。請注意，您需對您帳戶的所有使用行為負責。")
+                    Text("當您註冊成為會員時，您將需要設定一個密碼。您需全權負責保護您的密碼的機密性。您同意不將您的帳戶、用戶名或密碼提供給其他會員使用，或將您的密碼透露給任何第三方。如果您懷疑您的帳戶或密碼被未經授權的使用或訪問，您應立即通知SwiftiDate，請以電子郵件方式聯繫 support@SwiftiDate.sg。請注意，您需對您帳戶的所有使用行為負責。")
                         .padding(.bottom, 10)
                 }
                 .padding()
@@ -140,7 +140,7 @@ struct TermsOfServiceView: View {
                     Text("1. 當您在SwiftiDate提供的服務上或通過SwiftiDate提供的服務展示或發布任何內容時，您在此授予SwiftiDate有限許可，僅在SwiftiDate提供的服務上或通過SwiftiDate提供的服務使用、修改、公開演出、公開展示、複製和分發該等內容。")
                         .padding(.bottom, 10)
                     
-                    Text("2. 您聲明並保證：(i) 您擁有或以其他方式有權向Omi授予本條款中所述的許可，且 (ii) 您在Omi提供的服務上或通過Omi提供的服務發布的內容不侵犯任何人的隱私權、公眾權、版權、合約權或任何其他權利。您同意支付所有因您在Omi提供的服務上或通過Omi提供的服務發布的任何內容而欠任何人的版稅、費用和其他款項。")
+                    Text("2. 您聲明並保證：(i) 您擁有或以其他方式有權向SwiftiDate授予本條款中所述的許可，且 (ii) 您在SwiftiDate提供的服務上或通過SwiftiDate提供的服務發布的內容不侵犯任何人的隱私權、公眾權、版權、合約權或任何其他權利。您同意支付所有因您在SwiftiDate提供的服務上或通過SwiftiDate提供的服務發布的任何內容而欠任何人的版稅、費用和其他款項。")
                         .padding(.bottom, 10)
 
                     Text("3. SwiftiDate提供的服務包含由SwiftiDate產生的內容，該內容受版權、商標、專利、商業秘密和其他法律保護，且SwiftiDate擁有並保留所有對SwiftiDate提供的服務中SwiftiDate所產生的內容的權利。SwiftiDate在此授予您有限的、可撤銷的、不可再許可的許可，僅供您個人使用和瀏覽SwiftiDate網站及使用SwiftiDate提供的服務，以複製和展示SwiftiDate所產生的內容（不包括任何軟體代碼）。任何因您不當使用SwiftiDate內容所產生的責任由您自行承擔。")
@@ -173,7 +173,7 @@ struct TermsOfServiceView: View {
                     .padding(.horizontal) // Apply padding if needed
 
                 VStack(alignment: .leading, spacing: 15) {
-                    Text("以下是在Omi服務上或通過Omi服務進行的非法或被禁止的行為。Omi保留對任何違反這些規定的人進行調查並採取適當法律行動的權利，包括但不限於，刪除違規的通訊，終止違規者的會員資格，並向違規者索賠。被禁止的內容包括但不限於以下類型：")
+                    Text("以下是在SwiftiDate服務上或通過SwiftiDate服務進行的非法或被禁止的行為。SwiftiDate保留對任何違反這些規定的人進行調查並採取適當法律行動的權利，包括但不限於，刪除違規的通訊，終止違規者的會員資格，並向違規者索賠。被禁止的內容包括但不限於以下類型：")
                         .padding(.bottom, 10)
                     
                     Text("1. 宣揚任何形式的種族主義、偏見、仇恨或對任何群體或個人的身體傷害；")
@@ -224,7 +224,7 @@ struct TermsOfServiceView: View {
                     Text("16. 使用性暗示圖片或任何其他旨在吸引流量的不公平、誤導性或欺騙性內容。")
                         .padding(.bottom, 10)
 
-                    Text("以下是在Omi平台上非法或被禁止的活動：")
+                    Text("以下是在SwiftiDate平台上非法或被禁止的活動：")
                         .padding(.bottom, 10)
 
                     Text("1. 犯罪或侵權活動，包括兒童色情、欺詐、販運淫穢材料、毒品交易、賭博、騷擾、跟踪、垃圾郵件、發送惡意或有害文件、版權侵權、專利侵權或盜竊商業秘密；")
@@ -272,10 +272,10 @@ struct TermsOfServiceView: View {
                     .padding(.horizontal) // Apply padding if needed
                 
                 VStack(alignment: .leading, spacing: 15) {
-                    Text("您不得以任何方式發布、修改、分發或複製任何受版權保護的材料、商標，或未經所有者事先書面同意的其他專有資訊。根據Omi的政策，如果您在收到版權方對Omi的適當通知後，繼續侵犯他人的版權，將會導致您的會員特權被終止。如果您認為您的作品已被複製並在Omi服務上發佈，並構成版權侵權，請將以下信息發送至 support@Omi.sg：")
+                    Text("您不得以任何方式發布、修改、分發或複製任何受版權保護的材料、商標，或未經所有者事先書面同意的其他專有資訊。根據SwiftiDate的政策，如果您在收到版權方對SwiftiDate的適當通知後，繼續侵犯他人的版權，將會導致您的會員特權被終止。如果您認為您的作品已被複製並在SwiftiDate服務上發佈，並構成版權侵權，請將以下信息發送至 support@SwiftiDate.sg：")
                         .padding(.bottom, 10)
                     
-                    Text("(i) 版權所有者或被授權代表版權所有者行事的人的電子或實體簽名； (ii) 對您聲稱已被侵權的受版權保護作品的描述； (iii) 指出您聲稱被侵權的材料在Omi服務上的位置； (iv) 您的地址、電話號碼和電子郵件地址； (v) 一份您的書面聲明，聲明您有充分理由相信有爭議的使用未經版權所有者、其代理人或法律的授權； (vi) 您在適用法律處罰下作出的聲明，表明通知中的信息是準確的，並且您是版權所有者或被授權代表版權所有者行事。")
+                    Text("(i) 版權所有者或被授權代表版權所有者行事的人的電子或實體簽名； (ii) 對您聲稱已被侵權的受版權保護作品的描述； (iii) 指出您聲稱被侵權的材料在SwiftiDate服務上的位置； (iv) 您的地址、電話號碼和電子郵件地址； (v) 一份您的書面聲明，聲明您有充分理由相信有爭議的使用未經版權所有者、其代理人或法律的授權； (vi) 您在適用法律處罰下作出的聲明，表明通知中的信息是準確的，並且您是版權所有者或被授權代表版權所有者行事。")
                         .padding(.bottom, 10)
                 }
                 .padding()
@@ -286,7 +286,7 @@ struct TermsOfServiceView: View {
                     .padding(.horizontal) // Apply padding if needed
 
                 VStack(alignment: .leading, spacing: 15) {
-                    Text("您需要對與Omi的其他成員進行的所有互動負全責。雖然Omi保留權利，但我們並無義務監控您與其他成員之間的糾紛。")
+                    Text("您需要對與SwiftiDate的其他成員進行的所有互動負全責。雖然SwiftiDate保留權利，但我們並無義務監控您與其他成員之間的糾紛。")
                         .padding(.bottom, 10)
                 }
                 .padding()
@@ -311,10 +311,10 @@ struct TermsOfServiceView: View {
                     Text("SwiftiDate的部分增值服務需要付費使用。您在購買頁面上選擇並購買所需的增值服務，並進行支付。SwiftiDate 可能透過以下方式提供產品和服務供您購買（「應用內購買」）：iTunes、Google Play、運營商計費、SwiftiDate 直接計費或 SwiftiDate 授權的其他支付平台。在購買時，您應確認商品的類別、價格、數量、時長、使用方式、自動續訂期限（如果可選）等，並根據您的實際需求購買服務。付款後，您將被視為已確認購買，並且除非法律另有規定，您不得要求修改或退款。")
                         .padding(.bottom, 10)
                     
-                    Text("如果您購買自動定期訂閱，您的付款方式將在您取消訂閱之前持續計費。如果您以未經調整的價格購買了增值服務，您在該增值服務有效期內將不受可能發生的價格調整影響，並無需支付額外費用；但在下次購買或自動續訂時，您需要以最新的標價付款。如果您不希望您的訂閱自動續訂，您可以按照[幫助 - 如何取消自動續訂？]中的指南和步驟操作。如果您未能在訂閱期結束前至少24小時取消自動續訂，您將被視為接受Omi根據協議和您選擇的自動續訂週期繼續收費。如果您在增值服務有效期內停止使用SwiftiDate，SwiftiDate 將不承擔退還剩餘期間的相應服務費的責任。在SwiftiDate上刪除您的帳戶或在您的設備上刪除SwiftiDate應用程序不會取消您的訂閱。")
+                    Text("如果您購買自動定期訂閱，您的付款方式將在您取消訂閱之前持續計費。如果您以未經調整的價格購買了增值服務，您在該增值服務有效期內將不受可能發生的價格調整影響，並無需支付額外費用；但在下次購買或自動續訂時，您需要以最新的標價付款。如果您不希望您的訂閱自動續訂，您可以按照[幫助 - 如何取消自動續訂？]中的指南和步驟操作。如果您未能在訂閱期結束前至少24小時取消自動續訂，您將被視為接受SwiftiDate根據協議和您選擇的自動續訂週期繼續收費。如果您在增值服務有效期內停止使用SwiftiDate，SwiftiDate 將不承擔退還剩餘期間的相應服務費的責任。在SwiftiDate上刪除您的帳戶或在您的設備上刪除SwiftiDate應用程序不會取消您的訂閱。")
                         .padding(.bottom, 10)
 
-                    Text("您可能需要承擔因開具發票而產生的稅費、快遞費等費用，具體繳納的稅金、快遞費等會因您支付的金額及您所在地要求等有所差別，Omi將根據相關法律法規要求進行收取。")
+                    Text("您可能需要承擔因開具發票而產生的稅費、快遞費等費用，具體繳納的稅金、快遞費等會因您支付的金額及您所在地要求等有所差別，SwiftiDate將根據相關法律法規要求進行收取。")
                         .padding(.bottom, 10)
 
                 }
