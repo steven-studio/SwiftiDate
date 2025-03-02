@@ -291,3 +291,21 @@
 ![PreviewSectionView 測試通過](./PreviewSectionTestResult.png)
 
 ---
+
+### SchoolInputView 測試結果
+
+我們針對 SchoolInputView 進行了 UI 互動測試，主要檢查以下幾點：
+
+- 頁面曝光：當畫面出現時，上報 "school_input_view_appear" 事件，確保頁面曝光統計正確。
+- 輸入操作：當用戶在輸入框中輸入學校名稱（例如輸入 "Test School"）時，對應的綁定值能夠正確更新，並驗證該值已同步至綁定變數。
+- 確認操作：當用戶點擊「確定」按鈕時，上報 "school_input_confirmed" 事件，並傳入正確的學校名稱（例如 "Test School"）。
+- 清空操作：當用戶點擊「清空」按鈕時，綁定值被清空（變為 nil），同時上報 "school_input_cleared" 事件。
+
+所有測試均已成功通過，確保 SchoolInputView 在用戶互動時能夠正確更新資料並上報相應的 Analytics 數據。
+
+### 測試通過截圖：
+![SchoolInputView 測試通過](./SchoolInputViewTestResult.png)
+
+---
+
+
