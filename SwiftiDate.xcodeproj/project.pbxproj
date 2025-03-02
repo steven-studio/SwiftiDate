@@ -365,6 +365,9 @@
 		D0B3F2BB2D7410B0007A5EA0 /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0903ACD2D58A5C200735323 /* Response.swift */; };
 		D0B3F2BC2D7410B5007A5EA0 /* TextViewRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0903ACB2D58A59B00735323 /* TextViewRepresentable.swift */; };
 		D0B3F2BD2D7410DA007A5EA0 /* MessageListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0903AC92D58A56F00735323 /* MessageListView.swift */; };
+		D0B3F2C42D741632007A5EA0 /* GenderSelectionViewUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B3F2C32D741632007A5EA0 /* GenderSelectionViewUITests.swift */; };
+		D0B3F2C52D741681007A5EA0 /* GenderSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09587D52CB8CDDA00BCD04B /* GenderSelectionView.swift */; };
+		D0B3F2C72D741786007A5EA0 /* SwipeCardViewUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B3F2C62D741786007A5EA0 /* SwipeCardViewUITests.swift */; };
 		D0C99B2E2D0DBFED00FA98AD /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D0C99B2C2D0DBFEC00FA98AD /* Localizable.strings */; };
 		D0DDDB052C9FA8AF00A78A87 /* ChatDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB042C9FA8AF00A78A87 /* ChatDetailView.swift */; };
 		D0DDDB072C9FDB1600A78A87 /* WhoLikedYouView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB062C9FDB1600A78A87 /* WhoLikedYouView.swift */; };
@@ -611,6 +614,8 @@
 		D0B3F2A02D740AAA007A5EA0 /* OTPVerificationViewUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTPVerificationViewUITests.swift; sourceTree = "<group>"; };
 		D0B3F2B02D740DBE007A5EA0 /* ModelSelectorViewUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelSelectorViewUITests.swift; sourceTree = "<group>"; };
 		D0B3F2B22D740FBA007A5EA0 /* TopRightActionButtonsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopRightActionButtonsUITests.swift; sourceTree = "<group>"; };
+		D0B3F2C32D741632007A5EA0 /* GenderSelectionViewUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenderSelectionViewUITests.swift; sourceTree = "<group>"; };
+		D0B3F2C62D741786007A5EA0 /* SwipeCardViewUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeCardViewUITests.swift; sourceTree = "<group>"; };
 		D0C99B2D2D0DBFEC00FA98AD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		D0C99B2F2D0DC00100FA98AD /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		D0C99B302D0DC00700FA98AD /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
@@ -1128,6 +1133,7 @@
 		D0B3F1962D72AC1D007A5EA0 /* AnalyticsManagerTests */ = {
 			isa = PBXGroup;
 			children = (
+				D0B3F2BE2D741297007A5EA0 /* SwipeCardRelated */,
 				D0B3F2AC2D740D01007A5EA0 /* ChatRelated */,
 				D0B3F29F2D740A5F007A5EA0 /* LoginOrRegister */,
 				D0B3F28F2D73F02E007A5EA0 /* ProfileRelated */,
@@ -1221,6 +1227,15 @@
 			children = (
 			);
 			path = ChatAIRelated;
+			sourceTree = "<group>";
+		};
+		D0B3F2BE2D741297007A5EA0 /* SwipeCardRelated */ = {
+			isa = PBXGroup;
+			children = (
+				D0B3F2C32D741632007A5EA0 /* GenderSelectionViewUITests.swift */,
+				D0B3F2C62D741786007A5EA0 /* SwipeCardViewUITests.swift */,
+			);
+			path = SwipeCardRelated;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1587,6 +1602,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D0B3F2C52D741681007A5EA0 /* GenderSelectionView.swift in Sources */,
 				D0B3F2BD2D7410DA007A5EA0 /* MessageListView.swift in Sources */,
 				D0B3F2BC2D7410B5007A5EA0 /* TextViewRepresentable.swift in Sources */,
 				D0B3F2BB2D7410B0007A5EA0 /* Response.swift in Sources */,
@@ -1654,6 +1670,7 @@
 				D0B3F25B2D736303007A5EA0 /* PrivacyPolicyView.swift in Sources */,
 				D0B3F28C2D73E418007A5EA0 /* ZodiacPickerViewUITests.swift in Sources */,
 				D0B3F25C2D736303007A5EA0 /* QRCodeGeneratorView.swift in Sources */,
+				D0B3F2C42D741632007A5EA0 /* GenderSelectionViewUITests.swift in Sources */,
 				D0B3F25D2D736303007A5EA0 /* QRCodeScannerView.swift in Sources */,
 				D0B3F25E2D736303007A5EA0 /* TermsOfServiceView.swift in Sources */,
 				D0B3F2562D7362D3007A5EA0 /* FeaturedCardView.swift in Sources */,
@@ -1675,6 +1692,7 @@
 				D0B3F2522D736234007A5EA0 /* UnverifiedProfilePlaceholderView.swift in Sources */,
 				D0B3F2932D73F0F6007A5EA0 /* TurboPurchaseViewUITests.swift in Sources */,
 				D0B3F2532D736234007A5EA0 /* VerifiedProfileProgressView.swift in Sources */,
+				D0B3F2C72D741786007A5EA0 /* SwipeCardViewUITests.swift in Sources */,
 				D0B3F2442D7361FF007A5EA0 /* SafetyCenterView.swift in Sources */,
 				D0B3F2432D7361A5007A5EA0 /* SettingsView.swift in Sources */,
 				D0B3F2422D73616C007A5EA0 /* ProfileImageView.swift in Sources */,
