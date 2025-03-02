@@ -308,4 +308,20 @@
 
 ---
 
+### SmokingOptionsView 測試結果
+
+我們針對 SmokingOptionsView 進行了 UI 互動測試，主要檢查以下幾點：
+
+- 當畫面出現時，用戶能看到所有抽煙選項按鈕。
+- 當用戶點擊某個抽煙選項（例如「不抽煙」）時，對應的綁定值會正確更新，同時透過 Analytics 上報 “smoking_option_selected” 事件，並附帶正確的選項參數。
+- 當用戶點擊「清空」按鈕後，抽煙選項會被清空（綁定值變為 nil），並上報 “smoking_option_cleared” 事件。
+- 當用戶點擊「確定」按鈕時，會上報 “smoking_option_confirmed” 事件，並傳入當前所選的抽煙選項（若無選擇則傳入 “none”）。
+
+所有測試均已成功通過，確保 SmokingOptionsView 在用戶互動時能夠正確更新狀態並上報相關 Analytics 數據。
+
+### 測試通過截圖：
+![SmokingOptionsView 測試通過](./SmokingOptionsViewTestResult.png)
+
+---
+
 

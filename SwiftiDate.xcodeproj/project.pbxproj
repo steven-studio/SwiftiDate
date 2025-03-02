@@ -334,6 +334,7 @@
 		D0B3F2832D7363AC007A5EA0 /* ReportAftermathView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09587CA2CB7D19B00BCD04B /* ReportAftermathView.swift */; };
 		D0B3F2842D7363AC007A5EA0 /* MeetingGuideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09587CC2CB7D5C800BCD04B /* MeetingGuideView.swift */; };
 		D0B3F2862D73DC67007A5EA0 /* SchoolInputViewUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B3F2852D73DC67007A5EA0 /* SchoolInputViewUITests.swift */; };
+		D0B3F2882D73DF11007A5EA0 /* SmokingOptionsViewUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B3F2872D73DF0A007A5EA0 /* SmokingOptionsViewUITests.swift */; };
 		D0C99B2E2D0DBFED00FA98AD /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D0C99B2C2D0DBFEC00FA98AD /* Localizable.strings */; };
 		D0DDDB052C9FA8AF00A78A87 /* ChatDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB042C9FA8AF00A78A87 /* ChatDetailView.swift */; };
 		D0DDDB072C9FDB1600A78A87 /* WhoLikedYouView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB062C9FDB1600A78A87 /* WhoLikedYouView.swift */; };
@@ -568,6 +569,7 @@
 		D0B3F2362D7354CD007A5EA0 /* PreviewSectionViewUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewSectionViewUITests.swift; sourceTree = "<group>"; };
 		D0B3F2392D735EF4007A5EA0 /* ProfileTabPickerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTabPickerUITests.swift; sourceTree = "<group>"; };
 		D0B3F2852D73DC67007A5EA0 /* SchoolInputViewUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolInputViewUITests.swift; sourceTree = "<group>"; };
+		D0B3F2872D73DF0A007A5EA0 /* SmokingOptionsViewUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmokingOptionsViewUITests.swift; sourceTree = "<group>"; };
 		D0C99B2D2D0DBFEC00FA98AD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		D0C99B2F2D0DC00100FA98AD /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		D0C99B302D0DC00700FA98AD /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
@@ -1117,6 +1119,7 @@
 				D0B3F2362D7354CD007A5EA0 /* PreviewSectionViewUITests.swift */,
 				D0B3F2392D735EF4007A5EA0 /* ProfileTabPickerUITests.swift */,
 				D0B3F2852D73DC67007A5EA0 /* SchoolInputViewUITests.swift */,
+				D0B3F2872D73DF0A007A5EA0 /* SmokingOptionsViewUITests.swift */,
 			);
 			path = EditProfileRelated;
 			sourceTree = "<group>";
@@ -1495,6 +1498,7 @@
 				D0B3F2812D7363AC007A5EA0 /* ReportConditionsView.swift in Sources */,
 				D0B3F2822D7363AC007A5EA0 /* HowToReportView.swift in Sources */,
 				D0B3F2832D7363AC007A5EA0 /* ReportAftermathView.swift in Sources */,
+				D0B3F2882D73DF11007A5EA0 /* SmokingOptionsViewUITests.swift in Sources */,
 				D0B3F2842D7363AC007A5EA0 /* MeetingGuideView.swift in Sources */,
 				D0B3F27F2D736396007A5EA0 /* ResultsView.swift in Sources */,
 				D0B3F27C2D73636B007A5EA0 /* SafetyTestView.swift in Sources */,
