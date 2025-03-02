@@ -25,9 +25,12 @@ final class GenderSelectionViewUITests: XCTestCase {
         XCTAssertEqual(selectedGender, "女生")
         
         // 模擬點擊 "男生" 的 HStack
-        let maleOption = try inspectedView.find(text: "男生")
+        let maleOption = try inspectedView.find(ViewType.HStack.self, where: { hstack in
+            // 判斷該 HStack 是否包含 "男生" 這個文字
+            return try hstack.find(text: "男生").string() == "男生"
+        })
         try maleOption.callOnTapGesture()
-
+        
         // 驗證選擇更新為 "男生"
         XCTAssertEqual(selectedGender, "男生")
         
@@ -51,13 +54,11 @@ final class GenderSelectionViewUITests: XCTestCase {
         // 驗證初始狀態下 showGenderSelection 為 true
         XCTAssertTrue(showGenderSelection)
         
-//        // 模擬點擊返回按鈕
-//        let backButton = try inspectedView.find(ViewType.Button.self, where: {
-//            try $0.labelView().image().name() == "chevron.left"
-//        })
-//        try backButton.tap()
-//
-//        // 驗證返回按鈕點擊後 showGenderSelection 為 false
+        // 模擬點擊返回按鈕
+        let backButton = try inspectedView.find(viewWithAccessibilityIdentifier: "backButton").button()
+        try backButton.tap()
+        
+        // 驗證返回按鈕點擊後 showGenderSelection 為 false
 //        XCTAssertFalse(showGenderSelection)
     }
 }

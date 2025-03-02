@@ -27,6 +27,7 @@ struct GenderSelectionView: View {
                             .foregroundColor(.gray)
                             .padding()
                     }
+                    .accessibility(identifier: "backButton")  // <-- 加上這行
                     Spacer() // 用 Spacer 把按鈕推到左側
                 }
                 
