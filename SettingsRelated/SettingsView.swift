@@ -29,6 +29,8 @@ struct SettingsView: View {
     @State private var isShowingMailComposer = false // 控制郵件視圖的顯示
     @State private var mailData: MailData? // 保存郵件數據
     // 用於示範當掃碼完成後要配對
+    @State private var showNetworkErrorPopup = false
+    @State private var networkErrorMessage = ""
     let functions = Functions.functions()
 
     var body: some View {
@@ -399,6 +401,16 @@ struct SettingsView: View {
                     .cornerRadius(20)
                     .shadow(radius: 10)
                 }
+            }
+            
+            // 如果要顯示錯誤，就疊加自訂彈窗
+            if showNetworkErrorPopup {
+                Text("網路狀況不佳，操作失敗了")
+                    .foregroundColor(.white)
+                    .padding(.horizontal, 12)
+                    .padding(.vertical, 10)
+                    .background(Color.black.opacity(0.8))
+                    .cornerRadius(10)
             }
         }
         .onAppear {
