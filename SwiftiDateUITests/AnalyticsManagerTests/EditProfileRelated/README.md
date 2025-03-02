@@ -338,3 +338,19 @@
 
 ### 測試通過截圖：
 ![VacationOptionsView 測試通過](./VacationOptionsViewTestResult.png)
+
+---
+
+### ZodiacPickerView 測試結果
+
+我們針對 ZodiacPickerView 進行了 UI 互動測試，主要檢查以下幾點：
+
+- 頁面曝光：當畫面出現時，上報「zodiac_picker_view_appear」事件，確保進入星座選擇頁面時能進行正確的曝光統計。
+- 選擇星座：當用戶點擊任意星座（例如「巨蟹座」）時，綁定值能夠正確更新為所選星座，並透過 Analytics 上報「zodiac_selected」事件，附帶正確的星座參數（如 “巨蟹座”）。
+- 清空操作：當用戶點擊「清空」按鈕後，星座綁定值會被清空（設為空字串或其他預設），同時上報「zodiac_cleared」事件。
+- 確認操作：當用戶點擊「確定」按鈕時，會上報「zodiac_picker_confirm」事件，並關閉當前頁面。
+
+透過上述流程，可確保 ZodiacPickerView 與後端 Analytics 事件能夠正確連動，並確保使用者選擇或取消選擇星座時，綁定值及事件上報都能如預期執行。所有測試均已成功通過，確保我們的 ZodiacPickerView 在用戶互動時能夠正確更新綁定值並上報分析數據。
+
+### 測試通過截圖：
+![ZodiacPickerView 測試通過](./ZodiacPickerViewTestResult.png)
