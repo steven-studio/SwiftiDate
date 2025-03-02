@@ -324,4 +324,17 @@
 
 ---
 
+### VacationOptionsView 測試結果
 
+我們針對 VacationOptionsView 進行了 UI 互動測試，主要檢查以下幾點：
+
+- **頁面曝光**：當畫面出現時，上報 “vacation_options_view_appear” 事件，確保頁面曝光統計正確。
+- **選項點擊**：當用戶點擊某個休假選項（例如「週末休息」）時，綁定值能夠正確更新為該選項，同時透過 Analytics 上報「vacation_option_selected」事件，並附帶該選項參數。
+- **清空操作**：當用戶點擊「清空」按鈕後，所有休假選項均被清空（綁定值設為 nil），並上報「vacation_option_cleared」事件。
+- **確認操作**：當用戶點擊「確定」按鈕時，會上報「vacation_option_confirmed」事件，並傳入當前選定的休假選項（若未選定則傳入 “none”）。
+透過此流程可確保 VacationOptionsView 與後端 Analytics 事件正確連動。
+
+所有測試均已成功通過，確保我們的 VacationOptionsView 在用戶互動時能夠正確更新綁定值並上報分析數據。
+
+### 測試通過截圖：
+![VacationOptionsView 測試通過](./VacationOptionsViewTestResult.png)
