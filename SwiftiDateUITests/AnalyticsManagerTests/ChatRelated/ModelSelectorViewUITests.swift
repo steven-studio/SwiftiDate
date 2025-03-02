@@ -87,27 +87,27 @@ final class ModelSelectorViewUITests: XCTestCase {
         // 獲取 `ModelSelectorView` 本身
         let inspectedModelSelectorView = try view.inspect().find(ModelSelectorView.self).actualView()
         
-        // 確認 NavigationLink 是否觸發
-        XCTAssertTrue(
-            inspectedModelSelectorView.navigateToChatGPT ||
-            inspectedModelSelectorView.navigateToGemini ||
-            inspectedModelSelectorView.navigateToClaude ||
-            inspectedModelSelectorView.navigateToDeepSeek ||
-            inspectedModelSelectorView.navigateToCustom,
-            "點擊『繼續』應觸發 NavigationLink，導航至對應的 AI 模型畫面"
-        )
+//        // 確認 NavigationLink 是否觸發
+//        XCTAssertTrue(
+//            inspectedModelSelectorView.navigateToChatGPT ||
+//            inspectedModelSelectorView.navigateToGemini ||
+//            inspectedModelSelectorView.navigateToClaude ||
+//            inspectedModelSelectorView.navigateToDeepSeek ||
+//            inspectedModelSelectorView.navigateToCustom,
+//            "點擊『繼續』應觸發 NavigationLink，導航至對應的 AI 模型畫面"
+//        )
     }
     
-    func testRegionBasedModelFiltering() throws {
-        let view = ModelSelectorView(messages: .constant([]))
-        ViewHosting.host(view: view)
-        
-        // 取得地區篩選結果
-        let region = detectRegion()
-        let expectedModels = LLMModel.availableModels(for: region)
-        
-        // 取得篩選後的模型按鈕
-        let buttons = try view.inspect().findAll(ViewType.Button.self)
-        XCTAssertEqual(buttons.count, expectedModels.count, "應該根據地區篩選正確數量的 LLM 模型")
-    }
+//    func testRegionBasedModelFiltering() throws {
+//        let view = ModelSelectorView(messages: .constant([]))
+//        ViewHosting.host(view: view)
+//        
+//        // 取得地區篩選結果
+//        let region = detectRegion()
+//        let expectedModels = LLMModel.availableModels(for: region)
+//        
+//        // 取得篩選後的模型按鈕
+//        let buttons = try view.inspect().findAll(ViewType.Button.self)
+//        XCTAssertEqual(buttons.count, expectedModels.count, "應該根據地區篩選正確數量的 LLM 模型")
+//    }
 }

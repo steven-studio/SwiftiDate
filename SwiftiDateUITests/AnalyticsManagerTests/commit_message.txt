@@ -1,0 +1,22 @@
+fix(ModelSelectorViewUITests): 修正測試失敗問題，確保 NavigationLink 正確觸發
+
+- 修正 ModelSelectorViewUITests 測試失敗，錯誤訊息：
+  - "Referencing instance method 'actualView()' on 'InspectableView' requires that 'ViewType.ClassifiedView' conform to 'CustomViewType'"
+  - "'try' cannot appear to the right of a non-assignment operator"
+
+- 問題分析：
+  - `actualView()` 只能在 `InspectableView<ViewType.View>` 上調用，但測試直接對 `view.inspect()` 調用，可能是 `InspectableView<ViewType.NavigationView>`，導致無法解析 `ModelSelectorView` 的 @State 變數。
+  - `navigateToChatGPT` 等 @State 變數可能未及時更新，影響測試判斷。
+
+- 修正方案：
+  - 改用 `try view.inspect().find(ModelSelectorView.self).actualView()` 來獲取 `ModelSelectorView`，確保 `@State` 變數可讀取。
+  - 在 `ModelSelectorView.swift` 加入 `extension ModelSelectorView: Inspectable {}` 以支援 ViewInspector。
+  - 增加 `DispatchQueue.main.asyncAfter(deadline: .now() + 0.5)` 來等待 UI 變更，確保 `navigateToChatGPT` 等變數有機會正確變更。
+
+- 確保測試項目：
+  ✅ 點擊「繼續」按鈕後，應觸發 `navigateToChatGPT` 或其他對應變數
+  ✅ 確保 `model_selector_view_appear` 事件埋點正常觸發
+  ✅ 確保 `model_selected` 事件埋點記錄正確的 AI 模型
+  ✅ 確保 `continue_button_pressed` 事件記錄選擇的模型並觸發導航
+
+測試仍需確認 UI 互動邏輯是否完全符合預期

@@ -354,6 +354,17 @@
 		D0B3F2A82D740B7F007A5EA0 /* UploadPhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B388282D5B7BAE003BC40C /* UploadPhotoView.swift */; };
 		D0B3F2A92D740B9B007A5EA0 /* FirestoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07B41EF2D61EE2C0015C7AA /* FirestoreManager.swift */; };
 		D0B3F2B12D740DBE007A5EA0 /* ModelSelectorViewUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B3F2B02D740DBE007A5EA0 /* ModelSelectorViewUITests.swift */; };
+		D0B3F2B32D740FBA007A5EA0 /* TopRightActionButtonsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B3F2B22D740FBA007A5EA0 /* TopRightActionButtonsUITests.swift */; };
+		D0B3F2B42D74103B007A5EA0 /* modelSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0903ABF2D58A45200735323 /* modelSelector.swift */; };
+		D0B3F2B52D741052007A5EA0 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04938792CBF0A6F00754E46 /* Models.swift */; };
+		D0B3F2B62D741074007A5EA0 /* ChatGPTView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09587B82CB6552100BCD04B /* ChatGPTView.swift */; };
+		D0B3F2B72D741086007A5EA0 /* VertexAIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B3F12E2D6F0BE5007A5EA0 /* VertexAIView.swift */; };
+		D0B3F2B82D74108B007A5EA0 /* ClaudeAIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0903AC32D58A50000735323 /* ClaudeAIView.swift */; };
+		D0B3F2B92D741099007A5EA0 /* DeepSeekView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0903AC52D58A52500735323 /* DeepSeekView.swift */; };
+		D0B3F2BA2D7410A5007A5EA0 /* LocalModelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0903AC72D58A54700735323 /* LocalModelView.swift */; };
+		D0B3F2BB2D7410B0007A5EA0 /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0903ACD2D58A5C200735323 /* Response.swift */; };
+		D0B3F2BC2D7410B5007A5EA0 /* TextViewRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0903ACB2D58A59B00735323 /* TextViewRepresentable.swift */; };
+		D0B3F2BD2D7410DA007A5EA0 /* MessageListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0903AC92D58A56F00735323 /* MessageListView.swift */; };
 		D0C99B2E2D0DBFED00FA98AD /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D0C99B2C2D0DBFEC00FA98AD /* Localizable.strings */; };
 		D0DDDB052C9FA8AF00A78A87 /* ChatDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB042C9FA8AF00A78A87 /* ChatDetailView.swift */; };
 		D0DDDB072C9FDB1600A78A87 /* WhoLikedYouView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB062C9FDB1600A78A87 /* WhoLikedYouView.swift */; };
@@ -599,6 +610,7 @@
 		D0B3F29D2D7407F8007A5EA0 /* InfoPopupViewUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoPopupViewUITests.swift; sourceTree = "<group>"; };
 		D0B3F2A02D740AAA007A5EA0 /* OTPVerificationViewUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTPVerificationViewUITests.swift; sourceTree = "<group>"; };
 		D0B3F2B02D740DBE007A5EA0 /* ModelSelectorViewUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelSelectorViewUITests.swift; sourceTree = "<group>"; };
+		D0B3F2B22D740FBA007A5EA0 /* TopRightActionButtonsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopRightActionButtonsUITests.swift; sourceTree = "<group>"; };
 		D0C99B2D2D0DBFEC00FA98AD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		D0C99B2F2D0DC00100FA98AD /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		D0C99B302D0DC00700FA98AD /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
@@ -1172,6 +1184,7 @@
 				D0B3F2912D73F07F007A5EA0 /* PurchasesView */,
 				D0B3F2982D740400007A5EA0 /* AchievementSectionViewUITests.swift */,
 				D0B3F29D2D7407F8007A5EA0 /* InfoPopupViewUITests.swift */,
+				D0B3F2B22D740FBA007A5EA0 /* TopRightActionButtonsUITests.swift */,
 			);
 			path = ProfileRelated;
 			sourceTree = "<group>";
@@ -1574,6 +1587,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D0B3F2BD2D7410DA007A5EA0 /* MessageListView.swift in Sources */,
+				D0B3F2BC2D7410B5007A5EA0 /* TextViewRepresentable.swift in Sources */,
+				D0B3F2BB2D7410B0007A5EA0 /* Response.swift in Sources */,
+				D0B3F2BA2D7410A5007A5EA0 /* LocalModelView.swift in Sources */,
+				D0B3F2B92D741099007A5EA0 /* DeepSeekView.swift in Sources */,
+				D0B3F2B82D74108B007A5EA0 /* ClaudeAIView.swift in Sources */,
+				D0B3F2B72D741086007A5EA0 /* VertexAIView.swift in Sources */,
+				D0B3F2B62D741074007A5EA0 /* ChatGPTView.swift in Sources */,
+				D0B3F2B52D741052007A5EA0 /* Models.swift in Sources */,
+				D0B3F2B42D74103B007A5EA0 /* modelSelector.swift in Sources */,
 				D0B3F2A92D740B9B007A5EA0 /* FirestoreManager.swift in Sources */,
 				D0B3F2A82D740B7F007A5EA0 /* UploadPhotoView.swift in Sources */,
 				D0B3F2A72D740B76007A5EA0 /* FaceTrackingView.swift in Sources */,
@@ -1660,6 +1683,7 @@
 				D0B3F23F2D7360AA007A5EA0 /* VerificationStatusView.swift in Sources */,
 				D0B3F23E2D73606B007A5EA0 /* SmartPhotoToggle.swift in Sources */,
 				D0B3F23D2D736000007A5EA0 /* EditSectionView.swift in Sources */,
+				D0B3F2B32D740FBA007A5EA0 /* TopRightActionButtonsUITests.swift in Sources */,
 				D0B3F23C2D735FBB007A5EA0 /* EditProfileView.swift in Sources */,
 				D0B3F23B2D735F3A007A5EA0 /* ProfileTabPicker.swift in Sources */,
 				D0B3F2382D735555007A5EA0 /* PreviewSectionView.swift in Sources */,
