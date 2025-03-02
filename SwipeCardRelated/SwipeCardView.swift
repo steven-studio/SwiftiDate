@@ -101,6 +101,7 @@ struct SwipeCardView: View {
                 welcomePopupView
             }
         }
+        .accessibilityIdentifier("SwipeCardViewIdentifier")
         .edgesIgnoringSafeArea(.all) // 保證圖標能貼近螢幕邊緣
         .fullScreenCover(isPresented: $showPrivacySettings) {
             PrivacySettingsView(isPresented: $showPrivacySettings)

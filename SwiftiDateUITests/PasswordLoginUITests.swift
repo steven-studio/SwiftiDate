@@ -53,8 +53,13 @@ final class PasswordLoginUITests: XCTestCase {
         passwordField.tap()
         passwordField.typeText("123456")
         
-        // 4. 等待登入成功後進入主畫面，檢查是否出現 "Welcome" 標籤
-        let welcomeLabel = app.staticTexts["Welcome"]
-        XCTAssertTrue(welcomeLabel.waitForExistence(timeout: 5), "登入後 Welcome 標籤未出現")
+        // 6. 點擊登入按鈕，這裡假設按鈕的 label 為 "繼續"
+        let loginButton = app.buttons["PasswordLogin_ContinueButton"]
+        XCTAssertTrue(loginButton.waitForExistence(timeout: 5), "找不到登入按鈕")
+        loginButton.tap()
+        
+        // 4. 等待登入成功後進入 SwipeCardView，檢查是否出現 SwipeCardView 的識別符
+        let swipeCardView = app.otherElements["SwipeCardViewIdentifier"]
+        XCTAssertTrue(swipeCardView.waitForExistence(timeout: 5), "登入後 SwipeCardView 未出現")
     }
 }

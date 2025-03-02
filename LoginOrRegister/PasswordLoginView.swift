@@ -80,6 +80,7 @@ struct PasswordLoginView: View {
                 .foregroundColor(.white)
                 .cornerRadius(10)
             }
+            .accessibilityIdentifier("PasswordLogin_ContinueButton")
             .disabled(isLoggingIn)
             .padding()
         }
@@ -103,9 +104,19 @@ struct PasswordLoginView: View {
     }
 
     private func loginUser() {
-        isLoggingIn = true
+        // 檢查是否啟用了繞過 Firebase 驗證的模式
+        if ProcessInfo.processInfo.arguments.contains("-SKIP_FIREBASE_CHECK") {
+            print("⚠️ SKIP_FIREBASE_CHECK 啟用：模擬登入成功")
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                isLoggingIn = false
+                AnalyticsManager.shared.trackEvent("PasswordLogin_LoginSuccess", parameters: nil)
+                userSettings.globalPhoneNumber = phoneNumber
+                appState.isLoggedIn = true
+            }
+            return
+        }
         
-        // 記錄使用者嘗試登入
+        isLoggingIn = true
         AnalyticsManager.shared.trackEvent("PasswordLogin_LoginAttempt", parameters: ["phone": "\(selectedCountryCode)\(phoneNumber)"])
 
         let fullPhoneNumber = "\(selectedCountryCode)\(phoneNumber)"
