@@ -47,6 +47,7 @@ struct PasswordLoginView: View {
                 .padding(.vertical)
                 .background(Color.gray.opacity(0.1))
                 .cornerRadius(10)
+                .accessibilityIdentifier("PasswordTextField") // <- 加上 Identifier
             
             Text("忘記密碼？")
                 .font(.body)

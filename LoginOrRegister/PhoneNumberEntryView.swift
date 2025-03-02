@@ -180,6 +180,17 @@ struct PhoneNumberEntryView: View {
     
     // **✅ 先檢查手機號碼是否存在**
     private func checkPhoneNumber() {
+        // 檢查是否有 "-SKIP_FIREBASE_CHECK" 標記
+        if ProcessInfo.processInfo.arguments.contains("-SKIP_FIREBASE_CHECK") {
+            print("Skipping Firebase phone check due to launch argument flag.")
+            // 模擬 Firebase 回傳：假設手機號碼已存在，直接跳轉到密碼登入畫面
+            DispatchQueue.main.async {
+                self.showPasswordLoginView = true
+                self.isChecking = false
+            }
+            return
+        }
+        
         isChecking = true
         userSettings.globalCountryCode = selectedCountryCode
 
