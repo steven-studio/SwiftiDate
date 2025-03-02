@@ -368,6 +368,10 @@
 		D0B3F2C42D741632007A5EA0 /* GenderSelectionViewUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B3F2C32D741632007A5EA0 /* GenderSelectionViewUITests.swift */; };
 		D0B3F2C52D741681007A5EA0 /* GenderSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09587D52CB8CDDA00BCD04B /* GenderSelectionView.swift */; };
 		D0B3F2C72D741786007A5EA0 /* SwipeCardViewUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B3F2C62D741786007A5EA0 /* SwipeCardViewUITests.swift */; };
+		D0B3F2C82D7421EC007A5EA0 /* SwipeCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0445C582C71BFE70059D522 /* SwipeCardView.swift */; };
+		D0B3F2C92D742222007A5EA0 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB0E2CA0E65F00A78A87 /* LocationManager.swift */; };
+		D0B3F2CA2D742260007A5EA0 /* CircleExpansionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09587CE2CB7E44400BCD04B /* CircleExpansionView.swift */; };
+		D0B3F2CB2D7422A3007A5EA0 /* PrivacySettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09587D32CB8BDEA00BCD04B /* PrivacySettingsView.swift */; };
 		D0C99B2E2D0DBFED00FA98AD /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D0C99B2C2D0DBFEC00FA98AD /* Localizable.strings */; };
 		D0DDDB052C9FA8AF00A78A87 /* ChatDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB042C9FA8AF00A78A87 /* ChatDetailView.swift */; };
 		D0DDDB072C9FDB1600A78A87 /* WhoLikedYouView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB062C9FDB1600A78A87 /* WhoLikedYouView.swift */; };
@@ -1602,6 +1606,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D0B3F2CB2D7422A3007A5EA0 /* PrivacySettingsView.swift in Sources */,
+				D0B3F2CA2D742260007A5EA0 /* CircleExpansionView.swift in Sources */,
+				D0B3F2C92D742222007A5EA0 /* LocationManager.swift in Sources */,
+				D0B3F2C82D7421EC007A5EA0 /* SwipeCardView.swift in Sources */,
 				D0B3F2C52D741681007A5EA0 /* GenderSelectionView.swift in Sources */,
 				D0B3F2BD2D7410DA007A5EA0 /* MessageListView.swift in Sources */,
 				D0B3F2BC2D7410B5007A5EA0 /* TextViewRepresentable.swift in Sources */,

@@ -90,6 +90,8 @@ struct SwipeCardView: View {
                             .padding(.top, 50)
                             .padding(.trailing, 20)
                     }
+                    // 加上識別標識
+                    .accessibility(identifier: "privacySettingsButton")
                 }
                 Spacer()
             }
@@ -590,6 +592,8 @@ struct SwipeCard: View {
                                 Image(systemName: "xmark")
                                     .font(.system(size: 30, weight: .bold)) // 設定字體大小和粗體
                                     .foregroundColor(.red)
+                                    // 加上識別標識
+                                    .accessibility(identifier: "xmarkButtonImage")
                             }
                         }
                         
@@ -627,6 +631,8 @@ struct SwipeCard: View {
                                 Image(systemName: "heart.fill")
                                     .font(.system(size: 24, weight: .bold)) // 設定字體大小和粗體
                                     .foregroundColor(.green)
+                                    // 加上識別標識
+                                    .accessibility(identifier: "heartFillButtonImage")
                             }
                         }
                         
