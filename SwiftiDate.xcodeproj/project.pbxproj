@@ -343,6 +343,7 @@
 		D0B3F2992D740400007A5EA0 /* AchievementSectionViewUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B3F2982D740400007A5EA0 /* AchievementSectionViewUITests.swift */; };
 		D0B3F29B2D7404D3007A5EA0 /* AchievementCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B3F29A2D7404D3007A5EA0 /* AchievementCardView.swift */; };
 		D0B3F29C2D7404D3007A5EA0 /* AchievementCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B3F29A2D7404D3007A5EA0 /* AchievementCardView.swift */; };
+		D0B3F29E2D7407F8007A5EA0 /* InfoPopupViewUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B3F29D2D7407F8007A5EA0 /* InfoPopupViewUITests.swift */; };
 		D0C99B2E2D0DBFED00FA98AD /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D0C99B2C2D0DBFEC00FA98AD /* Localizable.strings */; };
 		D0DDDB052C9FA8AF00A78A87 /* ChatDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB042C9FA8AF00A78A87 /* ChatDetailView.swift */; };
 		D0DDDB072C9FDB1600A78A87 /* WhoLikedYouView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB062C9FDB1600A78A87 /* WhoLikedYouView.swift */; };
@@ -585,6 +586,7 @@
 		D0B3F2962D74018B007A5EA0 /* PraisePurchaseViewUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PraisePurchaseViewUITests.swift; sourceTree = "<group>"; };
 		D0B3F2982D740400007A5EA0 /* AchievementSectionViewUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementSectionViewUITests.swift; sourceTree = "<group>"; };
 		D0B3F29A2D7404D3007A5EA0 /* AchievementCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementCardView.swift; sourceTree = "<group>"; };
+		D0B3F29D2D7407F8007A5EA0 /* InfoPopupViewUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoPopupViewUITests.swift; sourceTree = "<group>"; };
 		D0C99B2D2D0DBFEC00FA98AD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		D0C99B2F2D0DC00100FA98AD /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		D0C99B302D0DC00700FA98AD /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
@@ -1155,6 +1157,7 @@
 			children = (
 				D0B3F2912D73F07F007A5EA0 /* PurchasesView */,
 				D0B3F2982D740400007A5EA0 /* AchievementSectionViewUITests.swift */,
+				D0B3F29D2D7407F8007A5EA0 /* InfoPopupViewUITests.swift */,
 			);
 			path = ProfileRelated;
 			sourceTree = "<group>";
@@ -1670,6 +1673,7 @@
 				D0B3F1EF2D72E426007A5EA0 /* DegreePickerUITests.swift in Sources */,
 				D0B3F1E32D72CCCD007A5EA0 /* BasicInfoUITests.swift in Sources */,
 				D0B3F23A2D735EF4007A5EA0 /* ProfileTabPickerUITests.swift in Sources */,
+				D0B3F29E2D7407F8007A5EA0 /* InfoPopupViewUITests.swift in Sources */,
 				D0445C4C2C71B3830059D522 /* SwiftiDateUITestsLaunchTests.swift in Sources */,
 				D0B3F20A2D7324DC007A5EA0 /* HometownInputUITests.swift in Sources */,
 				D0B3F2082D732316007A5EA0 /* HeightPickerUITests.swift in Sources */,
