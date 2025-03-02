@@ -344,6 +344,15 @@
 		D0B3F29B2D7404D3007A5EA0 /* AchievementCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B3F29A2D7404D3007A5EA0 /* AchievementCardView.swift */; };
 		D0B3F29C2D7404D3007A5EA0 /* AchievementCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B3F29A2D7404D3007A5EA0 /* AchievementCardView.swift */; };
 		D0B3F29E2D7407F8007A5EA0 /* InfoPopupViewUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B3F29D2D7407F8007A5EA0 /* InfoPopupViewUITests.swift */; };
+		D0B3F2A12D740AAA007A5EA0 /* OTPVerificationViewUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B3F2A02D740AAA007A5EA0 /* OTPVerificationViewUITests.swift */; };
+		D0B3F2A22D740AEA007A5EA0 /* OTPVerificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B388252D5B7BAE003BC40C /* OTPVerificationView.swift */; };
+		D0B3F2A32D740B06007A5EA0 /* NoCursorTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B3F1272D6F0472007A5EA0 /* NoCursorTextField.swift */; };
+		D0B3F2A42D740B06007A5EA0 /* NoCursorTextFieldWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B3F1292D6F04B7007A5EA0 /* NoCursorTextFieldWrapper.swift */; };
+		D0B3F2A52D740B29007A5EA0 /* FirebaseAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07B41ED2D61DA530015C7AA /* FirebaseAuthManager.swift */; };
+		D0B3F2A62D740B3B007A5EA0 /* RealVerificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B388272D5B7BAE003BC40C /* RealVerificationView.swift */; };
+		D0B3F2A72D740B76007A5EA0 /* FaceTrackingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B388242D5B7BAE003BC40C /* FaceTrackingView.swift */; };
+		D0B3F2A82D740B7F007A5EA0 /* UploadPhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B388282D5B7BAE003BC40C /* UploadPhotoView.swift */; };
+		D0B3F2A92D740B9B007A5EA0 /* FirestoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07B41EF2D61EE2C0015C7AA /* FirestoreManager.swift */; };
 		D0C99B2E2D0DBFED00FA98AD /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D0C99B2C2D0DBFEC00FA98AD /* Localizable.strings */; };
 		D0DDDB052C9FA8AF00A78A87 /* ChatDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB042C9FA8AF00A78A87 /* ChatDetailView.swift */; };
 		D0DDDB072C9FDB1600A78A87 /* WhoLikedYouView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB062C9FDB1600A78A87 /* WhoLikedYouView.swift */; };
@@ -587,6 +596,7 @@
 		D0B3F2982D740400007A5EA0 /* AchievementSectionViewUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementSectionViewUITests.swift; sourceTree = "<group>"; };
 		D0B3F29A2D7404D3007A5EA0 /* AchievementCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementCardView.swift; sourceTree = "<group>"; };
 		D0B3F29D2D7407F8007A5EA0 /* InfoPopupViewUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoPopupViewUITests.swift; sourceTree = "<group>"; };
+		D0B3F2A02D740AAA007A5EA0 /* OTPVerificationViewUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTPVerificationViewUITests.swift; sourceTree = "<group>"; };
 		D0C99B2D2D0DBFEC00FA98AD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		D0C99B2F2D0DC00100FA98AD /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		D0C99B302D0DC00700FA98AD /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
@@ -1104,6 +1114,7 @@
 		D0B3F1962D72AC1D007A5EA0 /* AnalyticsManagerTests */ = {
 			isa = PBXGroup;
 			children = (
+				D0B3F29F2D740A5F007A5EA0 /* LoginOrRegister */,
 				D0B3F28F2D73F02E007A5EA0 /* ProfileRelated */,
 				D0B3F1972D72AC46007A5EA0 /* EditProfileRelated */,
 				D0B3F1F32D72FA61007A5EA0 /* AnalyticsSpy.swift */,
@@ -1170,6 +1181,14 @@
 				D0B3F2962D74018B007A5EA0 /* PraisePurchaseViewUITests.swift */,
 			);
 			path = PurchasesView;
+			sourceTree = "<group>";
+		};
+		D0B3F29F2D740A5F007A5EA0 /* LoginOrRegister */ = {
+			isa = PBXGroup;
+			children = (
+				D0B3F2A02D740AAA007A5EA0 /* OTPVerificationViewUITests.swift */,
+			);
+			path = LoginOrRegister;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1536,6 +1555,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D0B3F2A92D740B9B007A5EA0 /* FirestoreManager.swift in Sources */,
+				D0B3F2A82D740B7F007A5EA0 /* UploadPhotoView.swift in Sources */,
+				D0B3F2A72D740B76007A5EA0 /* FaceTrackingView.swift in Sources */,
+				D0B3F2A62D740B3B007A5EA0 /* RealVerificationView.swift in Sources */,
+				D0B3F2A52D740B29007A5EA0 /* FirebaseAuthManager.swift in Sources */,
+				D0B3F2A32D740B06007A5EA0 /* NoCursorTextField.swift in Sources */,
+				D0B3F2A42D740B06007A5EA0 /* NoCursorTextFieldWrapper.swift in Sources */,
+				D0B3F2A22D740AEA007A5EA0 /* OTPVerificationView.swift in Sources */,
 				D0B3F2802D7363AC007A5EA0 /* RealNameVerificationView.swift in Sources */,
 				D0B3F2812D7363AC007A5EA0 /* ReportConditionsView.swift in Sources */,
 				D0B3F2822D7363AC007A5EA0 /* HowToReportView.swift in Sources */,
@@ -1630,6 +1657,7 @@
 				D0B3F2222D733D5B007A5EA0 /* MeetWillingnessSection.swift in Sources */,
 				D0B3F21D2D733998007A5EA0 /* VacationOptionsView.swift in Sources */,
 				D0B3F21C2D73396E007A5EA0 /* SmokingOptionsView.swift in Sources */,
+				D0B3F2A12D740AAA007A5EA0 /* OTPVerificationViewUITests.swift in Sources */,
 				D0B3F21B2D73392F007A5EA0 /* PetSelectionView.swift in Sources */,
 				D0B3F21A2D73390F007A5EA0 /* LookingForView.swift in Sources */,
 				D0B3F2192D7338E7007A5EA0 /* LifestyleView.swift in Sources */,
