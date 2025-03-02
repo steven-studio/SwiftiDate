@@ -340,6 +340,9 @@
 		D0B3F2932D73F0F6007A5EA0 /* TurboPurchaseViewUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B3F2922D73F0F6007A5EA0 /* TurboPurchaseViewUITests.swift */; };
 		D0B3F2952D73FBC3007A5EA0 /* CrushPurchaseViewUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B3F2942D73FBC3007A5EA0 /* CrushPurchaseViewUITests.swift */; };
 		D0B3F2972D74018B007A5EA0 /* PraisePurchaseViewUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B3F2962D74018B007A5EA0 /* PraisePurchaseViewUITests.swift */; };
+		D0B3F2992D740400007A5EA0 /* AchievementSectionViewUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B3F2982D740400007A5EA0 /* AchievementSectionViewUITests.swift */; };
+		D0B3F29B2D7404D3007A5EA0 /* AchievementCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B3F29A2D7404D3007A5EA0 /* AchievementCardView.swift */; };
+		D0B3F29C2D7404D3007A5EA0 /* AchievementCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B3F29A2D7404D3007A5EA0 /* AchievementCardView.swift */; };
 		D0C99B2E2D0DBFED00FA98AD /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D0C99B2C2D0DBFEC00FA98AD /* Localizable.strings */; };
 		D0DDDB052C9FA8AF00A78A87 /* ChatDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB042C9FA8AF00A78A87 /* ChatDetailView.swift */; };
 		D0DDDB072C9FDB1600A78A87 /* WhoLikedYouView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB062C9FDB1600A78A87 /* WhoLikedYouView.swift */; };
@@ -580,6 +583,8 @@
 		D0B3F2922D73F0F6007A5EA0 /* TurboPurchaseViewUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TurboPurchaseViewUITests.swift; sourceTree = "<group>"; };
 		D0B3F2942D73FBC3007A5EA0 /* CrushPurchaseViewUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrushPurchaseViewUITests.swift; sourceTree = "<group>"; };
 		D0B3F2962D74018B007A5EA0 /* PraisePurchaseViewUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PraisePurchaseViewUITests.swift; sourceTree = "<group>"; };
+		D0B3F2982D740400007A5EA0 /* AchievementSectionViewUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementSectionViewUITests.swift; sourceTree = "<group>"; };
+		D0B3F29A2D7404D3007A5EA0 /* AchievementCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementCardView.swift; sourceTree = "<group>"; };
 		D0C99B2D2D0DBFEC00FA98AD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		D0C99B2F2D0DC00100FA98AD /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		D0C99B302D0DC00700FA98AD /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
@@ -942,6 +947,7 @@
 			isa = PBXGroup;
 			children = (
 				D039FC582CCD0AAC0082D2F3 /* PurchasesView */,
+				D0B3F29A2D7404D3007A5EA0 /* AchievementCardView.swift */,
 				D051EF302CC033C5004563A3 /* AchievementSectionView.swift */,
 				D04729DD2CC11320007C33EC /* InfoPopupView.swift */,
 				D04729E32CC13221007C33EC /* PremiumCardTabView.swift */,
@@ -1148,6 +1154,7 @@
 			isa = PBXGroup;
 			children = (
 				D0B3F2912D73F07F007A5EA0 /* PurchasesView */,
+				D0B3F2982D740400007A5EA0 /* AchievementSectionViewUITests.swift */,
 			);
 			path = ProfileRelated;
 			sourceTree = "<group>";
@@ -1467,6 +1474,7 @@
 				D09587CD2CB7D5C900BCD04B /* MeetingGuideView.swift in Sources */,
 				D09587BD2CB77F5200BCD04B /* SafetyTestView.swift in Sources */,
 				D0DDDB2C2CA160BB00A78A87 /* HowToUseWhoLikedMeAndCrushListView.swift in Sources */,
+				D0B3F29C2D7404D3007A5EA0 /* AchievementCardView.swift in Sources */,
 				D07B41DF2D6197570015C7AA /* FirebasePhotoManager.swift in Sources */,
 				D0445C592C71BFE70059D522 /* SwipeCardView.swift in Sources */,
 				D0445C612C722EF50059D522 /* PhotoSectionView.swift in Sources */,
@@ -1537,6 +1545,7 @@
 				D0B3F27E2D73636B007A5EA0 /* SafetyTipsView.swift in Sources */,
 				D0B3F2602D736347007A5EA0 /* HowToCancelSubscriptionView.swift in Sources */,
 				D0B3F2612D736347007A5EA0 /* HowToDeleteMessagesView.swift in Sources */,
+				D0B3F2992D740400007A5EA0 /* AchievementSectionViewUITests.swift in Sources */,
 				D0B3F2622D736347007A5EA0 /* HowToEnableNotificationsView.swift in Sources */,
 				D0B3F2632D736347007A5EA0 /* HowToEnablePremiumBadgeView.swift in Sources */,
 				D0B3F2642D736347007A5EA0 /* HowToMatchAndChatView.swift in Sources */,
@@ -1558,6 +1567,7 @@
 				D0B3F2732D736347007A5EA0 /* UpdateProfileDetailsView.swift in Sources */,
 				D0B3F2742D736347007A5EA0 /* WhatIsCrushAndHowToUseView.swift in Sources */,
 				D0B3F2752D736347007A5EA0 /* WhatIsSwiftiDateView.swift in Sources */,
+				D0B3F29B2D7404D3007A5EA0 /* AchievementCardView.swift in Sources */,
 				D0B3F2762D736347007A5EA0 /* WhatIsSwiftiDatePremiumDiscountPolicyView.swift in Sources */,
 				D0B3F2772D736347007A5EA0 /* WhatIsSwiftiDatePremiumView.swift in Sources */,
 				D0B3F2782D736347007A5EA0 /* WhatIsSwiftiDateSupremeView.swift in Sources */,
