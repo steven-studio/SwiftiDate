@@ -353,6 +353,7 @@
 		D0B3F2A72D740B76007A5EA0 /* FaceTrackingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B388242D5B7BAE003BC40C /* FaceTrackingView.swift */; };
 		D0B3F2A82D740B7F007A5EA0 /* UploadPhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B388282D5B7BAE003BC40C /* UploadPhotoView.swift */; };
 		D0B3F2A92D740B9B007A5EA0 /* FirestoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07B41EF2D61EE2C0015C7AA /* FirestoreManager.swift */; };
+		D0B3F2B12D740DBE007A5EA0 /* ModelSelectorViewUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B3F2B02D740DBE007A5EA0 /* ModelSelectorViewUITests.swift */; };
 		D0C99B2E2D0DBFED00FA98AD /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D0C99B2C2D0DBFEC00FA98AD /* Localizable.strings */; };
 		D0DDDB052C9FA8AF00A78A87 /* ChatDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB042C9FA8AF00A78A87 /* ChatDetailView.swift */; };
 		D0DDDB072C9FDB1600A78A87 /* WhoLikedYouView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB062C9FDB1600A78A87 /* WhoLikedYouView.swift */; };
@@ -597,6 +598,7 @@
 		D0B3F29A2D7404D3007A5EA0 /* AchievementCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementCardView.swift; sourceTree = "<group>"; };
 		D0B3F29D2D7407F8007A5EA0 /* InfoPopupViewUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoPopupViewUITests.swift; sourceTree = "<group>"; };
 		D0B3F2A02D740AAA007A5EA0 /* OTPVerificationViewUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTPVerificationViewUITests.swift; sourceTree = "<group>"; };
+		D0B3F2B02D740DBE007A5EA0 /* ModelSelectorViewUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelSelectorViewUITests.swift; sourceTree = "<group>"; };
 		D0C99B2D2D0DBFEC00FA98AD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		D0C99B2F2D0DC00100FA98AD /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		D0C99B302D0DC00700FA98AD /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
@@ -1114,6 +1116,7 @@
 		D0B3F1962D72AC1D007A5EA0 /* AnalyticsManagerTests */ = {
 			isa = PBXGroup;
 			children = (
+				D0B3F2AC2D740D01007A5EA0 /* ChatRelated */,
 				D0B3F29F2D740A5F007A5EA0 /* LoginOrRegister */,
 				D0B3F28F2D73F02E007A5EA0 /* ProfileRelated */,
 				D0B3F1972D72AC46007A5EA0 /* EditProfileRelated */,
@@ -1189,6 +1192,22 @@
 				D0B3F2A02D740AAA007A5EA0 /* OTPVerificationViewUITests.swift */,
 			);
 			path = LoginOrRegister;
+			sourceTree = "<group>";
+		};
+		D0B3F2AC2D740D01007A5EA0 /* ChatRelated */ = {
+			isa = PBXGroup;
+			children = (
+				D0B3F2AD2D740D5A007A5EA0 /* ChatAIRelated */,
+				D0B3F2B02D740DBE007A5EA0 /* ModelSelectorViewUITests.swift */,
+			);
+			path = ChatRelated;
+			sourceTree = "<group>";
+		};
+		D0B3F2AD2D740D5A007A5EA0 /* ChatAIRelated */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ChatAIRelated;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1695,6 +1714,7 @@
 				D0B3F1E72D72CD52007A5EA0 /* AnalyticsManagerProtocol.swift in Sources */,
 				D0B3F1F42D72FA61007A5EA0 /* AnalyticsSpy.swift in Sources */,
 				D0B3F1E52D72CD27007A5EA0 /* AboutMeSection.swift in Sources */,
+				D0B3F2B12D740DBE007A5EA0 /* ModelSelectorViewUITests.swift in Sources */,
 				D0B3F1E62D72CD27007A5EA0 /* BasicInfoView.swift in Sources */,
 				D0B3F1E22D72CCC6007A5EA0 /* AboutMeSectionUITests.swift in Sources */,
 				D0B3F1312D6F0F8F007A5EA0 /* OTPVerificationUITests.swift in Sources */,
