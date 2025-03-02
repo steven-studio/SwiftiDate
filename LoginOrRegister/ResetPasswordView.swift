@@ -36,16 +36,19 @@ struct ResetPasswordView: View {
             
             Text("更換新密碼")
                 .font(.title)
+                .foregroundColor(.white)
             
             Text("密碼須不少於6個字符")
                 .font(.body)
                 .padding()
+                .foregroundColor(.white)
 
             TextField("", text: $password)
                 .font(.title3)
                 .padding(.horizontal)
                 .padding(.vertical)
-                .background(Color.gray.opacity(0.1))
+                .foregroundColor(.black)
+                .background(Color.gray.opacity(0.3))
                 .cornerRadius(10)
                 .accessibilityIdentifier("ResetPasswordTextField") // <- 加上 Identifier
             
@@ -68,6 +71,7 @@ struct ResetPasswordView: View {
             .padding()
         }
         .padding()
+        .background(Color.black)
         .onAppear {
             // 畫面出現時記錄 Analytics 事件
             AnalyticsManager.shared.trackEvent("ResetPasswordView_Appeared", parameters: nil)

@@ -37,6 +37,7 @@ struct OTPVerificationView: View {
     var attributedString: AttributedString {
         var text = AttributedString("驗證碼")
         text.font = .body
+        text.foregroundColor = .white  // 設置預設為白色
 
         var highlightText = AttributedString(" 正在傳送至")
         highlightText.font = .headline
@@ -44,6 +45,7 @@ struct OTPVerificationView: View {
 
         var phoneText = AttributedString(" \(selectedCountryCode) \(phoneNumber)，請在下方輸入")
         phoneText.font = .body
+        phoneText.foregroundColor = .white  // 設置預設為白色
 
         return text + highlightText + phoneText
     }
@@ -58,7 +60,7 @@ struct OTPVerificationView: View {
                 }) {
                     Image(systemName: "chevron.left")
                         .font(.title2)
-                        .foregroundColor(.black.opacity(0.5)) // 設置文字顏色為黑色
+                        .foregroundColor(.gray.opacity(0.5)) // 設置文字顏色為黑色
                         .padding(.leading)
                 }
                 Spacer()
@@ -68,6 +70,7 @@ struct OTPVerificationView: View {
             Text("輸入驗證碼")
                 .font(.title)
                 .padding()
+                .foregroundColor(.white)
             
             Text(attributedString)
                 .multilineTextAlignment(.center)
@@ -92,7 +95,8 @@ struct OTPVerificationView: View {
                         }
                     )
                     .frame(width: 50, height: 50)
-                    .background(Color(.systemGray6))
+                    .foregroundColor(.black)
+                    .background(Color(.systemGray).opacity(0.3))
                     .cornerRadius(10)
                     .multilineTextAlignment(.center)
                     .font(.title)
@@ -164,8 +168,10 @@ struct OTPVerificationView: View {
             }
             .disabled(isVerifying)
             .padding()
+            .accessibilityIdentifier("VerifyOTPButton")
         }
         .padding()
+        .background(Color.black)
         .fullScreenCover(isPresented: $showResetPasswordView) {
             ResetPasswordView(
                 selectedCountryCode: $selectedCountryCode,
@@ -252,20 +258,33 @@ struct OTPVerificationView: View {
         isVerifying = true
         
         let code = otpCode.joined() // ✅ 修正：將 [String] 陣列轉換為單一 String
-
-        let credential = PhoneAuthProvider.provider().credential(withVerificationID: verificationID, verificationCode: code)
-
-        Auth.auth().signIn(with: credential) { authResult, error in
+        
+        if ProcessInfo.processInfo.arguments.contains("-SKIP_FIREBASE_CHECK") {
+            // Simulate success
             DispatchQueue.main.async {
                 isVerifying = false
-                if let error = error {
-                    print("❌ 驗證失敗: \(error.localizedDescription)")
+                print("✅ Skip Firebase check: Simulated success.")
+                if isResetPassword {
+                    showResetPasswordView = true
                 } else {
-                    print("✅ 驗證成功！用戶登入成功")
-                    if isResetPassword {
-                        showResetPasswordView = true
+                    showRealVerification = true // ✅ 觸發真人認證畫面
+                }
+            }
+        } else {
+            let credential = PhoneAuthProvider.provider().credential(withVerificationID: verificationID, verificationCode: code)
+            
+            Auth.auth().signIn(with: credential) { authResult, error in
+                DispatchQueue.main.async {
+                    isVerifying = false
+                    if let error = error {
+                        print("❌ 驗證失敗: \(error.localizedDescription)")
                     } else {
-                        showRealVerification = true // ✅ 觸發真人認證畫面
+                        print("✅ 驗證成功！用戶登入成功")
+                        if isResetPassword {
+                            showResetPasswordView = true
+                        } else {
+                            showRealVerification = true // ✅ 觸發真人認證畫面
+                        }
                     }
                 }
             }

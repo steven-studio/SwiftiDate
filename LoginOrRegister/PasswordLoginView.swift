@@ -28,7 +28,7 @@ struct PasswordLoginView: View {
                 }) {
                     Image(systemName: "chevron.left")
                         .font(.title2)
-                        .foregroundColor(.black.opacity(0.5)) // 設置文字顏色為黑色
+                        .foregroundColor(.gray.opacity(0.5)) // 設置文字顏色為黑色
                         .padding(.leading)
                 }
                 Spacer()
@@ -38,15 +38,17 @@ struct PasswordLoginView: View {
             Text("輸入密碼")
                 .font(.title)
                 .padding()
+                .foregroundColor(.white)
 
 //            Text("\(selectedCountryCode) \(phoneNumber)")
 //                .foregroundColor(.gray)
 
             TextField("", text: $password)
-                .font(.title3)
+                .font(.title2)
                 .padding(.horizontal)
                 .padding(.vertical)
-                .background(Color.gray.opacity(0.1))
+                .foregroundColor(.black)
+                .background(Color.gray.opacity(0.3))
                 .cornerRadius(10)
                 .accessibilityIdentifier("PasswordTextField") // <- 加上 Identifier
             
@@ -61,6 +63,7 @@ struct PasswordLoginView: View {
                     .foregroundColor(.green)
                     .padding(.top)
             }
+            .accessibilityIdentifier("ForgotPasswordButton") // <- 加上 Identifier
 
             Spacer()
 
@@ -81,6 +84,7 @@ struct PasswordLoginView: View {
             .padding()
         }
         .padding()
+        .background(.black)
         .onAppear {
             // 畫面出現時記錄 Analytics 事件
             AnalyticsManager.shared.trackEvent("PasswordLoginView_Appeared", parameters: nil)
