@@ -22,12 +22,19 @@ class FirebasePhotoManager {
     /// 用來追蹤「是否正在上傳」的狀態
     private var isUploading = false
     
+    // 注入 UserSettings
+    var userSettings: UserSettings?
+    
     init(firebaseManager: FirebaseManager = .shared) {
         self.firebaseManager = firebaseManager
     }
 
     // Fetch photos from Firebase Storage
     func fetchPhotosFromFirebase(completion: @escaping () -> Void) {
+        guard let userSettings = userSettings else {
+            print("UserSettings not injected")
+            return
+        }
         print("Fetching photos from Firebase started")
         userSettings.photos.removeAll() // Clear existing photos before fetching
         
@@ -115,15 +122,13 @@ class FirebasePhotoManager {
                     }
                     
                     DispatchQueue.main.async {
-                        // Update userSettings
-                        userSettings.photos = downloadedPhotos.map { $0.imageName }
-                        userSettings.loadedPhotosString = userSettings.photos.joined(separator: ",")
-                        print("Updated photos array after download: \(userSettings.photos)")
-                        
-                        if userSettings.loadedPhotosString.isEmpty {
+                        self.userSettings?.photos = downloadedPhotos.map { $0.imageName }
+                        self.userSettings?.loadedPhotosString = self.userSettings?.photos.joined(separator: ",") ?? ""
+                        print("Updated photos array after download: \(self.userSettings?.photos ?? [])")
+                        if self.userSettings?.loadedPhotosString.isEmpty == true {
                             print("下載結束，但 loadedPhotosString 依然是空的，表示沒有照片")
                         } else {
-                            print("下載結束，成功存入 loadedPhotosString = \(userSettings.loadedPhotosString)")
+                            print("下載結束，成功存入 loadedPhotosString = \(self.userSettings?.loadedPhotosString ?? "")")
                         }
                         
                         // 告知外部：所有流程都完成
@@ -181,6 +186,10 @@ class FirebasePhotoManager {
     
     /// 一次上傳 userSettings.photos 中的所有照片
     func uploadAllPhotos() {
+        guard let userSettings = userSettings else {
+            print("UserSettings not injected")
+            return
+        }
         let photoNames = userSettings.photos // e.g. ["someUUID1", "someUUID2"...]
         guard !photoNames.isEmpty else {
             print("❌ 沒有任何照片可上傳")

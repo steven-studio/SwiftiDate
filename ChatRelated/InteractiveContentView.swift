@@ -13,6 +13,7 @@ struct InteractiveContentView: View {
     var onBack: () -> Void // Closure to handle back navigation
     @Binding var messages: [Message]  // Bind to the messages passed from ChatView
     @State private var newMessageText: String = "" // State variable to hold the input message text
+    @EnvironmentObject var userSettings: UserSettings  // 加入這行
     
     var body: some View {
         VStack {

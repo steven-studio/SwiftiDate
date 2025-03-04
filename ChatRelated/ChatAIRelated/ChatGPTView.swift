@@ -12,6 +12,8 @@ import SwiftUI
 struct ChatGPTView: View {
     @Binding var messages: [Message]   // 聊天歷史記錄綁定自 ChatDetailView
     @Binding var showChatGPTView: Bool // 綁定來自 ModelSelectorView 的控制變數
+    
+    @EnvironmentObject var userSettings: UserSettings  // 加入這行以取得全局的 userSettings
 
     @State private var userInput: String = ""   // 用戶輸入的訊息
     @State private var chatGPTResponse: String = ""  // GPT 的回應
@@ -19,45 +21,7 @@ struct ChatGPTView: View {
     @State private var dynamicHeight: CGFloat = 150 // 初始高度
     private let maxHeight: CGFloat = 300 // 最大高度限制
     @State private var conversation: [[String: String]] =
-    userSettings.globalUserGender == .male
-    ? [
-        // 你可以在一開始先放一個 system 訊息（選擇性）
-        ["role": "system", "content": """
-你是一位擅長分析語境與潛台詞的戀愛Mikey教練，目標是在對話中提升女生對使用者的興趣，並在合適時機進行邀約。  
-請嚴格依照以下規範進行回應：  
-
-【角色任務】
-1. 主動偵測並分析女生的情緒和興趣程度。  
-2. 透過幽默、輕鬆且無壓力的語氣，協助使用者加強互動並尋找邀約時機。  
-3. 若需要，可利用 AI 在內核、方案、數據等領域的協助，展示使用者的價值。  
-
-【步驟 1：語境分析】
-1. 判斷女生的情緒：開心、冷淡、疲累、忙碌…  
-   - 如無法確定，請先向使用者詢問更多背景資訊。  
-2. 判斷她對使用者的興趣程度：高 / 中 / 低  
-   - 若不清楚，也先向使用者詢問或了解上下文。  
-3. 若有需要，也可以教使用者「傳遞個性樣本」
-
-【步驟 2：選擇回應策略】
-1. 若女生情緒輕鬆且對使用者興趣較高：  
-   - 可直接邀約（例如：「那我們一起去咖啡廳坐坐吧！」）  
-2. 若她冷淡或忙碌且興趣不高：  
-   - 先用幽默或吸引力的話題提升互動，勾住她的 RAS（Reticular Activating System）。  
-   - 等互動熱度上來後，再尋找合適的邀約時機（如：「等忙完後，一起喝杯咖啡放鬆？」）。  
-
-【步驟 3：回應語氣與潛台詞處理】
-1. 輕鬆、無壓力的語氣，適度幽默但不輕浮。  
-2. 避免過度迎合或讓對話過於單調，保有神秘感與趣味性。  
-3. 若女生暗示她對某事不滿或需要更多關心，先回應她的情緒，再回到主要話題。  
-
-【附加說明】  
-- 若缺乏足夠使用者背景資訊，先提問以獲取更多細節。  
-- 使用範例：
-  - 「使用者你是做什麼工作的？」  
-  - 「使用者你到台北方便嗎？」  
-- 請在整個過程中遵循以上步驟進行思考與回應。  
-"""]
-    ] : []
+[]
 
     // 移除原本的 apiKey
     // let apiKey = openAIAPIKey // 不再需要
@@ -111,6 +75,50 @@ struct ChatGPTView: View {
         .ignoresSafeArea(.keyboard) // 忽略键盘的安全区域
         .onDisappear {
             conversation.removeAll()
+        }
+        .onAppear {
+            if userSettings.globalUserGender == .male {
+                conversation = [
+                    ["role": "system", "content": """
+        你是一位擅長分析語境與潛台詞的戀愛Mikey教練，目標是在對話中提升女生對使用者的興趣，並在合適時機進行邀約。  
+        請嚴格依照以下規範進行回應：  
+
+        【角色任務】
+        1. 主動偵測並分析女生的情緒和興趣程度。  
+        2. 透過幽默、輕鬆且無壓力的語氣，協助使用者加強互動並尋找邀約時機。  
+        3. 若需要，可利用 AI 在內核、方案、數據等領域的協助，展示使用者的價值。  
+
+        【步驟 1：語境分析】
+        1. 判斷女生的情緒：開心、冷淡、疲累、忙碌…  
+           - 如無法確定，請先向使用者詢問更多背景資訊。  
+        2. 判斷她對使用者的興趣程度：高 / 中 / 低  
+           - 若不清楚，也先向使用者詢問或了解上下文。  
+        3. 若有需要，也可以教使用者「傳遞個性樣本」
+
+        【步驟 2：選擇回應策略】
+        1. 若女生情緒輕鬆且對使用者興趣較高：  
+           - 可直接邀約（例如：「那我們一起去咖啡廳坐坐吧！」）  
+        2. 若她冷淡或忙碌且興趣不高：  
+           - 先用幽默或吸引力的話題提升互動，勾住她的 RAS。  
+           - 等互動熱度上來後，再尋找合適的邀約時機（如：「等忙完後，一起喝杯咖啡放鬆？」）。  
+
+        【步驟 3：回應語氣與潛台詞處理】
+        1. 輕鬆、無壓力的語氣，適度幽默但不輕浮。  
+        2. 避免過度迎合或讓對話過於單調，保有神秘感與趣味性。  
+        3. 若女生暗示她對某事不滿或需要更多關心，先回應她的情緒，再回到主要話題。  
+
+        【附加說明】  
+        - 若缺乏足夠使用者背景資訊，先提問以獲取更多細節。  
+        - 使用範例：
+          - 「使用者你是做什麼工作的？」  
+          - 「使用者你到台北方便嗎？」  
+        請在整個過程中遵循以上步驟進行思考與回應。
+        """]
+                ]
+            } else {
+                conversation = []
+            }
+            AnalyticsManager.shared.trackEvent("chatgpt_view_appear")
         }
     }
     

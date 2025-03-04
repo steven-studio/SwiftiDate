@@ -45,7 +45,6 @@ struct MainView: View {
                 }
                 .tabItem {
                     Image(systemName: "moon.stars.fill") // 使用更符合命理學的 SF Symbol
-                    Text("星座占卜")
                 }
                 .tag(2)
             }

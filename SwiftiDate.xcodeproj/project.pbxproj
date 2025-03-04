@@ -163,7 +163,6 @@
 		D09587CB2CB7D19B00BCD04B /* ReportAftermathView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09587CA2CB7D19B00BCD04B /* ReportAftermathView.swift */; };
 		D09587CD2CB7D5C900BCD04B /* MeetingGuideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09587CC2CB7D5C800BCD04B /* MeetingGuideView.swift */; };
 		D09587CF2CB7E44400BCD04B /* CircleExpansionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09587CE2CB7E44400BCD04B /* CircleExpansionView.swift */; };
-		D09587D12CB8623C00BCD04B /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09587D02CB8623C00BCD04B /* LoginView.swift */; };
 		D09587D42CB8BDEA00BCD04B /* PrivacySettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09587D32CB8BDEA00BCD04B /* PrivacySettingsView.swift */; };
 		D09587D62CB8CDDA00BCD04B /* GenderSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09587D52CB8CDDA00BCD04B /* GenderSelectionView.swift */; };
 		D0B388122D5B79A1003BC40C /* WebRTC in Frameworks */ = {isa = PBXBuildFile; productRef = D0B388112D5B79A1003BC40C /* WebRTC */; };
@@ -585,7 +584,6 @@
 		D09587CA2CB7D19B00BCD04B /* ReportAftermathView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportAftermathView.swift; sourceTree = "<group>"; };
 		D09587CC2CB7D5C800BCD04B /* MeetingGuideView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingGuideView.swift; sourceTree = "<group>"; };
 		D09587CE2CB7E44400BCD04B /* CircleExpansionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleExpansionView.swift; sourceTree = "<group>"; };
-		D09587D02CB8623C00BCD04B /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		D09587D22CB8AC6900BCD04B /* SwiftiDate.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SwiftiDate.entitlements; sourceTree = "<group>"; };
 		D09587D32CB8BDEA00BCD04B /* PrivacySettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacySettingsView.swift; sourceTree = "<group>"; };
 		D09587D52CB8CDDA00BCD04B /* GenderSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenderSelectionView.swift; sourceTree = "<group>"; };
@@ -950,11 +948,9 @@
 				D018AD5A2C9E57DF005A14B9 /* UserGuideView.swift */,
 				D018AD952C9EEA82005A14B9 /* AsyncImageView.swift */,
 				D0DDDB062C9FDB1600A78A87 /* WhoLikedYouView.swift */,
-				D0DDDB082C9FDE0500A78A87 /* InteractiveContentView.swift */,
 				D0DDDB0A2CA07A0D00A78A87 /* TurboView.swift */,
 				D0DDDB0C2CA07A2400A78A87 /* FeaturedCardView.swift */,
 				D017F4F52CAFBFF700C71D18 /* LoginOrRegisterView.swift */,
-				D09587D02CB8623C00BCD04B /* LoginView.swift */,
 				D09587D32CB8BDEA00BCD04B /* PrivacySettingsView.swift */,
 				D04938792CBF0A6F00754E46 /* Models.swift */,
 				D051EF2B2CC02C33004563A3 /* PhotoUtility.swift */,
@@ -1074,9 +1070,9 @@
 		D06724E62D6EC1DE00FD566F /* FirebaseManager */ = {
 			isa = PBXGroup;
 			children = (
+				D07B41ED2D61DA530015C7AA /* FirebaseAuthManager.swift */,
 				D07B41EA2D61C3630015C7AA /* FirebaseManager.swift */,
 				D07B41DE2D6197570015C7AA /* FirebasePhotoManager.swift */,
-				D07B41ED2D61DA530015C7AA /* FirebaseAuthManager.swift */,
 				D07B41EF2D61EE2C0015C7AA /* FirestoreManager.swift */,
 			);
 			path = FirebaseManager;
@@ -1109,6 +1105,7 @@
 				D0DDDB042C9FA8AF00A78A87 /* ChatDetailView.swift */,
 				D04938772CBF0A4600754E46 /* ChatRow.swift */,
 				D018AD622C9E87F6005A14B9 /* ChatView.swift */,
+				D0DDDB082C9FDE0500A78A87 /* InteractiveContentView.swift */,
 				D017F4F32CAF77D900C71D18 /* MessageBubbleView.swift */,
 				D0903AC92D58A56F00735323 /* MessageListView.swift */,
 				D0903ABF2D58A45200735323 /* modelSelector.swift */,
@@ -1569,7 +1566,6 @@
 				D018AD5B2C9E57DF005A14B9 /* UserGuideView.swift in Sources */,
 				D07C57E52D76F3B30008DC9D /* CropViewControllerWrapper.swift in Sources */,
 				D09587C52CB7C73100BCD04B /* RealNameVerificationView.swift in Sources */,
-				D09587D12CB8623C00BCD04B /* LoginView.swift in Sources */,
 				D0DDDB302CA164BE00A78A87 /* WhatIsTurboAndHowToUseView.swift in Sources */,
 				D0DDDB282CA14FCC00A78A87 /* ReportUserView.swift in Sources */,
 				D0DDDB482CA191EE00A78A87 /* HowToPurchaseSwiftiDateSupremeView.swift in Sources */,

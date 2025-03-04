@@ -14,12 +14,20 @@ class FirebaseAuthManager {
     // MARK: - Singleton
     static let shared = FirebaseAuthManager()
     private init() {}
+    
+    // 新增一個屬性來注入 UserSettings
+    var userSettings: UserSettings?
 
     // MARK: - OTP 驗證相關
     
     /// 結合 userSettings 的國碼 + 電話號碼，發送 OTP 驗證碼
     func sendOTP() {
-        let fullPhoneNumber = "\(userSettings.globalCountryCode)\(userSettings.globalPhoneNumber)"
+        // 使用注入的 userSettings
+        guard let settings = userSettings else {
+            print("UserSettings not injected")
+            return
+        }
+        let fullPhoneNumber = "\(settings.globalCountryCode)\(settings.globalPhoneNumber)"
         sendFirebaseOTP(to: fullPhoneNumber)
     }
 

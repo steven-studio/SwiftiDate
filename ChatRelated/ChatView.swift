@@ -226,6 +226,7 @@ struct ChatView: View {
                         AnalyticsManager.shared.trackEvent("interactive_content_closed")
                         showInteractiveContent = false
                     }, messages: $interactiveMessage)
+                    .environmentObject(userSettings)
                 } else if showSearchField && filteredMatches.isEmpty {
                     ScrollView {
                         // 使用 List 顯示聊天對話

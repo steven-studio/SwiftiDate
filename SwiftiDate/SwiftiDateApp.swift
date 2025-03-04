@@ -81,6 +81,8 @@ struct SwiftiDateApp: App {
                 userSettings.globalCrushCount = 10000
                 userSettings.globalPraiseCount = 10000
                 userSettings.isProfilePhotoVerified = true
+                FirebaseAuthManager.shared.userSettings = userSettings
+                FirebasePhotoManager.shared.userSettings = userSettings
             }
         }
     }

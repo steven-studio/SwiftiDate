@@ -30,10 +30,13 @@ struct PhotoUtility {
     }
     
     // 加載照片
-    static func loadPhotosFromAppStorage() {
+    static func loadPhotosFromAppStorage(for userSettings: UserSettings) {
         if !userSettings.loadedPhotosString.isEmpty {
-            print("Loaded cached photos from AppStorage: \(userSettings.loadedPhotosString)")
-            userSettings.photos = userSettings.loadedPhotosString.components(separatedBy: ",")
+            // 確保在主線程更新狀態，促使 View 刷新
+            DispatchQueue.main.async {
+                print("Loaded cached photos from AppStorage: \(userSettings.loadedPhotosString)")
+                userSettings.photos = userSettings.loadedPhotosString.components(separatedBy: ",")
+            }
         } else {
             print("No cached photos found in AppStorage, fetching from Firebase.")
             FirebasePhotoManager.shared.fetchPhotosFromFirebase {
@@ -45,8 +48,11 @@ struct PhotoUtility {
     static func addImageToPhotos(_ image: UIImage, to userSettings: UserSettings) {
         let imageName = UUID().uuidString
         PhotoUtility.saveImageToLocalStorage(image: image, withName: imageName)
-        userSettings.photos.append(imageName)
-        userSettings.loadedPhotosString = userSettings.photos.joined(separator: ",")
+        // 確保在主線程更新狀態，促使 View 刷新
+        DispatchQueue.main.async {
+            userSettings.photos.append(imageName)
+            userSettings.loadedPhotosString = userSettings.photos.joined(separator: ",")
+        }
     }
     
     static func removePhoto(_ photoName: String, from userSettings: UserSettings) {

@@ -117,6 +117,9 @@ class UserSettings: ObservableObject {
 
     // MARK: - 2. 屬性定義
     
+    // 用來控制是否顯示 existing user popup
+    @Published var showExistingUserPopup: Bool = true
+    
     // 使用者 ID
     @Published var globalUserID: String {
         didSet { UserDefaults.standard.set(globalUserID, forKey: kUserID) }
@@ -420,9 +423,6 @@ class UserSettings: ObservableObject {
         print("Debug: setUserProfile => name=\(name), phone=\(phone)")
     }
 }
-
-// MARK: - 全局單例
-let userSettings = UserSettings()
 
 class AppState: ObservableObject {
     @Published var isLoggedIn: Bool = false // 使用 @Published 來追蹤登入狀態

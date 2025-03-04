@@ -295,22 +295,6 @@ struct SettingsView: View {
                                 }
                                 .foregroundColor(.black) // Keep the text color unchanged when the button is tapped
                             }
-                            
-                            HStack {
-                                Text("戀愛性格測驗")
-                                    .padding(.vertical, 10)
-                                Spacer()
-                                Image(systemName: "chevron.right")
-                                    .foregroundColor(.gray)
-                            }
-                            
-//                            HStack {
-//                                Text("MBTI測驗")
-//                                    .padding(.vertical, 10)
-//                                Spacer()
-//                                Image(systemName: "chevron.right")
-//                                    .foregroundColor(.gray)
-//                            }
                         }
                         
                         Section {

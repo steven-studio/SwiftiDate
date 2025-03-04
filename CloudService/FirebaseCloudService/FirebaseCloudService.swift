@@ -15,6 +15,9 @@ class FirebaseCloudService: CloudService {
     private let authManager = FirebaseAuthManager.shared
     private let firestoreManager = FirestoreManager.shared
     
+    // 注入的 UserSettings 實例
+    var userSettings: UserSettings?
+    
     // MARK: - CloudService protocol methods
     
     func initialize() {
@@ -26,6 +29,12 @@ class FirebaseCloudService: CloudService {
     }
     
     func fetchPhotos(completion: @escaping ([String]) -> Void) {
+        // 使用注入的 userSettings 實例
+        guard let userSettings = userSettings else {
+            print("UserSettings not injected")
+            completion([])
+            return
+        }
         // 改用帶 completion 版本的 fetchPhotosFromFirebase
         photoManager.fetchPhotosFromFirebase {
             // 這個 closure 裡，代表所有照片都下載 & userSettings.photos 已更新
