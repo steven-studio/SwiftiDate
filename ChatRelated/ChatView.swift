@@ -13,6 +13,7 @@ import Vision
 struct ChatView: View {
     @EnvironmentObject var userSettings: UserSettings
     // 使用 userSettings.globalUserID 來取得 globalUserID
+    @EnvironmentObject var appState: AppState
 
     @State private var selectedChat: Chat? = nil // State variable to handle navigation
     @AppStorage("userMatchesStorage") private var userMatchesString: String = "" // 使用 AppStorage 儲存 JSON 字符串
@@ -31,6 +32,27 @@ struct ChatView: View {
     // Dictionary to store messages for each chat
     @State private var interactiveMessage: [Message] = []
     @State private var chatMessages: [UUID: [Message]] = [:]
+    @State private var                     showSafetyCenterView = false
+    @State private var showSearchField = false
+    @State private var searchText = ""
+    
+    // 篩選後的新配對
+    private var filteredMatches: [UserMatch] {
+        if searchText.isEmpty {
+            return userMatches
+        } else {
+            return userMatches.filter { $0.name.contains(searchText) }
+        }
+    }
+
+    // 篩選後的聊天清單
+    private var filteredChats: [Chat] {
+        if searchText.isEmpty {
+            return chatData
+        } else {
+            return chatData.filter { $0.name.contains(searchText) }
+        }
+    }
 
     init(contentSelectedTab: Binding<Int>) {
         self._contentSelectedTab = contentSelectedTab
@@ -204,6 +226,60 @@ struct ChatView: View {
                         AnalyticsManager.shared.trackEvent("interactive_content_closed")
                         showInteractiveContent = false
                     }, messages: $interactiveMessage)
+                } else if showSearchField && filteredMatches.isEmpty {
+                    ScrollView {
+                        // 使用 List 顯示聊天對話
+                        ForEach(filteredChats) { chat in
+                            if let messages = chatMessages[chat.id] {
+                                Button(action: {
+                                    // 埋點：點擊聊天列表中的某個聊天
+                                    AnalyticsManager.shared.trackEvent("chat_row_tapped", parameters: [
+                                        "chat_id": chat.id.uuidString,
+                                        "chat_name": chat.name
+                                    ])
+                                    if chat.name == "SwiftiDate" { // Adjust to your actual name for SwiftiDate
+                                        // 埋點：選擇打開互動內容
+                                        AnalyticsManager.shared.trackEvent("interactive_content_opened")
+                                        showInteractiveContent = true // Navigate to InteractiveContentView
+                                        selectedChat = nil
+                                    } else {
+                                        showInteractiveContent = false
+                                        selectedChat = chat // Navigate to ChatDetailView
+                                    }
+                                }) {
+                                    ChatRow(chat: chat, messages: messages) // Pass messages to ChatRow
+                                        .swipeActions(edge: .trailing, allowsFullSwipe: false) {
+                                            // "解除配對" button
+                                            Button {
+                                                // 埋點：點擊解除配對
+                                                AnalyticsManager.shared.trackEvent("chat_unmatch_tapped", parameters: [
+                                                    "chat_id": chat.id.uuidString
+                                                ])
+                                                print("解除配對 tapped")
+                                            } label: {
+                                                Text("解除配對")
+                                            }
+                                            .tint(.gray)
+
+                                            // "修改備註名稱" button
+                                            Button {
+                                                // 埋點：點擊修改備註名稱
+                                                AnalyticsManager.shared.trackEvent("chat_rename_tapped", parameters: [
+                                                    "chat_id": chat.id.uuidString
+                                                ])
+                                                print("修改備註名稱 tapped")
+                                            } label: {
+                                                Text("修改備註名稱")
+                                            }
+                                            .tint(.green)
+                                        }
+                                }
+                            } else {
+                                // 如果 messages 不存在，显示 chat.id 作为调试信息
+                                Text(chat.id.uuidString)
+                            }
+                        }
+                    }
                 } else {
                     // 聊天列表
                     ScrollView {
@@ -250,25 +326,50 @@ struct ChatView: View {
                                         showTurboPurchaseView = true // Navigate to TurboPurchaseView
                                     }
                                     
-                                    // Existing users
-                                    ForEach(userMatches) { user in
-                                        VStack {
-                                            if let uiImage = UIImage(named: user.imageName) {
-                                                Image(uiImage: uiImage)
-                                                    .resizable()
-                                                    .frame(width: 60, height: 60)
-                                                    .clipShape(Circle())
-                                            } else {
-                                                // Placeholder image when the actual image is not found
-                                                Image(systemName: "person.crop.circle.fill")
-                                                    .resizable()
-                                                    .frame(width: 60, height: 60)
-                                                    .foregroundColor(.gray)
-                                                    .clipShape(Circle())
+                                    if showSearchField {
+                                        // Existing users
+                                        ForEach(filteredMatches) { user in
+                                            VStack {
+                                                if let uiImage = UIImage(named: user.imageName) {
+                                                    Image(uiImage: uiImage)
+                                                        .resizable()
+                                                        .frame(width: 60, height: 60)
+                                                        .clipShape(Circle())
+                                                } else {
+                                                    // Placeholder image when the actual image is not found
+                                                    Image(systemName: "person.crop.circle.fill")
+                                                        .resizable()
+                                                        .frame(width: 60, height: 60)
+                                                        .foregroundColor(.gray)
+                                                        .clipShape(Circle())
+                                                }
+                                                
+                                                Text(user.name)
+                                                    .font(.caption)
                                             }
-                                            
-                                            Text(user.name)
-                                                .font(.caption)
+                                        }
+
+                                    } else {
+                                        // Existing users
+                                        ForEach(userMatches) { user in
+                                            VStack {
+                                                if let uiImage = UIImage(named: user.imageName) {
+                                                    Image(uiImage: uiImage)
+                                                        .resizable()
+                                                        .frame(width: 60, height: 60)
+                                                        .clipShape(Circle())
+                                                } else {
+                                                    // Placeholder image when the actual image is not found
+                                                    Image(systemName: "person.crop.circle.fill")
+                                                        .resizable()
+                                                        .frame(width: 60, height: 60)
+                                                        .foregroundColor(.gray)
+                                                        .clipShape(Circle())
+                                                }
+                                                
+                                                Text(user.name)
+                                                    .font(.caption)
+                                            }
                                         }
                                     }
                                 }
@@ -289,56 +390,110 @@ struct ChatView: View {
                                 WhoLikedYouView()
                                     .padding(.top)
                             }
-
-                            // 使用 List 顯示聊天對話
-                            ForEach(chatData) { chat in
-                                if let messages = chatMessages[chat.id] {
-                                    Button(action: {
-                                        // 埋點：點擊聊天列表中的某個聊天
-                                        AnalyticsManager.shared.trackEvent("chat_row_tapped", parameters: [
-                                            "chat_id": chat.id.uuidString,
-                                            "chat_name": chat.name
-                                        ])
-                                        if chat.name == "SwiftiDate" { // Adjust to your actual name for SwiftiDate
-                                            // 埋點：選擇打開互動內容
-                                            AnalyticsManager.shared.trackEvent("interactive_content_opened")
-                                            showInteractiveContent = true // Navigate to InteractiveContentView
-                                            selectedChat = nil
-                                        } else {
-                                            showInteractiveContent = false
-                                            selectedChat = chat // Navigate to ChatDetailView
-                                        }
-                                    }) {
-                                        ChatRow(chat: chat, messages: messages) // Pass messages to ChatRow
-                                            .swipeActions(edge: .trailing, allowsFullSwipe: false) {
-                                                // "解除配對" button
-                                                Button {
-                                                    // 埋點：點擊解除配對
-                                                    AnalyticsManager.shared.trackEvent("chat_unmatch_tapped", parameters: [
-                                                        "chat_id": chat.id.uuidString
-                                                    ])
-                                                    print("解除配對 tapped")
-                                                } label: {
-                                                    Text("解除配對")
-                                                }
-                                                .tint(.gray)
-
-                                                // "修改備註名稱" button
-                                                Button {
-                                                    // 埋點：點擊修改備註名稱
-                                                    AnalyticsManager.shared.trackEvent("chat_rename_tapped", parameters: [
-                                                        "chat_id": chat.id.uuidString
-                                                    ])
-                                                    print("修改備註名稱 tapped")
-                                                } label: {
-                                                    Text("修改備註名稱")
-                                                }
-                                                .tint(.green)
+                            
+                            if showSearchField {
+                                // 使用 List 顯示聊天對話
+                                ForEach(filteredChats) { chat in
+                                    if let messages = chatMessages[chat.id] {
+                                        Button(action: {
+                                            // 埋點：點擊聊天列表中的某個聊天
+                                            AnalyticsManager.shared.trackEvent("chat_row_tapped", parameters: [
+                                                "chat_id": chat.id.uuidString,
+                                                "chat_name": chat.name
+                                            ])
+                                            if chat.name == "SwiftiDate" { // Adjust to your actual name for SwiftiDate
+                                                // 埋點：選擇打開互動內容
+                                                AnalyticsManager.shared.trackEvent("interactive_content_opened")
+                                                showInteractiveContent = true // Navigate to InteractiveContentView
+                                                selectedChat = nil
+                                            } else {
+                                                showInteractiveContent = false
+                                                selectedChat = chat // Navigate to ChatDetailView
                                             }
+                                        }) {
+                                            ChatRow(chat: chat, messages: messages) // Pass messages to ChatRow
+                                                .swipeActions(edge: .trailing, allowsFullSwipe: false) {
+                                                    // "解除配對" button
+                                                    Button {
+                                                        // 埋點：點擊解除配對
+                                                        AnalyticsManager.shared.trackEvent("chat_unmatch_tapped", parameters: [
+                                                            "chat_id": chat.id.uuidString
+                                                        ])
+                                                        print("解除配對 tapped")
+                                                    } label: {
+                                                        Text("解除配對")
+                                                    }
+                                                    .tint(.gray)
+
+                                                    // "修改備註名稱" button
+                                                    Button {
+                                                        // 埋點：點擊修改備註名稱
+                                                        AnalyticsManager.shared.trackEvent("chat_rename_tapped", parameters: [
+                                                            "chat_id": chat.id.uuidString
+                                                        ])
+                                                        print("修改備註名稱 tapped")
+                                                    } label: {
+                                                        Text("修改備註名稱")
+                                                    }
+                                                    .tint(.green)
+                                                }
+                                        }
+                                    } else {
+                                        // 如果 messages 不存在，显示 chat.id 作为调试信息
+                                        Text(chat.id.uuidString)
                                     }
-                                } else {
-                                    // 如果 messages 不存在，显示 chat.id 作为调试信息
-                                    Text(chat.id.uuidString)
+                                }
+                            } else {
+                                // 使用 List 顯示聊天對話
+                                ForEach(chatData) { chat in
+                                    if let messages = chatMessages[chat.id] {
+                                        Button(action: {
+                                            // 埋點：點擊聊天列表中的某個聊天
+                                            AnalyticsManager.shared.trackEvent("chat_row_tapped", parameters: [
+                                                "chat_id": chat.id.uuidString,
+                                                "chat_name": chat.name
+                                            ])
+                                            if chat.name == "SwiftiDate" { // Adjust to your actual name for SwiftiDate
+                                                // 埋點：選擇打開互動內容
+                                                AnalyticsManager.shared.trackEvent("interactive_content_opened")
+                                                showInteractiveContent = true // Navigate to InteractiveContentView
+                                                selectedChat = nil
+                                            } else {
+                                                showInteractiveContent = false
+                                                selectedChat = chat // Navigate to ChatDetailView
+                                            }
+                                        }) {
+                                            ChatRow(chat: chat, messages: messages) // Pass messages to ChatRow
+                                                .swipeActions(edge: .trailing, allowsFullSwipe: false) {
+                                                    // "解除配對" button
+                                                    Button {
+                                                        // 埋點：點擊解除配對
+                                                        AnalyticsManager.shared.trackEvent("chat_unmatch_tapped", parameters: [
+                                                            "chat_id": chat.id.uuidString
+                                                        ])
+                                                        print("解除配對 tapped")
+                                                    } label: {
+                                                        Text("解除配對")
+                                                    }
+                                                    .tint(.gray)
+
+                                                    // "修改備註名稱" button
+                                                    Button {
+                                                        // 埋點：點擊修改備註名稱
+                                                        AnalyticsManager.shared.trackEvent("chat_rename_tapped", parameters: [
+                                                            "chat_id": chat.id.uuidString
+                                                        ])
+                                                        print("修改備註名稱 tapped")
+                                                    } label: {
+                                                        Text("修改備註名稱")
+                                                    }
+                                                    .tint(.green)
+                                                }
+                                        }
+                                    } else {
+                                        // 如果 messages 不存在，显示 chat.id 作为调试信息
+                                        Text(chat.id.uuidString)
+                                    }
                                 }
                             }
                         }
@@ -346,9 +501,67 @@ struct ChatView: View {
                 }
             }
             .toolbar {
-                ToolbarItem(placement: .principal) {
-                    Text("聊天")
-                        .font(.headline)
+                if showSearchField {
+                    // 分支1：顯示搜尋列
+                    ToolbarItem(placement: .principal) {
+                        HStack {
+                            HStack(spacing: 8) {
+                                Image(systemName: "magnifyingglass")
+                                    .foregroundColor(.gray)
+
+                                TextField("搜尋配對好友", text: $searchText)
+                                    .font(.headline)
+                                    .foregroundColor(.gray)
+                                    .disableAutocorrection(true)
+                                    .autocapitalization(.none)
+                            }
+                            .frame(maxWidth: .infinity)
+                            .padding(.vertical, 8)
+                            .padding(.horizontal, 12)
+                            .background(Color(.systemGray6))  // 可換成其他淺色
+                            .cornerRadius(10)
+                            .padding(.horizontal, 10)
+
+                            Button("取消") {
+                                withAnimation {
+                                    searchText = ""
+                                    showSearchField = false
+                                }
+                            }
+                            .foregroundColor(.green)
+                        }
+                    }
+                } else {
+                    // 中央的標題
+                    ToolbarItem(placement: .principal) {
+                        Text("聊天")
+                            .font(.title2)
+                            .bold()
+                    }
+                    // 左側的 shield 按鈕：進入安全意識小測驗
+                    ToolbarItem(placement: .navigationBarLeading) {
+                        Button(action: {
+                            AnalyticsManager.shared.trackEvent("top_right_safety_center_pressed_from_chatview")
+                            showSafetyCenterView = true
+                        }) {
+                            Image(systemName: "shield.fill")
+                                .font(.title2)
+                                .foregroundColor(.gray) // Set the color to match the design
+                                .padding(.trailing, 10)
+                        }
+                    }
+                    // 右側的 magnifyingglass 按鈕：使用名字搜尋聊天記錄
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        Button(action: {
+                            // 實作使用者搜尋聊天記錄的邏輯
+                            print("使用者點選放大鏡搜尋聊天記錄")
+                            showSearchField = true
+                        }) {
+                            Image(systemName: "magnifyingglass")
+                                .font(.title3)
+                                .foregroundColor(.gray)
+                        }
+                    }
                 }
             }
             .onAppear {
@@ -395,6 +608,13 @@ struct ChatView: View {
                     showTurboView = false // This dismisses the TurboView
                     AnalyticsManager.shared.trackEvent("turbo_view_closed")
                 })
+            }
+            .fullScreenCover(isPresented: $showSafetyCenterView) {
+                SafetyCenterView(showSafetyCenterView: $showSafetyCenterView, photos: $userSettings.photos) // 如果全局变量为 true，则显示 SafetyCenterView
+                    .environmentObject(userSettings)
+                    .onAppear {
+                        AnalyticsManager.shared.trackEvent("chat_view_safety_center_appear")
+                    }
             }
             .sheet(isPresented: $showTurboPurchaseView) {
                 TurboPurchaseView() // Present TurboPurchaseView when showTurboPurchaseView is true

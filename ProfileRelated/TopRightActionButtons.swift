@@ -21,12 +21,11 @@ struct TopRightActionButtons: View {
                 
                 // 將 shield.fill 圖標放入 Button
                 Button(action: {
-                    AnalyticsManager.shared.trackEvent("top_right_safety_center_pressed")
+                    AnalyticsManager.shared.trackEvent("top_right_safety_center_pressed_from_profileview")
                     showSafetyCenterView = true
                 }) {
                     Image(systemName: "shield.fill")
-                        .resizable()
-                        .frame(width: 24, height: 24)
+                        .font(.title2)
                         .foregroundColor(.gray) // Set the color to match the design
                         .padding(.trailing, 10)
                 }
