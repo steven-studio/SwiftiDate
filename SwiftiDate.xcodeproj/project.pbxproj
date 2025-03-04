@@ -1013,17 +1013,17 @@
 				D0B388242D5B7BAE003BC40C /* FaceTrackingView.swift */,
 				D07B40AC2D60FF5A0015C7AA /* FaceVideo.swift */,
 				D07C57ED2D76F7C60008DC9D /* LifestylePhotoView.swift */,
+				D07C57E72D76F5AE0008DC9D /* NicknameInputView.swift */,
 				D0B388252D5B7BAE003BC40C /* OTPVerificationView.swift */,
 				D0B388262D5B7BAE003BC40C /* PasswordLoginView.swift */,
 				D017F4F72CAFC9A200C71D18 /* PhoneNumberEntryView.swift */,
+				D0B3F1472D70079F007A5EA0 /* PhoneValidator.swift */,
 				D07C57F32D76F9870008DC9D /* RegisterLanguageSelectionView.swift */,
 				D0B3F2D12D746499007A5EA0 /* ResetPasswordView.swift */,
 				D0B388272D5B7BAE003BC40C /* RealVerificationView.swift */,
+				D07C57F62D76FA460008DC9D /* TaggingView.swift */,
 				D0B388282D5B7BAE003BC40C /* UploadPhotoView.swift */,
 				D07C57DC2D76DD100008DC9D /* UserGenderSelectionView.swift */,
-				D07C57E72D76F5AE0008DC9D /* NicknameInputView.swift */,
-				D0B3F1472D70079F007A5EA0 /* PhoneValidator.swift */,
-				D07C57F62D76FA460008DC9D /* TaggingView.swift */,
 			);
 			path = LoginOrRegister;
 			sourceTree = "<group>";

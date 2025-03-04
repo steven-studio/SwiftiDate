@@ -248,7 +248,8 @@ struct ChatDetailView: View {
                     AnalyticsManager.shared.trackEvent("chatgpt_modal_appear")
                 }
         }
-        .navigationBarHidden(true) // Hide the default navigation bar
+        .toolbar(.hidden, for: .tabBar)
+        .toolbar(.hidden, for: .navigationBar)
         .alert("不要約砲", isPresented: $showFirstMessageHookupAlert) {
             Button("OK", role: .cancel) { }
         } message: {

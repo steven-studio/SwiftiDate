@@ -1,0 +1,12 @@
+digraph AnalyticsArchitecture {
+    node [shape=box, style="rounded,filled", fillcolor=white, fontname="Helvetica"];
+
+    AnalyticsManager [label="AnalyticsManager\n(trackEvent(),\nMixpanel.initialize())\n<-- Singleton"];
+    Firebase [label="Firebase Analytics\n(Analytics.logEvent)"];
+    Mixpanel [label="Mixpanel\n(Mixpanel.mainInstance().track(event:props:))"];
+    Converter [label="convertToMixpanelProperties\n(轉換 event parameters)"];
+
+    AnalyticsManager -> Firebase;
+    AnalyticsManager -> Mixpanel;
+    Mixpanel -> Converter [dir=both, arrowhead=none, arrowtail=none]; // 代表數據流向 Converter
+}

@@ -345,7 +345,12 @@ struct ChatView: View {
                     }
                 }
             }
-            .navigationTitle("聊天") // Ensure this is applied to the VStack
+            .toolbar {
+                ToolbarItem(placement: .principal) {
+                    Text("聊天")
+                        .font(.headline)
+                }
+            }
             .onAppear {
                 // 埋點：ChatView 畫面曝光
                 AnalyticsManager.shared.trackEvent("chat_view_appear")
