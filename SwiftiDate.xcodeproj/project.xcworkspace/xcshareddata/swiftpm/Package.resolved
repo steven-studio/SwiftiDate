@@ -1,5 +1,5 @@
 {
-  "originHash" : "a47cce712f247b88ae28900d9ccbd816465e52e2f45eb81d5d2ad6fe1847fca9",
+  "originHash" : "299ef1dd300e387f8d6e367371bf141c38924a3e48173741606d317eef94f56a",
   "pins" : [
     {
       "identity" : "abseil-cpp-binary",
@@ -143,6 +143,15 @@
       "state" : {
         "revision" : "807f73ce09a9b9723f12385e592b4e0aaebd3336",
         "version" : "1.3.0"
+      }
+    },
+    {
+      "identity" : "tocropviewcontroller",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/TimOliver/TOCropViewController.git",
+      "state" : {
+        "revision" : "a634cb7cdfd580006e79a6e74e64417fe9e9783b",
+        "version" : "2.7.4"
       }
     },
     {

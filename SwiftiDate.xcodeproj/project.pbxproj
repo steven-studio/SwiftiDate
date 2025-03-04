@@ -120,6 +120,12 @@
 		D07C57D82D76941E0008DC9D /* CreatePasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07C57D62D76941E0008DC9D /* CreatePasswordView.swift */; };
 		D07C57DD2D76DD100008DC9D /* UserGenderSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07C57DC2D76DD100008DC9D /* UserGenderSelectionView.swift */; };
 		D07C57DE2D76DD100008DC9D /* UserGenderSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07C57DC2D76DD100008DC9D /* UserGenderSelectionView.swift */; };
+		D07C57E12D76F38D0008DC9D /* CropViewController in Frameworks */ = {isa = PBXBuildFile; productRef = D07C57E02D76F38D0008DC9D /* CropViewController */; };
+		D07C57E32D76F38D0008DC9D /* TOCropViewController in Frameworks */ = {isa = PBXBuildFile; productRef = D07C57E22D76F38D0008DC9D /* TOCropViewController */; };
+		D07C57E52D76F3B30008DC9D /* CropViewControllerWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07C57E42D76F3B30008DC9D /* CropViewControllerWrapper.swift */; };
+		D07C57E62D76F3B30008DC9D /* CropViewControllerWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07C57E42D76F3B30008DC9D /* CropViewControllerWrapper.swift */; };
+		D07C57E82D76F5AE0008DC9D /* NicknameInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07C57E72D76F5AE0008DC9D /* NicknameInputView.swift */; };
+		D07C57E92D76F5AE0008DC9D /* NicknameInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07C57E72D76F5AE0008DC9D /* NicknameInputView.swift */; };
 		D089DB532D6896CB00D6A1AB /* QRCodeGeneratorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D089DB522D6896CB00D6A1AB /* QRCodeGeneratorView.swift */; };
 		D089DB562D69531300D6A1AB /* SuspiciousCheckResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = D089DB552D69531300D6A1AB /* SuspiciousCheckResult.swift */; };
 		D089DB582D69534700D6A1AB /* RuleChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D089DB572D69534700D6A1AB /* RuleChecker.swift */; };
@@ -535,6 +541,8 @@
 		D07B41F12D621E9C0015C7AA /* LocalStorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalStorageManager.swift; sourceTree = "<group>"; };
 		D07C57D62D76941E0008DC9D /* CreatePasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePasswordView.swift; sourceTree = "<group>"; };
 		D07C57DC2D76DD100008DC9D /* UserGenderSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserGenderSelectionView.swift; sourceTree = "<group>"; };
+		D07C57E42D76F3B30008DC9D /* CropViewControllerWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CropViewControllerWrapper.swift; sourceTree = "<group>"; };
+		D07C57E72D76F5AE0008DC9D /* NicknameInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NicknameInputView.swift; sourceTree = "<group>"; };
 		D089DB522D6896CB00D6A1AB /* QRCodeGeneratorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeGeneratorView.swift; sourceTree = "<group>"; };
 		D089DB552D69531300D6A1AB /* SuspiciousCheckResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuspiciousCheckResult.swift; sourceTree = "<group>"; };
 		D089DB572D69534700D6A1AB /* RuleChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleChecker.swift; sourceTree = "<group>"; };
@@ -698,7 +706,9 @@
 				D018AD742C9ED5D4005A14B9 /* FirebaseCrashlytics in Frameworks */,
 				D018AD762C9ED5D4005A14B9 /* FirebaseDatabase in Frameworks */,
 				D018AD802C9ED5D4005A14B9 /* FirebaseFunctionsCombine-Community in Frameworks */,
+				D07C57E32D76F38D0008DC9D /* TOCropViewController in Frameworks */,
 				D018AD722C9ED5D4005A14B9 /* FirebaseAuthCombine-Community in Frameworks */,
+				D07C57E12D76F38D0008DC9D /* CropViewController in Frameworks */,
 				D018AD8E2C9ED5D4005A14B9 /* FirebaseStorage in Frameworks */,
 				D018AD682C9ED5D4005A14B9 /* FirebaseAnalyticsOnDeviceConversion in Frameworks */,
 				D0B3F1942D713B60007A5EA0 /* Mixpanel in Frameworks */,
@@ -982,6 +992,7 @@
 				D0B3F1262D6F03BB007A5EA0 /* OTPRelated */,
 				D017F4F72CAFC9A200C71D18 /* PhoneNumberEntryView.swift */,
 				D0B388232D5B7BAE003BC40C /* CountryCodePickerView.swift */,
+				D07C57E42D76F3B30008DC9D /* CropViewControllerWrapper.swift */,
 				D07C57D62D76941E0008DC9D /* CreatePasswordView.swift */,
 				D0B388242D5B7BAE003BC40C /* FaceTrackingView.swift */,
 				D07B40AC2D60FF5A0015C7AA /* FaceVideo.swift */,
@@ -991,6 +1002,7 @@
 				D0B388272D5B7BAE003BC40C /* RealVerificationView.swift */,
 				D0B388282D5B7BAE003BC40C /* UploadPhotoView.swift */,
 				D07C57DC2D76DD100008DC9D /* UserGenderSelectionView.swift */,
+				D07C57E72D76F5AE0008DC9D /* NicknameInputView.swift */,
 				D0B3F1472D70079F007A5EA0 /* PhoneValidator.swift */,
 			);
 			path = LoginOrRegister;
@@ -1304,6 +1316,8 @@
 				D0B388112D5B79A1003BC40C /* WebRTC */,
 				D0B3F12C2D6F096E007A5EA0 /* SwiftUIIntrospect */,
 				D0B3F1932D713B60007A5EA0 /* Mixpanel */,
+				D07C57E02D76F38D0008DC9D /* CropViewController */,
+				D07C57E22D76F38D0008DC9D /* TOCropViewController */,
 			);
 			productName = SwiftiDate;
 			productReference = D07B40A92D60FF160015C7AA /* SwiftiDate.app */;
@@ -1388,6 +1402,7 @@
 				D0B3F12B2D6F096E007A5EA0 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
 				D0B3F1922D713B60007A5EA0 /* XCRemoteSwiftPackageReference "mixpanel-swift" */,
 				D0B3F19A2D72AD2C007A5EA0 /* XCRemoteSwiftPackageReference "ViewInspector" */,
+				D07C57DF2D76F38D0008DC9D /* XCRemoteSwiftPackageReference "TOCropViewController" */,
 			);
 			productRefGroup = D0445C222C71B3800059D522;
 			projectDirPath = "";
@@ -1457,6 +1472,7 @@
 				D018AD632C9E87F6005A14B9 /* ChatView.swift in Sources */,
 				D017F4F62CAFBFF700C71D18 /* LoginOrRegisterView.swift in Sources */,
 				D04729C22CC038B6007C33EC /* UnverifiedProfilePlaceholderView.swift in Sources */,
+				D07C57E82D76F5AE0008DC9D /* NicknameInputView.swift in Sources */,
 				D07B40AD2D60FF610015C7AA /* FaceVideo.swift in Sources */,
 				D04729EA2CC1F999007C33EC /* Color.swift in Sources */,
 				D018AD962C9EEA83005A14B9 /* AsyncImageView.swift in Sources */,
@@ -1527,6 +1543,7 @@
 				D055A7632D19931C00F11F18 /* GlobalVariables.swift in Sources */,
 				D0B3F12A2D6F04B7007A5EA0 /* NoCursorTextFieldWrapper.swift in Sources */,
 				D018AD5B2C9E57DF005A14B9 /* UserGuideView.swift in Sources */,
+				D07C57E52D76F3B30008DC9D /* CropViewControllerWrapper.swift in Sources */,
 				D09587C52CB7C73100BCD04B /* RealNameVerificationView.swift in Sources */,
 				D09587D12CB8623C00BCD04B /* LoginView.swift in Sources */,
 				D0DDDB302CA164BE00A78A87 /* WhatIsTurboAndHowToUseView.swift in Sources */,
@@ -1664,6 +1681,7 @@
 				D0B3F2602D736347007A5EA0 /* HowToCancelSubscriptionView.swift in Sources */,
 				D0B3F2612D736347007A5EA0 /* HowToDeleteMessagesView.swift in Sources */,
 				D0B3F2992D740400007A5EA0 /* AchievementSectionViewUITests.swift in Sources */,
+				D07C57E62D76F3B30008DC9D /* CropViewControllerWrapper.swift in Sources */,
 				D0B3F2622D736347007A5EA0 /* HowToEnableNotificationsView.swift in Sources */,
 				D0B3F2632D736347007A5EA0 /* HowToEnablePremiumBadgeView.swift in Sources */,
 				D0B3F2642D736347007A5EA0 /* HowToMatchAndChatView.swift in Sources */,
@@ -1759,6 +1777,7 @@
 				D0B3F2102D732876007A5EA0 /* InterestSelectionView.swift in Sources */,
 				D0B3F20F2D73284F007A5EA0 /* InterestsView.swift in Sources */,
 				D0B3F2062D731CDD007A5EA0 /* FitnessOptionsView.swift in Sources */,
+				D07C57E92D76F5AE0008DC9D /* NicknameInputView.swift in Sources */,
 				D0B3F2002D730CB5007A5EA0 /* SchoolInputView.swift in Sources */,
 				D0B3F1FF2D730CA6007A5EA0 /* IndustryPicker.swift in Sources */,
 				D0B3F2142D733436007A5EA0 /* JobInputViewUITests.swift in Sources */,
@@ -2163,6 +2182,14 @@
 				minimumVersion = 11.2.0;
 			};
 		};
+		D07C57DF2D76F38D0008DC9D /* XCRemoteSwiftPackageReference "TOCropViewController" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/TimOliver/TOCropViewController.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.7.4;
+			};
+		};
 		D0B3F12B2D6F096E007A5EA0 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/siteline/SwiftUI-Introspect";
@@ -2312,6 +2339,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = D018AD642C9ED3C2005A14B9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = "FirebaseVertexAI-Preview";
+		};
+		D07C57E02D76F38D0008DC9D /* CropViewController */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D07C57DF2D76F38D0008DC9D /* XCRemoteSwiftPackageReference "TOCropViewController" */;
+			productName = CropViewController;
+		};
+		D07C57E22D76F38D0008DC9D /* TOCropViewController */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D07C57DF2D76F38D0008DC9D /* XCRemoteSwiftPackageReference "TOCropViewController" */;
+			productName = TOCropViewController;
 		};
 		D0B388112D5B79A1003BC40C /* WebRTC */ = {
 			isa = XCSwiftPackageProductDependency;

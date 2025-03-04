@@ -93,7 +93,8 @@ struct UserGenderSelectionView: View {
                     .padding()
                     .background(selectedGender == nil ? Color.gray : Color.green)
                     .foregroundColor(.white)
-                    .cornerRadius(10)
+                    .frame(width: 300)
+                    .cornerRadius(25)
             }
             .disabled(selectedGender == nil)
             .padding(.horizontal, 20)

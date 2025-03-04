@@ -19,71 +19,146 @@ struct UploadPhotoView: View {
     // ✅ 六個照片框 (初始 nil)
     @State private var selectedImages: [UIImage?] = Array(repeating: nil, count: 6) // ✅ 六個照片框
     @State private var selectedImage: UIImage?
+    @State private var faceDetected: Bool = false
+    @State private var detectionMessage: String = ""
     @State private var selectedIndex = 0 // ✅ 追蹤當前點擊的上傳框索引
     
     @State private var showActionSheet = false // ✅ 控制是否顯示選擇方式（拍照 or 相簿）
     @State private var showImagePicker = false
+    @State private var showCropView = false
     @State private var showCameraPicker = false
+    @State private var showNicknameInputView = false
+    
+    // 假設用於裁切的暫存圖片
+    @State private var imageToCrop: UIImage?
     
     @State private var isUploading = false
+    
+    // 建立屬性字串
+    var attributedText: AttributedString {
+        var text = AttributedString("請選擇一張")
+        text.foregroundColor = .gray  // 設定灰色
+        
+        var greenText = AttributedString("最能凸顯你個人魅力的照片")
+        greenText.foregroundColor = .green  // 設定綠色
+        
+        text.append(greenText)
+        
+        var text2 = AttributedString("來讓大家認識你吧～")
+        text2.foregroundColor = .gray
+        
+        text.append(text2)
+        
+        return text
+    }
 
     var body: some View {
         VStack {
-            Text("上傳照片")
-                .font(.title)
-                .padding()
+            HStack {
+                Button(action: {
+                    // 返回上一頁前追蹤返回事件
+                    AnalyticsManager.shared.trackEvent("UploadPhoto_BackTapped", parameters: nil)
+                }) {
+                    Image(systemName: "chevron.left")
+                        .font(.title2)
+                        .foregroundColor(.gray.opacity(0.5)) // 設置文字顏色為黑色
+                        .padding(.leading)
+                }
+                Spacer()
+            }
+            .padding(.top)
             
-            // ✅ 六個上傳框
-            LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 3), spacing: 10) {
-                ForEach(0..<6, id: \.self) { index in
-                    Button(action: {
-                        selectedIndex = index
-                        showImagePicker = true
-                    }) {
-                        ZStack {
-                            if let image = selectedImages[index] {
-                                Image(uiImage: image)
-                                    .resizable()
-                                    .scaledToFill()
-                                    .frame(width: 100, height: 133)
-                                    .clipShape(RoundedRectangle(cornerRadius: 10))
-                                    .overlay(removePhotoButton(index: index), alignment: .topTrailing) // 對齊至右上角
-                            } else {
-                                RoundedRectangle(cornerRadius: 10)
-                                    .stroke(Color.gray, lineWidth: 1)
-                                    .frame(width: 100, height: 133)
-                                    .overlay(
-                                        VStack {
-                                            Image(systemName: "plus")
-                                                .font(.system(size: 24))
-                                                .foregroundColor(.gray)
-                                            Text("上傳")
-                                                .font(.footnote)
-                                                .foregroundColor(.gray)
-                                        }
-                                    )
-                                    .onTapGesture {
-                                        showActionSheet = true
-                                    }
+            Text("上傳你的個人照片")
+                .font(.title)
+                .bold()
+                .padding(40)
+            
+            // MARK: - 大框 + Plus + 按鈕
+            ZStack {
+                // 背景外框
+                RoundedRectangle(cornerRadius: 30)
+                    .stroke(Color.gray.opacity(0.3), lineWidth: 2)
+                    .frame(width: 230, height: 320)
+                    .foregroundColor(Color.gray.opacity(0.2))
+                    .background(Color.gray.opacity(0.05))
+                
+                if let firstImage = selectedImages[0] {
+                    // 已上傳照片時，顯示照片
+                    Image(uiImage: firstImage)
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: 230, height: 320)
+                        .clipShape(RoundedRectangle(cornerRadius: 12))
+                        .overlay(alignment: .topTrailing) {
+                            removePhotoButton(index: 0)
+                                .offset(x: -5, y: 5)
+                        }
+                } else {
+                    // 尚未上傳，顯示「＋」與「上傳照片」按鈕
+                    VStack {
+                        Spacer()
+                        
+                        Button {
+                            selectedIndex = 0
+                            showActionSheet = true
+                        } label: {
+                            ZStack {
+                                Circle()
+                                    .fill(Color.green) // 圓形背景顏色，可根據需求調整
+                                    .frame(width: 50, height: 50)
+                                Image(systemName: "plus")
+                                    .font(.system(size:    30, weight: .bold))
+                                    .foregroundColor(.white)
                             }
                         }
+                        
+                        Spacer()
+                        
+                        Button {
+                            selectedIndex = 0
+                            showActionSheet = true
+                        } label: {
+                            Text("上傳照片")
+                                .foregroundColor(.white)
+                                .padding(.horizontal, 60)
+                                .padding(.vertical, 12)
+                                .background(Color.green)
+                                .cornerRadius(25)
+                        }
+                        .frame(maxWidth: .infinity, maxHeight: 50)
+                        .cornerRadius(10)
                     }
+                    .padding()  // 可視需要調整
+                    // 讓 VStack 填滿 ZStack 的空間
+                    .frame(width: 230, height: 320)
                 }
             }
-            .padding()
+            
+            Text(attributedText)
+                .font(.body)
+                .multilineTextAlignment(.center)
+                .padding()
+            
+            Spacer()
 
             // ✅ 繼續按鈕（僅在至少上傳 1 張照片時可用）
             Button(action: {
                 AnalyticsManager.shared.trackEvent("UploadPhoto_ContinueTapped", parameters: ["uploadedCount": selectedImages.compactMap { $0 }.count])
                 FirebasePhotoManager.shared.uploadAllPhotos()
                 completeVerification()
+                
+                // 假設只要上傳至少一張照片就可以進入暱稱畫面
+                if selectedImages.contains(where: { $0 != nil }) {
+                    showNicknameInputView = true
+                }
             }) {
                 Text("繼續")
                     .frame(maxWidth: .infinity)
                     .padding()
-                    .background(selectedImages.contains(where: { $0 != nil }) ? Color.blue : Color.gray)
+                    .background(selectedImages.contains(where: { $0 != nil }) ? Color.green : Color.gray)
                     .foregroundColor(.white)
-                    .cornerRadius(10)
+                    .frame(width: 300)
+                    .cornerRadius(25)
             }
             .disabled(!selectedImages.contains(where: { $0 != nil })) // ✅ 至少上傳 1 張照片才能繼續
             .padding()
@@ -99,15 +174,35 @@ struct UploadPhotoView: View {
                 .onDisappear {
                     // ✅ 使用者關閉相簿後，若有選擇到照片就存到 selectedImages
                     if let newlyPickedImage = selectedImage {
-                        selectedImages[selectedIndex] = newlyPickedImage
                         AnalyticsManager.shared.trackEvent("UploadPhoto_ImageSelected", parameters: ["source": "photoLibrary", "index": selectedIndex])
 
                         PhotoUtility.addImageToPhotos(newlyPickedImage, to: userSettings)
+                        
+                        // 使用者從相簿選完照片
+                        imageToCrop = newlyPickedImage
+                        showCropView = true
                         
                         print("✅ 用戶選了照片，並已存本地檔案名: \(newlyPickedImage)")
                         // 若想要此時就同步上傳，也可在這裡呼叫 uploadPhoto(…)
                     }
                 }
+        }
+        
+        .sheet(isPresented: $showCropView) {
+            if let imageToCrop = imageToCrop {
+                CropViewControllerWrapper(image: Binding(
+                    get: { imageToCrop },
+                    set: { newImage in
+                        // 這裡會在裁切完成後回傳新圖
+                        self.imageToCrop = newImage
+                        self.selectedImages[selectedIndex] = newImage
+                    }
+                )) { croppedImage in
+                    // 當裁切完成後（或點擊確定上傳）
+                    self.selectedImages[selectedIndex] = croppedImage
+                    // 你也可以在這裡進行臉部偵測或上傳
+                }
+            }
         }
         
         // MARK: - 拍照
@@ -140,6 +235,13 @@ struct UploadPhotoView: View {
                     .cancel()
                 ]
             )
+        }
+        
+        .fullScreenCover(isPresented: $showNicknameInputView) {
+            // 這裡放你要顯示的暱稱輸入畫面
+            NicknameInputView()
+                .environmentObject(appState)       // 如果需要傳遞給 NicknameInputView
+                .environmentObject(userSettings)   // 如果需要
         }
     }
     

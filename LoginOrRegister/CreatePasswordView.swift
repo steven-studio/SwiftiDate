@@ -85,7 +85,8 @@ struct CreatePasswordView: View {
                     .padding()
                     .frame(maxWidth: .infinity)
                     .background(isPasswordValid ? Color.green : Color.gray)
-                    .cornerRadius(8)
+                    .frame(width: 300)
+                    .cornerRadius(25)
             }
             .disabled(!isPasswordValid)
         }

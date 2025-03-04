@@ -164,7 +164,8 @@ struct OTPVerificationView: View {
                 .padding()
                 .background(Color.green)
                 .foregroundColor(.white)
-                .cornerRadius(10)
+                .frame(width: 300)
+                .cornerRadius(25)
             }
             .disabled(isVerifying)
             .padding()
