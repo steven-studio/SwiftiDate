@@ -118,6 +118,8 @@
 		D07B41F22D621E9C0015C7AA /* LocalStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07B41F12D621E9C0015C7AA /* LocalStorageManager.swift */; };
 		D07C57D72D76941E0008DC9D /* CreatePasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07C57D62D76941E0008DC9D /* CreatePasswordView.swift */; };
 		D07C57D82D76941E0008DC9D /* CreatePasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07C57D62D76941E0008DC9D /* CreatePasswordView.swift */; };
+		D07C57DD2D76DD100008DC9D /* UserGenderSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07C57DC2D76DD100008DC9D /* UserGenderSelectionView.swift */; };
+		D07C57DE2D76DD100008DC9D /* UserGenderSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07C57DC2D76DD100008DC9D /* UserGenderSelectionView.swift */; };
 		D089DB532D6896CB00D6A1AB /* QRCodeGeneratorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D089DB522D6896CB00D6A1AB /* QRCodeGeneratorView.swift */; };
 		D089DB562D69531300D6A1AB /* SuspiciousCheckResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = D089DB552D69531300D6A1AB /* SuspiciousCheckResult.swift */; };
 		D089DB582D69534700D6A1AB /* RuleChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D089DB572D69534700D6A1AB /* RuleChecker.swift */; };
@@ -532,6 +534,7 @@
 		D07B41EF2D61EE2C0015C7AA /* FirestoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreManager.swift; sourceTree = "<group>"; };
 		D07B41F12D621E9C0015C7AA /* LocalStorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalStorageManager.swift; sourceTree = "<group>"; };
 		D07C57D62D76941E0008DC9D /* CreatePasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePasswordView.swift; sourceTree = "<group>"; };
+		D07C57DC2D76DD100008DC9D /* UserGenderSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserGenderSelectionView.swift; sourceTree = "<group>"; };
 		D089DB522D6896CB00D6A1AB /* QRCodeGeneratorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeGeneratorView.swift; sourceTree = "<group>"; };
 		D089DB552D69531300D6A1AB /* SuspiciousCheckResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuspiciousCheckResult.swift; sourceTree = "<group>"; };
 		D089DB572D69534700D6A1AB /* RuleChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleChecker.swift; sourceTree = "<group>"; };
@@ -977,16 +980,17 @@
 			isa = PBXGroup;
 			children = (
 				D0B3F1262D6F03BB007A5EA0 /* OTPRelated */,
-				D07B40AC2D60FF5A0015C7AA /* FaceVideo.swift */,
 				D017F4F72CAFC9A200C71D18 /* PhoneNumberEntryView.swift */,
 				D0B388232D5B7BAE003BC40C /* CountryCodePickerView.swift */,
 				D07C57D62D76941E0008DC9D /* CreatePasswordView.swift */,
 				D0B388242D5B7BAE003BC40C /* FaceTrackingView.swift */,
+				D07B40AC2D60FF5A0015C7AA /* FaceVideo.swift */,
 				D0B388252D5B7BAE003BC40C /* OTPVerificationView.swift */,
 				D0B388262D5B7BAE003BC40C /* PasswordLoginView.swift */,
 				D0B3F2D12D746499007A5EA0 /* ResetPasswordView.swift */,
 				D0B388272D5B7BAE003BC40C /* RealVerificationView.swift */,
 				D0B388282D5B7BAE003BC40C /* UploadPhotoView.swift */,
+				D07C57DC2D76DD100008DC9D /* UserGenderSelectionView.swift */,
 				D0B3F1472D70079F007A5EA0 /* PhoneValidator.swift */,
 			);
 			path = LoginOrRegister;
@@ -1562,6 +1566,7 @@
 				D07B41EE2D61DA530015C7AA /* FirebaseAuthManager.swift in Sources */,
 				D09587CD2CB7D5C900BCD04B /* MeetingGuideView.swift in Sources */,
 				D09587BD2CB77F5200BCD04B /* SafetyTestView.swift in Sources */,
+				D07C57DD2D76DD100008DC9D /* UserGenderSelectionView.swift in Sources */,
 				D0DDDB2C2CA160BB00A78A87 /* HowToUseWhoLikedMeAndCrushListView.swift in Sources */,
 				D0B3F29C2D7404D3007A5EA0 /* AchievementCardView.swift in Sources */,
 				D07B41DF2D6197570015C7AA /* FirebasePhotoManager.swift in Sources */,
@@ -1707,6 +1712,7 @@
 				D0B3F2482D736234007A5EA0 /* AchievementSectionView.swift in Sources */,
 				D0B3F2CD2D744F23007A5EA0 /* PasswordLoginUITests.swift in Sources */,
 				D0B3F2492D736234007A5EA0 /* InfoPopupView.swift in Sources */,
+				D07C57DE2D76DD100008DC9D /* UserGenderSelectionView.swift in Sources */,
 				D0B3F24A2D736234007A5EA0 /* PremiumCardTabView.swift in Sources */,
 				D0B3F24B2D736234007A5EA0 /* PremiumDetailsView.swift in Sources */,
 				D0B3F24C2D736234007A5EA0 /* ProfileHeaderView.swift in Sources */,

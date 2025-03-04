@@ -11,7 +11,8 @@ import SwiftUI
 struct CreatePasswordView: View {
     @State private var password: String = ""
     @State private var isPasswordVisible: Bool = false
-    
+    @State private var showUserGenderSelectionView: Bool = false  // 新增控制跳轉的狀態
+
     // 檢查密碼長度是否符合
     private var isPasswordValid: Bool {
         password.count >= 6
@@ -48,7 +49,7 @@ struct CreatePasswordView: View {
             
             // 密碼輸入欄位 (可顯示/隱藏)
             ZStack(alignment: .trailing) {
-                TextField("輸入密碼", text: $password)
+                TextField("", text: $password)
                     .font(.title2)
                     .padding(.horizontal)
                     .padding(.vertical)
@@ -56,25 +57,6 @@ struct CreatePasswordView: View {
                     .background(Color.gray.opacity(0.3))
                     .cornerRadius(10)
                     .accessibilityIdentifier("CreatePasswordField") // <- 加上 Identifier
-
-//                } else {
-//                    SecureField("輸入密碼", text: $password)
-//                        .font(.title2)
-//                        .padding(.horizontal)
-//                        .padding(.vertical)
-//                        .foregroundColor(.black)
-//                        .background(Color.gray.opacity(0.3))
-//                        .cornerRadius(10)
-//                        .accessibilityIdentifier("SecureCreatePasswordField") // <- 加上 Identifier
-//                }
-                
-//                Button(action: {
-//                    isPasswordVisible.toggle()
-//                }) {
-//                    Image(systemName: isPasswordVisible ? "eye.slash.fill" : "eye.fill")
-//                        .foregroundColor(.gray)
-//                        .padding(.trailing, 8)
-//                }
             }
             
             // 錯誤訊息 (若需要)
@@ -93,6 +75,9 @@ struct CreatePasswordView: View {
                 // 2. 導向下一個頁面
                 // 3. 呼叫後端 API 等
                 print("建立密碼：\(password)")
+                // 在此可以加入儲存密碼、呼叫後端 API 的邏輯
+                // 驗證成功後跳轉到 UserGenderSelectionView
+                showUserGenderSelectionView = true
             }) {
                 Text("繼續")
                     .font(.headline)
@@ -107,6 +92,11 @@ struct CreatePasswordView: View {
         .padding()
         .navigationBarHidden(true) // 如果需要隱藏NavigationBar
         .background(Color.black)
+        // 使用 fullScreenCover 呈現 UserGenderSelectionView
+        .fullScreenCover(isPresented: $showUserGenderSelectionView) {
+            UserGenderSelectionView()
+                .environmentObject(UserSettings())
+        }
     }
 }
 
