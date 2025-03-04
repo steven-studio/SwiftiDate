@@ -15,6 +15,9 @@ class AnalyticsManager: AnalyticsManagerProtocol {
 
     private init() {
         // 若需要在這裡做額外初始化可加，如 FirebaseApp.configure() 等
+        
+        // 初始化 Mixpanel
+        Mixpanel.initialize(token: "c33a19b0b1c17db46731337f2bc233da", trackAutomaticEvents: true)
     }
     
     /// 追蹤事件的統一方法

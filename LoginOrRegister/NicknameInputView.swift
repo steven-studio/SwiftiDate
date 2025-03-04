@@ -14,19 +14,32 @@ struct NicknameInputView: View {
     
     var body: some View {
         VStack(spacing: 16) {
+            HStack {
+                Button(action: {
+                    // 返回上一頁前追蹤返回事件
+                    AnalyticsManager.shared.trackEvent("Nickname_BackTapped", parameters: nil)
+                }) {
+                    Image(systemName: "chevron.left")
+                        .font(.title2)
+                        .foregroundColor(.gray.opacity(0.5)) // 設置文字顏色為黑色
+                        .padding(.leading)
+                }
+                Spacer()
+            }
+            
             // 標題
             Text("你的名字叫…")
                 .font(.title)
                 .bold()
-                .padding(.top, 40)
+                .padding()
             
             // 說明文字
             Text("這將是你在 SwiftiDate 中的暱稱")
-                .font(.subheadline)
-                .foregroundColor(.gray)
+                .font(.system(size: 18))
+                .padding(.bottom)
             
             // 輸入框 + 字數顯示
-            ZStack(alignment: .trailing) {
+            VStack {
                 TextField("", text: $nickname)
                     .textFieldStyle(PlainTextFieldStyle())
                     .padding()
@@ -39,11 +52,14 @@ struct NicknameInputView: View {
                         }
                     }
                 
-                // 顯示剩餘字數 or 已輸入字數
-                Text("\(nickname.count)/\(maxLength)")
-                    .font(.footnote)
-                    .foregroundColor(.gray)
-                    .padding(.trailing, 8)
+                HStack {
+                    Spacer()
+                    
+                    // 顯示剩餘字數 or 已輸入字數
+                    Text("\(nickname.count)/\(maxLength)")
+                        .font(.footnote)
+                        .foregroundColor(.gray)
+                }
             }
             .padding(.horizontal, 20)
             
@@ -59,7 +75,8 @@ struct NicknameInputView: View {
                     .padding()
                     .foregroundColor(.white)
                     .background(isNicknameValid ? Color.blue : Color.gray)
-                    .cornerRadius(8)
+                    .frame(width: 300)
+                    .cornerRadius(25)
             }
             .disabled(!isNicknameValid)
             .padding(.horizontal, 20)

@@ -126,6 +126,16 @@
 		D07C57E62D76F3B30008DC9D /* CropViewControllerWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07C57E42D76F3B30008DC9D /* CropViewControllerWrapper.swift */; };
 		D07C57E82D76F5AE0008DC9D /* NicknameInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07C57E72D76F5AE0008DC9D /* NicknameInputView.swift */; };
 		D07C57E92D76F5AE0008DC9D /* NicknameInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07C57E72D76F5AE0008DC9D /* NicknameInputView.swift */; };
+		D07C57EB2D76F70C0008DC9D /* BirthdayInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07C57EA2D76F70C0008DC9D /* BirthdayInputView.swift */; };
+		D07C57EC2D76F70C0008DC9D /* BirthdayInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07C57EA2D76F70C0008DC9D /* BirthdayInputView.swift */; };
+		D07C57EE2D76F7C60008DC9D /* LifestylePhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07C57ED2D76F7C60008DC9D /* LifestylePhotoView.swift */; };
+		D07C57EF2D76F7C60008DC9D /* LifestylePhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07C57ED2D76F7C60008DC9D /* LifestylePhotoView.swift */; };
+		D07C57F42D76F9870008DC9D /* RegisterLanguageSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07C57F32D76F9870008DC9D /* RegisterLanguageSelectionView.swift */; };
+		D07C57F52D76F9870008DC9D /* RegisterLanguageSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07C57F32D76F9870008DC9D /* RegisterLanguageSelectionView.swift */; };
+		D07C57F72D76FA460008DC9D /* TaggingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07C57F62D76FA460008DC9D /* TaggingView.swift */; };
+		D07C57F82D76FA460008DC9D /* TaggingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07C57F62D76FA460008DC9D /* TaggingView.swift */; };
+		D07C57FA2D76FC960008DC9D /* ExperienceSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07C57F92D76FC960008DC9D /* ExperienceSelectionView.swift */; };
+		D07C57FB2D76FC960008DC9D /* ExperienceSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07C57F92D76FC960008DC9D /* ExperienceSelectionView.swift */; };
 		D089DB532D6896CB00D6A1AB /* QRCodeGeneratorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D089DB522D6896CB00D6A1AB /* QRCodeGeneratorView.swift */; };
 		D089DB562D69531300D6A1AB /* SuspiciousCheckResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = D089DB552D69531300D6A1AB /* SuspiciousCheckResult.swift */; };
 		D089DB582D69534700D6A1AB /* RuleChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D089DB572D69534700D6A1AB /* RuleChecker.swift */; };
@@ -543,6 +553,11 @@
 		D07C57DC2D76DD100008DC9D /* UserGenderSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserGenderSelectionView.swift; sourceTree = "<group>"; };
 		D07C57E42D76F3B30008DC9D /* CropViewControllerWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CropViewControllerWrapper.swift; sourceTree = "<group>"; };
 		D07C57E72D76F5AE0008DC9D /* NicknameInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NicknameInputView.swift; sourceTree = "<group>"; };
+		D07C57EA2D76F70C0008DC9D /* BirthdayInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirthdayInputView.swift; sourceTree = "<group>"; };
+		D07C57ED2D76F7C60008DC9D /* LifestylePhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifestylePhotoView.swift; sourceTree = "<group>"; };
+		D07C57F32D76F9870008DC9D /* RegisterLanguageSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterLanguageSelectionView.swift; sourceTree = "<group>"; };
+		D07C57F62D76FA460008DC9D /* TaggingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaggingView.swift; sourceTree = "<group>"; };
+		D07C57F92D76FC960008DC9D /* ExperienceSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExperienceSelectionView.swift; sourceTree = "<group>"; };
 		D089DB522D6896CB00D6A1AB /* QRCodeGeneratorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeGeneratorView.swift; sourceTree = "<group>"; };
 		D089DB552D69531300D6A1AB /* SuspiciousCheckResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuspiciousCheckResult.swift; sourceTree = "<group>"; };
 		D089DB572D69534700D6A1AB /* RuleChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleChecker.swift; sourceTree = "<group>"; };
@@ -990,20 +1005,25 @@
 			isa = PBXGroup;
 			children = (
 				D0B3F1262D6F03BB007A5EA0 /* OTPRelated */,
-				D017F4F72CAFC9A200C71D18 /* PhoneNumberEntryView.swift */,
+				D07C57EA2D76F70C0008DC9D /* BirthdayInputView.swift */,
 				D0B388232D5B7BAE003BC40C /* CountryCodePickerView.swift */,
 				D07C57E42D76F3B30008DC9D /* CropViewControllerWrapper.swift */,
 				D07C57D62D76941E0008DC9D /* CreatePasswordView.swift */,
+				D07C57F92D76FC960008DC9D /* ExperienceSelectionView.swift */,
 				D0B388242D5B7BAE003BC40C /* FaceTrackingView.swift */,
 				D07B40AC2D60FF5A0015C7AA /* FaceVideo.swift */,
+				D07C57ED2D76F7C60008DC9D /* LifestylePhotoView.swift */,
 				D0B388252D5B7BAE003BC40C /* OTPVerificationView.swift */,
 				D0B388262D5B7BAE003BC40C /* PasswordLoginView.swift */,
+				D017F4F72CAFC9A200C71D18 /* PhoneNumberEntryView.swift */,
+				D07C57F32D76F9870008DC9D /* RegisterLanguageSelectionView.swift */,
 				D0B3F2D12D746499007A5EA0 /* ResetPasswordView.swift */,
 				D0B388272D5B7BAE003BC40C /* RealVerificationView.swift */,
 				D0B388282D5B7BAE003BC40C /* UploadPhotoView.swift */,
 				D07C57DC2D76DD100008DC9D /* UserGenderSelectionView.swift */,
 				D07C57E72D76F5AE0008DC9D /* NicknameInputView.swift */,
 				D0B3F1472D70079F007A5EA0 /* PhoneValidator.swift */,
+				D07C57F62D76FA460008DC9D /* TaggingView.swift */,
 			);
 			path = LoginOrRegister;
 			sourceTree = "<group>";
@@ -1449,6 +1469,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D04729C82CC086F4007C33EC /* ProfileTabPicker.swift in Sources */,
+				D07C57FA2D76FC960008DC9D /* ExperienceSelectionView.swift in Sources */,
 				D07B41F22D621E9C0015C7AA /* LocalStorageManager.swift in Sources */,
 				D0445C892C73CF610059D522 /* VacationOptionsView.swift in Sources */,
 				D0B3F1482D70079F007A5EA0 /* PhoneValidator.swift in Sources */,
@@ -1484,6 +1505,7 @@
 				D0445C7B2C73C74B0059D522 /* BloodTypePickerView.swift in Sources */,
 				D06724E42D6EC0FC00FD566F /* CloudService.swift in Sources */,
 				D0B388142D5B7A3E003BC40C /* SocialTrainingView.swift in Sources */,
+				D07C57EB2D76F70C0008DC9D /* BirthdayInputView.swift in Sources */,
 				D018AD5D2C9E6581005A14B9 /* TurboPurchaseView.swift in Sources */,
 				D0445C772C73BF590059D522 /* HeightPickerView.swift in Sources */,
 				D018AD5F2C9E6976005A14B9 /* CrushPurchaseView.swift in Sources */,
@@ -1500,6 +1522,7 @@
 				D0DDDB502CA1A01200A78A87 /* HowToEnableNotificationsView.swift in Sources */,
 				D0472D3D2CCC7F600047FE10 /* MainView.swift in Sources */,
 				D04729CE2CC08BD7007C33EC /* AboutMeSection.swift in Sources */,
+				D07C57F72D76FA460008DC9D /* TaggingView.swift in Sources */,
 				D0DDDB202CA13C5E00A78A87 /* WhoLikedMeView.swift in Sources */,
 				D0445C8B2C73D0760059D522 /* DietPreferencesView.swift in Sources */,
 				D0445C792C73C0B30059D522 /* ZodiacPickerView.swift in Sources */,
@@ -1523,6 +1546,7 @@
 				D0903AC42D58A50000735323 /* ClaudeAIView.swift in Sources */,
 				D0445C7F2C73C9080059D522 /* LookingForView.swift in Sources */,
 				D0DDDB3E2CA179AC00A78A87 /* WhatIsSwiftiDatePremiumDiscountPolicyView.swift in Sources */,
+				D07C57F52D76F9870008DC9D /* RegisterLanguageSelectionView.swift in Sources */,
 				D09587D62CB8CDDA00BCD04B /* GenderSelectionView.swift in Sources */,
 				D0DDDB3A2CA174A100A78A87 /* RestorePurchaseView.swift in Sources */,
 				D0445C672C7239C80059D522 /* InterestsView.swift in Sources */,
@@ -1623,6 +1647,7 @@
 				D0DDDB4A2CA196FB00A78A87 /* UpdateProfileDetailsView.swift in Sources */,
 				D0DDDB262CA14B2700A78A87 /* HowToDeleteMessagesView.swift in Sources */,
 				D04729D02CC08CC1007C33EC /* SmartPhotoToggle.swift in Sources */,
+				D07C57EE2D76F7C60008DC9D /* LifestylePhotoView.swift in Sources */,
 				D089DB532D6896CB00D6A1AB /* QRCodeGeneratorView.swift in Sources */,
 				D07B41DD2D618E9B0015C7AA /* LocationService.swift in Sources */,
 				D0DDDB562CA29B1200A78A87 /* TermsOfServiceView.swift in Sources */,
@@ -1664,6 +1689,7 @@
 				D0B3F2A82D740B7F007A5EA0 /* UploadPhotoView.swift in Sources */,
 				D0B3F2A72D740B76007A5EA0 /* FaceTrackingView.swift in Sources */,
 				D0B3F2A62D740B3B007A5EA0 /* RealVerificationView.swift in Sources */,
+				D07C57FB2D76FC960008DC9D /* ExperienceSelectionView.swift in Sources */,
 				D0B3F2A52D740B29007A5EA0 /* FirebaseAuthManager.swift in Sources */,
 				D0B3F2A32D740B06007A5EA0 /* NoCursorTextField.swift in Sources */,
 				D0B3F2A42D740B06007A5EA0 /* NoCursorTextFieldWrapper.swift in Sources */,
@@ -1694,6 +1720,7 @@
 				D0B3F26A2D736347007A5EA0 /* HowToUseIncognitoModeView.swift in Sources */,
 				D0B3F26B2D736347007A5EA0 /* HowToUseWhoLikedMeAndCrushListView.swift in Sources */,
 				D0B3F26C2D736347007A5EA0 /* IsSwiftiDatePaidView.swift in Sources */,
+				D07C57F82D76FA460008DC9D /* TaggingView.swift in Sources */,
 				D0B3F26D2D736347007A5EA0 /* ManageProfilePhotosView.swift in Sources */,
 				D0B3F26E2D736347007A5EA0 /* PhotoUploadGuidelinesView.swift in Sources */,
 				D0B3F26F2D736347007A5EA0 /* RefundPolicyView.swift in Sources */,
@@ -1713,6 +1740,7 @@
 				D0B3F25F2D73631E007A5EA0 /* LocalStorageManager.swift in Sources */,
 				D0B3F2572D736303007A5EA0 /* CommunityGuidelinesView.swift in Sources */,
 				D0B3F2582D736303007A5EA0 /* DataManagementView.swift in Sources */,
+				D07C57F42D76F9870008DC9D /* RegisterLanguageSelectionView.swift in Sources */,
 				D0B3F2592D736303007A5EA0 /* HelpView.swift in Sources */,
 				D0B3F25A2D736303007A5EA0 /* PersonalInfoView.swift in Sources */,
 				D0B3F25B2D736303007A5EA0 /* PrivacyPolicyView.swift in Sources */,
@@ -1791,6 +1819,7 @@
 				D0B3F1F92D730491007A5EA0 /* DrinkOptionsUITests.swift in Sources */,
 				D0B3F1F02D72E4BB007A5EA0 /* DegreePicker.swift in Sources */,
 				D0B3F1ED2D72CDF7007A5EA0 /* BloodTypePickerView.swift in Sources */,
+				D07C57EC2D76F70C0008DC9D /* BirthdayInputView.swift in Sources */,
 				D0B3F2052D731A78007A5EA0 /* FitnessOptionsUITests.swift in Sources */,
 				D0B3F21F2D733B39007A5EA0 /* LookingForViewUITests.swift in Sources */,
 				D0B3F1F62D72FA8B007A5EA0 /* AnalyticsManager+Swizzle.swift in Sources */,
@@ -1804,6 +1833,7 @@
 				D0B3F1E82D72CD78007A5EA0 /* AnalyticsManager.swift in Sources */,
 				D0B3F2372D7354CD007A5EA0 /* PreviewSectionViewUITests.swift in Sources */,
 				D0B3F2272D73408E007A5EA0 /* PetSelectionViewUITests.swift in Sources */,
+				D07C57EF2D76F7C60008DC9D /* LifestylePhotoView.swift in Sources */,
 				D0B3F2252D733E0D007A5EA0 /* MeetWillingnessViewUITests.swift in Sources */,
 				D0B3F2952D73FBC3007A5EA0 /* CrushPurchaseViewUITests.swift in Sources */,
 				D0B3F1E72D72CD52007A5EA0 /* AnalyticsManagerProtocol.swift in Sources */,

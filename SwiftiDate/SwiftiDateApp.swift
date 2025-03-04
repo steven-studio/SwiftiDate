@@ -64,10 +64,10 @@ struct SwiftiDateApp: App {
                 }
             }
             .onAppear {
-//                userSettings.globalPhoneNumber = "0972516868"
-//                userSettings.globalUserName = "玩玩"
-                userSettings.globalPhoneNumber = ""
-                userSettings.globalUserName = ""
+                userSettings.globalPhoneNumber = "0972516868"
+                userSettings.globalUserName = "玩玩"
+//                userSettings.globalPhoneNumber = ""
+//                userSettings.globalUserName = ""
                 userSettings.globalUserGender = Gender.male
                 userSettings.globalIsUserVerified = true
                 userSettings.globalSelectedGender = "女生"
