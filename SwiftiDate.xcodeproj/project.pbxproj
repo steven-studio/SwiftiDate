@@ -116,6 +116,8 @@
 		D07B41EE2D61DA530015C7AA /* FirebaseAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07B41ED2D61DA530015C7AA /* FirebaseAuthManager.swift */; };
 		D07B41F02D61EE2C0015C7AA /* FirestoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07B41EF2D61EE2C0015C7AA /* FirestoreManager.swift */; };
 		D07B41F22D621E9C0015C7AA /* LocalStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07B41F12D621E9C0015C7AA /* LocalStorageManager.swift */; };
+		D07C57D72D76941E0008DC9D /* CreatePasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07C57D62D76941E0008DC9D /* CreatePasswordView.swift */; };
+		D07C57D82D76941E0008DC9D /* CreatePasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07C57D62D76941E0008DC9D /* CreatePasswordView.swift */; };
 		D089DB532D6896CB00D6A1AB /* QRCodeGeneratorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D089DB522D6896CB00D6A1AB /* QRCodeGeneratorView.swift */; };
 		D089DB562D69531300D6A1AB /* SuspiciousCheckResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = D089DB552D69531300D6A1AB /* SuspiciousCheckResult.swift */; };
 		D089DB582D69534700D6A1AB /* RuleChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D089DB572D69534700D6A1AB /* RuleChecker.swift */; };
@@ -529,6 +531,7 @@
 		D07B41ED2D61DA530015C7AA /* FirebaseAuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAuthManager.swift; sourceTree = "<group>"; };
 		D07B41EF2D61EE2C0015C7AA /* FirestoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreManager.swift; sourceTree = "<group>"; };
 		D07B41F12D621E9C0015C7AA /* LocalStorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalStorageManager.swift; sourceTree = "<group>"; };
+		D07C57D62D76941E0008DC9D /* CreatePasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePasswordView.swift; sourceTree = "<group>"; };
 		D089DB522D6896CB00D6A1AB /* QRCodeGeneratorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeGeneratorView.swift; sourceTree = "<group>"; };
 		D089DB552D69531300D6A1AB /* SuspiciousCheckResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuspiciousCheckResult.swift; sourceTree = "<group>"; };
 		D089DB572D69534700D6A1AB /* RuleChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleChecker.swift; sourceTree = "<group>"; };
@@ -977,6 +980,7 @@
 				D07B40AC2D60FF5A0015C7AA /* FaceVideo.swift */,
 				D017F4F72CAFC9A200C71D18 /* PhoneNumberEntryView.swift */,
 				D0B388232D5B7BAE003BC40C /* CountryCodePickerView.swift */,
+				D07C57D62D76941E0008DC9D /* CreatePasswordView.swift */,
 				D0B388242D5B7BAE003BC40C /* FaceTrackingView.swift */,
 				D0B388252D5B7BAE003BC40C /* OTPVerificationView.swift */,
 				D0B388262D5B7BAE003BC40C /* PasswordLoginView.swift */,
@@ -1542,6 +1546,7 @@
 				D0445C852C73CDB60059D522 /* SmokingOptionsView.swift in Sources */,
 				D0B3883A2D5B8286003BC40C /* WebRTCManager.swift in Sources */,
 				D07B41EC2D61C3630015C7AA /* FirebaseManager.swift in Sources */,
+				D07C57D82D76941E0008DC9D /* CreatePasswordView.swift in Sources */,
 				D0445C6D2C72EA990059D522 /* SchoolInputView.swift in Sources */,
 				D04729E62CC1DA82007C33EC /* PremiumDetailsView.swift in Sources */,
 				D0DDDB0D2CA07A2400A78A87 /* FeaturedCardView.swift in Sources */,
@@ -1740,6 +1745,7 @@
 				D0B3F2222D733D5B007A5EA0 /* MeetWillingnessSection.swift in Sources */,
 				D0B3F21D2D733998007A5EA0 /* VacationOptionsView.swift in Sources */,
 				D0B3F21C2D73396E007A5EA0 /* SmokingOptionsView.swift in Sources */,
+				D07C57D72D76941E0008DC9D /* CreatePasswordView.swift in Sources */,
 				D0B3F2A12D740AAA007A5EA0 /* OTPVerificationViewUITests.swift in Sources */,
 				D0B3F21B2D73392F007A5EA0 /* PetSelectionView.swift in Sources */,
 				D0B3F21A2D73390F007A5EA0 /* LookingForView.swift in Sources */,

@@ -16,7 +16,9 @@ struct RealVerificationView: View {
     @Binding var phoneNumber: String
     @State private var isVerified = false  // ✅ 是否通過真人驗證
     @State private var message = "請依指示轉頭"  // ✅ 提示訊息
-    @State private var showUploadPhoto = false // ✅ 是否跳轉到上傳照片頁面
+//    @State private var showUploadPhoto = false // ✅ 是否跳轉到上傳照片頁面
+    @State private var showPasswordLoginView = false
+    @State private var showCreatePasswordView = false
 
     var body: some View {
         VStack {
@@ -55,7 +57,8 @@ struct RealVerificationView: View {
                 
                 Button(action: {
                     AnalyticsManager.shared.trackEvent("RealVerification_ContinuePhotoVerificationTapped", parameters: nil)
-                    showUploadPhoto = true
+//                    showUploadPhoto = true
+                    showPasswordLoginView = true
                 }) {
                     Text("繼續進行照片驗證")
                         .frame(maxWidth: .infinity)
@@ -68,11 +71,16 @@ struct RealVerificationView: View {
             }
         }
         .padding()
-        .fullScreenCover(isPresented: $showUploadPhoto) { // ✅ 跳轉到照片上傳頁面
-            UploadPhotoView(selectedCountryCode: $selectedCountryCode, phoneNumber: $phoneNumber)
-                .environmentObject(appState) // ✅ 傳遞 AppState
-                .environmentObject(userSettings) // ✅ 傳遞 UserSettings
+        .fullScreenCover(isPresented: $showCreatePasswordView) {
+            CreatePasswordView()  // 依照你的 PasswordLoginView 的初始設定傳入必要的參數
+                .environmentObject(appState)
+                .environmentObject(userSettings)
         }
+//        .fullScreenCover(isPresented: $showUploadPhoto) { // ✅ 跳轉到照片上傳頁面
+//            UploadPhotoView(selectedCountryCode: $selectedCountryCode, phoneNumber: $phoneNumber)
+//                .environmentObject(appState) // ✅ 傳遞 AppState
+//                .environmentObject(userSettings) // ✅ 傳遞 UserSettings
+//        }
         .onAppear {
             // 畫面出現時記錄 Analytics 事件
             AnalyticsManager.shared.trackEvent("RealVerificationView_Appeared", parameters: nil)
@@ -80,7 +88,21 @@ struct RealVerificationView: View {
         .onChange(of: isVerified) { newValue in
             if newValue {
                 AnalyticsManager.shared.trackEvent("RealVerification_Verified", parameters: nil)
+                // 驗證通過後直接進入 PasswordLoginView
+                showCreatePasswordView = true
             }
         }
+    }
+}
+
+struct RealVerificationView_Previews: PreviewProvider {
+    static var previews: some View {
+        RealVerificationView(
+            selectedCountryCode: .constant("+886"),
+            phoneNumber: .constant("0912345678")
+        )
+        .environmentObject(AppState())
+        .environmentObject(UserSettings())
+        .previewDevice("iPhone 15 Pro")
     }
 }

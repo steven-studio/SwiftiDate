@@ -239,5 +239,6 @@ struct TurboView_Previews: PreviewProvider {
     static var previews: some View {
         TurboView(contentSelectedTab: $contentSelectedTab, turboSelectedTab: $turboSelectedTab, showBackButton: false)
             .previewDevice("iPhone 15 Pro")
+            .environmentObject(UserSettings())
     }
 }
