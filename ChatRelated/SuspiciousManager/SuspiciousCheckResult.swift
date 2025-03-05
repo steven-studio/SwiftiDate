@@ -15,6 +15,7 @@ enum SuspiciousReason {
     case scamKeyword
     case saleKeyword
     case ballsInHerHand
+    case relationshipInquiry
     case NSFWKeyword
 }
 

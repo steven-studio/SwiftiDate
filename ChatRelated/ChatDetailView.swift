@@ -576,5 +576,6 @@ struct ChatDetailView_Previews: PreviewProvider {
         ]), onBack: {
             // Provide an empty closure or action for the onBack parameter
         })
+        .environmentObject(UserSettings()) // 注入 environment object
     }
 }

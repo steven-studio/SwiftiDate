@@ -29,6 +29,12 @@ struct NLPChecker {
         // ...
     ]
     
+    static let relationshipInquiryEmbeddings: [[Double]] = [
+        // 例如，預先計算好代表「你有男朋友嗎？」這類訊息的 embedding vectors
+        // [0.001, 0.002, ...],
+        // [0.003, 0.004, ...]
+    ]
+    
     // =======================================
     // =  原本的 scam / sale
     // =======================================
@@ -91,6 +97,24 @@ struct NLPChecker {
                 }
             }
             // 同樣閾值 (0.85) 可依實際測試調整
+            completion(maxSim >= 0.85)
+        }
+    }
+    
+    static func isRelationshipInquiry(_ message: String, completion: @escaping (Bool) -> Void) {
+        getEmbeddingForText(message) { vector in
+            guard let vector = vector else {
+                completion(false)
+                return
+            }
+            var maxSim = 0.0
+            for refVec in relationshipInquiryEmbeddings {
+                let sim = cosineSimilarity(vector, refVec)
+                if sim > maxSim {
+                    maxSim = sim
+                }
+            }
+            // 根據實際測試調整閾值，這裡假設 0.85
             completion(maxSim >= 0.85)
         }
     }

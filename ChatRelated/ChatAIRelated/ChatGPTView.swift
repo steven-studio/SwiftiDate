@@ -39,7 +39,6 @@ struct ChatGPTView: View {
                     dynamicHeight: $dynamicHeight,
                     maxHeight: maxHeight
                 )
-                .frame(maxWidth: UIScreen.main.bounds.width - 32, maxHeight: 300)
                 .border(Color.gray, width: 1)
 
                 TextField("輸入您的訊息...", text: $userInput, axis: .vertical) // by bryan_u.6_developer

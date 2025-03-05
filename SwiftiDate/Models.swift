@@ -15,7 +15,7 @@ struct UserMatch: Identifiable, Codable { // 添加 Codable
     let imageName: String // Use image names stored in Assets
 }
 
-enum MessageType: Codable {
+enum MessageType: Codable, Equatable {
     case text(String)
     case image(Data)   // 使用 Data 來存儲圖片數據
     case audio(String) // 使用 String 來存儲音頻文件的 URL 字符串
@@ -70,7 +70,7 @@ enum MessageType: Codable {
 }
 
 // Message model
-struct Message: Identifiable, Codable {
+struct Message: Identifiable, Codable, Equatable {
     let id: UUID
     let content: MessageType
     let isSender: Bool

@@ -12,7 +12,7 @@ import SwiftUI
 enum LLMModel: String, CaseIterable {
     case chatgpt = "ChatGPT\n (OpenAI)"
     case claude = "Claude AI\n (Anthropic)"
-    case gemini = "Gemini\n (Google DeepMind)"
+    case vertexai = "Vertex AI\n (Google DeepMind)"
     case wenxin = "文心一言 (Baidu)"
     case tongyi = "通義千問 (Alibaba)"
     case local = "本地模型 (Custom)"
@@ -30,7 +30,7 @@ enum LLMModel: String, CaseIterable {
                     .douban,
                     .local] // 僅顯示大陸地區的模型
         case .other:
-            return [.chatgpt, .gemini, .claude, .deepseek, .local] // 顯示大陸以外的模型
+            return [.chatgpt, .vertexai, .claude, .deepseek, .local] // 顯示大陸以外的模型
         }
     }
     
@@ -43,7 +43,7 @@ enum LLMModel: String, CaseIterable {
         // 基本邏輯是：能連上 Google，就大概率能連上 ChatGPT。
         case .chatgpt:
             return URL(string: "https://api.openai.com/v1/models")
-        case .gemini:
+        case .vertexai:
             return URL(string: "https://www.google.com/")  // 模擬 Gemini => Google
         case .claude:
             return URL(string: "https://www.anthropic.com/")
@@ -54,7 +54,7 @@ enum LLMModel: String, CaseIterable {
 
     // 是否需要外網連線測試
     var requiresExternalCheck: Bool {
-        return self == .chatgpt || self == .gemini || self == .claude
+        return self == .chatgpt || self == .vertexai || self == .claude
     }
 }
 
@@ -139,6 +139,7 @@ func canConnect(to model: LLMModel, completion: @escaping (Bool) -> Void) {
 
 // 模型選擇視圖
 struct ModelSelectorView: View {
+    @Environment(\.dismiss) var dismiss  // 新增這行來獲取 dismiss function
     @State private var selectedModel: LLMModel = .chatgpt // 默認為 ChatGPT
     @State private var navigateToChatGPT = false
     @State private var navigateToGemini = false
@@ -254,6 +255,16 @@ struct ModelSelectorView: View {
                     ])
                 }
             }
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button("關閉") {
+                        // 在這裡添加退出邏輯，例如 dismiss sheet
+                        // 如果是使用 .presentationMode，可以呼叫 dismiss()
+                        // 或是利用 parent view 的 Binding 控制是否顯示
+                        dismiss()  // 調用 dismiss() 就可以關閉這個 sheet 或視圖
+                    }
+                }
+            }
         }
     }
     
@@ -264,7 +275,7 @@ struct ModelSelectorView: View {
         switch selectedModel {
         case .chatgpt:
             navigateToChatGPT = true
-        case .gemini:
+        case .vertexai:
             navigateToGemini = true
         case .claude:
             navigateToClaude = true
@@ -312,7 +323,7 @@ struct ModelSelectorView: View {
             // results 只是篩完的 model；仍維持插入順序
             // 若想更保險，可手動 sort
             var sorted = results
-            let desiredOrder: [LLMModel] = [.chatgpt, .gemini, .claude, .deepseek, .local]
+            let desiredOrder: [LLMModel] = [.chatgpt, .vertexai, .claude, .deepseek, .local]
             
             sorted.sort { a, b in
                 let indexA = desiredOrder.firstIndex(of: a) ?? Int.max
@@ -330,7 +341,7 @@ struct ModelSelectorView: View {
             return "ChatGPT"
         case .claude:
             return "Claude"
-        case .gemini:
+        case .vertexai:
             return "Gemini 1"
         case .wenxin:
             return "Wenxin"
@@ -365,5 +376,6 @@ struct ModelSelectorView_Previews: PreviewProvider {
                 isCompliment: false
             )
         ]))
+        .environmentObject(UserSettings())  // 加入環境物件
     }
 }

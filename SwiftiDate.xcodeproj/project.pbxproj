@@ -1115,7 +1115,6 @@
 				D018AD622C9E87F6005A14B9 /* ChatView.swift */,
 				D0DDDB082C9FDE0500A78A87 /* InteractiveContentView.swift */,
 				D017F4F32CAF77D900C71D18 /* MessageBubbleView.swift */,
-				D0903AC92D58A56F00735323 /* MessageListView.swift */,
 				D0903ABF2D58A45200735323 /* modelSelector.swift */,
 				D089DB5C2D69862300D6A1AB /* PHPickerView.swift */,
 			);
@@ -1129,6 +1128,7 @@
 				D0903AC32D58A50000735323 /* ClaudeAIView.swift */,
 				D0903AC52D58A52500735323 /* DeepSeekView.swift */,
 				D0903AC72D58A54700735323 /* LocalModelView.swift */,
+				D0903AC92D58A56F00735323 /* MessageListView.swift */,
 				D0903ACD2D58A5C200735323 /* Response.swift */,
 				D0903ACB2D58A59B00735323 /* TextViewRepresentable.swift */,
 				D0B3F12E2D6F0BE5007A5EA0 /* VertexAIView.swift */,
