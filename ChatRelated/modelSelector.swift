@@ -85,11 +85,18 @@ func canConnect(to model: LLMModel, completion: @escaping (Bool) -> Void) {
     
     // 針對 OpenAI API，添加 Bearer Token
     if model == .chatgpt {
-//        let apiKey = openAIAPIKey  // ⚠️ 確保這裡填入正確的 OpenAI API Key
-//        request.addValue("Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
+        let firebaseURLString = "https://us-central1-swiftidate-cdff0.cloudfunctions.net/chatCompletionGpt4o"
+        guard let firebaseURL = URL(string: firebaseURLString) else {
+            completion(false)
+            print("No Connection")
+            return
+        }
+        request = URLRequest(url: firebaseURL)
+        // 根據你 Cloud Function 的實作，設定合適的 HTTP 方法與 header
+        request.httpMethod = "GET"  // 或 "POST"，視你端點而定
     }
     
-    print("[DEBUG] 準備測試外網連線: \(url.absoluteString)")
+    print("[DEBUG] 準備測試外網連線: \(request.url?.absoluteString)")
     
     let task = URLSession.shared.dataTask(with: request) { data, response, error in
         

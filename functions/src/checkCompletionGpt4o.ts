@@ -26,6 +26,12 @@ export const chatCompletionGpt4o = onRequest(
     secrets: [openAiKeySecret],
   },
   async (req, res): Promise<void> => {
+    if (req.method === "GET") {
+      // 可以回傳一個說明訊息，告知用戶此端點需要 POST 請求
+      res.status(200).send({message: "請使用 POST 方法並附帶聊天資料 JSON 來呼叫此端點"});
+      return;
+    }
+
     // 透過 openAiKeySecret.value() 拿到實際金鑰
     const openaiKey = openAiKeySecret.value();
 

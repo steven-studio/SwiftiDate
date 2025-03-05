@@ -278,5 +278,6 @@ struct ChatGPTView_Previews: PreviewProvider {
                 isCompliment: false
             )
         ]), showChatGPTView: .constant(true))
+        .environmentObject(UserSettings())
     }
 }

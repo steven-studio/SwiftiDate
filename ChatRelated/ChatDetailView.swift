@@ -31,6 +31,14 @@ struct ChatDetailView: View {
     @State private var showWarnConfirmation = false       // 是否顯示「要不要繼續發送」的確認視窗
     @StateObject var signalingClient = SignalingClient()
     
+    // 假設我們有一組聊天建議
+    let chatSuggestions = [
+        "嗨，你好嗎？",
+        "今天過得怎麼樣？",
+        "最近有什麼好玩的事？",
+        "你喜歡旅遊嗎？"
+    ]
+    
     var body: some View {
         VStack {
             // Custom Navigation Bar
@@ -175,72 +183,94 @@ struct ChatDetailView: View {
                 }
             }
             
-            HStack {
-                TextField("輸入聊天內容", text: $newMessageText, axis: .vertical)
-                    .padding()
-                    .background(Color.gray.opacity(0.1))
-                    .cornerRadius(10)
-                
-                // 替代圖標，如表示 AI 的圖標
-                Button(action: {
-                    // 埋點：點擊 AI 按鈕
-                    AnalyticsManager.shared.trackEvent("chat_ai_button_pressed")
-                    showChatGPTModal = true  // 當按下時顯示 ChatGPT 的彈框
-                }) {
-                    Image(systemName: "brain.head.profile")
-                        .resizable()
-                        .frame(width: 24, height: 24)
-                        .padding(.trailing, 5)
+            VStack {
+                // 在訊息輸入區域前加入聊天建議
+                ChatSuggestionView(suggestions: chatSuggestions) { suggestion in
+                    // 當使用者點選建議時，直接填入訊息輸入框
+                    newMessageText = suggestion
                 }
                 
-                if newMessageText == "" {
-                    Image(systemName: "microphone.fill")
-                        .resizable()
-                        .frame(maxWidth: 24, maxHeight: 24)
+                HStack {
+                    // 替代圖標，如表示 AI 的圖標
+                    Button(action: {
+                        // 埋點：點擊 AI 按鈕
+                        AnalyticsManager.shared.trackEvent("camera_button_pressed")
+                        showChatGPTModal = true  // 當按下時顯示 ChatGPT 的彈框
+                    }) {
+                        Image(systemName: "camera.circle.fill")
+                            .font(.title)
+                            .foregroundColor(.green)
+                    }
+                    .padding(.leading, 10)
+                    
+                    TextField("輸入聊天內容", text: $newMessageText, axis: .vertical)
                         .padding()
-                        .foregroundColor(.blue)
-                } else {
-                    Button(action: sendMessage) {
-                        Image(systemName: "paperplane.fill")
-                            .resizable()
-                            .frame(width: 24, height: 24)
+                        .background(Color.gray.opacity(0.1))
+                        .multilineTextAlignment(.leading) // 文字對齊方式，可改成 .center 或 .trailing
+                        .cornerRadius(25)
+                        .overlay(
+                            // 替代圖標，如表示 AI 的圖標
+                            Button(action: {
+                                // 埋點：點擊 AI 按鈕
+                                AnalyticsManager.shared.trackEvent("chat_ai_button_pressed")
+                                showChatGPTModal = true  // 當按下時顯示 ChatGPT 的彈框
+                            }) {
+                                Image(systemName: "brain.head.profile")
+                                    .font(.title2)
+                                    .foregroundColor(.black)
+                            }
+                            .padding(.trailing, 15)
+                            , alignment: .trailing
+                        )
+                    
+                    if newMessageText == "" {
+                        Image(systemName: "microphone.fill")
+                            .font(.title2)
                             .padding()
-                    }
-                    // 埋點：點擊發送訊息
-                    .onTapGesture {
-                        AnalyticsManager.shared.trackEvent("send_message_button_pressed", parameters: [
-                            "message_length": newMessageText.count
-                        ])
+                            .foregroundColor(.black)
+                    } else {
+                        Button(action: sendMessage) {
+                            Image(systemName: "paperplane.fill")
+                                .resizable()
+                                .frame(width: 24, height: 24)
+                                .padding()
+                        }
+                        // 埋點：點擊發送訊息
+                        .onTapGesture {
+                            AnalyticsManager.shared.trackEvent("send_message_button_pressed", parameters: [
+                                "message_length": newMessageText.count
+                            ])
+                        }
                     }
                 }
+                .padding(2)
             }
-            .padding(2)
             
             HStack {
                 
                 Spacer()
                 
-                Image("gif")
-                    .resizable()
-                    .frame(width: 24, height: 24)
-                    .foregroundColor(.blue) // 將圖標設為藍色
+                Text("GIF")
+                    .font(.title2)
+                    .bold()
+                    .foregroundColor(.black) // 將圖標設為藍色
                 
                 Spacer()
                 
                 Image(systemName: "photo")
-                    .resizable()
-                    .frame(width: 24, height: 24)
-                    .foregroundColor(.blue) // 將圖標設為藍色
+                    .font(.title2)
+                    .foregroundColor(.black) // 將圖標設為藍色
                 
                 Spacer()
                 
-                Image(systemName: "map")
-                    .resizable()
-                    .frame(width: 24, height: 24)
-                    .foregroundColor(.blue) // 將圖標設為藍色
+                Image(systemName: "mappin.and.ellipse")
+                    .font(.title2)
+                    .foregroundColor(.black) // 將圖標設為藍色
 
                 Spacer()
             }
+            .padding(.top)
+            .background(Color.gray.opacity(0.15))
         }
         .sheet(isPresented: $showChatGPTModal) {
             ModelSelectorView(messages: $messages) // 彈出 ChatGPT 視圖並傳遞 messages

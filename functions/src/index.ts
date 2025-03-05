@@ -31,4 +31,4 @@ export {checkUrl} from "./checkUrl";
 export {createMatchToken} from "./createMatchToken";
 
 // 匯出 compareOneTextWithAllRedFlags
-export { compareOneTextWithAllRedFlags } from "./compareOneTextWithAllRedFlags";
+// export {compareOneTextWithAllRedFlags} from "./compareOneTextWithAllRedFlags";

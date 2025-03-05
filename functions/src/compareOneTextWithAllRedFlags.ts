@@ -135,7 +135,7 @@ export const compareOneTextWithAllRedFlags = onRequest(
       let sentenceCategory: "none"|"direct"|"opinion" = "none";
 
       if (patternDirect.test(text)) {
-        sentenceCategory = "direct";    // "我不值得"
+        sentenceCategory = "direct"; // "我不值得"
       } else if (patternOpinion.test(text)) {
         sentenceCategory = "opinion";
         // 壓縮空白和大小寫

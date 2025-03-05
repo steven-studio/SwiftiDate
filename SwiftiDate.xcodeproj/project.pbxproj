@@ -136,6 +136,10 @@
 		D07C57F82D76FA460008DC9D /* TaggingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07C57F62D76FA460008DC9D /* TaggingView.swift */; };
 		D07C57FA2D76FC960008DC9D /* ExperienceSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07C57F92D76FC960008DC9D /* ExperienceSelectionView.swift */; };
 		D07C57FB2D76FC960008DC9D /* ExperienceSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07C57F92D76FC960008DC9D /* ExperienceSelectionView.swift */; };
+		D07C57FD2D77DF190008DC9D /* AdaptiveAchievementCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07C57FC2D77DF190008DC9D /* AdaptiveAchievementCardView.swift */; };
+		D07C57FE2D77DF190008DC9D /* AdaptiveAchievementCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07C57FC2D77DF190008DC9D /* AdaptiveAchievementCardView.swift */; };
+		D07C58002D77FF570008DC9D /* ChatSuggestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07C57FF2D77FF570008DC9D /* ChatSuggestionView.swift */; };
+		D07C58012D77FF570008DC9D /* ChatSuggestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07C57FF2D77FF570008DC9D /* ChatSuggestionView.swift */; };
 		D089DB532D6896CB00D6A1AB /* QRCodeGeneratorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D089DB522D6896CB00D6A1AB /* QRCodeGeneratorView.swift */; };
 		D089DB562D69531300D6A1AB /* SuspiciousCheckResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = D089DB552D69531300D6A1AB /* SuspiciousCheckResult.swift */; };
 		D089DB582D69534700D6A1AB /* RuleChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D089DB572D69534700D6A1AB /* RuleChecker.swift */; };
@@ -557,6 +561,8 @@
 		D07C57F32D76F9870008DC9D /* RegisterLanguageSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterLanguageSelectionView.swift; sourceTree = "<group>"; };
 		D07C57F62D76FA460008DC9D /* TaggingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaggingView.swift; sourceTree = "<group>"; };
 		D07C57F92D76FC960008DC9D /* ExperienceSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExperienceSelectionView.swift; sourceTree = "<group>"; };
+		D07C57FC2D77DF190008DC9D /* AdaptiveAchievementCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveAchievementCardView.swift; sourceTree = "<group>"; };
+		D07C57FF2D77FF570008DC9D /* ChatSuggestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatSuggestionView.swift; sourceTree = "<group>"; };
 		D089DB522D6896CB00D6A1AB /* QRCodeGeneratorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeGeneratorView.swift; sourceTree = "<group>"; };
 		D089DB552D69531300D6A1AB /* SuspiciousCheckResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuspiciousCheckResult.swift; sourceTree = "<group>"; };
 		D089DB572D69534700D6A1AB /* RuleChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleChecker.swift; sourceTree = "<group>"; };
@@ -1030,6 +1036,7 @@
 				D039FC582CCD0AAC0082D2F3 /* PurchasesView */,
 				D0B3F29A2D7404D3007A5EA0 /* AchievementCardView.swift */,
 				D051EF302CC033C5004563A3 /* AchievementSectionView.swift */,
+				D07C57FC2D77DF190008DC9D /* AdaptiveAchievementCardView.swift */,
 				D04729DD2CC11320007C33EC /* InfoPopupView.swift */,
 				D04729E32CC13221007C33EC /* PremiumCardTabView.swift */,
 				D04729E52CC1DA82007C33EC /* PremiumDetailsView.swift */,
@@ -1104,6 +1111,7 @@
 				D089DB542D6952FA00D6A1AB /* SuspiciousManager */,
 				D0DDDB042C9FA8AF00A78A87 /* ChatDetailView.swift */,
 				D04938772CBF0A4600754E46 /* ChatRow.swift */,
+				D07C57FF2D77FF570008DC9D /* ChatSuggestionView.swift */,
 				D018AD622C9E87F6005A14B9 /* ChatView.swift */,
 				D0DDDB082C9FDE0500A78A87 /* InteractiveContentView.swift */,
 				D017F4F32CAF77D900C71D18 /* MessageBubbleView.swift */,
@@ -1503,6 +1511,7 @@
 				D06724E42D6EC0FC00FD566F /* CloudService.swift in Sources */,
 				D0B388142D5B7A3E003BC40C /* SocialTrainingView.swift in Sources */,
 				D07C57EB2D76F70C0008DC9D /* BirthdayInputView.swift in Sources */,
+				D07C58002D77FF570008DC9D /* ChatSuggestionView.swift in Sources */,
 				D018AD5D2C9E6581005A14B9 /* TurboPurchaseView.swift in Sources */,
 				D0445C772C73BF590059D522 /* HeightPickerView.swift in Sources */,
 				D018AD5F2C9E6976005A14B9 /* CrushPurchaseView.swift in Sources */,
@@ -1529,6 +1538,7 @@
 				D0B388332D5B7C46003BC40C /* CourseRowView.swift in Sources */,
 				D0B388342D5B7C46003BC40C /* CourseDetailView.swift in Sources */,
 				D017F4F82CAFC9A200C71D18 /* PhoneNumberEntryView.swift in Sources */,
+				D07C57FE2D77DF190008DC9D /* AdaptiveAchievementCardView.swift in Sources */,
 				D0B388292D5B7BAE003BC40C /* FaceTrackingView.swift in Sources */,
 				D0B3882A2D5B7BAE003BC40C /* CountryCodePickerView.swift in Sources */,
 				D0B3882B2D5B7BAE003BC40C /* PasswordLoginView.swift in Sources */,
@@ -1672,6 +1682,7 @@
 				D0B3F2C82D7421EC007A5EA0 /* SwipeCardView.swift in Sources */,
 				D0B3F2C52D741681007A5EA0 /* GenderSelectionView.swift in Sources */,
 				D0B3F2BD2D7410DA007A5EA0 /* MessageListView.swift in Sources */,
+				D07C58012D77FF570008DC9D /* ChatSuggestionView.swift in Sources */,
 				D0B3F2BC2D7410B5007A5EA0 /* TextViewRepresentable.swift in Sources */,
 				D0B3F2BB2D7410B0007A5EA0 /* Response.swift in Sources */,
 				D0B3F2BA2D7410A5007A5EA0 /* LocalModelView.swift in Sources */,
@@ -1681,6 +1692,7 @@
 				D0B3F2B62D741074007A5EA0 /* ChatGPTView.swift in Sources */,
 				D0B3F2B52D741052007A5EA0 /* Models.swift in Sources */,
 				D0B3F2B42D74103B007A5EA0 /* modelSelector.swift in Sources */,
+				D07C57FD2D77DF190008DC9D /* AdaptiveAchievementCardView.swift in Sources */,
 				D0B3F2A92D740B9B007A5EA0 /* FirestoreManager.swift in Sources */,
 				D0B3F2A82D740B7F007A5EA0 /* UploadPhotoView.swift in Sources */,
 				D0B3F2A72D740B76007A5EA0 /* FaceTrackingView.swift in Sources */,
