@@ -58,154 +58,6 @@ struct ChatView: View {
         self._contentSelectedTab = contentSelectedTab
     }
     
-    func readDataFromFirebase() {
-        let ref = Database.database(url: "https://swiftidate-cdff0-default-rtdb.asia-southeast1.firebasedatabase.app").reference()
-        let userId = userSettings.globalUserID
-
-        // 讀取 userMatches
-        ref.child("users").child(userId).child("userMatches").observeSingleEvent(of: .value) { snapshot in
-            guard let value = snapshot.value as? [[String: Any]] else {
-                print("Failed to decode userMatches data")
-                return
-            }
-            
-            do {
-                let jsonData = try JSONSerialization.data(withJSONObject: value, options: [])
-                var userMatches = try JSONDecoder().decode([UserMatch].self, from: jsonData)
-                
-                // 將 userMatches 倒序排序
-                userMatches.reverse()
-                
-                // 更新 self.userMatches 並存儲到本地
-                self.userMatches = userMatches
-                self.saveUserMatchesToAppStorage()
-            } catch {
-                print("Failed to decode userMatches: \(error)")
-            }
-        }
-
-        // 讀取 chatData
-        ref.child("users").child(userId).child("chats").observeSingleEvent(of: .value) { snapshot in
-            guard let value = snapshot.value as? [[String: Any]] else {
-                print("Failed to decode chats data")
-                return
-            }
-            
-            do {
-                let jsonData = try JSONSerialization.data(withJSONObject: value, options: [])
-                var chatData = try JSONDecoder().decode([Chat].self, from: jsonData)
-
-                // 確保 chatData 至少有兩個元素
-                if chatData.count > 1 {
-                    // 保留第一個元素
-                    let firstChat = [chatData[0]]
-                    // 倒序排列剩下的元素
-                    let reversedChats = chatData[1...].reversed()
-                    // 合併結果
-                    chatData = firstChat + reversedChats
-                }
-
-                self.chatData = chatData
-                self.saveChatDataToAppStorage()
-            } catch {
-                print("Failed to decode chats: \(error)")
-            }
-        }
-        
-        print("Path: \(ref.child("users").child(userId).child("chatMessages").description())")
-        
-        // 讀取 chatMessages
-        ref.child("users").child(userId).child("chatMessages").observeSingleEvent(of: .value) { snapshot in
-            if snapshot.exists() {
-                print("Snapshot exists for chatMessages: \(snapshot.value ?? "nil")")
-            } else {
-                print("Snapshot does not exist for chatMessages")
-            }
-            guard let value = snapshot.value as? [String: [[String: Any]]] else {
-                print("Failed to decode chatMessages data")
-                return
-            }
-            
-            var chatMessages: [UUID: [Message]] = [:]
-            do {
-                for (key, messagesArray) in value {
-                    guard let chatId = UUID(uuidString: key) else {
-                        print("Invalid UUID: \(key)")
-                        continue
-                    }
-                    
-                    print("Processing chat ID: \(chatId)")
-                    let jsonData = try JSONSerialization.data(withJSONObject: messagesArray, options: [])
-                    if let jsonString = String(data: jsonData, encoding: .utf8) {
-                        print("Serialized JSON for chat \(chatId): \(jsonString)")
-                    }
-                    
-                    do {
-                        let messages = try JSONDecoder().decode([Message].self, from: jsonData)
-//                        print("Decoded Messages for chat \(chatId): \(messages)")
-                        chatMessages[chatId] = messages
-                    } catch let DecodingError.dataCorrupted(context) {
-                        print("Data corrupted: \(context)")
-                    } catch let DecodingError.keyNotFound(key, context) {
-                        print("Key '\(key)' not found: \(context.debugDescription)")
-                        print("Coding Path: \(context.codingPath)")
-                    } catch let DecodingError.typeMismatch(type, context) {
-                        print("Type '\(type)' mismatch: \(context.debugDescription)")
-                        print("Coding Path: \(context.codingPath)")
-                    } catch let DecodingError.valueNotFound(value, context) {
-                        print("Value '\(value)' not found: \(context.debugDescription)")
-                        print("Coding Path: \(context.codingPath)")
-                    } catch {
-                        print("Failed to decode Messages for chat \(chatId): \(error)")
-                    }
-                }
-                
-                // Update the state on the main thread
-                DispatchQueue.main.async {
-                    self.chatMessages = chatMessages
-                    print("Final chatMessages dictionary: \(chatMessages)")
-                    self.saveChatMessagesToAppStorage()
-                }
-                
-            } catch {
-                print("Failed to decode chatMessages: \(error)")
-            }
-        }
-    }
-
-    // 將 userMatches 編碼為 JSON 字符串並存入 AppStorage
-    private func saveUserMatchesToAppStorage() {
-        do {
-            let encoder = JSONEncoder()
-            let data = try encoder.encode(userMatches)
-            userMatchesString = String(data: data, encoding: .utf8) ?? ""
-        } catch {
-            print("Failed to encode userMatches: \(error)")
-        }
-    }
-
-    // 將 chatData 編碼為 JSON 字符串並存入 AppStorage
-    private func saveChatDataToAppStorage() {
-        do {
-            let encoder = JSONEncoder()
-            let data = try encoder.encode(chatData)
-            chatDataString = String(data: data, encoding: .utf8) ?? ""
-        } catch {
-            print("Failed to encode chatData: \(error)")
-        }
-    }
-
-    // 將 chatMessages 編碼為 JSON 字符串並存入 AppStorage
-    private func saveChatMessagesToAppStorage() {
-        do {
-            let encoder = JSONEncoder()
-            let data = try encoder.encode(chatMessages)
-            chatMessagesString = String(data: data, encoding: .utf8) ?? ""
-        } catch {
-            print("Failed to encode chatMessages: \(error)")
-        }
-    }
-    
     var body: some View {
         NavigationView {
             VStack {
@@ -626,6 +478,151 @@ struct ChatView: View {
         }
     }
     
+    // 添加或更新聊天消息
+    private func updateChatMessages(for chatID: UUID, messages: [Message]) {
+        chatMessages[chatID] = messages
+        saveChatMessagesToAppStorage() // 保存至 AppStorage
+        AnalyticsManager.shared.trackEvent("chat_messages_updated", parameters: [
+            "chat_id": chatID.uuidString,
+            "message_count": messages.count
+        ])
+    }
+}
+
+// MARK: - Firebase Data Loading
+extension ChatView {
+    func readDataFromFirebase() {
+        let ref = Database.database(url: "https://swiftidate-cdff0-default-rtdb.asia-southeast1.firebasedatabase.app").reference()
+        let userId = userSettings.globalUserID
+        print("userSettings.globalUserID: \(userId)")
+
+        // 讀取 userMatches
+        ref.child("users").child(userId).child("userMatches").observeSingleEvent(of: .value) { snapshot in
+            guard let value = snapshot.value as? [[String: Any]] else {
+                print("Failed to decode userMatches data")
+                return
+            }
+            
+            do {
+                let jsonData = try JSONSerialization.data(withJSONObject: value, options: [])
+                var userMatches = try JSONDecoder().decode([UserMatch].self, from: jsonData)
+                
+                // 將 userMatches 倒序排序
+                userMatches.reverse()
+                
+                // 更新 self.userMatches 並存儲到本地
+                self.userMatches = userMatches
+                self.saveUserMatchesToAppStorage()
+            } catch {
+                print("Failed to decode userMatches: \(error)")
+            }
+        }
+
+        // 讀取 chatData
+        ref.child("users").child(userId).child("chats").observeSingleEvent(of: .value) { snapshot in
+            guard let value = snapshot.value as? [[String: Any]] else {
+                print("Failed to decode chats data")
+                return
+            }
+            
+            do {
+                let jsonData = try JSONSerialization.data(withJSONObject: value, options: [])
+                var chatData = try JSONDecoder().decode([Chat].self, from: jsonData)
+
+                // 確保 chatData 至少有兩個元素
+                if chatData.count > 1 {
+                    // 保留第一個元素
+                    let firstChat = [chatData[0]]
+                    // 倒序排列剩下的元素
+                    let reversedChats = chatData[1...].reversed()
+                    // 合併結果
+                    chatData = firstChat + reversedChats
+                }
+
+                self.chatData = chatData
+                self.saveChatDataToAppStorage()
+            } catch {
+                print("Failed to decode chats: \(error)")
+            }
+        }
+        
+        print("Path: \(ref.child("users").child(userId).child("chatMessages").description())")
+        
+        // 讀取 chatMessages
+        ref.child("users").child(userId).child("chatMessages").observeSingleEvent(of: .value) { snapshot in
+            if snapshot.exists() {
+                print("Snapshot exists for chatMessages: \(snapshot.value ?? "nil")")
+            } else {
+                print("Snapshot does not exist for chatMessages")
+            }
+            guard let value = snapshot.value as? [String: [[String: Any]]] else {
+                print("Failed to decode chatMessages data")
+                return
+            }
+            
+            var chatMessages: [UUID: [Message]] = [:]
+            do {
+                for (key, messagesArray) in value {
+                    guard let chatId = UUID(uuidString: key) else {
+                        print("Invalid UUID: \(key)")
+                        continue
+                    }
+                    
+                    print("Processing chat ID: \(chatId)")
+                    let jsonData = try JSONSerialization.data(withJSONObject: messagesArray, options: [])
+                    if let jsonString = String(data: jsonData, encoding: .utf8) {
+                        print("Serialized JSON for chat \(chatId): \(jsonString)")
+                    }
+                    
+                    do {
+                        let messages = try JSONDecoder().decode([Message].self, from: jsonData)
+//                        print("Decoded Messages for chat \(chatId): \(messages)")
+                        chatMessages[chatId] = messages
+                    } catch let DecodingError.dataCorrupted(context) {
+                        print("Data corrupted: \(context)")
+                    } catch let DecodingError.keyNotFound(key, context) {
+                        print("Key '\(key)' not found: \(context.debugDescription)")
+                        print("Coding Path: \(context.codingPath)")
+                    } catch let DecodingError.typeMismatch(type, context) {
+                        print("Type '\(type)' mismatch: \(context.debugDescription)")
+                        print("Coding Path: \(context.codingPath)")
+                    } catch let DecodingError.valueNotFound(value, context) {
+                        print("Value '\(value)' not found: \(context.debugDescription)")
+                        print("Coding Path: \(context.codingPath)")
+                    } catch {
+                        print("Failed to decode Messages for chat \(chatId): \(error)")
+                    }
+                }
+                
+                // Update the state on the main thread
+                DispatchQueue.main.async {
+                    self.chatMessages = chatMessages
+                    print("Final chatMessages dictionary: \(chatMessages)")
+                    self.saveChatMessagesToAppStorage()
+                }
+                
+            } catch {
+                print("Failed to decode chatMessages: \(error)")
+            }
+        }
+    }
+
+    // 其他 Firebase 相關的方法
+}
+
+// MARK: - AppStorage Operations
+extension ChatView {
+    // 將 userMatches 編碼為 JSON 字符串並存入 AppStorage
+    private func saveUserMatchesToAppStorage() {
+        do {
+            let encoder = JSONEncoder()
+            let data = try encoder.encode(userMatches)
+            userMatchesString = String(data: data, encoding: .utf8) ?? ""
+        } catch {
+            print("Failed to encode userMatches: \(error)")
+        }
+    }
+    
     // 從 AppStorage 載入 userMatches
     private func loadUserMatchesFromAppStorage() {
         guard !userMatchesString.isEmpty else {
@@ -647,6 +644,22 @@ struct ChatView: View {
         }
     }
     
+    // 其他 AppStorage 相關的方法
+}
+
+// MARK: - Chat Message Handling
+extension ChatView {
+    // 將 chatData 編碼為 JSON 字符串並存入 AppStorage
+    private func saveChatDataToAppStorage() {
+        do {
+            let encoder = JSONEncoder()
+            let data = try encoder.encode(chatData)
+            chatDataString = String(data: data, encoding: .utf8) ?? ""
+        } catch {
+            print("Failed to encode chatData: \(error)")
+        }
+    }
+
     // 從 AppStorage 載入 chatData
     private func loadChatDataFromAppStorage() {
         guard !chatDataString.isEmpty else {
@@ -697,14 +710,16 @@ struct ChatView: View {
         }
     }
 
-    // 添加或更新聊天消息
-    private func updateChatMessages(for chatID: UUID, messages: [Message]) {
-        chatMessages[chatID] = messages
-        saveChatMessagesToAppStorage() // 保存至 AppStorage
-        AnalyticsManager.shared.trackEvent("chat_messages_updated", parameters: [
-            "chat_id": chatID.uuidString,
-            "message_count": messages.count
-        ])
+    // 其他與聊天訊息相關的方法
+    // 將 chatMessages 編碼為 JSON 字符串並存入 AppStorage
+    private func saveChatMessagesToAppStorage() {
+        do {
+            let encoder = JSONEncoder()
+            let data = try encoder.encode(chatMessages)
+            chatMessagesString = String(data: data, encoding: .utf8) ?? ""
+        } catch {
+            print("Failed to encode chatMessages: \(error)")
+        }
     }
 }
 

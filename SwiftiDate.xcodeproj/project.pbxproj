@@ -140,6 +140,8 @@
 		D07C57FE2D77DF190008DC9D /* AdaptiveAchievementCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07C57FC2D77DF190008DC9D /* AdaptiveAchievementCardView.swift */; };
 		D07C58002D77FF570008DC9D /* ChatSuggestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07C57FF2D77FF570008DC9D /* ChatSuggestionView.swift */; };
 		D07C58012D77FF570008DC9D /* ChatSuggestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07C57FF2D77FF570008DC9D /* ChatSuggestionView.swift */; };
+		D07C58032D787DFB0008DC9D /* PeerConnectivityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07C58022D787DFB0008DC9D /* PeerConnectivityManager.swift */; };
+		D07C58042D787DFB0008DC9D /* PeerConnectivityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07C58022D787DFB0008DC9D /* PeerConnectivityManager.swift */; };
 		D089DB532D6896CB00D6A1AB /* QRCodeGeneratorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D089DB522D6896CB00D6A1AB /* QRCodeGeneratorView.swift */; };
 		D089DB562D69531300D6A1AB /* SuspiciousCheckResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = D089DB552D69531300D6A1AB /* SuspiciousCheckResult.swift */; };
 		D089DB582D69534700D6A1AB /* RuleChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D089DB572D69534700D6A1AB /* RuleChecker.swift */; };
@@ -563,6 +565,7 @@
 		D07C57F92D76FC960008DC9D /* ExperienceSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExperienceSelectionView.swift; sourceTree = "<group>"; };
 		D07C57FC2D77DF190008DC9D /* AdaptiveAchievementCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveAchievementCardView.swift; sourceTree = "<group>"; };
 		D07C57FF2D77FF570008DC9D /* ChatSuggestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatSuggestionView.swift; sourceTree = "<group>"; };
+		D07C58022D787DFB0008DC9D /* PeerConnectivityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerConnectivityManager.swift; sourceTree = "<group>"; };
 		D089DB522D6896CB00D6A1AB /* QRCodeGeneratorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeGeneratorView.swift; sourceTree = "<group>"; };
 		D089DB552D69531300D6A1AB /* SuspiciousCheckResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuspiciousCheckResult.swift; sourceTree = "<group>"; };
 		D089DB572D69534700D6A1AB /* RuleChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleChecker.swift; sourceTree = "<group>"; };
@@ -968,6 +971,7 @@
 				D0B388392D5B8286003BC40C /* WebRTCManager.swift */,
 				D0B3883B2D5B82DF003BC40C /* WebRTCVideoView.swift */,
 				D0B3883D2D5B854A003BC40C /* SignalingClient.swift */,
+				D07C58022D787DFB0008DC9D /* PeerConnectivityManager.swift */,
 			);
 			path = SwiftiDate;
 			sourceTree = "<group>";
@@ -1527,6 +1531,7 @@
 				D0445C712C72F7870059D522 /* JobInputView.swift in Sources */,
 				D0DDDB502CA1A01200A78A87 /* HowToEnableNotificationsView.swift in Sources */,
 				D0472D3D2CCC7F600047FE10 /* MainView.swift in Sources */,
+				D07C58032D787DFB0008DC9D /* PeerConnectivityManager.swift in Sources */,
 				D04729CE2CC08BD7007C33EC /* AboutMeSection.swift in Sources */,
 				D07C57F72D76FA460008DC9D /* TaggingView.swift in Sources */,
 				D0DDDB202CA13C5E00A78A87 /* WhoLikedMeView.swift in Sources */,
@@ -1725,6 +1730,7 @@
 				D0B3F2682D736347007A5EA0 /* HowToUseAdvancedFilteringView.swift in Sources */,
 				D0B3F2692D736347007A5EA0 /* HowToUseDailyPraiseOpportunityView.swift in Sources */,
 				D0B3F2862D73DC67007A5EA0 /* SchoolInputViewUITests.swift in Sources */,
+				D07C58042D787DFB0008DC9D /* PeerConnectivityManager.swift in Sources */,
 				D0B3F26A2D736347007A5EA0 /* HowToUseIncognitoModeView.swift in Sources */,
 				D0B3F26B2D736347007A5EA0 /* HowToUseWhoLikedMeAndCrushListView.swift in Sources */,
 				D0B3F26C2D736347007A5EA0 /* IsSwiftiDatePaidView.swift in Sources */,

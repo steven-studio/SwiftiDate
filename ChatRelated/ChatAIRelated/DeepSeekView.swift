@@ -26,6 +26,7 @@ struct DeepSeekView: View {
             VStack {
                 Text("DeepSeek")
                     .font(.title)
+                    .bold()
                     .padding()
                 
                 MessageListView(

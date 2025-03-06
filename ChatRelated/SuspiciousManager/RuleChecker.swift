@@ -54,7 +54,27 @@ struct RuleChecker {
         }
         
         // 2) 檢查 scamKeywords
-        let scamKeywords = ["ATM", "匯款", "投資保證", "娛樂城", "金大發", "老子有錢", "借錢", "借我錢"]
+        let scamKeywords = [
+            "ATM",
+            "匯款",
+            "汇款",
+            "投資保證",
+            "投资保证",
+            "保證獲利",
+            "保证获利",
+            "獲利保證",
+            "获利保证",
+            "娛樂城",
+            "娱乐城",
+            "金大發",
+            "金大发",
+            "老子有錢",
+            "老子有钱",
+            "借錢",
+            "借钱",
+            "借我錢",
+            "借我钱"
+        ]
         let loweredMessage = message.lowercased()
         for keyword in scamKeywords {
             if loweredMessage.contains(keyword.lowercased()) {
@@ -105,7 +125,7 @@ struct RuleChecker {
         
         // 定義一個 pattern，把所有可疑關鍵詞用 (xxx|yyy|zzz) 形式
         // 注意要 escape 特殊符號
-        let pattern = #"^(約嗎|要不要約|要不約|約砲|約\？|約嗎？)$"#
+        let pattern = #"^(約嗎|約嗎\?|约吗|约吗\?|约吗？|要不要約|要不要約\?|要不要約？|要不約|要不約\?|要不約？|約砲|約\？|約嗎？)$"#
         
         // 建立正規表示式
         guard let regex = try? NSRegularExpression(pattern: pattern, options: .caseInsensitive) else {
