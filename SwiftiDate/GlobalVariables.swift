@@ -77,6 +77,7 @@ enum Country: String, CaseIterable {
 
 // Global variables for shared app settings and user states
 class UserSettings: ObservableObject {
+    static let shared = UserSettings()
     
     // MARK: - 1. UserDefaults Key 常數集中管理
     private let kUserID                = "kUserID"

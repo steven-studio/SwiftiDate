@@ -26,7 +26,7 @@ function getPineconeClient() {
 
 function getPineconeIndex(): Index {
   const client = getPineconeClient();
-  return client.index("red-index"); // 假設你還是用 red-index，如果想分開，可改別的名稱
+  return client.index("relationship-inquiry-index"); // 假設你還是用 red-index，如果想分開，可改別的名稱
 }
 
 // 透過 Firebase Secrets 管理 OpenAI API Key

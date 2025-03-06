@@ -105,6 +105,8 @@
 		D055A7632D19931C00F11F18 /* GlobalVariables.swift in Sources */ = {isa = PBXBuildFile; fileRef = D055A7622D19931C00F11F18 /* GlobalVariables.swift */; };
 		D055A7672D19A2B800F11F18 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D055A7662D19A2B800F11F18 /* GoogleService-Info.plist */; };
 		D055E9922C8CCFBA00A97DD1 /* InterestSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D055E9912C8CCFBA00A97DD1 /* InterestSelectionView.swift */; };
+		D05E978E2D79B74D00F05560 /* ChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05E978D2D79B74D00F05560 /* ChatViewModel.swift */; };
+		D05E978F2D79B74D00F05560 /* ChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05E978D2D79B74D00F05560 /* ChatViewModel.swift */; };
 		D06724E42D6EC0FC00FD566F /* CloudService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06724E32D6EC0F900FD566F /* CloudService.swift */; };
 		D06724E82D6EC22000FD566F /* FirebaseCloudService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06724E72D6EC22000FD566F /* FirebaseCloudService.swift */; };
 		D06724EB2D6EC45200FD566F /* AliCloudService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06724EA2D6EC44C00FD566F /* AliCloudService.swift */; };
@@ -540,6 +542,7 @@
 		D055A7622D19931C00F11F18 /* GlobalVariables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalVariables.swift; sourceTree = "<group>"; };
 		D055A7662D19A2B800F11F18 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D055E9912C8CCFBA00A97DD1 /* InterestSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterestSelectionView.swift; sourceTree = "<group>"; };
+		D05E978D2D79B74D00F05560 /* ChatViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewModel.swift; sourceTree = "<group>"; };
 		D06724E32D6EC0F900FD566F /* CloudService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudService.swift; sourceTree = "<group>"; };
 		D06724E72D6EC22000FD566F /* FirebaseCloudService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseCloudService.swift; sourceTree = "<group>"; };
 		D06724EA2D6EC44C00FD566F /* AliCloudService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AliCloudService.swift; sourceTree = "<group>"; };
@@ -961,7 +964,6 @@
 				D0DDDB0C2CA07A2400A78A87 /* FeaturedCardView.swift */,
 				D017F4F52CAFBFF700C71D18 /* LoginOrRegisterView.swift */,
 				D09587D32CB8BDEA00BCD04B /* PrivacySettingsView.swift */,
-				D04938792CBF0A6F00754E46 /* Models.swift */,
 				D051EF2B2CC02C33004563A3 /* PhotoUtility.swift */,
 				D04729E92CC1F999007C33EC /* Color.swift */,
 				D039FC5A2CD230050082D2F3 /* PersonalityView.swift */,
@@ -1059,6 +1061,46 @@
 			path = ProfileRelated;
 			sourceTree = "<group>";
 		};
+		D05E97892D79B62400F05560 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				D04938792CBF0A6F00754E46 /* Models.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		D05E978A2D79B64E00F05560 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				D089DB542D6952FA00D6A1AB /* SuspiciousManager */,
+				D0903ABF2D58A45200735323 /* modelSelector.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		D05E978B2D79B68A00F05560 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				D089DB602D69975100D6A1AB /* ChatAIRelated */,
+				D0DDDB042C9FA8AF00A78A87 /* ChatDetailView.swift */,
+				D04938772CBF0A4600754E46 /* ChatRow.swift */,
+				D07C57FF2D77FF570008DC9D /* ChatSuggestionView.swift */,
+				D018AD622C9E87F6005A14B9 /* ChatView.swift */,
+				D0DDDB082C9FDE0500A78A87 /* InteractiveContentView.swift */,
+				D017F4F32CAF77D900C71D18 /* MessageBubbleView.swift */,
+				D089DB5C2D69862300D6A1AB /* PHPickerView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		D05E978C2D79B6E700F05560 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				D05E978D2D79B74D00F05560 /* ChatViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
 		D06724E22D6EC03C00FD566F /* CloudService */ = {
 			isa = PBXGroup;
 			children = (
@@ -1111,16 +1153,10 @@
 		D089DB5B2D69861300D6A1AB /* ChatRelated */ = {
 			isa = PBXGroup;
 			children = (
-				D089DB602D69975100D6A1AB /* ChatAIRelated */,
-				D089DB542D6952FA00D6A1AB /* SuspiciousManager */,
-				D0DDDB042C9FA8AF00A78A87 /* ChatDetailView.swift */,
-				D04938772CBF0A4600754E46 /* ChatRow.swift */,
-				D07C57FF2D77FF570008DC9D /* ChatSuggestionView.swift */,
-				D018AD622C9E87F6005A14B9 /* ChatView.swift */,
-				D0DDDB082C9FDE0500A78A87 /* InteractiveContentView.swift */,
-				D017F4F32CAF77D900C71D18 /* MessageBubbleView.swift */,
-				D0903ABF2D58A45200735323 /* modelSelector.swift */,
-				D089DB5C2D69862300D6A1AB /* PHPickerView.swift */,
+				D05E97892D79B62400F05560 /* Models */,
+				D05E978A2D79B64E00F05560 /* Utils */,
+				D05E978C2D79B6E700F05560 /* ViewModels */,
+				D05E978B2D79B68A00F05560 /* Views */,
 			);
 			path = ChatRelated;
 			sourceTree = "<group>";
@@ -1585,6 +1621,7 @@
 				D0DDDB282CA14FCC00A78A87 /* ReportUserView.swift in Sources */,
 				D0DDDB482CA191EE00A78A87 /* HowToPurchaseSwiftiDateSupremeView.swift in Sources */,
 				D0903AC82D58A54700735323 /* LocalModelView.swift in Sources */,
+				D05E978F2D79B74D00F05560 /* ChatViewModel.swift in Sources */,
 				D0DDDB1C2CA1321300A78A87 /* IsSwiftiDatePaidView.swift in Sources */,
 				D09587CB2CB7D19B00BCD04B /* ReportAftermathView.swift in Sources */,
 				D09587B92CB6552100BCD04B /* ChatGPTView.swift in Sources */,
@@ -1772,6 +1809,7 @@
 				D0B3F2482D736234007A5EA0 /* AchievementSectionView.swift in Sources */,
 				D0B3F2CD2D744F23007A5EA0 /* PasswordLoginUITests.swift in Sources */,
 				D0B3F2492D736234007A5EA0 /* InfoPopupView.swift in Sources */,
+				D05E978E2D79B74D00F05560 /* ChatViewModel.swift in Sources */,
 				D07C57DE2D76DD100008DC9D /* UserGenderSelectionView.swift in Sources */,
 				D0B3F24A2D736234007A5EA0 /* PremiumCardTabView.swift in Sources */,
 				D0B3F24B2D736234007A5EA0 /* PremiumDetailsView.swift in Sources */,

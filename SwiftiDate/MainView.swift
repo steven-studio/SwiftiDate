@@ -49,7 +49,7 @@ struct MainView: View {
                 .tag(2)
             }
             
-            ChatView(contentSelectedTab: $selectedTab) // Pass the binding to contentSelectedTab
+            ChatView(contentSelectedTab: $selectedTab, userSettings: userSettings) // Pass the binding to contentSelectedTab
                 .environmentObject(userSettings) // 確保傳遞 userSettings
                 .tabItem {
                     Image(systemName: "message.fill")

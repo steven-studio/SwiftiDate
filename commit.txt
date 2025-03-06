@@ -1,0 +1,6 @@
+feat: 更新聊天功能並新增 PeerConnectivityManager
+
+- 調整 ChatAIRelated/DeepSeekView.swift 與 ChatView.swift 的 UI 與互動邏輯
+- 更新 SuspiciousManager/RuleChecker.swift 以優化異常檢查規則
+- 新增 SwiftiDate/PeerConnectivityManager.swift，用於實現點對點連接功能
+- 更新 Xcode 工程文件 (project.pbxproj、UserInterfaceState.xcuserstate)
