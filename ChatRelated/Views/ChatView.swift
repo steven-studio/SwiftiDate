@@ -426,13 +426,13 @@ struct ChatView: View {
                     userSettings.newMatchedChatID = nil
                 }
             }
-//            .fullScreenCover(isPresented: $showTurboView) {
-//                // Pass the selectedTab to TurboView
-//                TurboView(contentSelectedTab: $contentSelectedTab, turboSelectedTab: $selectedTurboTab, showBackButton: true, onBack: {
-//                    showTurboView = false // This dismisses the TurboView
-//                    AnalyticsManager.shared.trackEvent("turbo_view_closed")
-//                })
-//            }
+            .fullScreenCover(isPresented: $viewModel.showTurboView) {
+                // Pass the selectedTab to TurboView
+                TurboView(contentSelectedTab: $contentSelectedTab, turboSelectedTab: $viewModel.selectedTurboTab, showBackButton: true, onBack: {
+                    viewModel.showTurboView = false // This dismisses the TurboView
+                    AnalyticsManager.shared.trackEvent("turbo_view_closed")
+                })
+            }
             .fullScreenCover(isPresented: $viewModel.showSafetyCenterView) {
                 SafetyCenterView(showSafetyCenterView: $viewModel.showSafetyCenterView, photos: $userSettings.photos) // 如果全局变量为 true，则显示 SafetyCenterView
                     .environmentObject(userSettings)
@@ -440,12 +440,12 @@ struct ChatView: View {
                         AnalyticsManager.shared.trackEvent("chat_view_safety_center_appear")
                     }
             }
-//            .sheet(isPresented: $showTurboPurchaseView) {
-//                TurboPurchaseView() // Present TurboPurchaseView when showTurboPurchaseView is true
-//                    .onAppear {
-//                        AnalyticsManager.shared.trackEvent("turbo_purchase_view_appear")
-//                    }
-//            }
+            .sheet(isPresented: $viewModel.showTurboPurchaseView) {
+                TurboPurchaseView() // Present TurboPurchaseView when showTurboPurchaseView is true
+                    .onAppear {
+                        AnalyticsManager.shared.trackEvent("turbo_purchase_view_appear")
+                    }
+            }
         }
     }
 }
