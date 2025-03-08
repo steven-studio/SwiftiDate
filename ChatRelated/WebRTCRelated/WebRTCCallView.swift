@@ -10,13 +10,25 @@ import SwiftUI
 import WebRTC
 
 struct WebRTCCallView: View {
-    // 這裡可以放一些 WebRTC 狀態，如 remoteVideoTrack
+    // 新增一個用來顯示對方名字的參數
+    let userName: String
+
     @StateObject private var webRTCManager = WebRTCManager()
-    
+
     var body: some View {
         VStack {
             Text("正在進行 WebRTC 通話…")
                 .font(.title)
+                .foregroundColor(.white)
+            
+            Text(userName) // 改成顯示對方名稱
+                .font(.title)
+                .foregroundColor(.white)
+                .padding(.bottom)
+            
+            Text("等待對方接受邀請...") // 改成顯示對方名稱
+                .font(.headline)
+                .foregroundColor(.white)
             
             // 如果要顯示遠端視訊，可放一個 VideoView
             // 這裡示範用 UIKit 的 Representable
@@ -36,13 +48,23 @@ struct WebRTCCallView: View {
             Button("掛斷") {
                 webRTCManager.hangup()
             }
+            .font(.system(size: 24)) // 設定字型大小為 24
+            .foregroundColor(.white)
             .padding()
         }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(Color.black.ignoresSafeArea())
         .onAppear {
             webRTCManager.startCall() // Example: 開始 P2P 連線
         }
         .onDisappear {
             webRTCManager.hangup()
         }
+    }
+}
+
+struct WebRTCCallView_Previews: PreviewProvider {
+    static var previews: some View {
+        WebRTCCallView(userName: "Ashley")
     }
 }

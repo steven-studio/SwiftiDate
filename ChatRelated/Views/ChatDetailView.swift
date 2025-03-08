@@ -91,7 +91,7 @@ struct ChatDetailView: View {
                         .padding(.trailing, 10)
                 }
                 .fullScreenCover(isPresented: $isShowingCallView) {
-                    WebRTCCallView() // 你自定義的通話 UI 視圖
+                    WebRTCCallView(userName: chat.name) // 你自定義的通話 UI 視圖
                 }
                 
                 Button(action: {
@@ -514,7 +514,7 @@ struct ChatDetailView: View {
 struct ChatDetailView_Previews: PreviewProvider {
     static var previews: some View {
         // Create a dummy chat to preview
-        let dummyChat = Chat(id: UUID(), name: "Laiiiiiiii", time: "01:50", unreadCount: 3, phoneNumber: "0912345678")
+        let dummyChat = Chat(id: UUID(), name: "Laiiiiiiii", time: "01:50", unreadCount: 3, phoneNumber: "0912345678", photoURLs: [])
         
         ChatDetailView(chat: dummyChat, messages: .constant([
             Message(

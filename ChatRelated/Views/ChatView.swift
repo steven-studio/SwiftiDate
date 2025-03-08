@@ -418,7 +418,8 @@ struct ChatView: View {
                         name: "對方暱稱",
                         time: "00:00",
                         unreadCount: 0,
-                        phoneNumber: "xxx"
+                        phoneNumber: "xxx",
+                        photoURLs: []
                     )
                     viewModel.selectedChat = newChat
 
