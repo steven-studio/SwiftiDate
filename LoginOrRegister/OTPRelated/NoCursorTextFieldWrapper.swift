@@ -62,6 +62,7 @@ struct NoCursorTextFieldWrapper: UIViewRepresentable {
     
     class Coordinator: NSObject, UITextFieldDelegate {
         var parent: NoCursorTextFieldWrapper
+        var lastKeyPressTime: Date?
         
         init(_ parent: NoCursorTextFieldWrapper) {
             self.parent = parent
@@ -69,6 +70,16 @@ struct NoCursorTextFieldWrapper: UIViewRepresentable {
         
         /// 文字改變時更新 SwiftUI 的 @Binding text
         func textFieldDidChangeSelection(_ textField: UITextField) {
+            let currentTime = Date()
+            if let lastTime = lastKeyPressTime {
+                let interval = currentTime.timeIntervalSince(lastTime)
+                print("按鍵間隔: \(interval)秒")
+
+                // 使用 AnalyticsManager 來上報這個事件（注意：你可能需要加上防抖或限制頻率）
+                AnalyticsManager.shared.trackEvent("key_press_interval", parameters: ["interval": interval])
+            }
+            lastKeyPressTime = currentTime
+            
             parent.text = textField.text ?? ""
         }
     }
