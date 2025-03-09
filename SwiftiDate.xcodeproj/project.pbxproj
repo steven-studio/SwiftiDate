@@ -66,6 +66,8 @@
 		D0422DB32D7C50AF00609060 /* WebRTCManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0422DAB2D7C50AF00609060 /* WebRTCManager.swift */; };
 		D0422DB42D7C50AF00609060 /* WebRTCVideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0422DAC2D7C50AF00609060 /* WebRTCVideoView.swift */; };
 		D0422DB52D7C50AF00609060 /* SignalingClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0422DA92D7C50AF00609060 /* SignalingClient.swift */; };
+		D0422E7F2D7D8CEA00609060 /* ChatListContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0422E7E2D7D8CEA00609060 /* ChatListContainerView.swift */; };
+		D0422E812D7D8D9100609060 /* ChatListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0422E802D7D8D9100609060 /* ChatListView.swift */; };
 		D0445C2F2C71B3800059D522 /* SwiftiDateApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0445C2E2C71B3800059D522 /* SwiftiDateApp.swift */; };
 		D0445C312C71B3800059D522 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0445C302C71B3800059D522 /* ContentView.swift */; };
 		D0445C332C71B3820059D522 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D0445C322C71B3820059D522 /* Assets.xcassets */; };
@@ -495,6 +497,8 @@
 		D0422DAA2D7C50AF00609060 /* WebRTCCallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebRTCCallView.swift; sourceTree = "<group>"; };
 		D0422DAB2D7C50AF00609060 /* WebRTCManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebRTCManager.swift; sourceTree = "<group>"; };
 		D0422DAC2D7C50AF00609060 /* WebRTCVideoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebRTCVideoView.swift; sourceTree = "<group>"; };
+		D0422E7E2D7D8CEA00609060 /* ChatListContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListContainerView.swift; sourceTree = "<group>"; };
+		D0422E802D7D8D9100609060 /* ChatListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListView.swift; sourceTree = "<group>"; };
 		D0445C2E2C71B3800059D522 /* SwiftiDateApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftiDateApp.swift; sourceTree = "<group>"; };
 		D0445C302C71B3800059D522 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		D0445C322C71B3820059D522 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -1108,6 +1112,8 @@
 			isa = PBXGroup;
 			children = (
 				D0DDDB042C9FA8AF00A78A87 /* ChatDetailView.swift */,
+				D0422E7E2D7D8CEA00609060 /* ChatListContainerView.swift */,
+				D0422E802D7D8D9100609060 /* ChatListView.swift */,
 				D04938772CBF0A4600754E46 /* ChatRow.swift */,
 				D07C57FF2D77FF570008DC9D /* ChatSuggestionView.swift */,
 				D018AD622C9E87F6005A14B9 /* ChatView.swift */,
@@ -1597,6 +1603,7 @@
 				D089DB662D69A72300D6A1AB /* NLPChecker.swift in Sources */,
 				D0B3F1CD2D72AF02007A5EA0 /* AnalyticsManagerProtocol.swift in Sources */,
 				D0B3882C2D5B7BAE003BC40C /* OTPVerificationView.swift in Sources */,
+				D0422E7F2D7D8CEA00609060 /* ChatListContainerView.swift in Sources */,
 				D0B3882D2D5B7BAE003BC40C /* RealVerificationView.swift in Sources */,
 				D0B3882E2D5B7BAE003BC40C /* UploadPhotoView.swift in Sources */,
 				D06724EB2D6EC45200FD566F /* AliCloudService.swift in Sources */,
@@ -1681,6 +1688,7 @@
 				D0DDDB2A2CA156A700A78A87 /* WhatIsSwiftiDatePremiumView.swift in Sources */,
 				D04729E02CC1149E007C33EC /* TopRightActionButtons.swift in Sources */,
 				D0DDDB542CA25B4E00A78A87 /* PrivacyPolicyView.swift in Sources */,
+				D0422E812D7D8D9100609060 /* ChatListView.swift in Sources */,
 				D04729DC2CC0BDC4007C33EC /* ServiceSectionContainer.swift in Sources */,
 				D0445C732C72FB440059D522 /* HometownInputView.swift in Sources */,
 				D04729DA2CC09B54007C33EC /* EditSectionView.swift in Sources */,
