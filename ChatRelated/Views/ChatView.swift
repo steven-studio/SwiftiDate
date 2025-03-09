@@ -214,6 +214,9 @@ struct ChatView: View {
                                             Text(user.name)
                                                 .font(.caption)
                                         }
+                                        .onAppear {
+                                            print("viewModel.userMatches = \(viewModel.userMatches)")
+                                        }
                                     }
                                 }
                             }
@@ -347,7 +350,7 @@ struct ChatView: View {
                 // 埋點：ChatView 畫面曝光
                 AnalyticsManager.shared.trackEvent("chat_view_appear")
                 
-                if viewModel.chatDataString.isEmpty || viewModel.chatMessagesString.isEmpty {
+                if viewModel.chatDataString.isEmpty || viewModel.chatMessagesString.isEmpty || viewModel.userMatches.isEmpty {
                     // 如果本地的 chatDataString 或 chatMessagesString 為空，就從 Firebase 加載
                     print("Loading data from Firebase as local storage is empty")
                     // 埋點：從 Firebase 加載聊天資料

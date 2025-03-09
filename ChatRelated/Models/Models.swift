@@ -10,9 +10,28 @@ import SwiftUI
 
 // Define a structure for user match data
 struct UserMatch: Identifiable, Codable { // 添加 Codable
-    var id = UUID()
+    var id: UUID
     let name: String
-    let imageName: String // Use image names stored in Assets
+    let imageName: String
+
+    enum CodingKeys: String, CodingKey {
+        case name
+        case imageName
+    }
+
+    init(id: UUID = UUID(), name: String, imageName: String) {
+        self.id = id
+        self.name = name
+        self.imageName = imageName
+    }
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        // 如果数据中没有 id，则自动生成一个
+        self.id = UUID()
+        self.name = try container.decode(String.self, forKey: .name)
+        self.imageName = try container.decode(String.self, forKey: .imageName)
+    }
 }
 
 enum MessageType: Codable, Equatable {

@@ -65,6 +65,7 @@ class ChatViewModel: ObservableObject {
             
             do {
                 let jsonData = try JSONSerialization.data(withJSONObject: value, options: [])
+                print("userMatches json data: \(jsonData)")
                 var userMatches = try JSONDecoder().decode([UserMatch].self, from: jsonData)
                 
                 // 將 userMatches 倒序排序
@@ -74,6 +75,10 @@ class ChatViewModel: ObservableObject {
                 self.userMatches = userMatches
                 self.saveUserMatchesToAppStorage()
             } catch {
+                // 这里使用 try? 防止在 catch 块中再次抛出错误
+                if let jsonData = try? JSONSerialization.data(withJSONObject: value, options: []) {
+                    print("userMatches json data: \(jsonData)")
+                }
                 print("Failed to decode userMatches: \(error)")
             }
         }
