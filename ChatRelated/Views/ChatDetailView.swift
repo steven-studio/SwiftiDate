@@ -74,14 +74,14 @@ struct ChatDetailView: View {
                     AnalyticsManager.shared.trackEvent("phone_call_pressed", parameters: [
                         "phone_number": userSettings.globalPhoneNumber
                     ])
-                    if let phoneURL = URL(string: "tel://\(userSettings.globalPhoneNumber)") {
-                        if UIApplication.shared.canOpenURL(phoneURL) {
-                            UIApplication.shared.open(phoneURL, options: [:], completionHandler: nil)
-                        } else {
-                            print("無法撥打電話，請檢查電話號碼格式")
-                        }
-                    }
-//                    startWebRTCCall()
+//                    if let phoneURL = URL(string: "tel://\(userSettings.globalPhoneNumber)") {
+//                        if UIApplication.shared.canOpenURL(phoneURL) {
+//                            UIApplication.shared.open(phoneURL, options: [:], completionHandler: nil)
+//                        } else {
+//                            print("無法撥打電話，請檢查電話號碼格式")
+//                        }
+//                    }
+                    startWebRTCCall()
                 }) {
                     Image(systemName: "phone.fill")
                         .resizable() // 使圖標可以調整大小

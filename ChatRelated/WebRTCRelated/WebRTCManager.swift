@@ -9,7 +9,16 @@ import Foundation
 import WebRTC
 import AVFoundation
 
+enum CallState {
+    case idle
+    case calling
+    case accepted
+    case ended
+}
+
 class WebRTCManager: ObservableObject {
+    @Published var callState: CallState = .idle
+
     // Video Renderer
     @Published var remoteRenderer: RTCVideoRenderer?
     @Published var localRenderer: RTCVideoRenderer?
@@ -17,10 +26,14 @@ class WebRTCManager: ObservableObject {
     private var peerConnection: RTCPeerConnection?
     private var factory: RTCPeerConnectionFactory
     
+    // 新增：信令伺服器 URL
+    private let signalingServerURL: URL
+    
     // 新增 AVAudioRecorder 屬性
     private var audioRecorder: AVAudioRecorder?
     
-    init() {
+    init(signalingServerURL: URL) {
+        self.signalingServerURL = signalingServerURL
         // 初始化 WebRTC
         RTCInitializeSSL()
         let encoderFactory = RTCDefaultVideoEncoderFactory()
@@ -77,15 +90,25 @@ class WebRTCManager: ObservableObject {
     }
     
     func startCall() {
-        // 在這裡做： create PeerConnection, add local media track, create offer, etc.
-        // 也可能需要 signaling
-        print("startCall triggered")
+        // 進入撥號狀態
+        callState = .calling
+        
+        // TODO: Signaling 流程 (送出 offer、等待對方 accept)
+        // 當對方在 signaling 回傳「accept」時，再把 callState 改成 .accepted
+        print("startCall triggered, callState = .calling")
+    }
+    
+    func acceptCall() {
+        // 如果是被動方（接聽者）在 Signaling 收到 "callRequest" 後
+        // 這裡做 peerConnection 設定，並將狀態改為 accepted
+        callState = .accepted
+        print("acceptCall, callState = .accepted")
     }
     
     func hangup() {
-        // 結束通話
+        callState = .ended
         peerConnection?.close()
         peerConnection = nil
-        print("hangup call")
+        print("hangup call, callState = .ended")
     }
 }

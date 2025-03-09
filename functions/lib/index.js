@@ -8,7 +8,7 @@
  * See a full list of supported triggers at https://firebase.google.com/docs/functions
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.createMatchToken = exports.checkUrl = exports.checkUSPhone = exports.checkTaiwanPhone = exports.checkSingaporePhone = exports.checkNewZealandPhone = exports.checkMacaoPhone = exports.checkKoreaPhone = exports.checkJapanPhone = exports.checkItalianPhone = exports.checkHongKongPhone = exports.checkChinaPhone = exports.checkBritishPhone = exports.checkAustralianPhone = exports.chatCompletionGpt4o = void 0;
+exports.copyUserData = exports.createMatchToken = exports.checkUrl = exports.checkUSPhone = exports.checkTaiwanPhone = exports.checkSingaporePhone = exports.checkNewZealandPhone = exports.checkMacaoPhone = exports.checkKoreaPhone = exports.checkJapanPhone = exports.checkItalianPhone = exports.checkHongKongPhone = exports.checkChinaPhone = exports.checkBritishPhone = exports.checkAustralianPhone = exports.chatCompletionGpt4o = void 0;
 // 你已經有 chatCompletionGpt4o
 var checkCompletionGpt4o_1 = require("./checkCompletionGpt4o");
 Object.defineProperty(exports, "chatCompletionGpt4o", { enumerable: true, get: function () { return checkCompletionGpt4o_1.chatCompletionGpt4o; } });
@@ -45,4 +45,6 @@ var createMatchToken_1 = require("./createMatchToken");
 Object.defineProperty(exports, "createMatchToken", { enumerable: true, get: function () { return createMatchToken_1.createMatchToken; } });
 // 匯出 compareOneTextWithAllRedFlags
 // export {compareOneTextWithAllRedFlags} from "./compareOneTextWithAllRedFlags";
+var copyUserData_1 = require("./copyUserData");
+Object.defineProperty(exports, "copyUserData", { enumerable: true, get: function () { return copyUserData_1.copyUserData; } });
 //# sourceMappingURL=index.js.map

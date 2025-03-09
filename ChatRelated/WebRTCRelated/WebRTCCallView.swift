@@ -13,7 +13,7 @@ struct WebRTCCallView: View {
     // 新增一個用來顯示對方名字的參數
     let userName: String
 
-    @StateObject private var webRTCManager = WebRTCManager()
+    @StateObject private var webRTCManager = WebRTCManager(signalingServerURL: URL(string: "http://192.168.1.100:3000")!)
 
     var body: some View {
         VStack {
@@ -26,10 +26,24 @@ struct WebRTCCallView: View {
                 .foregroundColor(.white)
                 .padding(.bottom)
             
-            Text("等待對方接受邀請...") // 改成顯示對方名稱
-                .font(.headline)
-                .foregroundColor(.white)
-            
+            // 依照 callState 顯示不同文字
+            switch webRTCManager.callState {
+            case .calling:
+                Text("等待對方接受邀請...")
+                    .font(.headline)
+                    .foregroundColor(.white)
+            case .accepted:
+                Text("通話中...")
+                    .font(.headline)
+                    .foregroundColor(.white)
+            case .ended:
+                Text("通話已結束")
+                    .font(.headline)
+                    .foregroundColor(.white)
+            default:
+                EmptyView()
+            }
+
             // 如果要顯示遠端視訊，可放一個 VideoView
             // 這裡示範用 UIKit 的 Representable
             if let remoteRenderer = webRTCManager.remoteRenderer {
@@ -45,10 +59,17 @@ struct WebRTCCallView: View {
                     .padding()
             }
             
-            Button("掛斷") {
+            Button(action: {
                 webRTCManager.hangup()
+            }) {
+                VStack {
+                    Image(systemName: "phone.down.circle.fill")
+                        .font(.system(size: 80))
+                        .foregroundStyle(.white, .red)
+                    Text("掛斷")
+                        .font(.headline) // 設定字型大小為 24
+                }
             }
-            .font(.system(size: 24)) // 設定字型大小為 24
             .foregroundColor(.white)
             .padding()
         }

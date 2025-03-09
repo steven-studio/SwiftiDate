@@ -1,0 +1,15 @@
+I0308 19:44:31.500592   61142 load.go:37] Reloading schema and connectors...
+I0308 19:44:31.519778   61142 control.go:59] [/emulator/SwiftiDate 5d2f] UpdateResources(): done
+Schema: sources: schema/schema.gql [1384B] 
+Connector "default": sources: connector/mutations.gql [1163B] connector/queries.gql [1855B] 
+I0308 19:44:31.529930   61142 codegen.go:82] [connector "default" swiftSdk] Generating sources into "/Users/youzhewei/Desktop/SwiftiDate/dataconnect-generated/swift/DefaultConnector"
+I0308 19:44:31.536639   61142 collector.go:107] schema extensions wrote into "/Users/youzhewei/Desktop/SwiftiDate/dataconnect/.dataconnect/schema"
+Generated sources: prelude.gql [65218B] 
+I0308 19:44:31.538026   61142 collector.go:107] connector "default" swiftSdk wrote into "/Users/youzhewei/Desktop/SwiftiDate/dataconnect-generated/swift/DefaultConnector"
+Generated sources: Package.swift [819B] Sources/DefaultClient.swift [838B] Sources/DefaultKeys.swift [48B] Sources/DefaultOperations.swift [239B] README.md [688B] 
+I0308 19:44:31.538148   61142 load.go:115] Finished reloading
+I0308 19:44:31.540482   61142 dev.go:95] Listening on address (HTTP + gRPC): 127.0.0.1:9399
+I0308 19:44:31.541277   61142 dev.go:95] Listening on address (HTTP + gRPC): [::1]:9399
+I0308 19:44:34.186699   61142 control.go:59] [/emulator/SwiftiDate faf7] UpdateResources(): done
+Schema: sources: schema/schema.gql [1384B] 
+Connector "default": sources: connector/queries.gql [1855B] connector/mutations.gql [1163B] 
