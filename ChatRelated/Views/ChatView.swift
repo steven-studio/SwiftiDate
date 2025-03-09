@@ -15,6 +15,7 @@ struct ChatView: View {
     // 使用 userSettings.globalUserID 來取得 globalUserID
     @EnvironmentObject var appState: AppState
     @Binding var contentSelectedTab: Int // Use a binding variable for selectedTab from ContentView
+    @State var showTurboView: Bool = false
     
     @StateObject private var viewModel: ChatViewModel
 
@@ -225,14 +226,14 @@ struct ChatView: View {
                             .padding(.leading)
                         
                         // Add the 'WhoLikedYouView' at the top
-//                            Button(action: {
-//                                // 埋點：點擊 WhoLikedYouView
-//                                AnalyticsManager.shared.trackEvent("who_liked_you_tapped")
-//                                showTurboView = true // Navigate to TurboView
-//                            }) {
-//                                WhoLikedYouView()
-//                                    .padding(.top)
-//                            }
+                        Button(action: {
+                            // 埋點：點擊 WhoLikedYouView
+                            AnalyticsManager.shared.trackEvent("who_liked_you_tapped")
+                            showTurboView = true // Navigate to TurboView
+                        }) {
+                            WhoLikedYouView()
+                                .padding(.top)
+                        }
                         
                         if viewModel.showSearchField {
                             List {

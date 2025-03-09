@@ -198,7 +198,7 @@ struct LoginOrRegisterView: View {
                     }
                     
                     Text(userSettings.globalUserName)
-                        .font(.subheadline)
+                        .font(.headline)
                         .padding(.horizontal)
                         .multilineTextAlignment(.center)
                     
