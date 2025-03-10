@@ -10,8 +10,18 @@ jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
     steps:
+      # 1) 先 checkout
       - uses: actions/checkout@v4
+
+      # 2) 安裝指定版本的 Node
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      # 3) 執行安裝與建置
       - run: npm ci && npm run build
+
+      # 4) 部署到 Firebase Hosting
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
