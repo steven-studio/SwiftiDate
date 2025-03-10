@@ -16,7 +16,7 @@ jobs:
       # 2) 安裝指定版本的 Node
       - uses: actions/setup-node@v3
         with:
-          node-version: 16
+          node-version: 18
 
       # 3) 執行安裝與建置
       - run: npm ci && npm run build
