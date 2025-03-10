@@ -9,7 +9,6 @@ functions/.DS_Store
 functions/node_modules
 google-cloud-sdk/
 google-cloud-cli-darwin-arm.tar.gz
-WebRTC
 # macOS
 *.DS_Store
 # Xcode
