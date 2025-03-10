@@ -170,6 +170,13 @@
 		D07C58012D77FF570008DC9D /* ChatSuggestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07C57FF2D77FF570008DC9D /* ChatSuggestionView.swift */; };
 		D07C58032D787DFB0008DC9D /* PeerConnectivityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07C58022D787DFB0008DC9D /* PeerConnectivityManager.swift */; };
 		D07C58042D787DFB0008DC9D /* PeerConnectivityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07C58022D787DFB0008DC9D /* PeerConnectivityManager.swift */; };
+		D07E7F442D7F18BB00FEDBBF /* TermsAndPrivacyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07E7F432D7F18BB00FEDBBF /* TermsAndPrivacyView.swift */; };
+		D07E7FF12D7F68AC00FEDBBF /* SpreadsheetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07E7FF02D7F68AC00FEDBBF /* SpreadsheetCell.swift */; };
+		D07E7FF32D7F68CF00FEDBBF /* SpreadsheetCellRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07E7FF22D7F68CF00FEDBBF /* SpreadsheetCellRepresentable.swift */; };
+		D07E7FF52D7F68E700FEDBBF /* SpreadsheetItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07E7FF42D7F68E700FEDBBF /* SpreadsheetItemViewModel.swift */; };
+		D07E7FF72D7F68F700FEDBBF /* SpreadSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07E7FF62D7F68F700FEDBBF /* SpreadSheetView.swift */; };
+		D07E7FF92D7F690F00FEDBBF /* SpreadSheetViewRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07E7FF82D7F690F00FEDBBF /* SpreadSheetViewRepresentable.swift */; };
+		D07E7FFB2D7F692900FEDBBF /* UIView+Border.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07E7FFA2D7F692900FEDBBF /* UIView+Border.swift */; };
 		D089DB532D6896CB00D6A1AB /* QRCodeGeneratorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D089DB522D6896CB00D6A1AB /* QRCodeGeneratorView.swift */; };
 		D089DB562D69531300D6A1AB /* SuspiciousCheckResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = D089DB552D69531300D6A1AB /* SuspiciousCheckResult.swift */; };
 		D089DB582D69534700D6A1AB /* RuleChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D089DB572D69534700D6A1AB /* RuleChecker.swift */; };
@@ -589,6 +596,13 @@
 		D07C57FC2D77DF190008DC9D /* AdaptiveAchievementCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveAchievementCardView.swift; sourceTree = "<group>"; };
 		D07C57FF2D77FF570008DC9D /* ChatSuggestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatSuggestionView.swift; sourceTree = "<group>"; };
 		D07C58022D787DFB0008DC9D /* PeerConnectivityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerConnectivityManager.swift; sourceTree = "<group>"; };
+		D07E7F432D7F18BB00FEDBBF /* TermsAndPrivacyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsAndPrivacyView.swift; sourceTree = "<group>"; };
+		D07E7FF02D7F68AC00FEDBBF /* SpreadsheetCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpreadsheetCell.swift; sourceTree = "<group>"; };
+		D07E7FF22D7F68CF00FEDBBF /* SpreadsheetCellRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpreadsheetCellRepresentable.swift; sourceTree = "<group>"; };
+		D07E7FF42D7F68E700FEDBBF /* SpreadsheetItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpreadsheetItemViewModel.swift; sourceTree = "<group>"; };
+		D07E7FF62D7F68F700FEDBBF /* SpreadSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpreadSheetView.swift; sourceTree = "<group>"; };
+		D07E7FF82D7F690F00FEDBBF /* SpreadSheetViewRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpreadSheetViewRepresentable.swift; sourceTree = "<group>"; };
+		D07E7FFA2D7F692900FEDBBF /* UIView+Border.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Border.swift"; sourceTree = "<group>"; };
 		D089DB522D6896CB00D6A1AB /* QRCodeGeneratorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeGeneratorView.swift; sourceTree = "<group>"; };
 		D089DB552D69531300D6A1AB /* SuspiciousCheckResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuspiciousCheckResult.swift; sourceTree = "<group>"; };
 		D089DB572D69534700D6A1AB /* RuleChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleChecker.swift; sourceTree = "<group>"; };
@@ -948,12 +962,13 @@
 			isa = PBXGroup;
 			children = (
 				D0B3F18F2D70A0DF007A5EA0 /* AnalyticsManager */,
+				D089DB5B2D69861300D6A1AB /* ChatRelated */,
 				D06724E22D6EC03C00FD566F /* CloudService */,
 				D089DB642D699B4D00D6A1AB /* LocalStorageManager */,
 				D089DB632D699A0700D6A1AB /* NotificationManager */,
 				D089DB622D6999E700D6A1AB /* LocationManager */,
+				D07E7FEF2D7F687E00FEDBBF /* SpreadSheet */,
 				D089DB612D69993D00D6A1AB /* SwipeCardRelated */,
-				D089DB5B2D69861300D6A1AB /* ChatRelated */,
 				D039FC572CCD08160082D2F3 /* SafetyRelated */,
 				D039FC562CCD074A0082D2F3 /* SettingsRelated */,
 				D0472D392CCC6CDA0047FE10 /* LoginOrRegister */,
@@ -1004,6 +1019,7 @@
 				D0C99B2C2D0DBFEC00FA98AD /* Localizable.strings */,
 				D055A7622D19931C00F11F18 /* GlobalVariables.swift */,
 				D07C58022D787DFB0008DC9D /* PeerConnectivityManager.swift */,
+				D07E7F432D7F18BB00FEDBBF /* TermsAndPrivacyView.swift */,
 			);
 			path = SwiftiDate;
 			sourceTree = "<group>";
@@ -1168,6 +1184,19 @@
 				D06724EA2D6EC44C00FD566F /* AliCloudService.swift */,
 			);
 			path = AliCloudService;
+			sourceTree = "<group>";
+		};
+		D07E7FEF2D7F687E00FEDBBF /* SpreadSheet */ = {
+			isa = PBXGroup;
+			children = (
+				D07E7FF02D7F68AC00FEDBBF /* SpreadsheetCell.swift */,
+				D07E7FF22D7F68CF00FEDBBF /* SpreadsheetCellRepresentable.swift */,
+				D07E7FF42D7F68E700FEDBBF /* SpreadsheetItemViewModel.swift */,
+				D07E7FF62D7F68F700FEDBBF /* SpreadSheetView.swift */,
+				D07E7FF82D7F690F00FEDBBF /* SpreadSheetViewRepresentable.swift */,
+				D07E7FFA2D7F692900FEDBBF /* UIView+Border.swift */,
+			);
+			path = SpreadSheet;
 			sourceTree = "<group>";
 		};
 		D089DB542D6952FA00D6A1AB /* SuspiciousManager */ = {
@@ -1560,6 +1589,7 @@
 				D07B41F22D621E9C0015C7AA /* LocalStorageManager.swift in Sources */,
 				D0445C892C73CF610059D522 /* VacationOptionsView.swift in Sources */,
 				D0B3F1482D70079F007A5EA0 /* PhoneValidator.swift in Sources */,
+				D07E7FF32D7F68CF00FEDBBF /* SpreadsheetCellRepresentable.swift in Sources */,
 				D0445C5F2C71F1070059D522 /* EditProfileView.swift in Sources */,
 				D0DDDB072C9FDB1600A78A87 /* WhoLikedYouView.swift in Sources */,
 				D0DDDB0B2CA07A0E00A78A87 /* TurboView.swift in Sources */,
@@ -1614,6 +1644,7 @@
 				D0445C792C73C0B30059D522 /* ZodiacPickerView.swift in Sources */,
 				D051EF2E2CC03360004563A3 /* VerifiedProfileProgressView.swift in Sources */,
 				D017F4EE2CAEBC8700C71D18 /* QRCodeScannerView.swift in Sources */,
+				D07E7FFB2D7F692900FEDBBF /* UIView+Border.swift in Sources */,
 				D04729E22CC1315F007C33EC /* SupremeBannerView.swift in Sources */,
 				D0B388332D5B7C46003BC40C /* CourseRowView.swift in Sources */,
 				D0B388342D5B7C46003BC40C /* CourseDetailView.swift in Sources */,
@@ -1653,6 +1684,7 @@
 				D0422DAF2D7C50AF00609060 /* WebRTCManager.swift in Sources */,
 				D0422DB02D7C50AF00609060 /* WebRTCVideoView.swift in Sources */,
 				D0422DB12D7C50AF00609060 /* SignalingClient.swift in Sources */,
+				D07E7FF12D7F68AC00FEDBBF /* SpreadsheetCell.swift in Sources */,
 				D0903AC02D58A45200735323 /* modelSelector.swift in Sources */,
 				D0DDDB442CA17FA700A78A87 /* HowToUseAdvancedFilteringView.swift in Sources */,
 				D055A7632D19931C00F11F18 /* GlobalVariables.swift in Sources */,
@@ -1665,6 +1697,7 @@
 				D0DDDB482CA191EE00A78A87 /* HowToPurchaseSwiftiDateSupremeView.swift in Sources */,
 				D05E978F2D79B74D00F05560 /* ChatViewModel.swift in Sources */,
 				D0DDDB1C2CA1321300A78A87 /* IsSwiftiDatePaidView.swift in Sources */,
+				D07E7FF52D7F68E700FEDBBF /* SpreadsheetItemViewModel.swift in Sources */,
 				D09587CB2CB7D19B00BCD04B /* ReportAftermathView.swift in Sources */,
 				D0DDDB4C2CA19A0600A78A87 /* ManageProfilePhotosView.swift in Sources */,
 				D051EF252CBF4F1B004563A3 /* BasicInfoView.swift in Sources */,
@@ -1687,6 +1720,7 @@
 				D0B388302D5B7C12003BC40C /* SocialCourse.swift in Sources */,
 				D0B3F2D22D746499007A5EA0 /* ResetPasswordView.swift in Sources */,
 				D055E9922C8CCFBA00A97DD1 /* InterestSelectionView.swift in Sources */,
+				D07E7F442D7F18BB00FEDBBF /* TermsAndPrivacyView.swift in Sources */,
 				D0445C2F2C71B3800059D522 /* SwiftiDateApp.swift in Sources */,
 				D04729D82CC099BA007C33EC /* VerificationStatusView.swift in Sources */,
 				D0DDDB342CA16D8B00A78A87 /* HowToEnablePremiumBadgeView.swift in Sources */,
@@ -1702,6 +1736,7 @@
 				D0445C612C722EF50059D522 /* PhotoSectionView.swift in Sources */,
 				D0DDDB522CA251C600A78A87 /* CommunityGuidelinesView.swift in Sources */,
 				D04729EC2CC1FB16007C33EC /* SubscriptionScrollView.swift in Sources */,
+				D07E7FF72D7F68F700FEDBBF /* SpreadSheetView.swift in Sources */,
 				D04729CC2CC08B62007C33EC /* MeetWillingnessSection.swift in Sources */,
 				D017F4F02CAECC5100C71D18 /* PersonalInfoView.swift in Sources */,
 				D0903ABC2D589D0C00735323 /* AppDelegate.swift in Sources */,
@@ -1716,6 +1751,7 @@
 				D04729DC2CC0BDC4007C33EC /* ServiceSectionContainer.swift in Sources */,
 				D0445C732C72FB440059D522 /* HometownInputView.swift in Sources */,
 				D04729DA2CC09B54007C33EC /* EditSectionView.swift in Sources */,
+				D07E7FF92D7F690F00FEDBBF /* SpreadSheetViewRepresentable.swift in Sources */,
 				D018AD612C9E6ACF005A14B9 /* PraisePurchaseView.swift in Sources */,
 				D0422D992D7C509400609060 /* ChatGPTView.swift in Sources */,
 				D0422D9A2D7C509400609060 /* ClaudeAIView.swift in Sources */,

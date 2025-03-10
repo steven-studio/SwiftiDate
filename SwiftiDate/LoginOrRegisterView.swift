@@ -14,6 +14,7 @@ struct LoginOrRegisterView: View {
     @EnvironmentObject var appState: AppState // ✅ 讓 LoginOrRegisterView 存取 appState
     @EnvironmentObject var userSettings: UserSettings // ✅ 讓 LoginOrRegisterView 存取 userSettings
     @State private var isRegistering = false // State to toggle between views
+    @State private var showPrivacySheet: Bool = false
     
     // 用來儲存從本地載入的圖片，當 userSettings.photos 改變時更新
     @State private var loadedImage: UIImage?
@@ -166,14 +167,25 @@ struct LoginOrRegisterView: View {
                         .padding(.bottom, 5)
                 }
                 
-                HStack {
-                    Text("服務協議")
-                    Text("&")
-                    Text("隱私權政策")
+                Button(action: {
+                    // 這裡可以觸發你的隱私條款頁面的展示動作
+                    // 例如設定一個 state 變數來顯示一個 sheet
+                    showPrivacySheet.toggle()
+                }) {
+                    HStack {
+                        Text("服務協議")
+                        Text("&")
+                        Text("隱私權政策")
+                    }
+                    .font(.footnote)
+                    .foregroundColor(.white.opacity(0.7))
+                    .padding(.bottom, 20)
                 }
-                .font(.footnote)
-                .foregroundColor(.white.opacity(0.7))
-                .padding(.bottom, 20)
+                .fullScreenCover(isPresented: $showPrivacySheet) {
+                    NavigationView {
+                        TermsAndPrivacyView()
+                    }
+                }
             }
             
             // 彈框顯示部分
