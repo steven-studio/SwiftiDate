@@ -9,11 +9,13 @@ import UIKit
 
 class SpreadsheetCell: UITableViewCell {
     
-//    private var itemView: UIView!
-    private var borderViewArray: [BorderViews?] = []
-    private var labelArray: [UILabel?] = []
-    private var labelContentViewArray: [UIView?] = []
+    // 可調的寬度比例，預設為 2/8 (約 0.25)
+    var widthMultiplier: CGFloat = 2.0/8.0
     
+    var labels: [UILabel] = [] // cell 內部的所有 label
+    private var borderViewArray: [BorderViews?] = []
+    private var labelContentViewArray: [UIView?] = []
+
     private lazy var mainStackView: UIStackView = {
        let stack = UIStackView()
         stack.axis = .horizontal
@@ -45,6 +47,12 @@ class SpreadsheetCell: UITableViewCell {
     
     public func update(viewModel: SpreadsheetItemViewModel) {
         self.viewModel = viewModel
+        
+        // 如果 viewModel 提供了 multiplier，就使用它
+        if let multiplier = viewModel.widthMultiplier {
+            self.widthMultiplier = multiplier
+        }
+        
         if !mainStackView.isDescendant(of: self) {
             setupView()
         }
@@ -57,8 +65,8 @@ class SpreadsheetCell: UITableViewCell {
     func applyViewModel() {
         let lastIndex = viewModel.items.capacity - 1
         for (index, item) in viewModel.items.enumerated() {
-            labelArray[index]?.text = item
-            labelArray[index]?.sizeToFit()
+            labels[safe: index]?.text = item
+            labels[safe: index]?.sizeToFit()
             hideUIViewBorder(withIsLastLine: viewModel.isLastLine,
                              isLastIndex: index == lastIndex,
                              bottomBorder: borderViewArray[index]?.bottomBorder ?? UIView(),
@@ -82,7 +90,7 @@ class SpreadsheetCell: UITableViewCell {
             mainStackView.addArrangedSubview(view)
             
             borderViewArray.append(BorderViews(topBorder: topBorder, bottomBorder: bottomBorder, leftBorder: leftBorder, rightBorder: rightBorder))
-            labelArray.append(label)
+            labels.append(label)
             labelContentViewArray.append(view)
             
             NSLayoutConstraint.activate([
@@ -100,7 +108,7 @@ class SpreadsheetCell: UITableViewCell {
             // 也就是 firstView : secondView = 1 : 9
             firstView.widthAnchor.constraint(
                 equalTo: secondView.widthAnchor,
-                multiplier: 2.0/8.0
+                multiplier: widthMultiplier
             ).isActive = true
         }
         
@@ -146,5 +154,17 @@ class SpreadsheetCell: UITableViewCell {
         
         return view
     }
-
+    
+    func setLabelsFont(isBold: Bool) {
+        for label in labels {
+            let currentFontSize = label.font.pointSize
+            label.font = isBold ? UIFont.boldSystemFont(ofSize: currentFontSize) : UIFont.systemFont(ofSize: currentFontSize)
+        }
+    }
+    
+    func setLabelsAlignment(_ alignment: NSTextAlignment) {
+        for label in labels {
+            label.textAlignment = alignment
+        }
+    }
 }

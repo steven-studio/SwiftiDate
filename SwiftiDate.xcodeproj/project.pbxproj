@@ -133,6 +133,7 @@
 		D055E9922C8CCFBA00A97DD1 /* InterestSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D055E9912C8CCFBA00A97DD1 /* InterestSelectionView.swift */; };
 		D05E978E2D79B74D00F05560 /* ChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05E978D2D79B74D00F05560 /* ChatViewModel.swift */; };
 		D05E978F2D79B74D00F05560 /* ChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05E978D2D79B74D00F05560 /* ChatViewModel.swift */; };
+		D0644BC42D7FDB41007B2DE0 /* IPManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0644BC32D7FDB41007B2DE0 /* IPManager.swift */; };
 		D06724E42D6EC0FC00FD566F /* CloudService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06724E32D6EC0F900FD566F /* CloudService.swift */; };
 		D06724E82D6EC22000FD566F /* FirebaseCloudService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06724E72D6EC22000FD566F /* FirebaseCloudService.swift */; };
 		D06724EB2D6EC45200FD566F /* AliCloudService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06724EA2D6EC44C00FD566F /* AliCloudService.swift */; };
@@ -570,6 +571,7 @@
 		D055A7662D19A2B800F11F18 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D055E9912C8CCFBA00A97DD1 /* InterestSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterestSelectionView.swift; sourceTree = "<group>"; };
 		D05E978D2D79B74D00F05560 /* ChatViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewModel.swift; sourceTree = "<group>"; };
+		D0644BC32D7FDB41007B2DE0 /* IPManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IPManager.swift; sourceTree = "<group>"; };
 		D06724E32D6EC0F900FD566F /* CloudService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudService.swift; sourceTree = "<group>"; };
 		D06724E72D6EC22000FD566F /* FirebaseCloudService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseCloudService.swift; sourceTree = "<group>"; };
 		D06724EA2D6EC44C00FD566F /* AliCloudService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AliCloudService.swift; sourceTree = "<group>"; };
@@ -964,17 +966,18 @@
 				D0B3F18F2D70A0DF007A5EA0 /* AnalyticsManager */,
 				D089DB5B2D69861300D6A1AB /* ChatRelated */,
 				D06724E22D6EC03C00FD566F /* CloudService */,
+				D017F4F92CAFF01900C71D18 /* EditProfileRelated */,
+				D017F4FA2CAFF46F00C71D18 /* HelpViews */,
+				D0644BC22D7FDB2A007B2DE0 /* IPRelated */,
 				D089DB642D699B4D00D6A1AB /* LocalStorageManager */,
-				D089DB632D699A0700D6A1AB /* NotificationManager */,
 				D089DB622D6999E700D6A1AB /* LocationManager */,
-				D07E7FEF2D7F687E00FEDBBF /* SpreadSheet */,
-				D089DB612D69993D00D6A1AB /* SwipeCardRelated */,
+				D0472D392CCC6CDA0047FE10 /* LoginOrRegister */,
+				D089DB632D699A0700D6A1AB /* NotificationManager */,
+				D051EF2F2CC033AC004563A3 /* ProfileRelated */,
 				D039FC572CCD08160082D2F3 /* SafetyRelated */,
 				D039FC562CCD074A0082D2F3 /* SettingsRelated */,
-				D0472D392CCC6CDA0047FE10 /* LoginOrRegister */,
-				D051EF2F2CC033AC004563A3 /* ProfileRelated */,
-				D017F4FA2CAFF46F00C71D18 /* HelpViews */,
-				D017F4F92CAFF01900C71D18 /* EditProfileRelated */,
+				D07E7FEF2D7F687E00FEDBBF /* SpreadSheet */,
+				D089DB612D69993D00D6A1AB /* SwipeCardRelated */,
 				D0445C2D2C71B3800059D522 /* SwiftiDate */,
 				D0445C3E2C71B3830059D522 /* SwiftiDateTests */,
 				D0445C482C71B3830059D522 /* SwiftiDateUITests */,
@@ -1146,6 +1149,14 @@
 				D05E978D2D79B74D00F05560 /* ChatViewModel.swift */,
 			);
 			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		D0644BC22D7FDB2A007B2DE0 /* IPRelated */ = {
+			isa = PBXGroup;
+			children = (
+				D0644BC32D7FDB41007B2DE0 /* IPManager.swift */,
+			);
+			path = IPRelated;
 			sourceTree = "<group>";
 		};
 		D06724E22D6EC03C00FD566F /* CloudService */ = {
@@ -1703,6 +1714,7 @@
 				D051EF252CBF4F1B004563A3 /* BasicInfoView.swift in Sources */,
 				D04729D42CC09543007C33EC /* VerificationView.swift in Sources */,
 				D09587CF2CB7E44400BCD04B /* CircleExpansionView.swift in Sources */,
+				D0644BC42D7FDB41007B2DE0 /* IPManager.swift in Sources */,
 				D06724E82D6EC22000FD566F /* FirebaseCloudService.swift in Sources */,
 				D09587D42CB8BDEA00BCD04B /* PrivacySettingsView.swift in Sources */,
 				D0B3F1912D70C9C7007A5EA0 /* AnalyticsManager.swift in Sources */,

@@ -74,6 +74,18 @@ class AppDelegate: NSObject, UIApplicationDelegate, CLLocationManagerDelegate, U
         NotificationManager.shared.requestAuthorization()
         NotificationManager.shared.registerForPushNotifications()
         
+        // 調用 IPManager 取得對外 IP
+        IPManager.shared.fetchPublicIP { ipAddress in
+            DispatchQueue.main.async {
+                if let ip = ipAddress {
+                    print("取得的對外 IP 為：\(ip)")
+                    // 此處可以做後續處理，例如上傳至後端、存檔等
+                } else {
+                    print("無法取得對外 IP")
+                }
+            }
+        }
+        
         return true
     }
     

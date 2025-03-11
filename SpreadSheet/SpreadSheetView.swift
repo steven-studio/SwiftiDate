@@ -8,6 +8,7 @@
 import UIKit
 
 class SpreadSheetView: UIView {
+    var cellWidthMultiplier: CGFloat = 2.0/8.0 // 預設值
 
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero)
@@ -40,8 +41,8 @@ class SpreadSheetView: UIView {
     private func setupView() {
         addSubview(self.tableView)
         NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: topAnchor, constant: 50),
-            tableView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -50),
+            tableView.topAnchor.constraint(equalTo: topAnchor, constant: 12),
+            tableView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -12),
             tableView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 12),
             tableView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -12)
         ])
@@ -74,11 +75,29 @@ extension SpreadSheetView: UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "\(SpreadsheetCell.self)", for: indexPath) as? SpreadsheetCell else {
             return UITableViewCell()
         }
+        // 假設只有兩個欄位時，傳入 multiplier
+        let multiplier: CGFloat? = (viewModel[indexPath.row].count == 2 ? 2.0 / 8.0 : nil)
         let model = SpreadsheetItemViewModel(
             items: viewModel[indexPath.row],
             isFirstLine: indexPath.row == 0,
-            isLastLine: indexPath.row == viewModel.count - 1)
+            isLastLine: indexPath.row == viewModel.count - 1,
+            widthMultiplier: self.cellWidthMultiplier
+        )
         cell.update(viewModel: model)
+        
+        // 如果是第一行，將內部所有 label 置中，否則靠左
+        if indexPath.row == 0 {
+            cell.setLabelsAlignment(.center)
+            cell.setLabelsFont(isBold: true)
+        } else {
+            cell.setLabelsAlignment(.left)
+            cell.setLabelsFont(isBold: false)
+        }
+        
+        // 假設我們只對兩個欄位的情況設定 widthMultiplier
+        if viewModel[indexPath.row].count == 2 {
+            cell.widthMultiplier = self.cellWidthMultiplier
+        }
         
         return cell
     }

@@ -12,11 +12,13 @@ class SpreadsheetItemViewModel: ObservableObject {
     let items: [String]
     let isFirstLine: Bool
     let isLastLine: Bool
+    let widthMultiplier: CGFloat? // 可選值
     
-    init(items: [String], isFirstLine: Bool, isLastLine: Bool) {
+    init(items: [String], isFirstLine: Bool, isLastLine: Bool, widthMultiplier: CGFloat? = nil) {
         self.items = items
         self.isFirstLine = isFirstLine
         self.isLastLine = isLastLine
+        self.widthMultiplier = widthMultiplier
     }
 }
 

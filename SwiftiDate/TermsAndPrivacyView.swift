@@ -14,15 +14,62 @@ struct DataItem: Identifiable {
     let description: String
 }
 
+struct TableHeightPreferenceKey: PreferenceKey {
+    static var defaultValue: CGFloat = 0
+    
+    static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) {
+        // 我們可以取最大值，或進行其他合併運算
+        value = max(value, nextValue())
+    }
+}
+
 struct TermsAndPrivacyView: View {
+    @State private var tableHeight: CGFloat = 250  // 預設一個最低高度
+    @State private var tableHeight1: CGFloat = 250  // 用於第二個 SpreadSheetView
+    @State private var tableHeight2: CGFloat = 250
+
     // 若要在此頁面本身提供「關閉」功能，可宣告以下變數：
     @Environment(\.presentationMode) var presentationMode
     
-    let testData = [
-        DataItem(category: "帳戶資料", description: "需要填入一些基本資訊..."),
-        DataItem(category: "個人檔案", description: "包含照片、喜好等...")
-    ]
+    private let spreadsheetView: SpreadSheetView = {
+        let viewModel: [[String]] = [
+            ["類別", "描述"],
+            ["帳戶資料", "當你建立帳戶時，你需要提供一些基本資訊來設定帳戶，例如你的手機號碼、電子郵件地址和出生日期"],
+            ["個人檔案資料", "當你完成個人檔案時，你會分享更多關於自己的細節，例如性別、興趣、偏好、大概位置等。在某些國家，這些資料可能被視為敏感或特殊資訊，例如關於性傾向、性生活、健康狀況或政治信仰的細節。如果你選擇提供這些資料，表示你同意我們依據本隱私政策使用這些資料。"],
+            ["內容", "使用我們的服務時，你可能會上傳照片、影片、音檔、文字及其他類型的內容，例如與其他會員的聊天記錄。"],
+            ["購買資料", "當你進行購買時，我們會保存交易細節（例如購買項目、交易日期及價格）。具體的資料取決於你選擇的支付方式。如果你是直接向我們支付（而非透過 iOS 平台)，你需要提供銀行卡或信用卡號碼或其他金融資料。"],
+            ["行銷、調查與研究資料", "我們有時會進行以下活動：(i)用於研究目的的問卷調查、焦點小組或市場研究；(ii)用於行銷目的的推廣活動、活動或比賽。當你選擇參與時，你會提供一些資訊以便我們處理你的參與內容，包括你的回答、回饋意見，以及電子郵件和電話號碼，方便我們進行後續研究。"],
+            ["第三方資料", "當你選擇與我們分享關於其他人的資訊時（例如使用某些功能時輸入認識的人的聯絡資訊，或提交涉及其他會員的查詢或報告），我們會代你處理這些資料以完成你的請求。"],
+            ["客戶支援資料", "當你聯絡我們時，你可能會提供一些資訊以幫助解決你的問題。其他人也可能提交與你相關的查詢或報告。此外，我們的審核工具和團隊在調查過程中也可能收集額外資料。"],
+            ["社群媒體資料", "你可以選擇透過其他平台的帳戶與我們分享資料（例如 Facebook、Spotify 或 Apple）。例如，當你使用這些平台的帳戶建立或登入我們的服務，或上傳這些平台上的資料（如照片或播放清單)到我們的服務時，我們會處理相關資料。"]
+        ]
+        let view = SpreadSheetView(viewModel: viewModel)
+//        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
     
+    private let spreadsheetView1: SpreadSheetView = {
+        let viewModel: [[String]] = [
+            ["類別", "描述"],
+            ["使用資料", "使用服務會生成有關你活動的資料，包括你如何使用服務（例如登入時間、使用的功能、執行的操作、顯示給你的資訊、來源網頁、互動過的廣告）以及你與其他人互動的方式（例如搜尋、配對、交流）。我們也可能收到你與我們廣告在第三方網站或應用程式上互動的相關資料。"],
+            ["技術資料", "使用服務會從您用於存取我們服務的裝置上收集數據，包括硬體和軟體訊息，如IP 位址、裝置ID 和類型、應用程式設定和特徵、應用程式崩潰、廣告ID 和與Cookie 或其他可能唯一標識設備或瀏覽器的技術相關的識別碼。"]
+        ]
+        let view = SpreadSheetView(viewModel: viewModel)
+//        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+
+    private let spreadsheetView2: SpreadSheetView = {
+        let viewModel: [[String]] = [
+            ["類別", "描述"],
+            ["地理位置資料", "如果你允許，我們可以從你的裝置收集地理位置（經緯度）。如果你拒絕授權，依賴精確地理位置的功能可能無法使用。"],
+            ["臉部幾何資料", "你可以選擇參與我們的某些功能，例如照片驗證，在某些地區這可能被視為生物特徵數據。"]
+        ]
+        let view = SpreadSheetView(viewModel: viewModel)
+//        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+
     var body: some View {
         NavigationView {
             ScrollView {
@@ -124,13 +171,79 @@ struct TermsAndPrivacyView: View {
                 .lineSpacing(8)     // 調整行距，例如8個點
                 .padding(.bottom)
                 
-                // 如果你希望用你原本 SpreadSheet 的呼叫方式，可以先將 testData 轉成 [[String]]
-                let spreadsheetData = testData.map { [ $0.category, $0.description ] }
+                VStack(alignment: .leading) {
+                    Text("""
+                    你提供給我們的資料
+                    """)
+                    .font(.body)
+                    .fontWeight(.bold)
+                    .multilineTextAlignment(.leading)
+                    .padding(.leading, 40)
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
                 
-                SpreadSheetViewRepresentable(view: SpreadSheetView(viewModel: spreadsheetData))
-                    .frame(height: 250)  // 根據內容或需求設定高度
-                    .padding(.horizontal, 40)
+                SpreadSheetViewRepresentable(view: spreadsheetView, contentHeight: $tableHeight, multiplier: 2.0/8.0)
+                    .overlay(
+                        GeometryReader { proxy in
+                            Color.clear
+                                .preference(key: TableHeightPreferenceKey.self, value: proxy.size.height)
+                        }
+                    )
+                    .onPreferenceChange(TableHeightPreferenceKey.self) { newHeight in
+                        tableHeight = newHeight
+                    }
+                    .frame(height: tableHeight + 50)
+                    .padding(.horizontal, 28)
+                
+                VStack(alignment: .leading) {
+                    Text("""
+                    自動生成或收集的資料
+                    """)
+                    .font(.body)
+                    .fontWeight(.bold)
+                    .multilineTextAlignment(.leading)
+                    .padding(.leading, 40)
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
 
+                SpreadSheetViewRepresentable(view: spreadsheetView1, contentHeight: $tableHeight1, multiplier: 15.0/85.0)
+                    .overlay(
+                        GeometryReader { proxy in
+                            Color.clear
+                                .preference(key: TableHeightPreferenceKey.self, value: proxy.size.height)
+                        }
+                    )
+                    .onPreferenceChange(TableHeightPreferenceKey.self) { newHeight in
+                        tableHeight1 = newHeight
+                    }
+                    .frame(height: tableHeight1 + 50)
+                    .padding(.horizontal, 28)
+                
+                VStack(alignment: .leading) {
+                    Text("""
+                    我們在獲得你同意後收集的其他資料
+                    """)
+                    .font(.body)
+                    .fontWeight(.bold)
+                    .multilineTextAlignment(.leading)
+                    .padding(.leading, 40)
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
+                
+                SpreadSheetViewRepresentable(view: spreadsheetView2, contentHeight: $tableHeight2, multiplier: 2.0/8.0)
+                    .overlay(
+                        GeometryReader { proxy in
+                            Color.clear
+                                .preference(key: TableHeightPreferenceKey.self, value: proxy.size.height)
+                        }
+                    )
+                    .onPreferenceChange(TableHeightPreferenceKey.self) { newHeight in
+                        tableHeight2 = newHeight
+                    }
+                    .frame(height: tableHeight2 + 50)
+                    .padding(.horizontal, 28)
+
+                
                 Text("""
     一、隱私權保護政策的內容
     為了保障您的個人資料及隱私，本服務將嚴格遵守相關法令規定。若您不同意本政策內容，請立即停止使用本服務。
