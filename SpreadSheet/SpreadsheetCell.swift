@@ -11,7 +11,6 @@ class SpreadsheetCell: UITableViewCell {
     
     // 可調的寬度比例，預設為 2/8 (約 0.25)
     var widthMultiplier: CGFloat = 2.0/8.0
-    
     var labels: [UILabel] = [] // cell 內部的所有 label
     private var borderViewArray: [BorderViews?] = []
     private var labelContentViewArray: [UIView?] = []
@@ -99,8 +98,13 @@ class SpreadsheetCell: UITableViewCell {
             ])
         }
         
-        // 2. 假設這一列只有 2 個欄位，給第一、第二個子視圖加上 1:9 寬度比
-        if viewModel.items.count == 2 {
+        // 若提供了自訂比例，就依比例設定各欄位寬度
+        if let ratios = viewModel.columnRatios, ratios.count == mainStackView.arrangedSubviews.count {
+            let total = ratios.reduce(0, +)
+            for (index, subview) in mainStackView.arrangedSubviews.enumerated() {
+                subview.widthAnchor.constraint(equalTo: mainStackView.widthAnchor, multiplier: (ratios[index] / total)).isActive = true
+            }
+        } else if viewModel.items.count == 2 {
             let firstView = mainStackView.arrangedSubviews[0]
             let secondView = mainStackView.arrangedSubviews[1]
             
@@ -110,6 +114,15 @@ class SpreadsheetCell: UITableViewCell {
                 equalTo: secondView.widthAnchor,
                 multiplier: widthMultiplier
             ).isActive = true
+        } else if viewModel.items.count == 3 {
+            // 假設你希望第一欄 : 第二欄 : 第三欄 = 1 : 4 : 4（例如）
+            let firstView = mainStackView.arrangedSubviews[0]
+            let secondView = mainStackView.arrangedSubviews[1]
+            let thirdView = mainStackView.arrangedSubviews[2]
+            
+            firstView.widthAnchor.constraint(equalTo: secondView.widthAnchor, multiplier: 1.0/4.0).isActive = true
+            firstView.widthAnchor.constraint(equalTo: thirdView.widthAnchor, multiplier: 1.0/4.0).isActive = true
+            // 或者根據你的設計建立其他約束
         }
         
         NSLayoutConstraint.activate([

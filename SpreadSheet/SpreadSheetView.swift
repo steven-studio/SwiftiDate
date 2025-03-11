@@ -9,6 +9,7 @@ import UIKit
 
 class SpreadSheetView: UIView {
     var cellWidthMultiplier: CGFloat = 2.0/8.0 // 預設值
+    var columnRatios: [CGFloat]? = nil           // 新增：自訂各欄比例
 
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero)
@@ -75,13 +76,21 @@ extension SpreadSheetView: UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "\(SpreadsheetCell.self)", for: indexPath) as? SpreadsheetCell else {
             return UITableViewCell()
         }
-        // 假設只有兩個欄位時，傳入 multiplier
-        let multiplier: CGFloat? = (viewModel[indexPath.row].count == 2 ? 2.0 / 8.0 : nil)
+
+        // 如果 SpreadSheetView 有設定 columnRatios 且數量與此行欄位數相同，則傳入；否則 nil
+        let ratios: [CGFloat]? = {
+            if let ratios = self.columnRatios, ratios.count == viewModel[indexPath.row].count {
+                return ratios
+            }
+            return nil
+        }()
+
         let model = SpreadsheetItemViewModel(
             items: viewModel[indexPath.row],
             isFirstLine: indexPath.row == 0,
             isLastLine: indexPath.row == viewModel.count - 1,
-            widthMultiplier: self.cellWidthMultiplier
+            widthMultiplier: self.cellWidthMultiplier, // 過渡用（針對2欄）
+            columnRatios: ratios
         )
         cell.update(viewModel: model)
         
@@ -95,7 +104,7 @@ extension SpreadSheetView: UITableViewDataSource {
         }
         
         // 假設我們只對兩個欄位的情況設定 widthMultiplier
-        if viewModel[indexPath.row].count == 2 {
+        if viewModel[indexPath.row].count == 2, self.columnRatios == nil {
             cell.widthMultiplier = self.cellWidthMultiplier
         }
         
