@@ -12,12 +12,14 @@ import WebRTC
 struct ContentView: View {
     @EnvironmentObject var appState: AppState
     @EnvironmentObject var userSettings: UserSettings
+    @EnvironmentObject var consumableStore: ConsumableStore
     
     var body: some View {
         if appState.isLoggedIn {
             MainView()
                 .environmentObject(appState) // 傳遞 appState
                 .environmentObject(userSettings)
+                .environmentObject(consumableStore)
                 .onAppear {
                     PhotoUtility.loadPhotosFromAppStorage(for: userSettings)
                     AnalyticsManager.shared.trackEvent("content_view_logged_in_appear", parameters: [

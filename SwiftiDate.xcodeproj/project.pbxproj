@@ -134,6 +134,19 @@
 		D05E978E2D79B74D00F05560 /* ChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05E978D2D79B74D00F05560 /* ChatViewModel.swift */; };
 		D05E978F2D79B74D00F05560 /* ChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05E978D2D79B74D00F05560 /* ChatViewModel.swift */; };
 		D0644BC42D7FDB41007B2DE0 /* IPManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0644BC32D7FDB41007B2DE0 /* IPManager.swift */; };
+		D0644BD02D80826E007B2DE0 /* SwiftiDate.storekit in Resources */ = {isa = PBXBuildFile; fileRef = D0644BCF2D80826E007B2DE0 /* SwiftiDate.storekit */; };
+		D0644BD62D808860007B2DE0 /* CropViewController in Frameworks */ = {isa = PBXBuildFile; productRef = D0644BD52D808860007B2DE0 /* CropViewController */; };
+		D0644BD82D808860007B2DE0 /* TOCropViewController in Frameworks */ = {isa = PBXBuildFile; productRef = D0644BD72D808860007B2DE0 /* TOCropViewController */; };
+		D0644BDF2D80F3E9007B2DE0 /* TransactionProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0644BDE2D80F3E9007B2DE0 /* TransactionProtocol.swift */; };
+		D0644BE02D80F3E9007B2DE0 /* TransactionProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0644BDE2D80F3E9007B2DE0 /* TransactionProtocol.swift */; };
+		D0644BE12D80F3E9007B2DE0 /* TransactionProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0644BDE2D80F3E9007B2DE0 /* TransactionProtocol.swift */; };
+		D0644BE72D810B6B007B2DE0 /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0644BE62D810B6B007B2DE0 /* Store.swift */; };
+		D0644BE82D810B6B007B2DE0 /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0644BE62D810B6B007B2DE0 /* Store.swift */; };
+		D0644BEA2D810DDB007B2DE0 /* ConsumableStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0644BE92D810DDB007B2DE0 /* ConsumableStore.swift */; };
+		D0644BEB2D810DDB007B2DE0 /* ConsumableStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0644BE92D810DDB007B2DE0 /* ConsumableStore.swift */; };
+		D0644BED2D813442007B2DE0 /* TurboPurchaseFlowUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0644BEC2D813442007B2DE0 /* TurboPurchaseFlowUITests.swift */; };
+		D0644BEE2D8139FA007B2DE0 /* SwiftiDate.storekit in Resources */ = {isa = PBXBuildFile; fileRef = D0644BCF2D80826E007B2DE0 /* SwiftiDate.storekit */; };
+		D0644C182D813F37007B2DE0 /* SwiftiDateClip.app in Embed App Clips */ = {isa = PBXBuildFile; fileRef = D0644BF32D813F36007B2DE0 /* SwiftiDateClip.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		D06724E42D6EC0FC00FD566F /* CloudService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06724E32D6EC0F900FD566F /* CloudService.swift */; };
 		D06724E82D6EC22000FD566F /* FirebaseCloudService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06724E72D6EC22000FD566F /* FirebaseCloudService.swift */; };
 		D06724EB2D6EC45200FD566F /* AliCloudService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06724EA2D6EC44C00FD566F /* AliCloudService.swift */; };
@@ -477,7 +490,42 @@
 			remoteGlobalIDString = D0445C2A2C71B3800059D522;
 			remoteInfo = SwiftiDate;
 		};
+		D0644C052D813F37007B2DE0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D0445C232C71B3800059D522 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D0644BF22D813F36007B2DE0;
+			remoteInfo = SwiftiDateClip;
+		};
+		D0644C0F2D813F37007B2DE0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D0445C232C71B3800059D522 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D0644BF22D813F36007B2DE0;
+			remoteInfo = SwiftiDateClip;
+		};
+		D0644C162D813F37007B2DE0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D0445C232C71B3800059D522 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D0644BF22D813F36007B2DE0;
+			remoteInfo = SwiftiDateClip;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		D0644C1D2D813F37007B2DE0 /* Embed App Clips */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/AppClips";
+			dstSubfolderSpec = 16;
+			files = (
+				D0644C182D813F37007B2DE0 /* SwiftiDateClip.app in Embed App Clips */,
+			);
+			name = "Embed App Clips";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		D017F4ED2CAEBC8700C71D18 /* QRCodeScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeScannerView.swift; sourceTree = "<group>"; };
@@ -572,6 +620,14 @@
 		D055E9912C8CCFBA00A97DD1 /* InterestSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterestSelectionView.swift; sourceTree = "<group>"; };
 		D05E978D2D79B74D00F05560 /* ChatViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewModel.swift; sourceTree = "<group>"; };
 		D0644BC32D7FDB41007B2DE0 /* IPManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IPManager.swift; sourceTree = "<group>"; };
+		D0644BCF2D80826E007B2DE0 /* SwiftiDate.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = SwiftiDate.storekit; sourceTree = "<group>"; };
+		D0644BDE2D80F3E9007B2DE0 /* TransactionProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionProtocol.swift; sourceTree = "<group>"; };
+		D0644BE62D810B6B007B2DE0 /* Store.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
+		D0644BE92D810DDB007B2DE0 /* ConsumableStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsumableStore.swift; sourceTree = "<group>"; };
+		D0644BEC2D813442007B2DE0 /* TurboPurchaseFlowUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TurboPurchaseFlowUITests.swift; sourceTree = "<group>"; };
+		D0644BF32D813F36007B2DE0 /* SwiftiDateClip.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftiDateClip.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D0644C042D813F37007B2DE0 /* SwiftiDateClipTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftiDateClipTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D0644C0E2D813F37007B2DE0 /* SwiftiDateClipUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftiDateClipUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D06724E32D6EC0F900FD566F /* CloudService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudService.swift; sourceTree = "<group>"; };
 		D06724E72D6EC22000FD566F /* FirebaseCloudService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseCloudService.swift; sourceTree = "<group>"; };
 		D06724EA2D6EC44C00FD566F /* AliCloudService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AliCloudService.swift; sourceTree = "<group>"; };
@@ -738,6 +794,22 @@
 		D0FA20B82C8CBAAB001C5D0E /* MeetWillingnessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetWillingnessView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		D0644C192D813F37007B2DE0 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = D0644BF22D813F36007B2DE0 /* SwiftiDateClip */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		D0644BF42D813F36007B2DE0 /* SwiftiDateClip */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (D0644C192D813F37007B2DE0 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = SwiftiDateClip; sourceTree = "<group>"; };
+		D0644C072D813F37007B2DE0 /* SwiftiDateClipTests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = SwiftiDateClipTests; sourceTree = "<group>"; };
+		D0644C112D813F37007B2DE0 /* SwiftiDateClipUITests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = SwiftiDateClipUITests; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
+
 /* Begin PBXFrameworksBuildPhase section */
 		D0445C282C71B3800059D522 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
@@ -796,11 +868,13 @@
 				D0B3F1AF2D72ADE3007A5EA0 /* FirebaseDatabase in Frameworks */,
 				D0B3F1B12D72ADE3007A5EA0 /* FirebaseDynamicLinks in Frameworks */,
 				D0B3F19F2D72ADE3007A5EA0 /* FirebaseAnalytics in Frameworks */,
+				D0644BD82D808860007B2DE0 /* TOCropViewController in Frameworks */,
 				D0B3F1A12D72ADE3007A5EA0 /* FirebaseAnalyticsOnDeviceConversion in Frameworks */,
 				D0B3F19C2D72AD2C007A5EA0 /* ViewInspector in Frameworks */,
 				D0B3F1B32D72ADE3007A5EA0 /* FirebaseFirestore in Frameworks */,
 				D0B3F1BD2D72ADE3007A5EA0 /* FirebaseInstallations in Frameworks */,
 				D0B3F1B92D72ADE3007A5EA0 /* FirebaseFunctionsCombine-Community in Frameworks */,
+				D0644BD62D808860007B2DE0 /* CropViewController in Frameworks */,
 				D0B3F1A52D72ADE3007A5EA0 /* FirebaseAppCheck in Frameworks */,
 				D0B3F1C12D72ADE3007A5EA0 /* FirebaseMLModelDownloader in Frameworks */,
 				D0B3F1A32D72ADE3007A5EA0 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
@@ -811,6 +885,27 @@
 				D0B3F1C72D72ADE3007A5EA0 /* FirebaseStorage in Frameworks */,
 				D0B3F1A72D72ADE3007A5EA0 /* FirebaseAppDistribution-Beta in Frameworks */,
 				D0B3F1AB2D72ADE3007A5EA0 /* FirebaseAuthCombine-Community in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D0644BF02D813F36007B2DE0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D0644C012D813F37007B2DE0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D0644C0B2D813F37007B2DE0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -973,6 +1068,7 @@
 				D089DB622D6999E700D6A1AB /* LocationManager */,
 				D0472D392CCC6CDA0047FE10 /* LoginOrRegister */,
 				D089DB632D699A0700D6A1AB /* NotificationManager */,
+				D0644BCC2D807950007B2DE0 /* PaymentRelated */,
 				D051EF2F2CC033AC004563A3 /* ProfileRelated */,
 				D039FC572CCD08160082D2F3 /* SafetyRelated */,
 				D039FC562CCD074A0082D2F3 /* SettingsRelated */,
@@ -984,7 +1080,13 @@
 				D07B40A92D60FF160015C7AA /* SwiftiDate.app */,
 				D07B40AA2D60FF160015C7AA /* SwiftiDateTests.xctest */,
 				D07B40AB2D60FF160015C7AA /* SwiftiDateUITests.xctest */,
+				D0644BF42D813F36007B2DE0 /* SwiftiDateClip */,
+				D0644C072D813F37007B2DE0 /* SwiftiDateClipTests */,
+				D0644C112D813F37007B2DE0 /* SwiftiDateClipUITests */,
 				D0B3F19D2D72ADE3007A5EA0 /* Frameworks */,
+				D0644BF32D813F36007B2DE0 /* SwiftiDateClip.app */,
+				D0644C042D813F37007B2DE0 /* SwiftiDateClipTests.xctest */,
+				D0644C0E2D813F37007B2DE0 /* SwiftiDateClipUITests.xctest */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1041,6 +1143,7 @@
 				D0445C3F2C71B3830059D522 /* SwiftiDateTests.swift */,
 				D0B3F14C2D70258A007A5EA0 /* FirebaseCloudServiceTests.swift */,
 				D0B3F14E2D70336C007A5EA0 /* LocalStorageManagerTests.swift */,
+				D0644BDE2D80F3E9007B2DE0 /* TransactionProtocol.swift */,
 			);
 			path = SwiftiDateTests;
 			sourceTree = "<group>";
@@ -1054,6 +1157,7 @@
 				D0B3F1302D6F0F8F007A5EA0 /* OTPVerificationUITests.swift */,
 				D0B3F2CC2D744F23007A5EA0 /* PasswordLoginUITests.swift */,
 				D0B3F2D42D746890007A5EA0 /* ResetPasswordFlowUITests.swift */,
+				D0644BEC2D813442007B2DE0 /* TurboPurchaseFlowUITests.swift */,
 			);
 			path = SwiftiDateUITests;
 			sourceTree = "<group>";
@@ -1157,6 +1261,16 @@
 				D0644BC32D7FDB41007B2DE0 /* IPManager.swift */,
 			);
 			path = IPRelated;
+			sourceTree = "<group>";
+		};
+		D0644BCC2D807950007B2DE0 /* PaymentRelated */ = {
+			isa = PBXGroup;
+			children = (
+				D0644BE92D810DDB007B2DE0 /* ConsumableStore.swift */,
+				D0644BE62D810B6B007B2DE0 /* Store.swift */,
+				D0644BCF2D80826E007B2DE0 /* SwiftiDate.storekit */,
+			);
+			path = PaymentRelated;
 			sourceTree = "<group>";
 		};
 		D06724E22D6EC03C00FD566F /* CloudService */ = {
@@ -1406,10 +1520,12 @@
 				D0445C282C71B3800059D522 /* Frameworks */,
 				D07E7F402D7EE81D00FEDBBF /* Run Script */,
 				D0445C292C71B3800059D522 /* Resources */,
+				D0644C1D2D813F37007B2DE0 /* Embed App Clips */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				D0644C172D813F37007B2DE0 /* PBXTargetDependency */,
 			);
 			name = SwiftiDate;
 			packageProductDependencies = (
@@ -1483,6 +1599,74 @@
 			productReference = D07B40AB2D60FF160015C7AA /* SwiftiDateUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
+		D0644BF22D813F36007B2DE0 /* SwiftiDateClip */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D0644C1A2D813F37007B2DE0 /* Build configuration list for PBXNativeTarget "SwiftiDateClip" */;
+			buildPhases = (
+				D0644BEF2D813F36007B2DE0 /* Sources */,
+				D0644BF02D813F36007B2DE0 /* Frameworks */,
+				D0644BF12D813F36007B2DE0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				D0644BF42D813F36007B2DE0 /* SwiftiDateClip */,
+			);
+			name = SwiftiDateClip;
+			packageProductDependencies = (
+			);
+			productName = SwiftiDateClip;
+			productReference = D0644BF32D813F36007B2DE0 /* SwiftiDateClip.app */;
+			productType = "com.apple.product-type.application.on-demand-install-capable";
+		};
+		D0644C032D813F37007B2DE0 /* SwiftiDateClipTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D0644C1E2D813F37007B2DE0 /* Build configuration list for PBXNativeTarget "SwiftiDateClipTests" */;
+			buildPhases = (
+				D0644C002D813F37007B2DE0 /* Sources */,
+				D0644C012D813F37007B2DE0 /* Frameworks */,
+				D0644C022D813F37007B2DE0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D0644C062D813F37007B2DE0 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				D0644C072D813F37007B2DE0 /* SwiftiDateClipTests */,
+			);
+			name = SwiftiDateClipTests;
+			packageProductDependencies = (
+			);
+			productName = SwiftiDateClipTests;
+			productReference = D0644C042D813F37007B2DE0 /* SwiftiDateClipTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		D0644C0D2D813F37007B2DE0 /* SwiftiDateClipUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D0644C212D813F37007B2DE0 /* Build configuration list for PBXNativeTarget "SwiftiDateClipUITests" */;
+			buildPhases = (
+				D0644C0A2D813F37007B2DE0 /* Sources */,
+				D0644C0B2D813F37007B2DE0 /* Frameworks */,
+				D0644C0C2D813F37007B2DE0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D0644C102D813F37007B2DE0 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				D0644C112D813F37007B2DE0 /* SwiftiDateClipUITests */,
+			);
+			name = SwiftiDateClipUITests;
+			packageProductDependencies = (
+			);
+			productName = SwiftiDateClipUITests;
+			productReference = D0644C0E2D813F37007B2DE0 /* SwiftiDateClipUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -1490,7 +1674,7 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1520;
+				LastSwiftUpdateCheck = 1620;
 				LastUpgradeCheck = 1520;
 				TargetAttributes = {
 					D0445C2A2C71B3800059D522 = {
@@ -1503,6 +1687,17 @@
 					D0445C442C71B3830059D522 = {
 						CreatedOnToolsVersion = 15.2;
 						TestTargetID = D0445C2A2C71B3800059D522;
+					};
+					D0644BF22D813F36007B2DE0 = {
+						CreatedOnToolsVersion = 16.2;
+					};
+					D0644C032D813F37007B2DE0 = {
+						CreatedOnToolsVersion = 16.2;
+						TestTargetID = D0644BF22D813F36007B2DE0;
+					};
+					D0644C0D2D813F37007B2DE0 = {
+						CreatedOnToolsVersion = 16.2;
+						TestTargetID = D0644BF22D813F36007B2DE0;
 					};
 				};
 			};
@@ -1535,6 +1730,9 @@
 				D0445C2A2C71B3800059D522 /* SwiftiDate */,
 				D0445C3A2C71B3820059D522 /* SwiftiDateTests */,
 				D0445C442C71B3830059D522 /* SwiftiDateUITests */,
+				D0644BF22D813F36007B2DE0 /* SwiftiDateClip */,
+				D0644C032D813F37007B2DE0 /* SwiftiDateClipTests */,
+				D0644C0D2D813F37007B2DE0 /* SwiftiDateClipUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -1546,6 +1744,7 @@
 			files = (
 				D0445C362C71B3820059D522 /* Preview Assets.xcassets in Resources */,
 				D055A7672D19A2B800F11F18 /* GoogleService-Info.plist in Resources */,
+				D0644BD02D80826E007B2DE0 /* SwiftiDate.storekit in Resources */,
 				D0C99B2E2D0DBFED00FA98AD /* Localizable.strings in Resources */,
 				D0445C332C71B3820059D522 /* Assets.xcassets in Resources */,
 			);
@@ -1559,6 +1758,28 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		D0445C432C71B3830059D522 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D0644BEE2D8139FA007B2DE0 /* SwiftiDate.storekit in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D0644BF12D813F36007B2DE0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D0644C022D813F37007B2DE0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D0644C0C2D813F37007B2DE0 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1639,6 +1860,8 @@
 				D089DB5A2D69830000D6A1AB /* PhishingChecker.swift in Sources */,
 				D051EF312CC033C5004563A3 /* AchievementSectionView.swift in Sources */,
 				D051EF272CBF50CB004563A3 /* LifestyleView.swift in Sources */,
+				D0644BDF2D80F3E9007B2DE0 /* TransactionProtocol.swift in Sources */,
+				D0644BE72D810B6B007B2DE0 /* Store.swift in Sources */,
 				D0445C752C73B4EF0059D522 /* LanguageSelectionView.swift in Sources */,
 				D09587C12CB7B17E00BCD04B /* ResultsView.swift in Sources */,
 				D039FC5B2CD230060082D2F3 /* PersonalityView.swift in Sources */,
@@ -1773,6 +1996,7 @@
 				D0422D9E2D7C509400609060 /* DeepSeekView.swift in Sources */,
 				D0422D9F2D7C509400609060 /* MessageListView.swift in Sources */,
 				D0422DA02D7C509400609060 /* Response.swift in Sources */,
+				D0644BEA2D810DDB007B2DE0 /* ConsumableStore.swift in Sources */,
 				D04729D62CC09749007C33EC /* ProfileImageView.swift in Sources */,
 				D0445C6F2C72EDF10059D522 /* IndustryPicker.swift in Sources */,
 				D09587C32CB7C0A900BCD04B /* SafetyTipsView.swift in Sources */,
@@ -1799,6 +2023,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D0644BE12D80F3E9007B2DE0 /* TransactionProtocol.swift in Sources */,
 				D0B3F14D2D70258A007A5EA0 /* FirebaseCloudServiceTests.swift in Sources */,
 				D0B3F14F2D70336C007A5EA0 /* LocalStorageManagerTests.swift in Sources */,
 				D0445C402C71B3830059D522 /* SwiftiDateTests.swift in Sources */,
@@ -1843,6 +2068,7 @@
 				D0B3F2992D740400007A5EA0 /* AchievementSectionViewUITests.swift in Sources */,
 				D07C57E62D76F3B30008DC9D /* CropViewControllerWrapper.swift in Sources */,
 				D0B3F2622D736347007A5EA0 /* HowToEnableNotificationsView.swift in Sources */,
+				D0644BE02D80F3E9007B2DE0 /* TransactionProtocol.swift in Sources */,
 				D0B3F2632D736347007A5EA0 /* HowToEnablePremiumBadgeView.swift in Sources */,
 				D0B3F2642D736347007A5EA0 /* HowToMatchAndChatView.swift in Sources */,
 				D0B3F2652D736347007A5EA0 /* HowToPurchaseSwiftiDatePremiumView.swift in Sources */,
@@ -1918,6 +2144,7 @@
 				D0B3F2402D7360E0007A5EA0 /* VerificationView.swift in Sources */,
 				D0B3F23F2D7360AA007A5EA0 /* VerificationStatusView.swift in Sources */,
 				D0B3F23E2D73606B007A5EA0 /* SmartPhotoToggle.swift in Sources */,
+				D0644BEB2D810DDB007B2DE0 /* ConsumableStore.swift in Sources */,
 				D0B3F23D2D736000007A5EA0 /* EditSectionView.swift in Sources */,
 				D0B3F2B32D740FBA007A5EA0 /* TopRightActionButtonsUITests.swift in Sources */,
 				D0B3F2D52D746890007A5EA0 /* ResetPasswordFlowUITests.swift in Sources */,
@@ -1944,6 +2171,7 @@
 				D0B3F2232D733D77007A5EA0 /* MeetWillingnessView.swift in Sources */,
 				D0B3F2222D733D5B007A5EA0 /* MeetWillingnessSection.swift in Sources */,
 				D0B3F21D2D733998007A5EA0 /* VacationOptionsView.swift in Sources */,
+				D0644BED2D813442007B2DE0 /* TurboPurchaseFlowUITests.swift in Sources */,
 				D0B3F21C2D73396E007A5EA0 /* SmokingOptionsView.swift in Sources */,
 				D07C57D72D76941E0008DC9D /* CreatePasswordView.swift in Sources */,
 				D0B3F2A12D740AAA007A5EA0 /* OTPVerificationViewUITests.swift in Sources */,
@@ -1960,6 +2188,7 @@
 				D0B3F20E2D7327FC007A5EA0 /* InterestsViewUITests.swift in Sources */,
 				D0B3F2182D7338A1007A5EA0 /* LifestyleViewUITests.swift in Sources */,
 				D0B3F1FE2D730C97007A5EA0 /* JobInputView.swift in Sources */,
+				D0644BE82D810B6B007B2DE0 /* Store.swift in Sources */,
 				D0B3F1FD2D730C60007A5EA0 /* EducationAndWorkView.swift in Sources */,
 				D0B3F1FA2D730545007A5EA0 /* DrinkOptionsView.swift in Sources */,
 				D0B3F1F72D72FB7E007A5EA0 /* DietPreferencesView.swift in Sources */,
@@ -2007,6 +2236,27 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D0644BEF2D813F36007B2DE0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D0644C002D813F37007B2DE0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D0644C0A2D813F37007B2DE0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -2019,6 +2269,21 @@
 			isa = PBXTargetDependency;
 			target = D0445C2A2C71B3800059D522 /* SwiftiDate */;
 			targetProxy = D0445C462C71B3830059D522 /* PBXContainerItemProxy */;
+		};
+		D0644C062D813F37007B2DE0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D0644BF22D813F36007B2DE0 /* SwiftiDateClip */;
+			targetProxy = D0644C052D813F37007B2DE0 /* PBXContainerItemProxy */;
+		};
+		D0644C102D813F37007B2DE0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D0644BF22D813F36007B2DE0 /* SwiftiDateClip */;
+			targetProxy = D0644C0F2D813F37007B2DE0 /* PBXContainerItemProxy */;
+		};
+		D0644C172D813F37007B2DE0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D0644BF22D813F36007B2DE0 /* SwiftiDateClip */;
+			targetProxy = D0644C162D813F37007B2DE0 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -2305,6 +2570,149 @@
 			};
 			name = Release;
 		};
+		D0644C1B2D813F37007B2DE0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = SwiftiDateClip/SwiftiDateClip.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_ASSET_PATHS = "\"SwiftiDateClip/Preview Content\"";
+				DEVELOPMENT_TEAM = 5YGLWU7828;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = SwiftiDateClip/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = SwiftiDate;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = stevenstudio.SwiftiDate.Clip;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		D0644C1C2D813F37007B2DE0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = SwiftiDateClip/SwiftiDateClip.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"SwiftiDateClip/Preview Content\"";
+				DEVELOPMENT_TEAM = 5YGLWU7828;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = SwiftiDateClip/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = SwiftiDate;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = stevenstudio.SwiftiDate.Clip;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		D0644C1F2D813F37007B2DE0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 5YGLWU7828;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = stevenstudio.SwiftiDate.SwiftiDateClipTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SwiftiDateClip.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/SwiftiDateClip";
+			};
+			name = Debug;
+		};
+		D0644C202D813F37007B2DE0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 5YGLWU7828;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = stevenstudio.SwiftiDate.SwiftiDateClipTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SwiftiDateClip.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/SwiftiDateClip";
+			};
+			name = Release;
+		};
+		D0644C222D813F37007B2DE0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 5YGLWU7828;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = stevenstudio.SwiftiDate.SwiftiDateClipUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = SwiftiDateClip;
+			};
+			name = Debug;
+		};
+		D0644C232D813F37007B2DE0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 5YGLWU7828;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = stevenstudio.SwiftiDate.SwiftiDateClipUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = SwiftiDateClip;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -2340,6 +2748,33 @@
 			buildConfigurations = (
 				D0445C562C71B3830059D522 /* Debug */,
 				D0445C572C71B3830059D522 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D0644C1A2D813F37007B2DE0 /* Build configuration list for PBXNativeTarget "SwiftiDateClip" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D0644C1B2D813F37007B2DE0 /* Debug */,
+				D0644C1C2D813F37007B2DE0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D0644C1E2D813F37007B2DE0 /* Build configuration list for PBXNativeTarget "SwiftiDateClipTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D0644C1F2D813F37007B2DE0 /* Debug */,
+				D0644C202D813F37007B2DE0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D0644C212D813F37007B2DE0 /* Build configuration list for PBXNativeTarget "SwiftiDateClipUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D0644C222D813F37007B2DE0 /* Debug */,
+				D0644C232D813F37007B2DE0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -2519,6 +2954,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = D018AD642C9ED3C2005A14B9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = "FirebaseVertexAI-Preview";
+		};
+		D0644BD52D808860007B2DE0 /* CropViewController */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D07C57DF2D76F38D0008DC9D /* XCRemoteSwiftPackageReference "TOCropViewController" */;
+			productName = CropViewController;
+		};
+		D0644BD72D808860007B2DE0 /* TOCropViewController */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D07C57DF2D76F38D0008DC9D /* XCRemoteSwiftPackageReference "TOCropViewController" */;
+			productName = TOCropViewController;
 		};
 		D07C57E02D76F38D0008DC9D /* CropViewController */ = {
 			isa = XCSwiftPackageProductDependency;

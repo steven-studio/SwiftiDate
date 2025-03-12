@@ -34,6 +34,7 @@ struct AdaptiveAchievementCardView: View {
                         .background(Color.white)
                         .cornerRadius(5)
                 }
+                .accessibilityIdentifier("AdaptiveAchievementCard_GetMoreButton_\(title)")
             }
             // 根據 GeometryReader 傳遞的尺寸動態調整 frame
             .frame(width: geometry.size.width, height: geometry.size.height)

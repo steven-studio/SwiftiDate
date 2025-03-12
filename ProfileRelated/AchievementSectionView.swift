@@ -10,6 +10,7 @@ import SwiftUI
 
 struct AchievementSectionView: View {
     @EnvironmentObject var userSettings: UserSettings
+    @EnvironmentObject var consumableStore: ConsumableStore
     @Binding var isShowingTurboPurchaseView: Bool
     @Binding var isShowingCrushPurchaseView: Bool
     @Binding var isShowingPraisePurchaseView: Bool
@@ -35,6 +36,7 @@ struct AchievementSectionView: View {
         .padding(.horizontal)
         .sheet(isPresented: $isShowingTurboPurchaseView) {
             TurboPurchaseView()
+                .environmentObject(consumableStore)
         }
         .sheet(isPresented: $isShowingCrushPurchaseView) {
             CrushPurchaseView()

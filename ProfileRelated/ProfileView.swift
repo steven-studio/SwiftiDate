@@ -12,6 +12,7 @@ import FirebaseStorage
 struct ProfileView: View {
     @EnvironmentObject var appState: AppState
     @EnvironmentObject var userSettings: UserSettings // 使用 EnvironmentObject 存取 UserSettings
+    @EnvironmentObject var consumableStore: ConsumableStore
     
     @State private var userRankPercentage: Double = 25.4
     @State private var isShowingInfoPopup = false // State to show/hide the popup
@@ -80,6 +81,7 @@ struct ProfileView: View {
                             isShowingPraisePurchaseView: $isShowingPraisePurchaseView
                         )
                         .environmentObject(userSettings)
+                        .environmentObject(consumableStore)
                         
                         // Display Supreme banner if the user has purchased Supreme
                         if userSettings.isSupremeUser {

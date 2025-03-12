@@ -5,12 +5,20 @@
 //  Created by 游哲維 on 2024/9/21.
 //
 
-import Foundation
 import SwiftUI
+import StoreKit
 
 struct TurboPurchaseView: View {
     @Environment(\.presentationMode) var presentationMode // Environment variable to control view dismissal
+    @EnvironmentObject var store: ConsumableStore
+    
+    @State var isPurchased: Bool = false
+    @State var errorTitle = ""
+    @State var isShowingError: Bool = false
     @State private var selectedOption = "5 Turbo" // Default selected option
+    @State private var selectedProduct: Product? = nil  // 新增：用於儲存所選產品
+
+    @State private var availableProducts: [Product] = []
 
     var body: some View {
         VStack {
@@ -50,15 +58,15 @@ struct TurboPurchaseView: View {
             
             // Turbo options
             HStack(spacing: 10) {
-                TurboOptionView(title: "10 Turbo", price: "NT$99 /次", discount: "省 34%", isSelected: selectedOption == "10 Turbo") {
+                TurboOptionView(title: "10 Turbo", price: "NT$99 /次", discount: "省 34%", isSelected: selectedOption == "10 Turbo", product: store.turbos[0], purchasingEnabled: true, selectedProduct: $selectedProduct) {
                     selectedOption = "10 Turbo"
                     AnalyticsManager.shared.trackEvent("turbo_option_selected", parameters: ["option": "10 Turbo"])
                 }
-                TurboOptionView(title: "5 Turbo", price: "NT$138 /次", discount: "省 8%", isSelected: selectedOption == "5 Turbo") {
+                TurboOptionView(title: "5 Turbo", price: "NT$138 /次", discount: "省 8%", isSelected: selectedOption == "5 Turbo", product: store.turbos[1], purchasingEnabled: true, selectedProduct: $selectedProduct) {
                     selectedOption = "5 Turbo"
                     AnalyticsManager.shared.trackEvent("turbo_option_selected", parameters: ["option": "5 Turbo"])
                 }
-                TurboOptionView(title: "1 Turbo", price: "NT$150 /次", discount: "", isSelected: selectedOption == "1 Turbo") {
+                TurboOptionView(title: "1 Turbo", price: "NT$150 /次", discount: "", isSelected: selectedOption == "1 Turbo", product: store.turbos[2], purchasingEnabled: true, selectedProduct: $selectedProduct) {
                     selectedOption = "1 Turbo"
                     AnalyticsManager.shared.trackEvent("turbo_option_selected", parameters: ["option": "1 Turbo"])
                 }
@@ -70,6 +78,26 @@ struct TurboPurchaseView: View {
                 AnalyticsManager.shared.trackEvent("turbo_purchase_button_tapped", parameters: [
                     "selected_option": selectedOption
                 ])
+                
+                // 檢查使用者的地區代碼
+                let regionCode = Locale.current.region?.identifier ?? "US" // 預設為 US
+                if regionCode == "CN" {
+                    // 假設這是微信支付或支付寶支付的 URL
+                    if let url = URL(string: "weixin://pay?params=xxx") {
+                        UIApplication.shared.open(url)
+                    } else {
+                        print("無法打開微信支付 URL")
+                    }
+                } else {
+                    if let product = selectedProduct {
+                        Task {
+                            await buy(product)
+                        }
+                    } else {
+                        print("尚未選擇產品")
+                    }
+                }
+                
                 print("立即獲取 \(selectedOption)")
                 // Handle the purchase logic here
             }) {
@@ -83,6 +111,14 @@ struct TurboPurchaseView: View {
             }
             .padding(.horizontal, 20)
             .padding(.bottom, 20)
+            .onAppear {
+                Task {
+                    // 使用 selectedProduct 來檢查購買狀態
+                    if let product = selectedProduct {
+                        isPurchased = (try? await store.isPurchased(product)) ?? false
+                    }
+                }
+            }
             
             Text("獲得後隨時用，永遠不會過期")
                 .font(.footnote)
@@ -95,6 +131,21 @@ struct TurboPurchaseView: View {
             AnalyticsManager.shared.trackEvent("turbo_purchase_view_appear")
         }
     }
+    
+    func buy(_ product: Product) async {
+        do {
+            if try await store.purchase(product) != nil {
+                withAnimation {
+                    isPurchased = true
+                }
+            }
+        } catch StoreError.failedVerification {
+            errorTitle = "Your purchase could not be verified by the App Store."
+            isShowingError = true
+        } catch {
+            print("Failed purchase for \(product.id). \(error)")
+        }
+    }
 }
 
 struct TurboOptionView: View {
@@ -102,6 +153,13 @@ struct TurboOptionView: View {
     var price: String
     var discount: String
     var isSelected: Bool
+    
+    let product: Product
+    let purchasingEnabled: Bool
+    
+    // 新增：Binding，讓父視圖能夠更新所選產品
+    @Binding var selectedProduct: Product?
+    
     var onSelect: () -> Void
     
     var body: some View {
@@ -130,13 +188,14 @@ struct TurboOptionView: View {
                 .stroke(isSelected ? Color.purple : Color.clear, lineWidth: 2)
         )
         .onTapGesture {
+            // 更新父視圖的 selectedProduct
+            selectedProduct = product
             onSelect()
         }
-    }
-}
-
-struct TurboPurchaseView_Previews: PreviewProvider {
-    static var previews: some View {
-        TurboPurchaseView()
+        // 改用 .accessibilityElement(children: .ignore) 將子視圖忽略，僅保留父容器作為可訪問元素
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel("TurboOption_\(title)")
+        .accessibilityIdentifier("TurboOption_\(title)")
+        .accessibilityAddTraits(.isButton)
     }
 }

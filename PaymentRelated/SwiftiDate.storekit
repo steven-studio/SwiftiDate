@@ -1,0 +1,215 @@
+{
+  "appPolicies" : {
+    "eula" : "",
+    "policies" : [
+      {
+        "locale" : "en_US",
+        "policyText" : "",
+        "policyURL" : ""
+      }
+    ]
+  },
+  "identifier" : "778293ED",
+  "nonRenewingSubscriptions" : [
+
+  ],
+  "products" : [
+    {
+      "displayPrice" : "4.99",
+      "familyShareable" : false,
+      "internalID" : "6730119068",
+      "localizations" : [
+        {
+          "description" : "使用1個Turbo增加你的曝光率，吸引更多潛在的配對對象。",
+          "displayName" : "1 Turbo",
+          "locale" : "zh_CN"
+        }
+      ],
+      "productID" : "stevenstudio.SwiftiDate.turbo.1",
+      "referenceName" : "1 Turbo",
+      "type" : "Consumable"
+    },
+    {
+      "displayPrice" : "29.99",
+      "familyShareable" : false,
+      "internalID" : "6739359318",
+      "localizations" : [
+        {
+          "description" : "使用10個Turbo增加你的曝光率，吸引更多潛在的配對對象。",
+          "displayName" : "10 Turbo",
+          "locale" : "zh_CN"
+        }
+      ],
+      "productID" : "stevenstudio.SwiftiDate.turbo.10",
+      "referenceName" : "10 Turbo",
+      "type" : "Consumable"
+    },
+    {
+      "displayPrice" : "39.99",
+      "familyShareable" : false,
+      "internalID" : "6739359338",
+      "localizations" : [
+        {
+          "description" : "送出Crush，讓對方可以馬上看見你！",
+          "displayName" : "30 Crushes",
+          "locale" : "zh_CN"
+        }
+      ],
+      "productID" : "stevenstudio.SwiftiDate.crushes.30",
+      "referenceName" : "30 Crushes",
+      "type" : "Consumable"
+    },
+    {
+      "displayPrice" : "39.99",
+      "familyShareable" : false,
+      "internalID" : "6739359547",
+      "localizations" : [
+        {
+          "description" : "一鍵讚美心儀對象，你的喜歡無需等待",
+          "displayName" : "30次讚美",
+          "locale" : "zh_CN"
+        }
+      ],
+      "productID" : "stevenstudio.SwiftiDate.praise.30",
+      "referenceName" : "30次讚美",
+      "type" : "Consumable"
+    },
+    {
+      "displayPrice" : "9.99",
+      "familyShareable" : false,
+      "internalID" : "6739359214",
+      "localizations" : [
+        {
+          "description" : "送出Crush，讓對方可以馬上看見你！",
+          "displayName" : "5 Crushes",
+          "locale" : "zh_CN"
+        }
+      ],
+      "productID" : "stevenstudio.SwiftiDate.crushes.5",
+      "referenceName" : "5 Crushes",
+      "type" : "Consumable"
+    },
+    {
+      "displayPrice" : "19.99",
+      "familyShareable" : false,
+      "internalID" : "6739177603",
+      "localizations" : [
+        {
+          "description" : "使用5個Turbo增加你的曝光率，吸引更多潛在的配對對象。",
+          "displayName" : "5 Turbo",
+          "locale" : "zh_CN"
+        }
+      ],
+      "productID" : "stevenstudio.SwiftiDate.turbo.5",
+      "referenceName" : "5 Turbo",
+      "type" : "Consumable"
+    },
+    {
+      "displayPrice" : "9.99",
+      "familyShareable" : false,
+      "internalID" : "6739359518",
+      "localizations" : [
+        {
+          "description" : "一鍵讚美心儀對象，你的喜歡無需等待",
+          "displayName" : "5次讚美",
+          "locale" : "zh_CN"
+        }
+      ],
+      "productID" : "stevenstudio.SwiftiDate.praise.5",
+      "referenceName" : "5次讚美",
+      "type" : "Consumable"
+    },
+    {
+      "displayPrice" : "59.99",
+      "familyShareable" : false,
+      "internalID" : "6739359464",
+      "localizations" : [
+        {
+          "description" : "送出Crush，讓對方可以馬上看見你！",
+          "displayName" : "60 Crushes",
+          "locale" : "zh_CN"
+        }
+      ],
+      "productID" : "stevenstudio.SwiftiDate.crushes.60",
+      "referenceName" : "60 Crushes",
+      "type" : "Consumable"
+    },
+    {
+      "displayPrice" : "59.99",
+      "familyShareable" : false,
+      "internalID" : "6739359623",
+      "localizations" : [
+        {
+          "description" : "一鍵讚美心儀對象，你的喜歡無需等待",
+          "displayName" : "60次讚美",
+          "locale" : "zh_CN"
+        }
+      ],
+      "productID" : "stevenstudio.SwiftiDate.praise.60",
+      "referenceName" : "60次讚美",
+      "type" : "Consumable"
+    }
+  ],
+  "settings" : {
+    "_applicationInternalID" : "6730118783",
+    "_developerTeamID" : "5YGLWU7828",
+    "_failTransactionsEnabled" : false,
+    "_lastSynchronizedDate" : 763396723.92198801,
+    "_locale" : "zh_TW",
+    "_storefront" : "TWN",
+    "_storeKitErrors" : [
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Load Products"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Purchase"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Verification"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "App Store Sync"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Subscription Status"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "App Transaction"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Manage Subscriptions Sheet"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Refund Request Sheet"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Offer Code Redeem Sheet"
+      }
+    ]
+  },
+  "subscriptionGroups" : [
+
+  ],
+  "version" : {
+    "major" : 4,
+    "minor" : 0
+  }
+}

@@ -11,6 +11,7 @@ import SwiftUI
 struct MainView: View {
     @EnvironmentObject var appState: AppState
     @EnvironmentObject var userSettings: UserSettings
+    @EnvironmentObject var consumableStore: ConsumableStore
 
     @State private var selectedTab: Int = 0 // Add this to track the selected tab
     @State private var selectedTurboTab: Int = 0 // Add this to track the selected tab for TurboView
@@ -60,11 +61,13 @@ struct MainView: View {
                 ProfileView(contentSelectedTab: $selectedTab) // Pass the binding variable
                     .environmentObject(userSettings) // 確保傳遞 userSettings
                     .environmentObject(appState) // 傳遞 appState
+                    .environmentObject(consumableStore)
             }
             .tabItem {
                 Image(systemName: "person.fill")
             }
             .tag(4) // Assign a tag for ProfileView tab
+            .accessibilityLabel("ProfileTab")
         }
         .onChange(of: selectedTab) { newValue in
             AnalyticsManager.shared.trackEvent("tab_switched", parameters: [

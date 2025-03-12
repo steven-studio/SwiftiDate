@@ -29,6 +29,7 @@ struct SwiftiDateApp: App {
     
     @StateObject private var appState = AppState()
     @StateObject var userSettings = UserSettings() // Initialize UserSettings as a state object
+    @StateObject var consumableStore = ConsumableStore()
     
     init() {
         // 在 App 初始化時檢查是否帶有 -UI_TEST_MODE
@@ -50,6 +51,7 @@ struct SwiftiDateApp: App {
                     ContentView()
                         .environmentObject(userSettings)
                         .environmentObject(appState)
+                        .environmentObject(consumableStore)
                         .onAppear {
                             // 1. 在這裡呼叫一個方法，執行 Firebase 匿名登入
                             signInAnonymously()
