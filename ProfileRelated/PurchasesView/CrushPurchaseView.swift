@@ -5,12 +5,18 @@
 //  Created by 游哲維 on 2024/9/21.
 //
 
-import Foundation
 import SwiftUI
+import StoreKit
 
 struct CrushPurchaseView: View {
     @Environment(\.presentationMode) var presentationMode // Environment variable to control view dismissal
+    @EnvironmentObject var store: ConsumableStore
+    
+    @State var isPurchased: Bool = false
+    @State var errorTitle = ""
+    @State var isShowingError: Bool = false
     @State private var selectedOption = "30 Crushes" // Default selected option
+    @State private var selectedProduct: Product? = nil  // 新增：用於儲存所選產品
 
     var body: some View {
         VStack {
@@ -50,15 +56,33 @@ struct CrushPurchaseView: View {
             
             // Crush options
             HStack(spacing: 10) {
-                CrushOptionView(title: "60 Crushes", price: "NT$34/個", discount: "省 48%", isSelected: selectedOption == "60 Crushes") {
+                CrushOptionView(title: "60 Crushes",
+                                 price: "NT$34/個",
+                                 discount: "省 48%",
+                                 isSelected: selectedOption == "60 Crushes",
+                                 product: store.crushes[0],
+                                 purchasingEnabled: true,
+                                 selectedProduct: $selectedProduct) {
                     selectedOption = "60 Crushes"
                     AnalyticsManager.shared.trackEvent("crush_option_selected", parameters: ["option": "60 Crushes"])
                 }
-                CrushOptionView(title: "30 Crushes", price: "NT$43/個", discount: "省 33%", isSelected: selectedOption == "30 Crushes") {
+                CrushOptionView(title: "30 Crushes",
+                                 price: "NT$43/個",
+                                 discount: "省 33%",
+                                 isSelected: selectedOption == "30 Crushes",
+                                 product: store.crushes[1],
+                                 purchasingEnabled: true,
+                                 selectedProduct: $selectedProduct) {
                     selectedOption = "30 Crushes"
                     AnalyticsManager.shared.trackEvent("crush_option_selected", parameters: ["option": "30 Crushes"])
                 }
-                CrushOptionView(title: "5 Crushes", price: "NT$64/個", discount: "", isSelected: selectedOption == "5 Crushes") {
+                CrushOptionView(title: "5 Crushes",
+                                 price: "NT$64/個",
+                                 discount: "",
+                                 isSelected: selectedOption == "5 Crushes",
+                                 product: store.crushes[2],
+                                 purchasingEnabled: true,
+                                 selectedProduct: $selectedProduct) {
                     selectedOption = "5 Crushes"
                     AnalyticsManager.shared.trackEvent("crush_option_selected", parameters: ["option": "5 Crushes"])
                 }
@@ -70,6 +94,26 @@ struct CrushPurchaseView: View {
                 AnalyticsManager.shared.trackEvent("crush_purchase_button_tapped", parameters: [
                     "selected_option": selectedOption
                 ])
+                
+                // 檢查使用者的地區代碼
+                let regionCode = Locale.current.region?.identifier ?? "US" // 預設為 US
+                if regionCode == "CN" {
+                    // 假設這是微信支付或支付寶支付的 URL
+                    if let url = URL(string: "weixin://pay?params=xxx") {
+                        UIApplication.shared.open(url)
+                    } else {
+                        print("無法打開微信支付 URL")
+                    }
+                } else {
+                    if let product = selectedProduct {
+                        Task {
+                            await buy(product)
+                        }
+                    } else {
+                        print("尚未選擇產品")
+                    }
+                }
+                
                 print("立即擁有 clicked with \(selectedOption)")
                 // Handle the purchase logic here
             }) {
@@ -92,6 +136,24 @@ struct CrushPurchaseView: View {
         .navigationTitle("Crush")
         .navigationBarTitleDisplayMode(.inline)
     }
+    
+    func buy(_ product: Product) async {
+        print("[DEBUG] buy(_:) called with product.id = \(product.id)")
+        do {
+            if try await store.purchase(product) != nil {
+                withAnimation {
+                    isPurchased = true
+                }
+                print("[DEBUG] Successfully purchased \(product.id)")
+            }
+        } catch StoreError.failedVerification {
+            errorTitle = "Your purchase could not be verified by the App Store."
+            isShowingError = true
+            print("[ERROR] Purchase verification failed for \(product.id)")
+        } catch {
+            print("Failed purchase for \(product.id). \(error)")
+        }
+    }
 }
 
 struct CrushOptionView: View {
@@ -99,8 +161,15 @@ struct CrushOptionView: View {
     var price: String
     var discount: String
     var isSelected: Bool
-    var onSelect: () -> Void
     
+    let product: Product
+    let purchasingEnabled: Bool
+    
+    // 新增：Binding，讓父視圖能夠更新所選產品
+    @Binding var selectedProduct: Product?
+    
+    var onSelect: () -> Void
+
     var body: some View {
         VStack {
             Text(title)
@@ -127,13 +196,15 @@ struct CrushOptionView: View {
                 .stroke(isSelected ? Color.green : Color.clear, lineWidth: 2)
         )
         .onTapGesture {
+            // 更新父視圖的 selectedProduct
+            selectedProduct = product
+            print("[DEBUG] onTapGesture - \(title) tapped. Setting selectedProduct to: \(product.id)")
             onSelect()
         }
-    }
-}
-
-struct CrushPurchaseView_Previews: PreviewProvider {
-    static var previews: some View {
-        CrushPurchaseView()
+        // 改用 .accessibilityElement(children: .ignore) 將子視圖忽略，僅保留父容器作為可訪問元素
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel("CrushOption_\(title)")
+        .accessibilityIdentifier("CrushOption_\(title)")
+        .accessibilityAddTraits(.isButton)
     }
 }

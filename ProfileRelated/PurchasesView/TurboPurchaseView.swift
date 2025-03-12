@@ -18,8 +18,6 @@ struct TurboPurchaseView: View {
     @State private var selectedOption = "5 Turbo" // Default selected option
     @State private var selectedProduct: Product? = nil  // 新增：用於儲存所選產品
 
-    @State private var availableProducts: [Product] = []
-
     var body: some View {
         VStack {
             ZStack(alignment: .topLeading) {
@@ -129,19 +127,30 @@ struct TurboPurchaseView: View {
         .navigationBarTitleDisplayMode(.inline)
         .onAppear {
             AnalyticsManager.shared.trackEvent("turbo_purchase_view_appear")
+            // 如果 selectedProduct 還是 nil，且 store.turbos 有資料，就找出 id 為 "stevenstudio.SwiftiDate.turbo.5" 的產品作預設選項
+            if selectedProduct == nil, !store.turbos.isEmpty {
+                if let product = store.turbos.first(where: { $0.id == "stevenstudio.SwiftiDate.turbo.5" }) {
+                    selectedProduct = product
+                    selectedOption = "5 Turbo"  // 同時更新選項文字
+                    print("[DEBUG] Default selectedProduct set to: \(product.id)")
+                }
+            }
         }
     }
     
     func buy(_ product: Product) async {
+        print("[DEBUG] buy(_:) called with product.id = \(product.id)")
         do {
             if try await store.purchase(product) != nil {
                 withAnimation {
                     isPurchased = true
                 }
+                print("[DEBUG] Successfully purchased \(product.id)")
             }
         } catch StoreError.failedVerification {
             errorTitle = "Your purchase could not be verified by the App Store."
             isShowingError = true
+            print("[ERROR] Purchase verification failed for \(product.id)")
         } catch {
             print("Failed purchase for \(product.id). \(error)")
         }
@@ -190,6 +199,7 @@ struct TurboOptionView: View {
         .onTapGesture {
             // 更新父視圖的 selectedProduct
             selectedProduct = product
+            print("[DEBUG] onTapGesture - \(title) tapped. Setting selectedProduct to: \(product.id)")
             onSelect()
         }
         // 改用 .accessibilityElement(children: .ignore) 將子視圖忽略，僅保留父容器作為可訪問元素

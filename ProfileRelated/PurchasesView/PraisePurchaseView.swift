@@ -7,10 +7,17 @@
 
 import Foundation
 import SwiftUI
+import StoreKit
 
 struct PraisePurchaseView: View {
     @Environment(\.presentationMode) var presentationMode // Environment variable to control view dismissal
+    @EnvironmentObject var store: ConsumableStore  // 取得 store.praises 產品資料
+    
+    @State var isPurchased: Bool = false
+    @State var errorTitle = ""
+    @State var isShowingError: Bool = false
     @State private var selectedOption = "30次讚美" // Default selected option
+    @State private var selectedProduct: Product? = nil  // 新增：用於儲存所選產品
 
     var body: some View {
         VStack {
@@ -50,13 +57,39 @@ struct PraisePurchaseView: View {
             
             // Praise options
             HStack(spacing: 10) {
-                PraiseOptionView(title: "60次讚美", price: "NT$34/次", discount: "省 52%", isSelected: selectedOption == "60次讚美") {
+                PraiseOptionView(
+                    title: "60次讚美",
+                    price: "NT$34/次",
+                    discount: "省 52%",
+                    isSelected: selectedOption == "60次讚美",
+                    product: store.praises.first(where: { $0.id == "stevenstudio.SwiftiDate.praise.60" })!,
+                    purchasingEnabled: true,
+                    selectedProduct: $selectedProduct
+                ) {
                     selectedOption = "60次讚美"
                 }
-                PraiseOptionView(title: "30次讚美", price: "NT$42/次", discount: "省 40%", isSelected: selectedOption == "30次讚美") {
+                
+                PraiseOptionView(
+                    title: "30次讚美",
+                    price: "NT$42/次",
+                    discount: "省 40%",
+                    isSelected: selectedOption == "30次讚美",
+                    product: store.praises.first(where: { $0.id == "stevenstudio.SwiftiDate.praise.30" })!,
+                    purchasingEnabled: true,
+                    selectedProduct: $selectedProduct
+                ) {
                     selectedOption = "30次讚美"
                 }
-                PraiseOptionView(title: "5次讚美", price: "NT$70/次", discount: "", isSelected: selectedOption == "5次讚美") {
+                
+                PraiseOptionView(
+                    title: "5次讚美",
+                    price: "NT$70/次",
+                    discount: "",
+                    isSelected: selectedOption == "5次讚美",
+                    product: store.praises.first(where: { $0.id == "stevenstudio.SwiftiDate.praise.5" })!,
+                    purchasingEnabled: true,
+                    selectedProduct: $selectedProduct
+                ) {
                     selectedOption = "5次讚美"
                 }
             }
@@ -67,6 +100,26 @@ struct PraisePurchaseView: View {
                 AnalyticsManager.shared.trackEvent("praise_purchase_button_tapped", parameters: [
                     "selected_option": selectedOption
                 ])
+                
+                // 檢查使用者的地區代碼
+                let regionCode = Locale.current.region?.identifier ?? "US" // 預設為 US
+                if regionCode == "CN" {
+                    // 假設這是微信支付或支付寶支付的 URL
+                    if let url = URL(string: "weixin://pay?params=xxx") {
+                        UIApplication.shared.open(url)
+                    } else {
+                        print("無法打開微信支付 URL")
+                    }
+                } else {
+                    if let product = selectedProduct {
+                        Task {
+                            await buy(product)
+                        }
+                    } else {
+                        print("尚未選擇產品")
+                    }
+                }
+                
                 print("立即獲取 clicked")
                 // 在這裡添加購買邏輯
             }) {
@@ -92,6 +145,24 @@ struct PraisePurchaseView: View {
             AnalyticsManager.shared.trackEvent("praise_purchase_view_appear")
         }
     }
+    
+    func buy(_ product: Product) async {
+        print("[DEBUG] buy(_:) called with product.id = \(product.id)")
+        do {
+            if try await store.purchase(product) != nil {
+                withAnimation {
+                    isPurchased = true
+                }
+                print("[DEBUG] Successfully purchased \(product.id)")
+            }
+        } catch StoreError.failedVerification {
+            errorTitle = "Your purchase could not be verified by the App Store."
+            isShowingError = true
+            print("[ERROR] Purchase verification failed for \(product.id)")
+        } catch {
+            print("Failed purchase for \(product.id). \(error)")
+        }
+    }
 }
 
 struct PraiseOptionView: View {
@@ -99,8 +170,15 @@ struct PraiseOptionView: View {
     var price: String
     var discount: String
     var isSelected: Bool
-    var onSelect: () -> Void
     
+    let product: Product
+    let purchasingEnabled: Bool
+    
+    // 新增：Binding，讓父視圖能夠更新所選產品
+    @Binding var selectedProduct: Product?
+    
+    var onSelect: () -> Void
+
     var body: some View {
         VStack {
             Text(title)
@@ -127,13 +205,10 @@ struct PraiseOptionView: View {
                 .stroke(isSelected ? Color.orange : Color.clear, lineWidth: 2)
         )
         .onTapGesture {
+            // 更新父視圖的 selectedProduct
+            selectedProduct = product
+            print("[DEBUG] onTapGesture - \(title) tapped. Setting selectedProduct to: \(product.id)")
             onSelect()
         }
-    }
-}
-
-struct PraisePurchaseView_Previews: PreviewProvider {
-    static var previews: some View {
-        PraisePurchaseView()
     }
 }
