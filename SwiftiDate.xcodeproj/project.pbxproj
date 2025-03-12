@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 60;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -147,6 +147,8 @@
 		D0644BED2D813442007B2DE0 /* TurboPurchaseFlowUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0644BEC2D813442007B2DE0 /* TurboPurchaseFlowUITests.swift */; };
 		D0644BEE2D8139FA007B2DE0 /* SwiftiDate.storekit in Resources */ = {isa = PBXBuildFile; fileRef = D0644BCF2D80826E007B2DE0 /* SwiftiDate.storekit */; };
 		D0644C182D813F37007B2DE0 /* SwiftiDateClip.app in Embed App Clips */ = {isa = PBXBuildFile; fileRef = D0644BF32D813F36007B2DE0 /* SwiftiDateClip.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		D0644C262D819DD6007B2DE0 /* StateMachine in Frameworks */ = {isa = PBXBuildFile; productRef = D0644C252D819DD6007B2DE0 /* StateMachine */; };
+		D0644C2A2D81B220007B2DE0 /* TabStateMachineManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0644C292D81B220007B2DE0 /* TabStateMachineManager.swift */; };
 		D06724E42D6EC0FC00FD566F /* CloudService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06724E32D6EC0F900FD566F /* CloudService.swift */; };
 		D06724E82D6EC22000FD566F /* FirebaseCloudService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06724E72D6EC22000FD566F /* FirebaseCloudService.swift */; };
 		D06724EB2D6EC45200FD566F /* AliCloudService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06724EA2D6EC44C00FD566F /* AliCloudService.swift */; };
@@ -628,6 +630,7 @@
 		D0644BF32D813F36007B2DE0 /* SwiftiDateClip.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftiDateClip.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0644C042D813F37007B2DE0 /* SwiftiDateClipTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftiDateClipTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0644C0E2D813F37007B2DE0 /* SwiftiDateClipUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftiDateClipUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D0644C292D81B220007B2DE0 /* TabStateMachineManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabStateMachineManager.swift; sourceTree = "<group>"; };
 		D06724E32D6EC0F900FD566F /* CloudService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudService.swift; sourceTree = "<group>"; };
 		D06724E72D6EC22000FD566F /* FirebaseCloudService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseCloudService.swift; sourceTree = "<group>"; };
 		D06724EA2D6EC44C00FD566F /* AliCloudService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AliCloudService.swift; sourceTree = "<group>"; };
@@ -817,6 +820,7 @@
 			files = (
 				D018AD902C9ED5D4005A14B9 /* FirebaseStorageCombine-Community in Frameworks */,
 				D018AD882C9ED5D4005A14B9 /* FirebaseMessaging in Frameworks */,
+				D0644C262D819DD6007B2DE0 /* StateMachine in Frameworks */,
 				D018AD862C9ED5D4005A14B9 /* FirebaseMLModelDownloader in Frameworks */,
 				D018AD6C2C9ED5D4005A14B9 /* FirebaseAppCheck in Frameworks */,
 				D018AD702C9ED5D4005A14B9 /* FirebaseAuth in Frameworks */,
@@ -1125,6 +1129,7 @@
 				D055A7622D19931C00F11F18 /* GlobalVariables.swift */,
 				D07C58022D787DFB0008DC9D /* PeerConnectivityManager.swift */,
 				D07E7F432D7F18BB00FEDBBF /* TermsAndPrivacyView.swift */,
+				D0644C292D81B220007B2DE0 /* TabStateMachineManager.swift */,
 			);
 			path = SwiftiDate;
 			sourceTree = "<group>";
@@ -1558,6 +1563,7 @@
 				D0B3F1932D713B60007A5EA0 /* Mixpanel */,
 				D07C57E02D76F38D0008DC9D /* CropViewController */,
 				D07C57E22D76F38D0008DC9D /* TOCropViewController */,
+				D0644C252D819DD6007B2DE0 /* StateMachine */,
 			);
 			productName = SwiftiDate;
 			productReference = D07B40A92D60FF160015C7AA /* SwiftiDate.app */;
@@ -1722,6 +1728,7 @@
 				D0B3F1922D713B60007A5EA0 /* XCRemoteSwiftPackageReference "mixpanel-swift" */,
 				D0B3F19A2D72AD2C007A5EA0 /* XCRemoteSwiftPackageReference "ViewInspector" */,
 				D07C57DF2D76F38D0008DC9D /* XCRemoteSwiftPackageReference "TOCropViewController" */,
+				D0644C242D819DD6007B2DE0 /* XCRemoteSwiftPackageReference "StateMachine" */,
 			);
 			productRefGroup = D0445C222C71B3800059D522;
 			projectDirPath = "";
@@ -1967,6 +1974,7 @@
 				D0DDDB2C2CA160BB00A78A87 /* HowToUseWhoLikedMeAndCrushListView.swift in Sources */,
 				D0B3F29C2D7404D3007A5EA0 /* AchievementCardView.swift in Sources */,
 				D07B41DF2D6197570015C7AA /* FirebasePhotoManager.swift in Sources */,
+				D0644C2A2D81B220007B2DE0 /* TabStateMachineManager.swift in Sources */,
 				D0445C592C71BFE70059D522 /* SwipeCardView.swift in Sources */,
 				D0445C612C722EF50059D522 /* PhotoSectionView.swift in Sources */,
 				D0DDDB522CA251C600A78A87 /* CommunityGuidelinesView.swift in Sources */,
@@ -2797,6 +2805,14 @@
 				minimumVersion = 11.2.0;
 			};
 		};
+		D0644C242D819DD6007B2DE0 /* XCRemoteSwiftPackageReference "StateMachine" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Tinder/StateMachine.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.3.0;
+			};
+		};
 		D07C57DF2D76F38D0008DC9D /* XCRemoteSwiftPackageReference "TOCropViewController" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/TimOliver/TOCropViewController.git";
@@ -2964,6 +2980,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = D07C57DF2D76F38D0008DC9D /* XCRemoteSwiftPackageReference "TOCropViewController" */;
 			productName = TOCropViewController;
+		};
+		D0644C252D819DD6007B2DE0 /* StateMachine */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D0644C242D819DD6007B2DE0 /* XCRemoteSwiftPackageReference "StateMachine" */;
+			productName = StateMachine;
 		};
 		D07C57E02D76F38D0008DC9D /* CropViewController */ = {
 			isa = XCSwiftPackageProductDependency;

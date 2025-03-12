@@ -1,5 +1,5 @@
 {
-  "originHash" : "299ef1dd300e387f8d6e367371bf141c38924a3e48173741606d317eef94f56a",
+  "originHash" : "415d12023f349b0ce17cd62fde14105e2cbe189479530f5357edb159a5f41532",
   "pins" : [
     {
       "identity" : "abseil-cpp-binary",
@@ -125,6 +125,15 @@
       "state" : {
         "revision" : "540318ecedd63d883069ae7f1ed811a2df00b6ac",
         "version" : "2.4.0"
+      }
+    },
+    {
+      "identity" : "statemachine",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Tinder/StateMachine.git",
+      "state" : {
+        "revision" : "0f7964206bd8dbc70f5a30fed0b1db76bfcc1b24",
+        "version" : "0.3.0"
       }
     },
     {

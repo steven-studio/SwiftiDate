@@ -19,7 +19,7 @@ struct ProfileTabPicker: View {
         }
         .pickerStyle(SegmentedPickerStyle())
         .padding()
-        .onChange(of: selectedTab) { newTab in
+        .onChange(of: selectedTab) { oldTab, newTab in
             print("ProfileTab changed to: \(newTab.rawValue)")
              AnalyticsManager.shared.trackEvent("profile_tab_changed", parameters: ["selected_tab": newTab.rawValue])
         }

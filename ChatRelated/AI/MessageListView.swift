@@ -49,11 +49,11 @@ struct MessageListView: View {
                     }
                 }
                 // 監聽 messages.count 變化，捲到最後一筆
-                .onChange(of: messages.count) { _ in
+                .onChange(of: messages.count) {
                     scrollToBottom(proxy: proxy)
                 }
                 // 監聽 GPT 回應的更新，捲到最後一筆
-                .onChange(of: Response) { _ in
+                .onChange(of: Response) {
                     scrollToBottom(proxy: proxy)
                 }
                 .background(

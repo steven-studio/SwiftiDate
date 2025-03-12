@@ -58,7 +58,7 @@ class FirebasePhotoManager {
             var downloadedPhotos: [(url: String, imageName: String)] = [] // Temporary array to store downloaded photos
             var processedItemCount = 0 // Track the number of processed items
             
-            for (index, item) in listResult.items.enumerated() {
+            for (_, item) in listResult.items.enumerated() {
                 
                 item.downloadURL { result in
                     processedItemCount += 1

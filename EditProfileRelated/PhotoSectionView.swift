@@ -55,7 +55,7 @@ struct PhotoSectionView: View {
         }
         .sheet(isPresented: $showImagePicker) {
             ImagePicker(sourceType: .photoLibrary, selectedImage: $selectedImage)
-                .onChange(of: selectedImage) { newImage in
+                .onChange(of: selectedImage) { oldImage, newImage in
                     if let image = newImage {
                         addImageToPhotos(image: image)
                     }

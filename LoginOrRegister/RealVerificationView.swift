@@ -85,7 +85,7 @@ struct RealVerificationView: View {
             // 畫面出現時記錄 Analytics 事件
             AnalyticsManager.shared.trackEvent("RealVerificationView_Appeared", parameters: nil)
         }
-        .onChange(of: isVerified) { newValue in
+        .onChange(of: isVerified) { oldValue, newValue in
             if newValue {
                 AnalyticsManager.shared.trackEvent("RealVerification_Verified", parameters: nil)
                 // 驗證通過後直接進入 PasswordLoginView

@@ -213,7 +213,7 @@ class FaceTrackingViewController: UIViewController, ARSessionDelegate, AVCapture
         request.httpBody = body
 
         URLSession.shared.dataTask(with: request) { data, response, error in
-            if let error = error {
+            if error != nil {
 //                print("❌ 影像傳輸失敗: \(error.localizedDescription)")
             } else {
 //                print("✅ 影像成功傳輸到後端！")

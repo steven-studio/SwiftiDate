@@ -78,7 +78,7 @@ struct PhoneNumberEntryView: View {
                     .padding(.horizontal)
                 }
                 .accessibilityIdentifier("CountryCodeButton") // <- 加上 Identifier
-                .onChange(of: selectedCountryCode) { newValue in
+                .onChange(of: selectedCountryCode) { oldValue, newValue in
                     userSettings.globalCountryCode = newValue
                 }
                 

@@ -295,10 +295,10 @@ struct RangeSlider: View {
                     )
                     .offset(x: self.xOffsetForValue(self.upperValue, in: geometry))
             }
-            .onChange(of: lowerValue) { newValue in
+            .onChange(of: lowerValue) { oldValue, newValue in
                 range = newValue...upperValue
             }
-            .onChange(of: upperValue) { newValue in
+            .onChange(of: upperValue) { oldValue, newValue in
                 range = lowerValue...newValue
             }
         }

@@ -135,7 +135,6 @@ struct PasswordLoginView: View {
             }
 
             guard let data = data, error == nil else {
-                let errorMessage = error?.localizedDescription ?? "未知錯誤"
                 print("❌ 登入失敗: \(error?.localizedDescription ?? "未知錯誤")")
                 return
             }

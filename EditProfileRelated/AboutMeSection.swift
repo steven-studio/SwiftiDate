@@ -21,7 +21,7 @@ struct AboutMeSection: View {
             
             TextEditor(text: $aboutMe)
                 .frame(height: 100)
-                .onChange(of: aboutMe) { newValue in
+                .onChange(of: aboutMe) { oldValue, newValue in
                     // 一旦文字有變動就上報行為分析
                     analyticsManager.trackEvent("aboutme_changed", parameters: [
                         "length": newValue.count

@@ -109,7 +109,13 @@ struct LanguageSelectionView: View {
                         "selected_count": selectedLanguages.count
                     ])
                     // 关闭语言选择界面
-                    UIApplication.shared.windows.first?.rootViewController?.dismiss(animated: true, completion: nil)
+                    if let windowScene = UIApplication.shared.connectedScenes
+                        .filter({ $0.activationState == .foregroundActive })
+                        .first as? UIWindowScene,
+                       let window = windowScene.windows.first {
+                        
+                        window.rootViewController?.dismiss(animated: true, completion: nil)
+                    }
                 }
                 .padding()
                 .background(Color.green)

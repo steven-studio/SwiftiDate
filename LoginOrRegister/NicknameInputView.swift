@@ -45,7 +45,7 @@ struct NicknameInputView: View {
                     .padding()
                     .background(Color.gray.opacity(0.1))
                     .cornerRadius(8)
-                    .onChange(of: nickname) { newValue in
+                    .onChange(of: nickname) { oldValue, newValue in
                         // 如果超過 35 字就自動截斷
                         if nickname.count > maxLength {
                             nickname = String(nickname.prefix(maxLength))

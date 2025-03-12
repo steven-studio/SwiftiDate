@@ -305,7 +305,7 @@ struct UploadPhotoView: View {
         
         // 2. 準備要寫入的資料字典 (示範)
         let userData: [String: Any] = [
-            "aboutMe": userSettings.aboutMe ?? "default about me",
+            "aboutMe": userSettings.aboutMe,
             "crushCount": userSettings.globalCrushCount,
             "isPremiumUser": userSettings.isPremiumUser,
             "isProfilePhotoVerified": userSettings.isProfilePhotoVerified,
