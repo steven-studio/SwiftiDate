@@ -1523,6 +1523,7 @@
 			buildPhases = (
 				D0445C272C71B3800059D522 /* Sources */,
 				D0445C282C71B3800059D522 /* Frameworks */,
+				D016DB4D2D857D4300946EB6 /* ShellScript */,
 				D07E7F402D7EE81D00FEDBBF /* Run Script */,
 				D0445C292C71B3800059D522 /* Resources */,
 				D0644C1D2D813F37007B2DE0 /* Embed App Clips */,
@@ -1729,6 +1730,7 @@
 				D0B3F19A2D72AD2C007A5EA0 /* XCRemoteSwiftPackageReference "ViewInspector" */,
 				D07C57DF2D76F38D0008DC9D /* XCRemoteSwiftPackageReference "TOCropViewController" */,
 				D0644C242D819DD6007B2DE0 /* XCRemoteSwiftPackageReference "StateMachine" */,
+				D016DB4C2D857C2100946EB6 /* XCRemoteSwiftPackageReference "SwiftLintPlugins" */,
 			);
 			productRefGroup = D0445C222C71B3800059D522;
 			projectDirPath = "";
@@ -1796,6 +1798,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		D016DB4D2D857D4300946EB6 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nif which swiftlint >/dev/null; then\n    swiftlint\nelse\n    echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
 		D07E7F402D7EE81D00FEDBBF /* Run Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -2793,6 +2812,14 @@
 /* End XCLocalSwiftPackageReference section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		D016DB4C2D857C2100946EB6 /* XCRemoteSwiftPackageReference "SwiftLintPlugins" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SimplyDanny/SwiftLintPlugins";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.58.2;
+			};
+		};
 		D018AD642C9ED3C2005A14B9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";

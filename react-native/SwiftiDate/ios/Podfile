@@ -5,6 +5,8 @@ require Pod::Executable.execute_command('node', ['-p',
     {paths: [process.argv[1]]},
   )', __dir__]).strip
 
+use_modular_headers!  # 新增這一行
+
 platform :ios, min_ios_version_supported
 prepare_react_native_project!
 
@@ -16,6 +18,9 @@ end
 
 target 'SwiftiDate' do
   config = use_native_modules!
+  
+  # 加入 Firebase Messaging
+  pod 'Firebase/Messaging'
 
   use_react_native!(
     :path => config[:reactNativePath],

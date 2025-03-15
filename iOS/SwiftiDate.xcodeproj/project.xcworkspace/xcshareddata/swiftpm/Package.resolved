@@ -1,5 +1,5 @@
 {
-  "originHash" : "415d12023f349b0ce17cd62fde14105e2cbe189479530f5357edb159a5f41532",
+  "originHash" : "d36b6ec25cb434f2d6364052c3dbe5c55fba880aaac1f2c90bca98c04f1443cd",
   "pins" : [
     {
       "identity" : "abseil-cpp-binary",
@@ -143,6 +143,15 @@
       "state" : {
         "revision" : "edb6ed4919f7756157fe02f2552b7e3850a538e5",
         "version" : "1.28.1"
+      }
+    },
+    {
+      "identity" : "swiftlintplugins",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/SimplyDanny/SwiftLintPlugins",
+      "state" : {
+        "revision" : "7a3d77f3dd9f91d5cea138e52c20cfceabf352de",
+        "version" : "0.58.2"
       }
     },
     {
