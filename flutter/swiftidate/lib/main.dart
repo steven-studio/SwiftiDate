@@ -4,21 +4,25 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:provider/provider.dart';
 
 // 假設你已自行定義了 AppState, UserSettings, ConsumableStore 等類別
+import 'analytics/analytics_manager.dart';
 import 'providers/app_state.dart';
 import 'providers/user_settings.dart';
 import 'providers/consumable_store.dart';
+import 'providers/location_provider.dart';
 import 'views/content_view.dart';
 import 'views/login_or_register_view.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  await AnalyticsManager.shared.initializeMixpanel("c33a19b0b1c17db46731337f2bc233da");
   runApp(
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => AppState()),
         ChangeNotifierProvider(create: (_) => UserSettings()),
         ChangeNotifierProvider(create: (_) => ConsumableStore()),
+        ChangeNotifierProvider(create: (_) => LocationProvider()),
       ],
       child: const SwiftiDateApp(),
     ),
