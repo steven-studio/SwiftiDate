@@ -13,13 +13,21 @@ struct ChatListContainerView: View {
     @State private var disableChildSwipe: Bool = false
     @Binding var showTurboView: Bool
     
+    // 自定義初始化器，需要傳入 viewModel 和 showTurboView
+    init(viewModel: ChatViewModel, showTurboView: Binding<Bool>) {
+        self.viewModel = viewModel
+        self._showTurboView = showTurboView
+        UITableView.appearance().separatorStyle = .none
+    }
+
     var body: some View {
         // 聊天列表
-        VStack(alignment: .leading, spacing: 15) {
+        List {
             // Custom title for new matches
             Text("新配對")
                 .font(.headline)
                 .padding(.leading)
+                .listRowSeparator(.hidden)  // 添加在這裡
 
             // 配對用戶的水平滾動
             ScrollView(.horizontal, showsIndicators: false) {
@@ -109,11 +117,13 @@ struct ChatListContainerView: View {
                 }
                 .padding(.horizontal)
             }
+            .listRowSeparator(.hidden)  // 添加在這裡
             
             // 聊天
             Text("聊天")
                 .font(.headline)
                 .padding(.leading)
+                .listRowSeparator(.hidden)  // 添加在這裡
             
             // Add the 'WhoLikedYouView' at the top
             Button(action: {
@@ -124,63 +134,110 @@ struct ChatListContainerView: View {
                 WhoLikedYouView()
                     .padding(.top)
             }
+            .listRowSeparator(.hidden)  // 添加在這裡
             
             if viewModel.showSearchField {
-                List {
-                    // 使用 List 顯示聊天對話
-                    ForEach(viewModel.filteredChats) { chat in
-                        if let messages = viewModel.chatMessages[chat.id] {
-                            ChatRow(chat: chat, messages: messages) // Pass messages to ChatRow
-                                .swipeActions(edge: .trailing) {
-                                    // "修改備註名稱" button
-                                    Button {
-                                        // 埋點：點擊修改備註名稱
-                                        AnalyticsManager.shared.trackEvent("chat_rename_tapped", parameters: [
-                                            "chat_id": chat.id.uuidString
-                                        ])
-                                        print("修改備註名稱 tapped")
-                                    } label: {
-                                        Text("修改備註名稱")
-                                    }
-                                    .tint(.green)
-
-                                    // "解除配對" button
-                                    Button {
-                                        // 埋點：點擊解除配對
-                                        AnalyticsManager.shared.trackEvent("chat_unmatch_tapped", parameters: [
-                                            "chat_id": chat.id.uuidString
-                                        ])
-                                        print("解除配對 tapped")
-                                    } label: {
-                                        Text("解除配對")
-                                    }
-                                    .tint(.gray)
-                                }
-                                .onTapGesture {
-                                    // 埋點：點擊聊天列表中的某個聊天
-                                    AnalyticsManager.shared.trackEvent("chat_row_tapped", parameters: [
-                                        "chat_id": chat.id.uuidString,
-                                        "chat_name": chat.name
+                // 使用 List 顯示聊天對話
+                ForEach(viewModel.filteredChats) { chat in
+                    if let messages = viewModel.chatMessages[chat.id] {
+                        ChatRow(chat: chat, messages: messages) // Pass messages to ChatRow
+                            .swipeActions(edge: .trailing) {
+                                // "修改備註名稱" button
+                                Button {
+                                    // 埋點：點擊修改備註名稱
+                                    AnalyticsManager.shared.trackEvent("chat_rename_tapped", parameters: [
+                                        "chat_id": chat.id.uuidString
                                     ])
-                                    if chat.name == "SwiftiDate" { // Adjust to your actual name for DateVerse
-                                        // 埋點：選擇打開互動內容
-                                        AnalyticsManager.shared.trackEvent("interactive_content_opened")
-                                        viewModel.showInteractiveContent = true // Navigate to InteractiveContentView
-                                        viewModel.selectedChat = nil
-                                    } else {
-                                        viewModel.showInteractiveContent = false
-                                        viewModel.selectedChat = chat // Navigate to ChatDetailView
-                                    }
+                                    print("修改備註名稱 tapped")
+                                } label: {
+                                    Text("修改備註名稱")
                                 }
-                        } else {
-                            // 如果 messages 不存在，显示 chat.id 作为调试信息
-                            Text(chat.id.uuidString)
-                        }
+                                .tint(.green)
+
+                                // "解除配對" button
+                                Button {
+                                    // 埋點：點擊解除配對
+                                    AnalyticsManager.shared.trackEvent("chat_unmatch_tapped", parameters: [
+                                        "chat_id": chat.id.uuidString
+                                    ])
+                                    print("解除配對 tapped")
+                                } label: {
+                                    Text("解除配對")
+                                }
+                                .tint(.gray)
+                            }
+                            .onTapGesture {
+                                // 埋點：點擊聊天列表中的某個聊天
+                                AnalyticsManager.shared.trackEvent("chat_row_tapped", parameters: [
+                                    "chat_id": chat.id.uuidString,
+                                    "chat_name": chat.name
+                                ])
+                                if chat.name == "SwiftiDate" { // Adjust to your actual name for DateVerse
+                                    // 埋點：選擇打開互動內容
+                                    AnalyticsManager.shared.trackEvent("interactive_content_opened")
+                                    viewModel.showInteractiveContent = true // Navigate to InteractiveContentView
+                                    viewModel.selectedChat = nil
+                                } else {
+                                    viewModel.showInteractiveContent = false
+                                    viewModel.selectedChat = chat // Navigate to ChatDetailView
+                                }
+                            }
+                            .listRowSeparator(.hidden)  // 添加在這裡
+                    } else {
+                        // 如果 messages 不存在，显示 chat.id 作为调试信息
+                        Text(chat.id.uuidString)
+                            .listRowSeparator(.hidden)  // 添加在這裡
                     }
                 }
             } else {
-                ChatListView(viewModel: viewModel)
+                // 使用 List 顯示聊天對話
+                ForEach(viewModel.chatData) { chat in
+                    ChatRow(chat: chat, messages: viewModel.chatMessages[chat.id] ?? []) // Pass messages to ChatRow
+                        .swipeActions(edge: .trailing) {
+                            // "修改備註名稱" button
+                            Button {
+                                // 埋點：點擊修改備註名稱
+                                AnalyticsManager.shared.trackEvent("chat_rename_tapped", parameters: [
+                                    "chat_id": chat.id.uuidString
+                                ])
+                                print("修改備註名稱 tapped")
+                            } label: {
+                                Text("修改備註名稱")
+                            }
+                            .tint(.green)
+
+                            // "解除配對" button
+                            Button {
+                                // 埋點：點擊解除配對
+                                AnalyticsManager.shared.trackEvent("chat_unmatch_tapped", parameters: [
+                                    "chat_id": chat.id.uuidString
+                                ])
+                                print("解除配對 tapped")
+                            } label: {
+                                Text("解除配對")
+                            }
+                            .tint(.gray)
+                        }
+                        .onTapGesture {
+                            // 埋點：點擊聊天列表中的某個聊天
+                            AnalyticsManager.shared.trackEvent("chat_row_tapped", parameters: [
+                                "chat_id": chat.id.uuidString,
+                                "chat_name": chat.name
+                            ])
+                            if chat.name == "SwiftiDate" { // Adjust to your actual name for DateVerse
+                                // 埋點：選擇打開互動內容
+                                AnalyticsManager.shared.trackEvent("interactive_content_opened")
+                                viewModel.showInteractiveContent = true // Navigate to InteractiveContentView
+                                viewModel.selectedChat = nil
+                            } else {
+                                viewModel.showInteractiveContent = false
+                                viewModel.selectedChat = chat // Navigate to ChatDetailView
+                            }
+                        }
+                        .listRowSeparator(.hidden)  // 添加在這裡
+                }
             }
         }
+        .listStyle(PlainListStyle())
     }
 }

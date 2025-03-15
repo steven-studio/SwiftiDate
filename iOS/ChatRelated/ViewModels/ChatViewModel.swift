@@ -36,7 +36,7 @@ class ChatViewModel: ObservableObject {
     }
     
     var filteredChats: [Chat] {
-        if searchText.isEmpty { return [] }
+        if searchText.isEmpty { return chatData }
         return chatData.filter { $0.name.contains(searchText) }
     }
     
