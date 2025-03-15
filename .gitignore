@@ -23,3 +23,6 @@ functions/src/swiftidate-cdff0-firebase-adminsdk-e2p44-34ef83ec05.json
 aps_development.cer
 憑證.p12
 CertificateSigningRequest.certSigningRequest
+flutter/swiftidate/lib/config/firebase_options.dart
+commit.txt
+bfg.jar

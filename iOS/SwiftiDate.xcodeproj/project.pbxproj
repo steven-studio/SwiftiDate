@@ -1523,8 +1523,8 @@
 			buildPhases = (
 				D0445C272C71B3800059D522 /* Sources */,
 				D0445C282C71B3800059D522 /* Frameworks */,
-				D016DB4D2D857D4300946EB6 /* ShellScript */,
 				D07E7F402D7EE81D00FEDBBF /* Run Script */,
+				D016DB4D2D857D4300946EB6 /* ShellScript */,
 				D0445C292C71B3800059D522 /* Resources */,
 				D0644C1D2D813F37007B2DE0 /* Embed App Clips */,
 			);
@@ -1828,11 +1828,11 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(PROJECT_DIR)/iOS/SwiftiDate/GoogleService-Info.plist",
+				"$(PROJECT_DIR)/SwiftiDate/GoogleService-Info.plist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n#!/bin/bash\nif [ -z \"$GOOGLESERVICEINFO_BASE64\" ]; then\n  echo \"環境變數 GOOGLESERVICEINFO_BASE64 沒有設定，無法生成 GoogleService-Info.plist\"\n  exit 1\nfi\n\necho \"$GOOGLESERVICEINFO_BASE64\" | base64 --decode > \"${PROJECT_DIR}/iOS/SwiftiDate/GoogleService-Info.plist\"\necho \"已生成 GoogleService-Info.plist 到專案目錄。\"\n";
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n#!/bin/bash\nif [ -z \"$GOOGLESERVICEINFO_BASE64\" ]; then\n  echo \"環境變數 GOOGLESERVICEINFO_BASE64 沒有設定，無法生成 GoogleService-Info.plist\"\n  exit 1\nfi\n\necho \"$GOOGLESERVICEINFO_BASE64\" | base64 --decode > \"${PROJECT_DIR}/SwiftiDate/GoogleService-Info.plist\"\necho \"已生成 GoogleService-Info.plist 到專案目錄。\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
