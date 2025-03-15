@@ -7,6 +7,19 @@
 
 import SwiftUI
 
+struct TabBarIcon: View {
+    let systemImageName: String
+    var body: some View {
+        Image(systemName: systemImageName)
+            .foregroundColor(.white)
+            .padding(8)
+            .background(
+                Circle()
+                    .stroke(Color.white, lineWidth: 1)
+            )
+    }
+}
+
 struct MainView: View {
     @EnvironmentObject var appState: AppState
     @EnvironmentObject var userSettings: UserSettings
@@ -22,19 +35,28 @@ struct MainView: View {
     
     // 使用狀態機管理器
     @StateObject private var tabStateMachineManager = TabStateMachineManager()
+    
+    init() {
+        UITabBar.appearance().backgroundImage = UIImage()
+        UITabBar.appearance().shadowImage = UIImage()
+        UITabBar.appearance().backgroundColor = .clear
+        UITabBar.appearance().isTranslucent = true
+        UITabBar.appearance().tintColor = UIColor.white  // 設定 tabItem 的圖片顏色為白色
+        UITabBar.appearance().unselectedItemTintColor = UIColor.systemGray3
+    }
 
     var body: some View {
         TabView(selection: $selectedTab) { // Bind TabView selection to selectedTab
             SwipeCardView()
                 .tabItem {
-                    Image(systemName: "heart.fill")
+                    TabBarIcon(systemImageName: "heart.fill")
                 }
                 .tag(0) // Assign a tag for SwipeCardView tab
             
             // Pass the selectedTab to TurboView
             TurboView(contentSelectedTab: $selectedTab, turboSelectedTab: $selectedTurboTab, showBackButton: false) // Match the parameter name here
                 .tabItem {
-                    Image(systemName: "star.fill")
+                    TabBarIcon(systemImageName: "star.fill")
                 }
                 .tag(1) // Assign a tag for TurboView tab
 
@@ -44,7 +66,7 @@ struct MainView: View {
                     UserGuideView()
                 }
                 .tabItem {
-                    Image(systemName: "questionmark.circle.fill")
+                    TabBarIcon(systemImageName: "questionmark.circle.fill")
                 }
                 .tag(2) // Assign a tag for UserGuideView tab
             } else {
@@ -52,7 +74,7 @@ struct MainView: View {
                     AstrologyView() // ✅ 針對女性用戶顯示命理學相關內容
                 }
                 .tabItem {
-                    Image(systemName: "moon.stars.fill") // 使用更符合命理學的 SF Symbol
+                    TabBarIcon(systemImageName: "moon.stars.fill") // 使用更符合命理學的 SF Symbol
                 }
                 .tag(2)
             }
@@ -60,7 +82,7 @@ struct MainView: View {
             ChatView(contentSelectedTab: $selectedTab, userSettings: userSettings) // Pass the binding to contentSelectedTab
                 .environmentObject(userSettings) // 確保傳遞 userSettings
                 .tabItem {
-                    Image(systemName: "message.fill")
+                    TabBarIcon(systemImageName: "message.fill")
                 }
                 .tag(3) // Assign a tag for ChatView tab
             
@@ -71,7 +93,7 @@ struct MainView: View {
                     .environmentObject(consumableStore)
             }
             .tabItem {
-                Image(systemName: "person.fill")
+                TabBarIcon(systemImageName: "person.fill")
             }
             .tag(4) // Assign a tag for ProfileView tab
             .accessibilityLabel("ProfileTab")

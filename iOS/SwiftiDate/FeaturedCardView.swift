@@ -19,7 +19,7 @@ struct FeaturedCardView: View {
             
             VStack(alignment: .leading, spacing: 4) {
                 HStack {
-                    Text("每日精選")
+                    Text("AI每日精選")
                         .font(.headline)
                         .foregroundColor(.white)
                     Image(systemName: "star.fill")
