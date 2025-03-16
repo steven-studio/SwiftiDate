@@ -49,6 +49,8 @@ struct SwipeCardView: View {
     /// - isRightSwipe: 是否為向右滑 (Like)
     /// - docID: 此筆滑動資料在 Firebase 中的文件 ID
     @State private var lastSwipedData: (user: User, index: Int, isRightSwipe: Bool, docID: String)?
+    // 加一個屬性，記錄最後飛出的 offset
+    @State private var lastSwipedOffset: CGSize?
 
     // List of users and current index
     @State private var users: [User] = [
@@ -63,6 +65,10 @@ struct SwipeCardView: View {
         ])
         // Add more users here
     ]
+    
+    // Use the view model
+    @StateObject var viewModel = SwipeCardViewModel()
+    // If needed, you can pass other environment objects (like UserSettings or LocationManager) here.
     
     var body: some View {
         ZStack {
@@ -107,9 +113,11 @@ struct SwipeCardView: View {
             PrivacySettingsView(isPresented: $showPrivacySettings)
         }
         .onReceive(NotificationCenter.default.publisher(for: .undoSwipeNotification)) { _ in
-            self.undoSwipe()
+            viewModel.undoSwipe()
+            print("Got undo notification!")
         }
         .onAppear {
+            viewModel.userSettings = userSettings
             fetchSwipes()
         }
     }
@@ -125,34 +133,41 @@ struct SwipeCardView: View {
                 ForEach(Array(users[currentIndex..<min(currentIndex + 3, users.count)]).reversed(), id: \.id) { user in
                     let index = users.firstIndex(where: { $0.id == user.id }) ?? 0
                     let isCurrentCard = index == currentIndex
-                    let yOffset = CGFloat(index - currentIndex) * 10
-                    let rotationAngle = isCurrentCard ? Double(offset.width / 10) : 0
+                    // 先把基礎的堆疊位移
+                    let baseY = CGFloat(index - currentIndex) * 10
+                    let rotationAngle = isCurrentCard ? Double(offset.width / 40) : 0
                     let zIndexValue = Double(users.count - index)
                     let scaleValue = isCurrentCard ? 1.0 : 0.95
-                    let xOffset = isCurrentCard ? offset.width : 0
 
                     SwipeCard(user: user)
-                        .offset(x: xOffset, y: yOffset)
+                        .offset(
+                            x: isCurrentCard ? offset.width : 0,
+                            y: isCurrentCard ? offset.height : CGFloat(index - currentIndex) * 10
+                        )
                         .scaleEffect(scaleValue)
                         .rotationEffect(.degrees(rotationAngle))
                         .gesture(
                             isCurrentCard ? DragGesture()
                                 .onChanged { gesture in
-                                    withAnimation(nil) {
-                                        self.offset = gesture.translation
-                                    }
+                                    self.offset = gesture.translation
                                 }
-                                .onEnded { _ in
-                                    withAnimation(nil) {
-                                        if self.offset.width > 120 {
-                                            // Like gesture (右滑)
-                                            handleSwipe(rightSwipe: true)
-                                        } else if self.offset.width < -150 {
-                                            // Dislike gesture (左滑)
-                                            handleSwipe(rightSwipe: false)
-                                        } else {
-                                            // 如果滑動不夠，重置偏移
-                                            self.offset = .zero
+                                .onEnded { value in
+                                    
+                                    // 1) 抓出預估結束時的 x / y 偏移
+                                    let predictedX = value.predictedEndTranslation.width
+                                    let predictedY = value.predictedEndTranslation.height
+
+                                    // 2) 根據門檻來判斷是否左滑或右滑
+                                    if predictedX > 100 {
+                                        // ▶︎ 右滑 (like)
+                                        viewModel.swipeOffScreen(toRight: true, predictedX: predictedX, predictedY: predictedY)
+                                    } else if predictedX < -100 {
+                                        // ◀︎ 左滑 (dislike)
+                                        viewModel.swipeOffScreen(toRight: false, predictedX: predictedX, predictedY: predictedY)
+                                    } else {
+                                        // 回彈，不夠力就歸位
+                                        withAnimation(.spring()) {
+                                            offset = .zero
                                         }
                                     }
                                 }
@@ -256,107 +271,7 @@ struct SwipeCardView: View {
             self.lastDocument = docs.last
         }
     }
-    
-    // Handle swipe action
-    func handleSwipe(rightSwipe: Bool) {
-        // 先做本地端的暫時 UI 效果 (例如：卡片飛出去)
-        // ...
         
-        // === 1. 建立 Firebase 參考 ===
-        let newDocRef = db.collection("swipes").document()
-        
-        // === 2. 準備要上傳的資料 ===
-        let data: [String: Any] = [
-            "userID": "<你當前使用者的ID>",
-            "targetID": users[currentIndex].id,
-            "isLike": rightSwipe,
-            "timestamp": FieldValue.serverTimestamp() // Firestore 會自動帶入雲端時間
-        ]
-        
-        // === 3. 寫進 Firestore ===
-        newDocRef.setData(data) { error in
-            if let error = error {
-                print("寫入 Firestore 失敗: \(error)")
-                // 這裡可以根據需求做錯誤處理 (UI 還原)
-                return
-            }
-            
-            // ★ 在這裡加上行為分析 (Card Swipe) ★
-            AnalyticsManager.shared.trackEvent("card_swipe", parameters: [
-                "target_id": self.users[self.currentIndex].id,
-                "is_like": rightSwipe
-            ])
-            
-            // === 4. 成功後，紀錄這次滑卡資料 ===
-            self.lastSwipedData = (
-                user: self.users[self.currentIndex],
-                index: self.currentIndex,
-                isRightSwipe: rightSwipe,
-                docID: newDocRef.documentID
-            )
-            
-            // Like 的話，依你原本邏輯，加個計數：
-            if rightSwipe {
-                userSettings.globalLikeCount += 1
-            }
-            
-            // === UI：前往下一張卡 ===
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                if currentIndex < users.count - 1 {
-                    currentIndex += 1
-                } else {
-                    // 沒有更多卡了
-                    withAnimation {
-                        showCircleAnimation = true
-                    }
-                }
-                self.offset = .zero
-            }
-        }
-    }
-    
-    func undoSwipe() {
-        guard let data = lastSwipedData else {
-            // 沒有可以撤回的資料
-            return
-        }
-        
-        let docRef = db.collection("swipes").document(data.docID)
-        
-        // 這裡示範「刪除」的作法
-        docRef.delete { error in
-            if let error = error {
-                print("刪除 Firestore 紀錄失敗: \(error)")
-                return
-            }
-            
-            // ★ 在這裡加上行為分析 (Swipe Undo) ★
-            AnalyticsManager.shared.trackEvent("card_swipe_undo", parameters: [
-                "target_id": data.user.id,
-                "was_like": data.isRightSwipe
-            ])
-            
-            // 如果上次是 Like，就把 like count 加回來
-            if data.isRightSwipe {
-                userSettings.globalLikeCount -= 1
-            }
-            
-            // UI 邏輯：將 currentIndex 拉回上一張
-            self.currentIndex = data.index
-            
-            // 假如已經進到「沒卡了」，要把動畫關掉
-            withAnimation {
-                self.showCircleAnimation = false
-            }
-            
-            // 把卡片的偏移歸零
-            self.offset = .zero
-            
-            // 清空，代表只能撤回最後一次
-            self.lastSwipedData = nil
-        }
-    }
-    
     // 位置權限提示畫面
     var locationPermissionPromptView: some View {
         VStack {

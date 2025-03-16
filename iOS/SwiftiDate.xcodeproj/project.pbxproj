@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D016DC0F2D86D99800946EB6 /* SwipeCardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D016DC0E2D86D99800946EB6 /* SwipeCardViewModel.swift */; };
+		D016DC102D86D99800946EB6 /* SwipeCardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D016DC0E2D86D99800946EB6 /* SwipeCardViewModel.swift */; };
 		D017F4EE2CAEBC8700C71D18 /* QRCodeScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D017F4ED2CAEBC8700C71D18 /* QRCodeScannerView.swift */; };
 		D017F4F02CAECC5100C71D18 /* PersonalInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D017F4EF2CAECC5100C71D18 /* PersonalInfoView.swift */; };
 		D017F4F42CAF77D900C71D18 /* MessageBubbleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D017F4F32CAF77D900C71D18 /* MessageBubbleView.swift */; };
@@ -529,6 +531,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		D016DC0E2D86D99800946EB6 /* SwipeCardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeCardViewModel.swift; sourceTree = "<group>"; };
 		D017F4ED2CAEBC8700C71D18 /* QRCodeScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeScannerView.swift; sourceTree = "<group>"; };
 		D017F4EF2CAECC5100C71D18 /* PersonalInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalInfoView.swift; sourceTree = "<group>"; };
 		D017F4F32CAF77D900C71D18 /* MessageBubbleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageBubbleView.swift; sourceTree = "<group>"; };
@@ -1356,6 +1359,7 @@
 				D09587CE2CB7E44400BCD04B /* CircleExpansionView.swift */,
 				D09587D52CB8CDDA00BCD04B /* GenderSelectionView.swift */,
 				D0445C582C71BFE70059D522 /* SwipeCardView.swift */,
+				D016DC0E2D86D99800946EB6 /* SwipeCardViewModel.swift */,
 			);
 			path = SwipeCardRelated;
 			sourceTree = "<group>";
@@ -1999,6 +2003,7 @@
 				D04729CC2CC08B62007C33EC /* MeetWillingnessSection.swift in Sources */,
 				D017F4F02CAECC5100C71D18 /* PersonalInfoView.swift in Sources */,
 				D0903ABC2D589D0C00735323 /* AppDelegate.swift in Sources */,
+				D016DC0F2D86D99800946EB6 /* SwipeCardViewModel.swift in Sources */,
 				D0DDDB052C9FA8AF00A78A87 /* ChatDetailView.swift in Sources */,
 				D0B388362D5B7C58003BC40C /* AstrologyView.swift in Sources */,
 				D0445C652C72388D0059D522 /* FlowStack.swift in Sources */,
@@ -2178,6 +2183,7 @@
 				D0B3F2322D73479A007A5EA0 /* FirebaseManager.swift in Sources */,
 				D0B3F2312D73477A007A5EA0 /* FirebasePhotoManager.swift in Sources */,
 				D0B3F2302D734752007A5EA0 /* PhotoUtility.swift in Sources */,
+				D016DC102D86D99800946EB6 /* SwipeCardViewModel.swift in Sources */,
 				D0B3F22F2D734732007A5EA0 /* ImagePicker.swift in Sources */,
 				D0422DA12D7C509400609060 /* ChatGPTView.swift in Sources */,
 				D0422DA22D7C509400609060 /* ClaudeAIView.swift in Sources */,
