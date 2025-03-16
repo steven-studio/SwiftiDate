@@ -9,7 +9,7 @@ import '../widgets/user_guide_view.dart';
 import '../widgets/astrology_view.dart';
 import '../widgets/chat_view.dart';
 import '../widgets/profile_view.dart';
-// import 'analytics_manager.dart';
+import '../analytics/analytics_manager.dart';
 // import 'tab_state_machine_manager.dart'; // 假設你有這個類別
 import '../utils/tab_event.dart'; // 假設定義了 TabEvent, 如：selectSwipe, selectTurbo, selectGuide, selectAstrology, selectChat, selectProfile
 
@@ -82,9 +82,9 @@ class _MainViewState extends State<MainView> {
         newEvent = TabEvent.selectSwipe;
     }
     triggerTabEvent(newEvent);
-    // AnalyticsManager.shared.trackEvent("tab_switched", parameters: {
-    //   "new_tab_index": newIndex,
-    // });
+    AnalyticsManager.shared.trackEvent("tab_switched", parameters: {
+      "new_tab_index": newIndex,
+    });
   }
 
   @override
@@ -96,7 +96,7 @@ class _MainViewState extends State<MainView> {
 
     // 定義各個分頁對應的 Widget，這裡直接引用各自實作的 widget
     final List<Widget> pages = [
-      const SwipeCardView(), // tab index 0
+      SwipeCardView(), // tab index 0
       TurboView(
         // 傳遞必要的參數，這裡簡化為傳遞當前選取值
         contentSelectedTab: selectedTab,
@@ -126,7 +126,7 @@ class _MainViewState extends State<MainView> {
         label: 'Turbo',
       ),
       BottomNavigationBarItem(
-        icon: const Icon(Icons.help_outline),
+        icon: Icon(Icons.help_outline),
         label: guideLabel,
       ),
       const BottomNavigationBarItem(

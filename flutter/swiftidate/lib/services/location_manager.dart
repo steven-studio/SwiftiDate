@@ -1,7 +1,7 @@
 // lib/services/location_manager.dart
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
-import '../analytics_manager.dart';
+import '../analytics/analytics_manager.dart';
 
 class LocationManager extends ChangeNotifier {
   Position? userLocation;

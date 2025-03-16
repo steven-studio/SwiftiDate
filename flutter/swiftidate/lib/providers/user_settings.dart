@@ -19,6 +19,9 @@ class UserSettings extends ChangeNotifier {
   int globalPraiseCount = 0;
   bool isProfilePhotoVerified = false;
 
+  // 新增 newMatchedChatID 屬性，用於儲存新的配對聊天 ID
+  String? newMatchedChatID;
+
   // 例如，更新電話的函式：
   void updatePhoneNumber(String phone) {
     globalPhoneNumber = phone;

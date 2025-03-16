@@ -42,6 +42,16 @@ dependencies:
   mixpanel_flutter: ^1.2.1
   geolocator: ^9.0.2
   http: ^0.13.5
+  cloud_firestore: ^4.0.0
+  firebase_database: ^10.0.7
+  firebase_storage: ^11.1.0
+  flutter_webrtc: ^0.12.12+hotfix.1
+  
+  # 從 GitHub 直接引用 flutter-webrtc-demo
+  flutter_webrtc_demo:
+    git:
+      url: https://github.com/flutter-webrtc/flutter-webrtc-demo.git
+      ref: master
 
 dev_dependencies:
   flutter_test:

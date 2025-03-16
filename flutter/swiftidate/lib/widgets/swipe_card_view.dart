@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:provider/provider.dart';
+import 'package:geolocator/geolocator.dart';
 // 假設你已經實作這些 class
 import '../providers/user_settings.dart';
 import '../services/location_manager.dart';
@@ -241,8 +242,8 @@ class _SwipeCardViewState extends State<SwipeCardView> {
     final userSettings = Provider.of<UserSettings>(context);
     // 檢查位置權限，假設 locationManager.authorizationStatus 為枚舉型態
     bool locationAuthorized =
-        locationManager.authorizationStatus == AuthorizationStatus.authorizedWhenInUse ||
-        locationManager.authorizationStatus == AuthorizationStatus.authorizedAlways;
+        locationManager.authorizationStatus == LocationPermission.whileInUse ||
+        locationManager.authorizationStatus == LocationPermission.always;
 
     return Scaffold(
       body: Stack(
@@ -495,7 +496,7 @@ class SwipeCard extends StatelessWidget {
                 // 特殊功能按鈕
                 IconButton(
                   icon: Icon(Icons.star, size: 30,
-                      color: Provider.of<UserSettings>(context).globalUserGender == UserGender.male ? Colors.blue : Colors.pink),
+                      color: Provider.of<UserSettings>(context).globalUserGender == Gender.male ? Colors.blue : Colors.pink),
                   onPressed: () {
                     // 特殊功能行為
                   },
