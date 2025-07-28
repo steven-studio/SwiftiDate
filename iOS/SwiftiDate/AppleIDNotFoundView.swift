@@ -12,30 +12,40 @@ struct AppleIDNotFoundView: View {
     var onBack: () -> Void
 
     var body: some View {
-        VStack(spacing: 32) {
-            Text("找不到 Apple ID")
-                .font(.title)
-                .bold()
-            Text("我們找不到與該 Apple ID 連結的帳號。")
-                .font(.body)
-                .foregroundColor(.gray)
-            Button(action: {
-                onCreateAccount()
-            }) {
-                Text("建立新帳號")
-                    .frame(maxWidth: .infinity)
-                    .padding()
-                    .background(Color.green)
-                    .foregroundColor(.white)
-                    .cornerRadius(12)
+        NavigationView {
+            VStack(spacing: 32) {
+                Spacer()
+                
+                Text("找不到 Apple ID")
+                    .font(.title)
+                    .bold()
+                Text("我們找不到與該 Apple ID 連結的帳號。")
+                    .font(.body)
+                    .foregroundColor(.gray)
+                Button(action: {
+                    onCreateAccount()
+                }) {
+                    Text("建立新帳號")
+                        .bold() // 或 .fontWeight(.bold)
+                        .padding(.vertical, 24)
+                        .padding(.horizontal, 64)
+                        .background(Color.green)
+                        .foregroundColor(.white)
+                        .cornerRadius(12)
+                }
+                Spacer()
             }
-            Button(action: {
-                onBack()
-            }) {
-                Text("返回")
-                    .foregroundColor(.blue)
+            .padding()
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button(action: { onBack() }) {
+                        HStack {
+                            Image(systemName: "chevron.left")
+                                .foregroundColor(.gray)
+                        }
+                    }
+                }
             }
-            .padding(.top, 8)
         }
         .padding()
     }

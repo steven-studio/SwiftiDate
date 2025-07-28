@@ -306,7 +306,15 @@ struct LoginOrRegisterView: View {
             print("Full Name: \(fullName)")
         }
         
-        showPhoneNumberEntry = true
+        checkAppleIDRegistered(userID: userID) { isRegistered in
+            if isRegistered {
+                // TODO: 執行登入（寫入 userSettings, appState, etc）
+                // 例如 appState.isLoggedIn = true
+            } else {
+                // 查不到 Apple ID，顯示引導建立帳號畫面
+                showAppleIDNotFound = true
+            }
+        }
     }
     
     // 這是範例API，請自行換成真正API

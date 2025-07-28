@@ -1,9 +1,7 @@
-feat: 重構專案目錄結構並更新 import 路徑
+feat: 新增 GeminiView 與 AppleIDNotFoundView，移除 VertexAIView，並同步調整 iOS/Flutter 多處專案檔案
 
-- 將 UserSettings、AppState、ConsumableStore 等檔案移至 providers/ 資料夾
-- 將 local_storage_manager.dart 新增到 services/ 資料夾
-- 調整 views/ 下檔案的 import 路徑以符合新結構
-- 更新 .swiftlint.yml 配置以符合專案目錄
-- 新增 SwiftLint Run Script Phase（未在 Xcode 中修改腳本內容）
-  
-此 commit 使專案結構更清晰，也利於日後維護與擴充。
+- 新增 iOS/ChatRelated/AI/GeminiView.swift
+- 新增 iOS/SwiftiDate/AppleIDNotFoundView.swift
+- 移除 iOS/ChatRelated/AI/VertexAIView.swift
+- 調整/刪除 Flutter 與 iOS 多處設定、專案檔案
+- 修改多個主要 Swift 檔案與 Flutter 設定檔
