@@ -43,12 +43,14 @@
 		D018AD902C9ED5D4005A14B9 /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = D018AD8F2C9ED5D4005A14B9 /* FirebaseStorageCombine-Community */; settings = {ATTRIBUTES = (Required, ); }; };
 		D018AD922C9ED5D4005A14B9 /* FirebaseVertexAI-Preview in Frameworks */ = {isa = PBXBuildFile; productRef = D018AD912C9ED5D4005A14B9 /* FirebaseVertexAI-Preview */; };
 		D018AD962C9EEA83005A14B9 /* AsyncImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D018AD952C9EEA82005A14B9 /* AsyncImageView.swift */; };
+		D019A8762E37826C00385027 /* GeminiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D019A8752E37826600385027 /* GeminiView.swift */; };
+		D019A8772E37826C00385027 /* GeminiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D019A8752E37826600385027 /* GeminiView.swift */; };
+		D019A8792E3797EC00385027 /* AppleIDNotFoundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D019A8782E3797E300385027 /* AppleIDNotFoundView.swift */; };
 		D039FC5B2CD230060082D2F3 /* PersonalityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D039FC5A2CD230050082D2F3 /* PersonalityView.swift */; };
 		D0422D992D7C509400609060 /* ChatGPTView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0422D902D7C509400609060 /* ChatGPTView.swift */; };
 		D0422D9A2D7C509400609060 /* ClaudeAIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0422D912D7C509400609060 /* ClaudeAIView.swift */; };
 		D0422D9B2D7C509400609060 /* LocalModelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0422D932D7C509400609060 /* LocalModelView.swift */; };
 		D0422D9C2D7C509400609060 /* TextViewRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0422D962D7C509400609060 /* TextViewRepresentable.swift */; };
-		D0422D9D2D7C509400609060 /* VertexAIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0422D972D7C509400609060 /* VertexAIView.swift */; };
 		D0422D9E2D7C509400609060 /* DeepSeekView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0422D922D7C509400609060 /* DeepSeekView.swift */; };
 		D0422D9F2D7C509400609060 /* MessageListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0422D942D7C509400609060 /* MessageListView.swift */; };
 		D0422DA02D7C509400609060 /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0422D952D7C509400609060 /* Response.swift */; };
@@ -56,7 +58,6 @@
 		D0422DA22D7C509400609060 /* ClaudeAIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0422D912D7C509400609060 /* ClaudeAIView.swift */; };
 		D0422DA32D7C509400609060 /* LocalModelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0422D932D7C509400609060 /* LocalModelView.swift */; };
 		D0422DA42D7C509400609060 /* TextViewRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0422D962D7C509400609060 /* TextViewRepresentable.swift */; };
-		D0422DA52D7C509400609060 /* VertexAIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0422D972D7C509400609060 /* VertexAIView.swift */; };
 		D0422DA62D7C509400609060 /* DeepSeekView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0422D922D7C509400609060 /* DeepSeekView.swift */; };
 		D0422DA72D7C509400609060 /* MessageListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0422D942D7C509400609060 /* MessageListView.swift */; };
 		D0422DA82D7C509400609060 /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0422D952D7C509400609060 /* Response.swift */; };
@@ -544,6 +545,8 @@
 		D018AD622C9E87F6005A14B9 /* ChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; wrapsLines = 0; };
 		D018AD952C9EEA82005A14B9 /* AsyncImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncImageView.swift; sourceTree = "<group>"; };
 		D018AD972C9F1A0F005A14B9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		D019A8752E37826600385027 /* GeminiView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeminiView.swift; sourceTree = "<group>"; };
+		D019A8782E3797E300385027 /* AppleIDNotFoundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleIDNotFoundView.swift; sourceTree = "<group>"; };
 		D039FC5A2CD230050082D2F3 /* PersonalityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalityView.swift; sourceTree = "<group>"; };
 		D0422D902D7C509400609060 /* ChatGPTView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatGPTView.swift; sourceTree = "<group>"; };
 		D0422D912D7C509400609060 /* ClaudeAIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClaudeAIView.swift; sourceTree = "<group>"; };
@@ -552,7 +555,6 @@
 		D0422D942D7C509400609060 /* MessageListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageListView.swift; sourceTree = "<group>"; };
 		D0422D952D7C509400609060 /* Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
 		D0422D962D7C509400609060 /* TextViewRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextViewRepresentable.swift; sourceTree = "<group>"; };
-		D0422D972D7C509400609060 /* VertexAIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VertexAIView.swift; sourceTree = "<group>"; };
 		D0422DA92D7C50AF00609060 /* SignalingClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignalingClient.swift; sourceTree = "<group>"; };
 		D0422DAA2D7C50AF00609060 /* WebRTCCallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebRTCCallView.swift; sourceTree = "<group>"; };
 		D0422DAB2D7C50AF00609060 /* WebRTCManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebRTCManager.swift; sourceTree = "<group>"; };
@@ -1037,6 +1039,7 @@
 		D0422D982D7C509400609060 /* AI */ = {
 			isa = PBXGroup;
 			children = (
+				D019A8752E37826600385027 /* GeminiView.swift */,
 				D0422D902D7C509400609060 /* ChatGPTView.swift */,
 				D0422D912D7C509400609060 /* ClaudeAIView.swift */,
 				D0422D922D7C509400609060 /* DeepSeekView.swift */,
@@ -1044,7 +1047,6 @@
 				D0422D942D7C509400609060 /* MessageListView.swift */,
 				D0422D952D7C509400609060 /* Response.swift */,
 				D0422D962D7C509400609060 /* TextViewRepresentable.swift */,
-				D0422D972D7C509400609060 /* VertexAIView.swift */,
 			);
 			path = AI;
 			sourceTree = "<group>";
@@ -1098,6 +1100,7 @@
 		D0445C2D2C71B3800059D522 /* SwiftiDate */ = {
 			isa = PBXGroup;
 			children = (
+				D019A8782E3797E300385027 /* AppleIDNotFoundView.swift */,
 				D0B3F2332D73496B007A5EA0 /* uncaughtExceptionHandler.swift */,
 				D0B388352D5B7C58003BC40C /* AstrologyView.swift */,
 				D07B41E02D61ABE80015C7AA /* ImagePicker.swift */,
@@ -1902,6 +1905,7 @@
 				D07C57F72D76FA460008DC9D /* TaggingView.swift in Sources */,
 				D0DDDB202CA13C5E00A78A87 /* WhoLikedMeView.swift in Sources */,
 				D0445C8B2C73D0760059D522 /* DietPreferencesView.swift in Sources */,
+				D019A8792E3797EC00385027 /* AppleIDNotFoundView.swift in Sources */,
 				D0445C792C73C0B30059D522 /* ZodiacPickerView.swift in Sources */,
 				D051EF2E2CC03360004563A3 /* VerifiedProfileProgressView.swift in Sources */,
 				D017F4EE2CAEBC8700C71D18 /* QRCodeScannerView.swift in Sources */,
@@ -1916,6 +1920,7 @@
 				D0B3882B2D5B7BAE003BC40C /* PasswordLoginView.swift in Sources */,
 				D0B3F1282D6F0472007A5EA0 /* NoCursorTextField.swift in Sources */,
 				D089DB5D2D69862300D6A1AB /* PHPickerView.swift in Sources */,
+				D019A8762E37826C00385027 /* GeminiView.swift in Sources */,
 				D089DB662D69A72300D6A1AB /* NLPChecker.swift in Sources */,
 				D0B3F1CD2D72AF02007A5EA0 /* AnalyticsManagerProtocol.swift in Sources */,
 				D0B3882C2D5B7BAE003BC40C /* OTPVerificationView.swift in Sources */,
@@ -2020,7 +2025,6 @@
 				D0422D9A2D7C509400609060 /* ClaudeAIView.swift in Sources */,
 				D0422D9B2D7C509400609060 /* LocalModelView.swift in Sources */,
 				D0422D9C2D7C509400609060 /* TextViewRepresentable.swift in Sources */,
-				D0422D9D2D7C509400609060 /* VertexAIView.swift in Sources */,
 				D0422D9E2D7C509400609060 /* DeepSeekView.swift in Sources */,
 				D0422D9F2D7C509400609060 /* MessageListView.swift in Sources */,
 				D0422DA02D7C509400609060 /* Response.swift in Sources */,
@@ -2170,6 +2174,7 @@
 				D0B3F2422D73616C007A5EA0 /* ProfileImageView.swift in Sources */,
 				D0B3F2412D736144007A5EA0 /* ProfileView.swift in Sources */,
 				D0B3F2402D7360E0007A5EA0 /* VerificationView.swift in Sources */,
+				D019A8772E37826C00385027 /* GeminiView.swift in Sources */,
 				D0B3F23F2D7360AA007A5EA0 /* VerificationStatusView.swift in Sources */,
 				D0B3F23E2D73606B007A5EA0 /* SmartPhotoToggle.swift in Sources */,
 				D0644BEB2D810DDB007B2DE0 /* ConsumableStore.swift in Sources */,
@@ -2189,7 +2194,6 @@
 				D0422DA22D7C509400609060 /* ClaudeAIView.swift in Sources */,
 				D0422DA32D7C509400609060 /* LocalModelView.swift in Sources */,
 				D0422DA42D7C509400609060 /* TextViewRepresentable.swift in Sources */,
-				D0422DA52D7C509400609060 /* VertexAIView.swift in Sources */,
 				D0422DA62D7C509400609060 /* DeepSeekView.swift in Sources */,
 				D0422DA72D7C509400609060 /* MessageListView.swift in Sources */,
 				D0422DA82D7C509400609060 /* Response.swift in Sources */,

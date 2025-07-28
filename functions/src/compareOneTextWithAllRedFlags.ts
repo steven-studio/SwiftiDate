@@ -30,7 +30,7 @@ function getPineconeClient() {
   if (!pinecone) {
     // 直接在建構子中指定 apiKey, environment
     pinecone = new Pinecone({
-      apiKey: "pcsk_43HmKS_T75Y6T2mtDpcEFy8QaCtsyHfFWKhZL7SDdeEFRRodRa9znBV3RDFbMeZ73J9ZJg",
+      apiKey: "",
     });
   }
   return pinecone;

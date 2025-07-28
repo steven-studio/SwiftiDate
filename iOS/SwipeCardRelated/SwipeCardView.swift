@@ -7,6 +7,7 @@
 
 import SwiftUI
 import FirebaseFirestore
+import FirebaseAuth
 
 struct User {
     let id: String
@@ -37,7 +38,9 @@ struct SwipeCardView: View {
     @State private var showWelcomePopup = false    // 初始值為 true，代表剛登入時顯示彈出視窗
     
     @State private var swipedIDs: Set<String> = [] // 存放已滑過的 userIDs
-    private let currentUserID = "abc123" // 假設當前用戶的 ID
+    private var currentUserID: String? {
+        Auth.auth().currentUser?.uid
+    }
     
     @State private var lastDocument: DocumentSnapshot? = nil
     @State private var isLoading: Bool = false

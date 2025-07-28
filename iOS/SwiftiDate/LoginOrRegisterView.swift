@@ -18,6 +18,10 @@ struct LoginOrRegisterView: View {
     
     // 用來儲存從本地載入的圖片，當 userSettings.photos 改變時更新
     @State private var loadedImage: UIImage?
+    @State private var showAppleIDNotFound = false
+    @State private var showPhoneNumberEntry = false
+    // 儲存 Apple userID 或其他註冊資料，若需傳遞
+    @State private var pendingAppleUserID: String? = nil
     
     var body: some View {
         // Display LoginOrRegisterView when isRegistering is false
@@ -265,6 +269,22 @@ struct LoginOrRegisterView: View {
                 loadedImage = nil
             }
         }
+        .fullScreenCover(isPresented: $showAppleIDNotFound) {
+            AppleIDNotFoundView(
+                onCreateAccount: {
+                    // 點擊建立新帳號，跳轉到手機號碼頁
+                    showAppleIDNotFound = false
+                    showPhoneNumberEntry = true
+                },
+                onBack: {
+                    // 返回，關閉彈窗
+                    showAppleIDNotFound = false
+                }
+            )
+        }
+        .fullScreenCover(isPresented: $showPhoneNumberEntry) {
+            PhoneNumberEntryView(isRegistering: .constant(false))
+        }
     }
     
     // 處理 Apple ID 登入結果
@@ -284,6 +304,16 @@ struct LoginOrRegisterView: View {
         }
         if let fullName = fullName {
             print("Full Name: \(fullName)")
+        }
+        
+        showPhoneNumberEntry = true
+    }
+    
+    // 這是範例API，請自行換成真正API
+    func checkAppleIDRegistered(userID: String, completion: @escaping (Bool) -> Void) {
+        // 假設查詢API，這裡只是模擬
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            completion(false) // 假裝都查不到
         }
     }
 }

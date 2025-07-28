@@ -1,5 +1,5 @@
 //
-//  VertexAIView.swift
+//  GeminiView.swift
 //  SwiftiDate
 //
 //  Created by 游哲維 on 2025/2/26.
@@ -9,12 +9,12 @@ import Foundation
 import UIKit
 import SwiftUI
 
-struct VertexAIView: View {
+struct GeminiView: View {
     @Binding var messages: [Message]   // 聊天歷史記錄綁定自 ChatDetailView
-    @Binding var showVertexAIView: Bool // 綁定來自 ModelSelectorView 的控制變數
+    @Binding var showGeminiView: Bool // 綁定來自 ModelSelectorView 的控制變數
 
     @State private var userInput: String = ""   // 用戶輸入的訊息
-    @State private var VertexAIResponse: String = ""  // GPT 的回應
+    @State private var GeminiResponse: String = ""  // GPT 的回應
     @State private var isLoading = false        // 用來顯示加載狀態
     @State private var dynamicHeight: CGFloat = 150 // 初始高度
     private let maxHeight: CGFloat = 300 // 最大高度限制
@@ -30,7 +30,7 @@ struct VertexAIView: View {
                 
                 MessageListView(
                     messages: $messages,
-                    Response: $VertexAIResponse,
+                    Response: $GeminiResponse,
                     dynamicHeight: $dynamicHeight,
                     maxHeight: maxHeight
                 )
@@ -50,7 +50,7 @@ struct VertexAIView: View {
                 }
 
                 Button(action: {
-                    sendMessageToVertexAI()  // 發送用戶輸入給 Gemini
+                    sendMessageToGemini()  // 發送用戶輸入給 Gemini
                 }) {
                     Text("發送")
                         .foregroundColor(.white)
@@ -71,7 +71,7 @@ struct VertexAIView: View {
     }
     
     // 與 Vertex AI API 進行交互的函數
-    func sendMessageToVertexAI() {
+    func sendMessageToGemini() {
         guard !userInput.isEmpty else { return }
         
         // 記錄用戶發送訊息事件
@@ -142,7 +142,7 @@ struct VertexAIView: View {
                     
                     DispatchQueue.main.async {
                         // 把 content 當作我們的回覆
-                        VertexAIResponse = content
+                        GeminiResponse = content
                         userInput = ""
                         
                         // 記錄回應生成完成事件
@@ -153,13 +153,13 @@ struct VertexAIView: View {
                 } else {
                     print("回應格式不符合預期。")
                     DispatchQueue.main.async {
-                        VertexAIResponse = "對方未回應"
+                        GeminiResponse = "對方未回應"
                     }
                 }
             } catch {
                 print("JSON 解析錯誤: \(error)")
                 DispatchQueue.main.async {
-                    VertexAIResponse = "對方未回應"
+                    GeminiResponse = "對方未回應"
                 }
             }
         }.resume()
@@ -174,9 +174,9 @@ struct VertexAIView: View {
 }
 
 // 添加 PreviewProvider
-struct VertexAIView_Previews: PreviewProvider {
+struct GeminiView_Previews: PreviewProvider {
     static var previews: some View {
-        VertexAIView(messages: .constant([ // 使用 .constant 來模擬綁定數據
+        GeminiView(messages: .constant([ // 使用 .constant 來模擬綁定數據
             Message(
                 id: UUID(),
                 content: .text("你好，這是範例訊息1"), // 將文字包裝為 .text
@@ -191,6 +191,6 @@ struct VertexAIView_Previews: PreviewProvider {
                 time: "10:05 AM",
                 isCompliment: false
             )
-        ]), showVertexAIView: .constant(true))
+        ]), showGeminiView: .constant(true))
     }
 }

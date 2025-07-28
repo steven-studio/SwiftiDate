@@ -7,6 +7,7 @@
 
 import SwiftUI
 import FirebaseFirestore
+import FirebaseAuth
 
 // MARK: - ViewModel
 /// This is the view model for our swipe card view. It holds the state and logic for:
@@ -111,14 +112,19 @@ class SwipeCardViewModel: ObservableObject {
             print("Error: currentIndex 超出陣列範圍，無法繼續滑卡。")
             return
         }
+        guard let userID = Auth.auth().currentUser?.uid else {
+            print("Error: 尚未登入，無法進行滑動。")
+            return
+        }
         
         // === 1. 建立 Firebase 參考 ===
+        let targetID = users[currentIndex].id
         let newDocRef = db.collection("swipes").document()
         
         // === 2. 準備要上傳的資料 ===
         let data: [String: Any] = [
             "userID": "<你當前使用者的ID>",
-            "targetID": users[currentIndex].id,
+            "targetID": targetID,
             "isLike": rightSwipe,
             "timestamp": FieldValue.serverTimestamp() // Firestore 會自動帶入雲端時間
         ]
@@ -150,6 +156,23 @@ class SwipeCardViewModel: ObservableObject {
                 self.userSettings.globalLikeCount += 1
             }
             
+            // **加上互相配對檢查與建立 match**
+            if rightSwipe {
+                // 查找對方是否曾經 Like 我
+                self.db.collection("swipes")
+                    .whereField("userID", isEqualTo: targetID)
+                    .whereField("targetID", isEqualTo: userID)
+                    .whereField("isLike", isEqualTo: true)
+                    .getDocuments { (snapshot, err) in
+                        if let err = err {
+                            print("互配查詢錯誤: \(err)")
+                        } else if let docs = snapshot?.documents, !docs.isEmpty {
+                            // 已互配，建立 match 紀錄
+                            self.createMatchRecord(userID1: userID, userID2: targetID)
+                        }
+                    }
+            }
+            
             // === UI：前往下一張卡 ===
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 if self.currentIndex < self.users.count - 1 {
@@ -161,6 +184,23 @@ class SwipeCardViewModel: ObservableObject {
                     }
                 }
                 self.offset = .zero
+            }
+        }
+    }
+    
+    private func createMatchRecord(userID1: String, userID2: String) {
+        // 建議用 userID 排序產生唯一ID，避免重複
+        let matchID = [userID1, userID2].sorted().joined(separator: "_")
+        let matchData: [String: Any] = [
+            "userID1": userID1,
+            "userID2": userID2,
+            "matchedAt": FieldValue.serverTimestamp()
+        ]
+        db.collection("matches").document(matchID).setData(matchData) { error in
+            if let error = error {
+                print("建立 match 失敗：\(error)")
+            } else {
+                print("🎉 配對成功！\(userID1) <-> \(userID2)")
             }
         }
     }
