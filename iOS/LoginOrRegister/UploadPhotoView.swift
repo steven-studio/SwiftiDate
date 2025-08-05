@@ -167,6 +167,17 @@ struct UploadPhotoView: View {
         // MARK: - 畫面出現時記錄事件
         .onAppear {
             AnalyticsManager.shared.trackEvent("UploadPhotoView_Appeared", parameters: nil)
+            
+            #if DEBUG
+            if ProcessInfo.processInfo.arguments.contains("UITestMode") {
+                selectedIndex = 0  // 新增這一行明確指定索引為 0
+                if let testImage = UIImage(named: "testProfileImage") {
+                    self.selectedImages[0] = testImage
+                    self.handleSelectedImage(testImage)
+                    print("⚠️ UITest模式：使用測試圖片")
+                }
+            }
+            #endif
         }
         // MARK: - 選擇相簿
         .sheet(isPresented: $showImagePicker) {
@@ -351,6 +362,19 @@ struct UploadPhotoView: View {
                 print("❌ 寫入使用者資料失敗: \(error.localizedDescription)")
             }
         }
+    }
+    
+    // 新增方法用於處理選取圖片（第343行後插入）
+    private func handleSelectedImage(_ image: UIImage) {
+        // 你原本選取照片後會執行的邏輯：
+        imageToCrop = image
+        showCropView = true
+
+        AnalyticsManager.shared.trackEvent("UploadPhoto_ImageSelected", parameters: ["source": "UITestMode", "index": selectedIndex])
+
+        PhotoUtility.addImageToPhotos(image, to: userSettings)
+        
+        print("✅ 用戶已選擇並處理圖片")
     }
 }
 

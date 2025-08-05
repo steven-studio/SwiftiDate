@@ -1,3 +1,0 @@
-export declare const PACKAGE_VERSION = "0.39.0";
-export declare const PACKAGE_NAME = "@opentelemetry/instrumentation-router";
-//# sourceMappingURL=version.d.ts.map

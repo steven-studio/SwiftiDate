@@ -1,6 +1,6 @@
 import * as functions from "firebase-functions";
 import * as admin from "firebase-admin";
-import { Request, Response } from "express";
+import {Request, Response} from "express";
 
 // 只在尚未初始化時初始化 Firebase Admin
 if (!admin.apps.length) {
@@ -14,7 +14,7 @@ export const copyUserData = functions.https.onRequest(async (req: Request, res: 
   const newUserID = req.query.newUserID;
 
   if (!oldUserID || !newUserID) {
-    res.status(400).send('請提供 oldUserID 與 newUserID');
+    res.status(400).send("請提供 oldUserID 與 newUserID");
     return;
   }
 
@@ -24,9 +24,9 @@ export const copyUserData = functions.https.onRequest(async (req: Request, res: 
 
   try {
     // 讀取原始資料
-    const snapshot = await ref.child(oldPath).once('value');
+    const snapshot = await ref.child(oldPath).once("value");
     if (!snapshot.exists()) {
-      res.status(404).send('原位置資料不存在');
+      res.status(404).send("原位置資料不存在");
       return;
     }
     const data = snapshot.val();

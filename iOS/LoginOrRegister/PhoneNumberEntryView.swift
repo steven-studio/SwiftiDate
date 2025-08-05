@@ -20,15 +20,7 @@ struct PhoneNumberEntryView: View {
     @State private var showPasswordLoginView = false // ✅ 控制是否顯示輸入密碼畫面
     @State private var isChecking = false // ✅ 控制是否顯示「檢查中」的 Loading
     private var isPhoneValid: Bool {
-        switch selectedCountryCode {
-        case "+886": // 台灣
-            return PhoneValidator.isTaiwanNumber(phoneNumber)
-        case "+86":  // 大陸
-            return PhoneValidator.isMainlandChinaNumber(phoneNumber)
-        default:
-            // 其他國碼 → 看你是否也要檢查或直接返回 false
-            return false
-        }
+        PhoneValidator.validate(countryCode: selectedCountryCode, phoneNumber: phoneNumber)
     }
     
     var body: some View {
@@ -120,20 +112,20 @@ struct PhoneNumberEntryView: View {
                 AnalyticsManager.shared.trackEvent("PhoneNumberEntry_ContinueTapped", parameters: ["phone": "\(selectedCountryCode) \(phoneNumber)"])
                 self.showAlert = true
             }) {
-//                Text("繼續")
+                //                Text("繼續")
                 HStack {
                     if isChecking {
                         ProgressView()
                     }
                     Text(isChecking ? "檢查中..." : "繼續")
                 }
-                    .font(.title2)
-                    .fontWeight(.bold)
-                    .padding()
-                    .frame(maxWidth: .infinity)
-                    .background(isPhoneValid ? Color.green : Color.gray.opacity(0.5))  // <-- 依狀態切換顏色
-                    .cornerRadius(25)
-                    .foregroundColor(.white)
+                .font(.title2)
+                .fontWeight(.bold)
+                .padding()
+                .frame(maxWidth: .infinity)
+                .background(isPhoneValid ? Color.green : Color.gray.opacity(0.5))  // <-- 依狀態切換顏色
+                .cornerRadius(25)
+                .foregroundColor(.white)
             }
             .accessibilityIdentifier("ContinueButton") // <- 加上 Identifier
             .padding(.horizontal)
@@ -179,122 +171,54 @@ struct PhoneNumberEntryView: View {
     }
     
     // **✅ 先檢查手機號碼是否存在**
-    private func checkPhoneNumber() {
-        // 檢查是否有 "-SKIP_FIREBASE_CHECK" 標記
-        if ProcessInfo.processInfo.arguments.contains("-SKIP_FIREBASE_CHECK") {
-            print("Skipping Firebase phone check due to launch argument flag.")
-            // 模擬 Firebase 回傳：假設手機號碼已存在，直接跳轉到密碼登入畫面
-            DispatchQueue.main.async {
-                self.showPasswordLoginView = true
-                self.isChecking = false
-            }
-            return
-        }
-        
+    func checkPhoneNumber() {
         isChecking = true
-        userSettings.globalCountryCode = selectedCountryCode
-
-        // 替換為你實際部署的函式 URL，比如:
-        // https://us-central1-你的專案ID.cloudfunctions.net/checkTaiwanPhone
+        let url = URL(string: "https://us-central1-swiftidate-cdff0.cloudfunctions.net/checkPhone")!
         
-        var urlString = "https://us-central1-swiftidate-cdff0.cloudfunctions.net/checkTaiwanPhone"
-        
-        // 1. 建立「國碼 -> 雲函式路徑」的字典
-        let functionMap: [String: String] = [
-            "+886": "checkTaiwanPhone",
-            "+86":  "checkChinaPhone",
-            "+852": "checkHongKongPhone", // 其實 +853 是澳門，+852 是香港
-            "+853": "checkMacaoPhone",
-            "+1":   "checkUSPhone",
-            "+65":  "checkSingaporePhone",
-            "+62":  "checkIndonesianPhone",
-            "+81":  "checkJapanPhone",
-            "+61":  "checkAustralianPhone",
-            "+44":  "checkBritishPhone",
-            "+39":  "checkItalianPhone",
-            "+64":  "checkNewZealandPhone",
-            "+82":  "checkKoreaPhone"
-        ]
-
-        // 2. 以 selectedCountryCode 查字典
-        if let functionName = functionMap[selectedCountryCode] {
-            // 為了維護容易，可把雲函式主機放在一個常數
-            let baseURL = "https://us-central1-swiftidate-cdff0.cloudfunctions.net"
-            urlString = "\(baseURL)/\(functionName)"
-        } else {
-            // 沒對應到就給個預設 fallback
-            // 或者直接不改 urlString
-            print("⚠️ 未定義此國碼對應的雲函式，請補充")
-        }
-        
-        guard let url = URL(string: urlString) else {
-            isChecking = false
-            print("❌ 無法生成 URL，請確認網址是否正確")
-            return
-        }
-        
-        // 建立 POST 請求
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-
+        
         let body: [String: Any] = [
             "data": [
-                "phone": phoneNumber
+                "countryCode": selectedCountryCode,
+                "phoneNumber": phoneNumber
             ]
         ]
-
-        do {
-            request.httpBody = try JSONSerialization.data(withJSONObject: body)
-        } catch {
-            print("❌ JSON 編碼失敗: \(error)")
-            isChecking = false
-            return
-        }
-
+        
+        request.httpBody = try? JSONSerialization.data(withJSONObject: body)
+        
         URLSession.shared.dataTask(with: request) { data, response, error in
-            // 在主執行緒更新 UI
-            DispatchQueue.main.async {
-                isChecking = false
+            DispatchQueue.main.async { isChecking = false }
+            
+            if let error = error {
+                print("❌ 網路請求錯誤：\(error.localizedDescription)")
+                return
             }
 
-            if let error = error {
-                print("❌ API 請求失敗: \(error.localizedDescription)")
+            guard let data = data else {
+                print("❌ 回傳的 data 是 nil")
                 return
             }
             
-            guard let data = data else {
-                print("❌ 回應資料為空")
+            // ⭐️ 將回應內容印出來查看：
+            if let responseString = String(data: data, encoding: .utf8) {
+                print("📬 API 回應內容：\(responseString)")
+            }
+            
+            guard let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
+                  let result = json["result"] as? [String: Any],
+                  let exists = result["exists"] as? Bool else {
+                print("❌ API回應解析錯誤")
                 return
             }
 
-            do {
-                // onCall 函式的回傳格式預設為:
-                // {
-                //   "result": {
-                //       "exists": true / false
-                //   }
-                // }
-                let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
-                if let result = json?["result"] as? [String: Any],
-                   let exists = result["exists"] as? Bool {
-                    
-                    DispatchQueue.main.async {
-                        if exists {
-                            // 手機號碼已註冊，導向「密碼登入」畫面
-                            print("✅ 手機號碼已註冊，跳轉到密碼登入畫面")
-                            self.showPasswordLoginView = true
-                        } else {
-                            // 手機號碼未註冊，導向「OTP 驗證」畫面
-                            print("✅ 手機號碼未註冊，跳轉到 OTP 驗證畫面")
-                            self.showOTPView = true
-                        }
-                    }
+            DispatchQueue.main.async {
+                if exists {
+                    showPasswordLoginView = true
                 } else {
-                    print("❌ JSON 格式不符合預期: \(String(describing: json))")
+                    showOTPView = true
                 }
-            } catch {
-                print("❌ API 回應解析失敗: \(error.localizedDescription)")
             }
         }.resume()
     }

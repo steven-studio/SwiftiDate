@@ -219,6 +219,11 @@ class UserSettings: ObservableObject {
     @Published var globalPraiseCount: Int {
         didSet { UserDefaults.standard.set(globalPraiseCount, forKey: kGlobalPraiseCount) }
     }
+    
+    // ======= 你要加在這裡 =======
+    @Published var likedMeUsers: [UserProfile] = []
+    @Published var sentLikes: [UserProfile] = [] // 如果有送出喜歡的，也建議放在此處
+    // ===========================
 
     // Turbo 相關
     @Published var globalTurboCount: Int {

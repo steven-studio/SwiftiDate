@@ -36,7 +36,7 @@ exports.checkUrl = (0, https_1.onCall)({
         if (!response.ok) {
             throw new https_1.HttpsError("unknown", "Web Risk call failed");
         }
-        const json = await response.json();
+        const json = (await response.json());
         const isMalicious = !!((json === null || json === void 0 ? void 0 : json.threats) && json.threats.length > 0);
         return {
             isMalicious,

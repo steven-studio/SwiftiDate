@@ -33,39 +33,11 @@ var __importStar = (this && this.__importStar) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.copyUserData = void 0;
-const functions = __importStar(require("firebase-functions"));
+exports.db = void 0;
+// src/firebase.ts
 const admin = __importStar(require("firebase-admin"));
-// 只在尚未初始化時初始化 Firebase Admin
-if (!admin.apps.length) {
+if (admin.apps.length === 0) {
     admin.initializeApp();
 }
-// 改寫 copyUserData 並指定 req 與 res 類型
-exports.copyUserData = functions.https.onRequest(async (req, res) => {
-    // 從 query parameters 取得 oldUserID 與 newUserID
-    const oldUserID = req.query.oldUserID;
-    const newUserID = req.query.newUserID;
-    if (!oldUserID || !newUserID) {
-        res.status(400).send("請提供 oldUserID 與 newUserID");
-        return;
-    }
-    const ref = admin.database().ref();
-    const oldPath = `users/${oldUserID}`;
-    const newPath = `users/${newUserID}`;
-    try {
-        // 讀取原始資料
-        const snapshot = await ref.child(oldPath).once("value");
-        if (!snapshot.exists()) {
-            res.status(404).send("原位置資料不存在");
-            return;
-        }
-        const data = snapshot.val();
-        // 將資料寫入新位置
-        await ref.child(newPath).set(data);
-        res.send(`資料成功複製到 ${newPath}`);
-    }
-    catch (error) {
-        res.status(500).send(`複製失敗：${error.message}`);
-    }
-});
-//# sourceMappingURL=copyUserData.js.map
+exports.db = admin.firestore();
+//# sourceMappingURL=firebase.js.map

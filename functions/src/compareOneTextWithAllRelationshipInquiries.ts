@@ -13,6 +13,11 @@ import {Pinecone} from "@pinecone-database/pinecone";
 import type {Index} from "@pinecone-database/pinecone";
 
 let pinecone: Pinecone | null = null;
+/**
+ * 取得 Pinecone Client (Lazy-init)。
+ *
+ * @return {Pinecone} 已初始化的 Pinecone 客戶端
+ */
 function getPineconeClient() {
   if (!pinecone) {
     pinecone = new Pinecone({
@@ -24,6 +29,11 @@ function getPineconeClient() {
   return pinecone;
 }
 
+/**
+ * 取得 Pinecone 特定索引的實例。
+ *
+ * @return {Index} Pinecone 中指定的索引實例
+ */
 function getPineconeIndex(): Index {
   const client = getPineconeClient();
   return client.index("relationship-inquiry-index"); // 假設你還是用 red-index，如果想分開，可改別的名稱
@@ -33,7 +43,11 @@ function getPineconeIndex(): Index {
 const openAiApiKey = defineSecret("OPENAI_API_KEY");
 
 /**
- * 取得文字的 embedding
+ * 使用 OpenAI API 產生輸入文字的 embedding。
+ *
+ * @param {string} text - 要轉換成 embedding 的輸入文字
+ * @param {string} apiKey - OpenAI API 金鑰
+ * @return {Promise<number[] | null>} 成功回傳 embedding 向量，否則回傳 null
  */
 async function getEmbeddingForText(text: string, apiKey: string): Promise<number[] | null> {
   if (!apiKey) {
@@ -60,7 +74,13 @@ async function getEmbeddingForText(text: string, apiKey: string): Promise<number
       return null;
     }
 
-    const json = await res.json();
+    interface OpenAIEmbeddingResponse {
+      data?: Array<{
+        embedding: number[];
+      }>;
+    }
+
+    const json = (await res.json()) as OpenAIEmbeddingResponse;
     const vector = json.data?.[0]?.embedding;
     if (!Array.isArray(vector)) {
       console.error("無法取得 embedding");
@@ -92,7 +112,7 @@ export const compareOneTextWithAllRelationshipInquiries = onRequest(
       if (!text) {
         res.status(400).json({
           input: null,
-          top: { sentence: null, similarity: null },
+          top: {sentence: null, similarity: null},
           error: "Missing text",
         });
         return;
@@ -112,7 +132,7 @@ export const compareOneTextWithAllRelationshipInquiries = onRequest(
       if (!embed) {
         res.status(500).json({
           input: text,
-          top: { sentence: null, similarity: null },
+          top: {sentence: null, similarity: null},
           error: "Failed to get OpenAI embedding",
         });
         return;
@@ -157,7 +177,7 @@ export const compareOneTextWithAllRelationshipInquiries = onRequest(
       console.error("ANN error:", err);
       res.status(500).json({
         input: null,
-        top: { sentence: null, similarity: null },
+        top: {sentence: null, similarity: null},
         error: err instanceof Error ? err.message : String(err),
       });
       return;

@@ -11,18 +11,7 @@
 export {chatCompletionGpt4o} from "./checkCompletionGpt4o";
 
 // 一一 export 各個 phone 函式
-export {checkAustralianPhone} from "./checkAustralianPhone";
-export {checkBritishPhone} from "./checkBritishPhone";
-export {checkChinaPhone} from "./checkChinaPhone";
-export {checkHongKongPhone} from "./checkHongKongPhone";
-export {checkItalianPhone} from "./checkItalianPhone";
-export {checkJapanPhone} from "./checkJapanPhone";
-export {checkKoreaPhone} from "./checkKoreaPhone";
-export {checkMacaoPhone} from "./checkMacaoPhone";
-export {checkNewZealandPhone} from "./checkNewZealandPhone";
-export {checkSingaporePhone} from "./checkSingaporePhone";
-export {checkTaiwanPhone} from "./checkTaiwanPhone";
-export {checkUSPhone} from "./checkUSPhone";
+export {checkPhoneHandler as checkPhone} from "./handlers/checkPhone";
 
 // export checkUrl
 export {checkUrl} from "./checkUrl";
@@ -33,3 +22,6 @@ export {createMatchToken} from "./createMatchToken";
 // 匯出 compareOneTextWithAllRedFlags
 // export {compareOneTextWithAllRedFlags} from "./compareOneTextWithAllRedFlags";
 export {copyUserData} from "./copyUserData";
+
+// index.ts 新增：
+export {loginHandler} from "./handlers/loginHandler";

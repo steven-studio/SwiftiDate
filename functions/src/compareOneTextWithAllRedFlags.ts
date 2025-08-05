@@ -81,7 +81,13 @@ async function getEmbeddingForText(text: string, apiKey: string): Promise<number
       return null;
     }
 
-    const json = await res.json();
+    interface OpenAIEmbeddingResponse {
+      data?: Array<{
+        embedding: number[];
+      }>;
+    }
+
+    const json = (await res.json()) as OpenAIEmbeddingResponse;
     const vector = json.data?.[0]?.embedding;
     if (!Array.isArray(vector)) {
       console.error("無法取得 embedding");
@@ -142,7 +148,7 @@ export const compareOneTextWithAllRedFlags = onRequest(
         const compressed = text.toLowerCase().replace(/\s+/g, "");
         // 如果剛好等於 "我覺得我不值得"，就不排除
         if (/^我(?:覺得|感覺|認為)我不值得$/.test(compressed)) {
-          // 這裡可視需求給一個特殊 category 
+          // 這裡可視需求給一個特殊 category
           // sentenceCategory = "worth_myself" (隨意命名)
           // 不做任何提前 return
         } else {
@@ -165,7 +171,7 @@ export const compareOneTextWithAllRedFlags = onRequest(
         const compressed = text.toLowerCase().replace(/\s+/g, "");
         // 如果剛好等於 "我不覺得我值得"，就不排除
         if (/^我不(?:覺得|感覺|認為)我值得$/.test(compressed)) {
-          // 這裡可視需求給一個特殊 category 
+          // 這裡可視需求給一個特殊 category
           // sentenceCategory = "worth_myself" (隨意命名)
           // 不做任何提前 return
         } else {

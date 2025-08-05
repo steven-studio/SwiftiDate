@@ -84,96 +84,19 @@ struct TurboView: View {
                 Spacer().frame(height: 20)
                 
                 if turboSelectedTab == 0 {
-                    // The featured card section (每日精選)
-                    FeaturedCardView()
-
-                    Spacer().frame(height: 20)
-                    
-                    // Main image
-                    Image("turbo_view_image") // Replace with your image asset name
-                        .resizable()
-                        .scaledToFit()
-                        .frame(height: 250)
-                    
-                    // Description text
-                    Text("開啟Turbo，將你直接置頂到所有人的前面！輕鬆提升10倍配對成功率")
-                        .font(.subheadline)
-                        .foregroundColor(.gray)
-                        .multilineTextAlignment(.center)
-                        .padding(.horizontal, 30)
-                    
-                    // Action button
-                    Button(action: {
-                        if userSettings.globalTurboCount > 0 {
-                            AnalyticsManager.shared.trackEvent("turbo_start_button_pressed", parameters: ["globalTurboCount": userSettings.globalTurboCount])
-                            showConfirmationPopup = true
-                        }
-                    }) {
-                        HStack {
-                            Image(systemName: "bolt.fill")
-                            
-                            Text("馬上開始")
-                                .fontWeight(.bold)
-                                .padding()
-                        }
-                        .frame(maxWidth: .infinity)
-                        .background(LinearGradient(gradient: Gradient(colors: [.pink, .purple]), startPoint: .topLeading, endPoint: .bottomTrailing))
-                        .foregroundColor(.white)
-                        .cornerRadius(10)
-                        .padding(.horizontal, 60)
-                    }
-                    .padding(.vertical, 20)
-
-                    Spacer()
-                    
-                    Button(action: {
-                        if userSettings.globalTurboCount > 0 {
-                            AnalyticsManager.shared.trackEvent("turbo_icon_button_pressed", parameters: ["globalTurboCount": userSettings.globalTurboCount])
-                            showConfirmationPopup = true
-                        }
-                    }) {
-                        Image(systemName: "bolt.fill")
-                            .resizable()
-                            .frame(width: 40, height: 40)
-                            .padding()
-                            .background(LinearGradient(gradient: Gradient(colors: [.pink, .purple]), startPoint: .topLeading, endPoint: .bottomTrailing))
-                            .foregroundColor(.white)
-                            .clipShape(Circle())
-                            .shadow(radius: 5)
-                    }
-                    .padding(.trailing, 20)
-                    .padding(.bottom, 20)
+                    UserListSection(
+                        contentSelectedTab: $contentSelectedTab,
+                        showConfirmationPopup: $showConfirmationPopup,
+                        listType: .likesMe,
+                        onBack: onBack
+                    )
                 } else {
-                    if userSettings.globalLikeCount == 0 { // Access globalLikeCount from UserSettings
-                        VStack {
-                            Spacer()
-                            Image(systemName: "cube.box")
-                                .resizable()
-                                .frame(width: 100, height: 100)
-                                .foregroundColor(.gray)
-                            Text("你還沒有送出喜歡，快去滑動吧")
-                                .foregroundColor(.gray)
-                                .padding(.top, 16)
-                            
-                            Button(action: {
-                                AnalyticsManager.shared.trackEvent("turbo_go_to_swipe_pressed")
-                                onBack?() // Dismiss TurboView
-                                contentSelectedTab = 0 // Navigate to the SwipeCardView
-                            }) {
-                                Text("去滑卡")
-                                    .font(.headline)
-                                    .foregroundColor(.white)
-                                    .padding()
-                                    .frame(maxWidth: .infinity)
-                                    .background(Color.green)
-                                    .cornerRadius(10)
-                                    .padding(.horizontal, 60)
-                            }
-                            Spacer()
-                        }
-                    } else {
-                        Spacer()
-                    }
+                    UserListSection(
+                        contentSelectedTab: $contentSelectedTab,
+                        showConfirmationPopup: .constant(false), // 不需要 Popup
+                        listType: .iLike,
+                        onBack: onBack
+                    )
                 }
             }
             
@@ -231,14 +154,24 @@ struct TurboView: View {
     }
 }
 
-// MARK: - TurboView Preview
-struct TurboView_Previews: PreviewProvider {
-    @State static var contentSelectedTab = 1 // For ContentView's TabView
-    @State static var turboSelectedTab = 1 // For TurboView's internal tabs
+// MARK: - TurboView Preview (Updated)
+struct TurboViewPreviewWrapper: View {
+    @State private var contentSelectedTab = 1
+    @State private var turboSelectedTab = 1
+    
+    var body: some View {
+        TurboView(
+            contentSelectedTab: $contentSelectedTab,
+            turboSelectedTab: $turboSelectedTab,
+            showBackButton: false
+        )
+        .environmentObject(UserSettings())
+    }
+}
 
+struct TurboView_Previews: PreviewProvider {
     static var previews: some View {
-        TurboView(contentSelectedTab: $contentSelectedTab, turboSelectedTab: $turboSelectedTab, showBackButton: false)
+        TurboViewPreviewWrapper()
             .previewDevice("iPhone 15 Pro")
-            .environmentObject(UserSettings())
     }
 }

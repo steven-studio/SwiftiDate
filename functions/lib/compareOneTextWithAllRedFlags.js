@@ -31,7 +31,7 @@ function getPineconeClient() {
     if (!pinecone) {
         // 直接在建構子中指定 apiKey, environment
         pinecone = new pinecone_1.Pinecone({
-            apiKey: "pcsk_43HmKS_T75Y6T2mtDpcEFy8QaCtsyHfFWKhZL7SDdeEFRRodRa9znBV3RDFbMeZ73J9ZJg",
+            apiKey: "",
         });
     }
     return pinecone;
@@ -77,7 +77,7 @@ async function getEmbeddingForText(text, apiKey) {
             console.error("OpenAI API Error:", errorText);
             return null;
         }
-        const json = await res.json();
+        const json = (await res.json());
         const vector = (_b = (_a = json.data) === null || _a === void 0 ? void 0 : _a[0]) === null || _b === void 0 ? void 0 : _b.embedding;
         if (!Array.isArray(vector)) {
             console.error("無法取得 embedding");
@@ -132,7 +132,7 @@ exports.compareOneTextWithAllRedFlags = (0, https_1.onRequest)({
             const compressed = text.toLowerCase().replace(/\s+/g, "");
             // 如果剛好等於 "我覺得我不值得"，就不排除
             if (/^我(?:覺得|感覺|認為)我不值得$/.test(compressed)) {
-                // 這裡可視需求給一個特殊 category 
+                // 這裡可視需求給一個特殊 category
                 // sentenceCategory = "worth_myself" (隨意命名)
                 // 不做任何提前 return
             }
@@ -157,7 +157,7 @@ exports.compareOneTextWithAllRedFlags = (0, https_1.onRequest)({
             const compressed = text.toLowerCase().replace(/\s+/g, "");
             // 如果剛好等於 "我不覺得我值得"，就不排除
             if (/^我不(?:覺得|感覺|認為)我值得$/.test(compressed)) {
-                // 這裡可視需求給一個特殊 category 
+                // 這裡可視需求給一個特殊 category
                 // sentenceCategory = "worth_myself" (隨意命名)
                 // 不做任何提前 return
             }

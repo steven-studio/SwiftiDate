@@ -114,6 +114,7 @@ struct LoginOrRegisterView: View {
                             AnalyticsManager.shared.trackEvent("click_login_phone", parameters: [
                                 "screen": "LoginView"
                             ])
+                            showPhoneNumberEntry = true // 這行才是關鍵修正！
                         }) {
                             HStack {
                                 Image(systemName: "phone.fill")

@@ -119,9 +119,18 @@ struct PasswordLoginView: View {
         
         isLoggingIn = true
         AnalyticsManager.shared.trackEvent("PasswordLogin_LoginAttempt", parameters: ["phone": "\(selectedCountryCode)\(phoneNumber)"])
+        
+        // ✅ 自動去除手機號碼前面的0
+        var formattedPhoneNumber = phoneNumber
+        if formattedPhoneNumber.hasPrefix("0") {
+            formattedPhoneNumber.removeFirst()
+        }
 
-        let fullPhoneNumber = "\(selectedCountryCode)\(phoneNumber)"
-        let url = URL(string: "https://your-api.com/login")! // ✅ 替換為你的後端 API
+        let fullPhoneNumber = "\(selectedCountryCode)\(formattedPhoneNumber)"
+
+        // ✅🔥 已修改為 Firebase Function URL
+        let url = URL(string: "https://us-central1-swiftidate-cdff0.cloudfunctions.net/loginHandler")!
+
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -142,6 +151,7 @@ struct PasswordLoginView: View {
             do {
                 let result = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
                 let success = result?["success"] as? Bool ?? false
+                let message = result?["message"] as? String ?? "未知錯誤"
 
                 DispatchQueue.main.async {
                     if success {
@@ -151,7 +161,7 @@ struct PasswordLoginView: View {
                         userSettings.globalPhoneNumber = phoneNumber
                         appState.isLoggedIn = true
                     } else {
-                        print("❌ 密碼錯誤")
+                        print("❌ 登入失敗: \(message)")
                         AnalyticsManager.shared.trackEvent("PasswordLogin_LoginFailure", parameters: ["reason": "密碼錯誤"])
                     }
                 }

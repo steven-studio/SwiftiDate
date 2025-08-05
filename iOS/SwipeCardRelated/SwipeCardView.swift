@@ -162,11 +162,26 @@ struct SwipeCardView: View {
 
                                     // 2) 根據門檻來判斷是否左滑或右滑
                                     if predictedX > 100 {
-                                        // ▶︎ 右滑 (like)
-                                        viewModel.swipeOffScreen(toRight: true, predictedX: predictedX, predictedY: predictedY)
+                                        withAnimation(.easeInOut) {
+                                            offset = CGSize(width: 1000, height: 0)
+                                        }
+                                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                                            offset = .zero
+                                            if currentIndex < users.count - 1 {
+                                                currentIndex += 1
+                                            }
+                                        }
                                     } else if predictedX < -100 {
                                         // ◀︎ 左滑 (dislike)
-                                        viewModel.swipeOffScreen(toRight: false, predictedX: predictedX, predictedY: predictedY)
+                                        withAnimation(.easeInOut) {
+                                            offset = CGSize(width: -1000, height: 0)
+                                        }
+                                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                                            offset = .zero
+                                            if currentIndex < users.count - 1 {
+                                                currentIndex += 1
+                                            }
+                                        }
                                     } else {
                                         // 回彈，不夠力就歸位
                                         withAnimation(.spring()) {
@@ -211,7 +226,7 @@ struct SwipeCardView: View {
         guard !isLoading else { return } // 防止重複加載
         isLoading = true
         
-        // 如果想先篩選資料，例如：只顯示男女、年齡區間，可在這裡加 .whereField(...)
+        // 如果d想先篩選資料，例如：只顯示男女、年齡區間，可在這裡加 .whereField(...)
         var query = db.collection("users")
             .order(by: "createdAt", descending: false)  // 假設你的 user document 有 "createdAt" 欄位
             .limit(to: pageSize)

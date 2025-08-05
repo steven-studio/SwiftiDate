@@ -39,7 +39,11 @@ export const checkUrl = onCall(
         throw new HttpsError("unknown", "Web Risk call failed");
       }
 
-      const json = await response.json();
+      interface UrlCheckResponse {
+        threats?: any[];
+      }
+
+      const json = (await response.json()) as UrlCheckResponse;
       const isMalicious = !!(json?.threats && json.threats.length > 0);
 
       return {

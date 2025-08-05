@@ -15,6 +15,11 @@ const params_1 = require("firebase-functions/params");
 const node_fetch_1 = __importDefault(require("node-fetch"));
 const pinecone_1 = require("@pinecone-database/pinecone");
 let pinecone = null;
+/**
+ * 取得 Pinecone Client (Lazy-init)。
+ *
+ * @return {Pinecone} 已初始化的 Pinecone 客戶端
+ */
 function getPineconeClient() {
     if (!pinecone) {
         pinecone = new pinecone_1.Pinecone({
@@ -25,6 +30,11 @@ function getPineconeClient() {
     }
     return pinecone;
 }
+/**
+ * 取得 Pinecone 特定索引的實例。
+ *
+ * @return {Index} Pinecone 中指定的索引實例
+ */
 function getPineconeIndex() {
     const client = getPineconeClient();
     return client.index("relationship-inquiry-index"); // 假設你還是用 red-index，如果想分開，可改別的名稱
@@ -32,7 +42,11 @@ function getPineconeIndex() {
 // 透過 Firebase Secrets 管理 OpenAI API Key
 const openAiApiKey = (0, params_1.defineSecret)("OPENAI_API_KEY");
 /**
- * 取得文字的 embedding
+ * 使用 OpenAI API 產生輸入文字的 embedding。
+ *
+ * @param {string} text - 要轉換成 embedding 的輸入文字
+ * @param {string} apiKey - OpenAI API 金鑰
+ * @return {Promise<number[] | null>} 成功回傳 embedding 向量，否則回傳 null
  */
 async function getEmbeddingForText(text, apiKey) {
     var _a, _b;
@@ -57,7 +71,7 @@ async function getEmbeddingForText(text, apiKey) {
             console.error("OpenAI API Error:", errorText);
             return null;
         }
-        const json = await res.json();
+        const json = (await res.json());
         const vector = (_b = (_a = json.data) === null || _a === void 0 ? void 0 : _a[0]) === null || _b === void 0 ? void 0 : _b.embedding;
         if (!Array.isArray(vector)) {
             console.error("無法取得 embedding");
