@@ -61,24 +61,26 @@ struct MainView: View {
                 .tag(1) // Assign a tag for TurboView tab
                 .environmentObject(UserSettings.shared) // 必須加入這行
 
-            // Only show UserGuideView if the user is male
-            if userSettings.globalUserGender == .male { // Use globalUserGender for the gender check
-                NavigationView {
-                    UserGuideView()
-                }
-                .tabItem {
-                    TabBarIcon(systemImageName: "questionmark.circle.fill")
-                }
-                .tag(2) // Assign a tag for UserGuideView tab
-            } else {
-                NavigationView {
-                    AstrologyView() // ✅ 針對女性用戶顯示命理學相關內容
-                }
-                .tabItem {
-                    TabBarIcon(systemImageName: "moon.stars.fill") // 使用更符合命理學的 SF Symbol
-                }
-                .tag(2)
-            }
+            // ❌ This functionality is not part of the MVP core feature set.
+            // Temporarily disabled to focus on essential MVP functions.
+            // 待產品初期核心功能驗證完畢後再重新評估啟用
+//            if userSettings.globalUserGender == .male { // Use globalUserGender for the gender check
+//                NavigationView {
+//                    UserGuideView()
+//                }
+//                .tabItem {
+//                    TabBarIcon(systemImageName: "questionmark.circle.fill")
+//                }
+//                .tag(2) // Assign a tag for UserGuideView tab
+//            } else {
+//                NavigationView {
+//                    AstrologyView() // ✅ 針對女性用戶顯示命理學相關內容
+//                }
+//                .tabItem {
+//                    TabBarIcon(systemImageName: "moon.stars.fill") // 使用更符合命理學的 SF Symbol
+//                }
+//                .tag(2)
+//            }
             
             ChatView(contentSelectedTab: $selectedTab, userSettings: userSettings) // Pass the binding to contentSelectedTab
                 .environmentObject(userSettings) // 確保傳遞 userSettings

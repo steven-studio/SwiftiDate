@@ -64,12 +64,13 @@ class FirebaseCloudService: CloudService {
     
     func sendOTP(to phoneNumber: String, completion: @escaping (Result<String, Error>) -> Void) {
         // 改寫 FirebaseAuthManager 的 sendFirebaseOTP 讓它可以回傳驗證 ID
-        authManager.sendFirebaseOTP(to: phoneNumber)
-        
-        // 同樣要在 FirebaseAuthManager 中增加 callback or completion
-        // 這裡示範簡化
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            completion(.success("dummyVerificationID"))
+        authManager.sendFirebaseOTP(to: phoneNumber) { result in
+            
+            // 同樣要在 FirebaseAuthManager 中增加 callback or completion
+            // 這裡示範簡化
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                completion(.success("dummyVerificationID"))
+            }
         }
     }
     

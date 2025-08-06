@@ -7,6 +7,7 @@
 
 import Foundation
 import FirebaseAuth
+import FirebaseMessaging
 
 /// 使用 Firebase Auth 進行各種登入驗證的管理類別
 class FirebaseAuthManager {
@@ -28,26 +29,41 @@ class FirebaseAuthManager {
             return
         }
         let fullPhoneNumber = "\(settings.globalCountryCode)\(settings.globalPhoneNumber)"
-        sendFirebaseOTP(to: fullPhoneNumber)
+        sendFirebaseOTP(to: fullPhoneNumber) { result in
+            switch result {
+            case .success(let verificationID):
+                print("✅ 成功發送OTP, verificationID: \(verificationID)")
+                // 這裡可以存入LocalStorageManager或其他暫存位置
+                LocalStorageManager.shared.saveVerificationID(verificationID)
+
+            case .failure(let error):
+                print("❌ 發送OTP失敗: \(error.localizedDescription)")
+            }
+        }
     }
 
     /// 直接發送 OTP 驗證碼到指定 phoneNumber
     ///
     /// - Parameter phoneNumber: 包含國碼的完整電話號碼 (e.g. "+886912345678")
-    func sendFirebaseOTP(to phoneNumber: String) {
-        PhoneAuthProvider.provider()
-            .verifyPhoneNumber(phoneNumber, uiDelegate: nil) { verificationID, error in
-                if let error = error {
-                    print("❌ 發送 OTP 驗證碼失敗: \(error.localizedDescription)")
-                    return
-                }
-                // 驗證碼發送成功，將 verificationID 暫存到 UserDefaults 或 ViewModel
-                print("✅ 發送 OTP 驗證碼成功，verificationID = \(verificationID ?? "")")
-                if let vid = verificationID {
-                    // 將 verificationID 存起來，後續在 OTP 驗證畫面時會用到
-                    LocalStorageManager.shared.saveVerificationID(vid)
-                }
+    func sendFirebaseOTP(to phoneNumber: String, completion: @escaping (Result<String, Error>) -> Void) {
+        let formattedPhone = phoneNumber.replacingOccurrences(of: " ", with: "")
+
+        PhoneAuthProvider.provider().verifyPhoneNumber(formattedPhone, uiDelegate: nil) { verificationID, error in
+            if let error = error {
+                print("❌ Firebase 發送 OTP 錯誤: \(error.localizedDescription)")
+                completion(.failure(error))
+                return
             }
+            
+            guard let verificationID = verificationID else {
+                print("❌ Firebase 未提供 verificationID，錯誤不明")
+                completion(.failure(NSError(domain: "FirebaseAuth", code: -1, userInfo: [NSLocalizedDescriptionKey: "verificationID 為 nil"])))
+                return
+            }
+            
+            print("✅ Firebase OTP 成功發送，verificationID：\(verificationID)")
+            completion(.success(verificationID))
+        }
     }
 
     /// 以電話號碼進行登入（驗證碼流程）

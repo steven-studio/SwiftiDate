@@ -26,14 +26,8 @@ struct SwipeCardView: View {
 
     // MARK: - Environment & Observed Objects
     @EnvironmentObject var userSettings: UserSettings
-    @StateObject private var locationManager = LocationManager()
-
-    // MARK: - State Variables
-    @State private var currentIndex = 0
-    @State private var offset = CGSize.zero
 
     // MARK: - UI Controls
-    @State private var showCircleAnimation = false
     @State private var showPrivacySettings = false // 控制隱私設置頁面的顯示
     @State private var showWelcomePopup = false    // 初始值為 true，代表剛登入時顯示彈出視窗
     
@@ -44,30 +38,6 @@ struct SwipeCardView: View {
     
     @State private var lastDocument: DocumentSnapshot? = nil
     @State private var isLoading: Bool = false
-
-    // MARK: - Undo Tracking
-    /// 記錄最後一次滑動資訊：
-    /// - user: 使用者資料
-    /// - index: 卡片在陣列中的索引
-    /// - isRightSwipe: 是否為向右滑 (Like)
-    /// - docID: 此筆滑動資料在 Firebase 中的文件 ID
-    @State private var lastSwipedData: (user: User, index: Int, isRightSwipe: Bool, docID: String)?
-    // 加一個屬性，記錄最後飛出的 offset
-    @State private var lastSwipedOffset: CGSize?
-
-    // List of users and current index
-    @State private var users: [User] = [
-        User(id: "userID_2", name: "後照鏡被偷", age: 20, zodiac: "雙魚座", location: "桃園市", height: 172, photos: [
-            "userID_2_photo1", "userID_2_photo2"
-        ]),
-        User(id: "userID_3", name: "小明", age: 22, zodiac: "天秤座", location: "台北市", height: 180, photos: [
-            "userID_3_photo1", "userID_3_photo2", "userID_3_photo3", "userID_3_photo4", "userID_3_photo5", "userID_3_photo6"
-        ]),
-        User(id: "userID_4", name: "小花", age: 25, zodiac: "獅子座", location: "新竹市", height: 165, photos: [
-            "userID_4_photo1", "userID_4_photo2", "userID_4_photo3"
-        ])
-        // Add more users here
-    ]
     
     // Use the view model
     @StateObject var viewModel = SwipeCardViewModel()
@@ -75,8 +45,7 @@ struct SwipeCardView: View {
     
     var body: some View {
         ZStack {
-            if locationManager.authorizationStatus == .authorizedWhenInUse ||
-               locationManager.authorizationStatus == .authorizedAlways {
+            if viewModel.locationManager.authorizationStatus.isAuthorized {
                 // 使用者已授權位置存取，顯示滑動卡片畫面
                 mainSwipeCardView
                     .blur(radius: userSettings.globalSelectedGender == "none" ? 10 : 0) // ✅ 讓畫面模糊
@@ -128,74 +97,63 @@ struct SwipeCardView: View {
     // 主滑動卡片畫面
     var mainSwipeCardView: some View {
         ZStack {
-            if showCircleAnimation {
+            if viewModel.showCircleAnimation {
                 // 動態圓圈動畫頁面
                 CircleExpansionView()
             } else {
-                // 從後往前顯示卡片
-                ForEach(Array(users[currentIndex..<min(currentIndex + 3, users.count)]).reversed(), id: \.id) { user in
-                    let index = users.firstIndex(where: { $0.id == user.id }) ?? 0
-                    let isCurrentCard = index == currentIndex
-                    // 先把基礎的堆疊位移
-                    let baseY = CGFloat(index - currentIndex) * 10
-                    let rotationAngle = isCurrentCard ? Double(offset.width / 40) : 0
-                    let zIndexValue = Double(users.count - index)
-                    let scaleValue = isCurrentCard ? 1.0 : 0.95
+                ForEach(visibleUsers, id: \.id) { user in
+                    let properties = cardProperties(for: user)
 
                     SwipeCard(user: user)
                         .offset(
-                            x: isCurrentCard ? offset.width : 0,
-                            y: isCurrentCard ? offset.height : CGFloat(index - currentIndex) * 10
+                            x: properties.isCurrentCard ? viewModel.offset.width : 0,
+                            y: properties.isCurrentCard ? viewModel.offset.height : 10
                         )
-                        .scaleEffect(scaleValue)
-                        .rotationEffect(.degrees(rotationAngle))
+                        .scaleEffect(properties.scaleValue)
+                        .rotationEffect(.degrees(properties.rotationAngle))
                         .gesture(
-                            isCurrentCard ? DragGesture()
+                            properties.isCurrentCard ?
+                            DragGesture()
                                 .onChanged { gesture in
-                                    self.offset = gesture.translation
+                                    viewModel.offset = gesture.translation
                                 }
                                 .onEnded { value in
-                                    
-                                    // 1) 抓出預估結束時的 x / y 偏移
                                     let predictedX = value.predictedEndTranslation.width
                                     let predictedY = value.predictedEndTranslation.height
-
-                                    // 2) 根據門檻來判斷是否左滑或右滑
                                     if predictedX > 100 {
-                                        withAnimation(.easeInOut) {
-                                            offset = CGSize(width: 1000, height: 0)
-                                        }
-                                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                                            offset = .zero
-                                            if currentIndex < users.count - 1 {
-                                                currentIndex += 1
-                                            }
-                                        }
+                                        viewModel.swipeOffScreen(toRight: true, predictedX: predictedX, predictedY: predictedY)
                                     } else if predictedX < -100 {
-                                        // ◀︎ 左滑 (dislike)
-                                        withAnimation(.easeInOut) {
-                                            offset = CGSize(width: -1000, height: 0)
-                                        }
-                                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                                            offset = .zero
-                                            if currentIndex < users.count - 1 {
-                                                currentIndex += 1
-                                            }
-                                        }
+                                        viewModel.swipeOffScreen(toRight: false, predictedX: predictedX, predictedY: predictedY)
                                     } else {
-                                        // 回彈，不夠力就歸位
                                         withAnimation(.spring()) {
-                                            offset = .zero
+                                            viewModel.offset = .zero
                                         }
                                     }
-                                }
-                            : nil
+                                } : nil
                         )
-                        .zIndex(zIndexValue) // 控制卡片的顯示層級
-                        .animation(nil, value: offset) // 禁止不必要的動畫
+                        .zIndex(properties.zIndexValue)
+                        .animation(nil, value: viewModel.offset)
                 }
             }
         }
+    }
+    
+    var visibleUsers: [User] {
+        let endIndex = min(viewModel.currentIndex + 3, viewModel.users.count)
+        return Array(viewModel.users[viewModel.currentIndex..<endIndex]).reversed()
+    }
+    
+    func cardProperties(for user: User) -> (isCurrentCard: Bool, rotationAngle: Double, zIndexValue: Double, scaleValue: CGFloat) {
+        guard let index = viewModel.users.firstIndex(where: { $0.id == user.id }) else {
+            return (false, 0, 0, 0.95)
+        }
+        
+        let isCurrentCard = index == viewModel.currentIndex
+        let rotationAngle = isCurrentCard ? Double(viewModel.offset.width / 40) : 0
+        let zIndexValue = Double(viewModel.users.count - index)
+        let scaleValue: CGFloat = isCurrentCard ? 1.0 : 0.95
+        
+        return (isCurrentCard, rotationAngle, zIndexValue, scaleValue)
     }
     
     // 先抓「已滑過」的紀錄
@@ -283,7 +241,7 @@ struct SwipeCardView: View {
             }
             
             // 把新抓到的 user 陣列「接續」到 self.users
-            self.users.append(contentsOf: tempUsers)
+            self.viewModel.users.append(contentsOf: tempUsers)
             
             // 更新 lastDocument，為下一頁做準備
             self.lastDocument = docs.last
@@ -308,7 +266,7 @@ struct SwipeCardView: View {
                 .padding()
 
             Button(action: {
-                locationManager.requestPermission()
+                viewModel.locationManager.requestPermission()
             }) {
                 Text("前往設置")
                     .font(.headline)

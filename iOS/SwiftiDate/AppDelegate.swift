@@ -14,6 +14,7 @@ import KeychainAccess
 import FirebaseAppCheck
 import FirebaseFirestore
 import UserNotifications
+import FirebaseMessaging
 
 class AppDelegate: NSObject, UIApplicationDelegate, CLLocationManagerDelegate, UNUserNotificationCenterDelegate {
     var cloudService: CloudService?
@@ -24,27 +25,25 @@ class AppDelegate: NSObject, UIApplicationDelegate, CLLocationManagerDelegate, U
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         
-        // 1. 嘗試初始化 Firebase
-        let firebaseCloud = FirebaseCloudService()
-        firebaseCloud.initialize()
+        // 🔥 Firebase 官方標準初始化方式：
+        FirebaseApp.configure()
+
+        // AppCheck (這裡沒有問題)
+        let providerFactory = DeviceCheckProviderFactory()
+        AppCheck.setAppCheckProviderFactory(providerFactory)
         
-        // 2. 檢查 Firebase 是否可用 (例如測試 Firestore 或測試 Storage 連線)
+        // 確認 Firebase 初始化成功之後，再進行 Firestore測試
         testFirebaseConnection { success in
             if success {
-                // 如果可用，就用 Firebase
-                self.cloudService = firebaseCloud
+                self.cloudService = FirebaseCloudService()
+                self.cloudService?.initialize() // 這個 initialize 應僅用來做你額外設定（如 listener 等）
             } else {
-                // 如果連不上，就用阿里雲 (示例)
                 let aliCloud = AliCloudService()
                 aliCloud.initialize()
                 self.cloudService = aliCloud
             }
         }
 
-        // 初始化 App Check
-        let providerFactory = DeviceCheckProviderFactory()
-        AppCheck.setAppCheckProviderFactory(providerFactory)
-        
         // Store or retrieve device identifier
         storeDeviceIdentifier()
         
@@ -86,11 +85,26 @@ class AppDelegate: NSObject, UIApplicationDelegate, CLLocationManagerDelegate, U
             }
         }
         
+        // 🔔🔔🔔🔔🔔 推播的關鍵程式碼在這 🔔🔔🔔🔔🔔
+        UNUserNotificationCenter.current().delegate = self
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { granted, error in
+            guard granted else {
+                print("❌ 推播權限未允許")
+                return
+            }
+            DispatchQueue.main.async {
+                UIApplication.shared.registerForRemoteNotifications()
+                print("✅ 已呼叫 registerForRemoteNotifications")
+            }
+        }
+
         return true
     }
     
     // 收到設備令牌時的回調
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        print("✅ 已成功取得 deviceToken: \(deviceToken)")
+        Messaging.messaging().apnsToken = deviceToken // 必須要有這行！
         NotificationManager.shared.handleDeviceToken(deviceToken: deviceToken)
     }
 
@@ -105,7 +119,7 @@ class AppDelegate: NSObject, UIApplicationDelegate, CLLocationManagerDelegate, U
     }
         
     private func storeDeviceIdentifier() {
-        let keychain = Keychain(service: "com.stevenstudio.SwiftiDate")
+        let keychain = Keychain(service: "stevenstudio.SwiftiDate")
         if let existingUUID = keychain["deviceUUID"] {
             print("Existing Device UUID: \(existingUUID)")
             deviceIdentifier = existingUUID // Store it in the global variable

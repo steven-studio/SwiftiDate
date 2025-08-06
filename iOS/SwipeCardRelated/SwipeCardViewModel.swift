@@ -24,6 +24,9 @@ class SwipeCardViewModel: ObservableObject {
     // (We use an implicitly unwrapped optional so we know it must be assigned.)
     var userSettings: UserSettings!
     
+    // 在這裡加入 locationManager
+    @Published var locationManager = LocationManager()
+    
     // MARK: - Published Properties (State)
     @Published var currentIndex: Int = 0
     @Published var offset: CGSize = .zero

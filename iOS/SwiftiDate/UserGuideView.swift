@@ -29,10 +29,6 @@ struct UserGuideView: View {
 
     var body: some View {
         ZStack {
-            Image("userGuideBackground")
-                .resizable()
-                .scaledToFill()
-                .ignoresSafeArea()
             
             ScrollView {
                 GeometryReader { geo in
@@ -181,7 +177,7 @@ struct UserGuideView: View {
                     }
                 }
                 .padding()
-                .foregroundColor(.white) // 統一所有文字顏色為白色
+                .foregroundColor(.black) // 統一所有文字顏色為白色
             }
         }
         .onPreferenceChange(ScrollOffsetPreferenceKey.self) { value in

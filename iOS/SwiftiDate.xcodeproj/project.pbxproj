@@ -429,7 +429,6 @@
 		D0B3F2B52D741052007A5EA0 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04938792CBF0A6F00754E46 /* Models.swift */; };
 		D0B3F2C42D741632007A5EA0 /* GenderSelectionViewUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B3F2C32D741632007A5EA0 /* GenderSelectionViewUITests.swift */; };
 		D0B3F2C52D741681007A5EA0 /* GenderSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09587D52CB8CDDA00BCD04B /* GenderSelectionView.swift */; };
-		D0B3F2C72D741786007A5EA0 /* SwipeCardViewUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B3F2C62D741786007A5EA0 /* SwipeCardViewUITests.swift */; };
 		D0B3F2C82D7421EC007A5EA0 /* SwipeCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0445C582C71BFE70059D522 /* SwipeCardView.swift */; };
 		D0B3F2C92D742222007A5EA0 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB0E2CA0E65F00A78A87 /* LocationManager.swift */; };
 		D0B3F2CA2D742260007A5EA0 /* CircleExpansionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09587CE2CB7E44400BCD04B /* CircleExpansionView.swift */; };
@@ -482,6 +481,8 @@
 		D0DDDB582CA4ECD300A78A87 /* DataManagementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB572CA4ECD200A78A87 /* DataManagementView.swift */; };
 		D0E46AD82E4139B2008B6871 /* PasswordLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E46AD72E4139AD008B6871 /* PasswordLoginView.swift */; };
 		D0E46AD92E4139B2008B6871 /* PasswordLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E46AD72E4139AD008B6871 /* PasswordLoginView.swift */; };
+		D0E46ADE2E420ED5008B6871 /* CLAuthorizationStatus+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E46ADD2E420ED1008B6871 /* CLAuthorizationStatus+Extensions.swift */; };
+		D0E46ADF2E420ED5008B6871 /* CLAuthorizationStatus+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E46ADD2E420ED1008B6871 /* CLAuthorizationStatus+Extensions.swift */; };
 		D0E936DE2E3E8D4C002F371C /* LoginOrRegisterUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E936DD2E3E8D4A002F371C /* LoginOrRegisterUITests.swift */; };
 		D0FA20B92C8CBAAB001C5D0E /* MeetWillingnessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FA20B82C8CBAAB001C5D0E /* MeetWillingnessView.swift */; };
 /* End PBXBuildFile section */
@@ -758,7 +759,6 @@
 		D0B3F2B02D740DBE007A5EA0 /* ModelSelectorViewUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelSelectorViewUITests.swift; sourceTree = "<group>"; };
 		D0B3F2B22D740FBA007A5EA0 /* TopRightActionButtonsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopRightActionButtonsUITests.swift; sourceTree = "<group>"; };
 		D0B3F2C32D741632007A5EA0 /* GenderSelectionViewUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenderSelectionViewUITests.swift; sourceTree = "<group>"; };
-		D0B3F2C62D741786007A5EA0 /* SwipeCardViewUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeCardViewUITests.swift; sourceTree = "<group>"; };
 		D0B3F2CC2D744F23007A5EA0 /* PasswordLoginUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordLoginUITests.swift; sourceTree = "<group>"; };
 		D0B3F2D12D746499007A5EA0 /* ResetPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordView.swift; sourceTree = "<group>"; };
 		D0B3F2D42D746890007A5EA0 /* ResetPasswordFlowUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordFlowUITests.swift; sourceTree = "<group>"; };
@@ -808,6 +808,7 @@
 		D0DDDB552CA29B1100A78A87 /* TermsOfServiceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsOfServiceView.swift; sourceTree = "<group>"; };
 		D0DDDB572CA4ECD200A78A87 /* DataManagementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManagementView.swift; sourceTree = "<group>"; };
 		D0E46AD72E4139AD008B6871 /* PasswordLoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordLoginView.swift; sourceTree = "<group>"; };
+		D0E46ADD2E420ED1008B6871 /* CLAuthorizationStatus+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CLAuthorizationStatus+Extensions.swift"; sourceTree = "<group>"; };
 		D0E936DD2E3E8D4A002F371C /* LoginOrRegisterUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginOrRegisterUITests.swift; sourceTree = "<group>"; };
 		D0FA20B82C8CBAAB001C5D0E /* MeetWillingnessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetWillingnessView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -1376,6 +1377,7 @@
 		D089DB612D69993D00D6A1AB /* SwipeCardRelated */ = {
 			isa = PBXGroup;
 			children = (
+				D0E46ADD2E420ED1008B6871 /* CLAuthorizationStatus+Extensions.swift */,
 				D09587CE2CB7E44400BCD04B /* CircleExpansionView.swift */,
 				D09587D52CB8CDDA00BCD04B /* GenderSelectionView.swift */,
 				D0445C582C71BFE70059D522 /* SwipeCardView.swift */,
@@ -1530,7 +1532,6 @@
 			isa = PBXGroup;
 			children = (
 				D0B3F2C32D741632007A5EA0 /* GenderSelectionViewUITests.swift */,
-				D0B3F2C62D741786007A5EA0 /* SwipeCardViewUITests.swift */,
 			);
 			path = SwipeCardRelated;
 			sourceTree = "<group>";
@@ -2006,6 +2007,7 @@
 				D0DDDB2E2CA1628F00A78A87 /* WhatIsCrushAndHowToUseView.swift in Sources */,
 				D0B388302D5B7C12003BC40C /* SocialCourse.swift in Sources */,
 				D0B3F2D22D746499007A5EA0 /* ResetPasswordView.swift in Sources */,
+				D0E46ADF2E420ED5008B6871 /* CLAuthorizationStatus+Extensions.swift in Sources */,
 				D055E9922C8CCFBA00A97DD1 /* InterestSelectionView.swift in Sources */,
 				D07E7F442D7F18BB00FEDBBF /* TermsAndPrivacyView.swift in Sources */,
 				D0445C2F2C71B3800059D522 /* SwiftiDateApp.swift in Sources */,
@@ -2137,6 +2139,7 @@
 				D07C57F82D76FA460008DC9D /* TaggingView.swift in Sources */,
 				D0B3F26D2D736347007A5EA0 /* ManageProfilePhotosView.swift in Sources */,
 				D0B3F26E2D736347007A5EA0 /* PhotoUploadGuidelinesView.swift in Sources */,
+				D0E46ADE2E420ED5008B6871 /* CLAuthorizationStatus+Extensions.swift in Sources */,
 				D0B3F26F2D736347007A5EA0 /* RefundPolicyView.swift in Sources */,
 				D0B3F2702D736347007A5EA0 /* ReportUserView.swift in Sources */,
 				D0B3F2712D736347007A5EA0 /* RestorePurchaseView.swift in Sources */,
@@ -2190,7 +2193,6 @@
 				D0422DB32D7C50AF00609060 /* WebRTCManager.swift in Sources */,
 				D0422DB42D7C50AF00609060 /* WebRTCVideoView.swift in Sources */,
 				D0422DB52D7C50AF00609060 /* SignalingClient.swift in Sources */,
-				D0B3F2C72D741786007A5EA0 /* SwipeCardViewUITests.swift in Sources */,
 				D0B3F2442D7361FF007A5EA0 /* SafetyCenterView.swift in Sources */,
 				D0B3F2432D7361A5007A5EA0 /* SettingsView.swift in Sources */,
 				D0B3F2422D73616C007A5EA0 /* ProfileImageView.swift in Sources */,
