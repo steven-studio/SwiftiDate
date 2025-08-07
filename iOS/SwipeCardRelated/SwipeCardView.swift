@@ -30,7 +30,8 @@ struct SwipeCardView: View {
     // MARK: - UI Controls
     @State private var showPrivacySettings = false // 控制隱私設置頁面的顯示
     @State private var showWelcomePopup = false    // 初始值為 true，代表剛登入時顯示彈出視窗
-    
+    @State private var showMatchTipsPopup = false // 控制配對秘訣彈窗
+
     @State private var swipedIDs: Set<String> = [] // 存放已滑過的 userIDs
     private var currentUserID: String? {
         Auth.auth().currentUser?.uid
@@ -84,9 +85,15 @@ struct SwipeCardView: View {
         .fullScreenCover(isPresented: $showPrivacySettings) {
             PrivacySettingsView(isPresented: $showPrivacySettings)
         }
+        .fullScreenCover(isPresented: $showMatchTipsPopup) {
+            MatchTipsPopupView(isPresented: $showMatchTipsPopup)
+        }
         .onReceive(NotificationCenter.default.publisher(for: .undoSwipeNotification)) { _ in
             viewModel.undoSwipe()
             print("Got undo notification!")
+        }
+        .onReceive(NotificationCenter.default.publisher(for: .checkMatchTipsNotification)) { _ in
+            checkAndShowMatchTips()
         }
         .onAppear {
             viewModel.userSettings = userSettings
@@ -154,6 +161,48 @@ struct SwipeCardView: View {
         let scaleValue: CGFloat = isCurrentCard ? 1.0 : 0.95
         
         return (isCurrentCard, rotationAngle, zIndexValue, scaleValue)
+    }
+    
+    // MARK: - Match Tips Logic
+    private func checkAndShowMatchTips() {
+        // 避免重複顯示
+        if showMatchTipsPopup {
+            return
+        }
+        
+        // 每滑 10 張卡片就有機會顯示一次
+        if viewModel.currentIndex > 0 && viewModel.currentIndex % 10 == 0 {
+            // 30% 機率顯示
+            if Int.random(in: 1...100) <= 30 {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                    showMatchTipsPopup = true
+                }
+                return
+            }
+        }
+        
+        // 或者根據使用者的配對成功率來決定
+        let successRate = calculateMatchSuccessRate()
+        if successRate < 0.1 && viewModel.currentIndex > 5 { // 成功率低於 10% 且已滑過 5 張
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                showMatchTipsPopup = true
+            }
+        }
+        
+        // 新用戶特殊邏輯：滑了3張卡片後就顯示
+        if viewModel.currentIndex == 3 && userSettings.globalLikeCount == 0 {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                showMatchTipsPopup = true
+            }
+        }
+    }
+
+    private func calculateMatchSuccessRate() -> Double {
+        // 簡單的成功率計算邏輯
+        // 你可以根據實際的配對數據來計算
+        let totalSwipes = Double(viewModel.currentIndex + 1)
+        let matches = Double(userSettings.globalLikeCount) // 假設這是配對數
+        return totalSwipes > 0 ? matches / totalSwipes : 0.0
     }
     
     // 先抓「已滑過」的紀錄
@@ -558,6 +607,7 @@ struct SwipeCard: View {
 
 extension Notification.Name {
     static let undoSwipeNotification = Notification.Name("undoSwipeNotification")
+    static let checkMatchTipsNotification = Notification.Name("checkMatchTipsNotification")
 }
 
 struct SwipeCardView_Previews: PreviewProvider {
