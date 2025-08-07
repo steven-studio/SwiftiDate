@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import Firebase
 import FirebaseAuth
 
 struct OTPVerificationView: View {
@@ -241,7 +242,11 @@ struct OTPVerificationView: View {
         // 確認Firebase SDK的Auth是否正確初始化
         print("Firebase Auth 是否初始化: \(Auth.auth().app != nil)")
 
-        FirebaseAuthManager.shared.sendFirebaseOTP(to: fullPhoneNumber) { result in
+        let manager = FirebaseAuthManager.shared
+        print("🔍 取得 manager: \(manager)")
+
+        manager.sendFirebaseOTP(to: fullPhoneNumber) { result in
+            print("🔥 進入 completion closure")
             DispatchQueue.main.async {
                 switch result {
                 case .success(let vid):
@@ -254,6 +259,7 @@ struct OTPVerificationView: View {
                 }
             }
         }
+        print("🔥 已呼叫 sendFirebaseOTP")
     }
     
     /// 當使用者在第 index 欄位輸入(或刪除)新值時，更新 otpCode 並處理焦點
@@ -345,11 +351,12 @@ struct OTPVerificationView: View {
     }
 
     func verifyOTPCode() {
-        guard let verificationID = verificationID else {
+        // ✅ 直接從 UserDefaults 中取得
+        guard let verificationID = UserDefaults.standard.string(forKey: "authVerificationID") else {
             errorMessage = "驗證ID不存在，請重新發送驗證碼"
             return
         }
-        
+
         isVerifying = true
         errorMessage = nil // 清除錯誤訊息
         

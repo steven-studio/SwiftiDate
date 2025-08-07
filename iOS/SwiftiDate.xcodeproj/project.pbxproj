@@ -133,7 +133,6 @@
 		D051EF2E2CC03360004563A3 /* VerifiedProfileProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D051EF2D2CC03360004563A3 /* VerifiedProfileProgressView.swift */; };
 		D051EF312CC033C5004563A3 /* AchievementSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D051EF302CC033C5004563A3 /* AchievementSectionView.swift */; };
 		D055A7632D19931C00F11F18 /* GlobalVariables.swift in Sources */ = {isa = PBXBuildFile; fileRef = D055A7622D19931C00F11F18 /* GlobalVariables.swift */; };
-		D055A7672D19A2B800F11F18 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D055A7662D19A2B800F11F18 /* GoogleService-Info.plist */; };
 		D055E9922C8CCFBA00A97DD1 /* InterestSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D055E9912C8CCFBA00A97DD1 /* InterestSelectionView.swift */; };
 		D05E978E2D79B74D00F05560 /* ChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05E978D2D79B74D00F05560 /* ChatViewModel.swift */; };
 		D05E978F2D79B74D00F05560 /* ChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05E978D2D79B74D00F05560 /* ChatViewModel.swift */; };
@@ -438,6 +437,8 @@
 		D0B3F2D32D746499007A5EA0 /* ResetPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B3F2D12D746499007A5EA0 /* ResetPasswordView.swift */; };
 		D0B3F2D52D746890007A5EA0 /* ResetPasswordFlowUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B3F2D42D746890007A5EA0 /* ResetPasswordFlowUITests.swift */; };
 		D0C99B2E2D0DBFED00FA98AD /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D0C99B2C2D0DBFEC00FA98AD /* Localizable.strings */; };
+		D0D86AA12E439E5500F125F4 /* AuthError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D86AA02E439E4A00F125F4 /* AuthError.swift */; };
+		D0D86AB52E4457BC00F125F4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D0D86AB42E4457BC00F125F4 /* GoogleService-Info.plist */; };
 		D0DDDB052C9FA8AF00A78A87 /* ChatDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB042C9FA8AF00A78A87 /* ChatDetailView.swift */; };
 		D0DDDB072C9FDB1600A78A87 /* WhoLikedYouView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB062C9FDB1600A78A87 /* WhoLikedYouView.swift */; };
 		D0DDDB092C9FDE0500A78A87 /* InteractiveContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB082C9FDE0500A78A87 /* InteractiveContentView.swift */; };
@@ -631,7 +632,6 @@
 		D051EF2D2CC03360004563A3 /* VerifiedProfileProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifiedProfileProgressView.swift; sourceTree = "<group>"; };
 		D051EF302CC033C5004563A3 /* AchievementSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementSectionView.swift; sourceTree = "<group>"; };
 		D055A7622D19931C00F11F18 /* GlobalVariables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalVariables.swift; sourceTree = "<group>"; };
-		D055A7662D19A2B800F11F18 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D055E9912C8CCFBA00A97DD1 /* InterestSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterestSelectionView.swift; sourceTree = "<group>"; };
 		D05E978D2D79B74D00F05560 /* ChatViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewModel.swift; sourceTree = "<group>"; };
 		D0644BC32D7FDB41007B2DE0 /* IPManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IPManager.swift; sourceTree = "<group>"; };
@@ -767,6 +767,8 @@
 		D0C99B302D0DC00700FA98AD /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		D0C99B312D0DC02500FA98AD /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		D0C99B322D0DC04B00FA98AD /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
+		D0D86AA02E439E4A00F125F4 /* AuthError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthError.swift; sourceTree = "<group>"; };
+		D0D86AB42E4457BC00F125F4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D0DDDB042C9FA8AF00A78A87 /* ChatDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatDetailView.swift; sourceTree = "<group>"; };
 		D0DDDB062C9FDB1600A78A87 /* WhoLikedYouView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhoLikedYouView.swift; sourceTree = "<group>"; };
 		D0DDDB082C9FDE0500A78A87 /* InteractiveContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractiveContentView.swift; sourceTree = "<group>"; };
@@ -1113,6 +1115,7 @@
 		D0445C2D2C71B3800059D522 /* SwiftiDate */ = {
 			isa = PBXGroup;
 			children = (
+				D0D86AA02E439E4A00F125F4 /* AuthError.swift */,
 				D080E64D2E3E5B41004A5CAE /* UserListSection.swift */,
 				D04C5DAA2E393E1A000BE146 /* UserProfileCardView.swift */,
 				D04C5DA62E393432000BE146 /* UserProfile.swift */,
@@ -1125,8 +1128,8 @@
 				D0B3882F2D5B7C12003BC40C /* SocialCourse.swift */,
 				D0B388132D5B7A3E003BC40C /* SocialTrainingView.swift */,
 				D09587D22CB8AC6900BCD04B /* SwiftiDate.entitlements */,
+				D0D86AB42E4457BC00F125F4 /* GoogleService-Info.plist */,
 				D018AD972C9F1A0F005A14B9 /* Info.plist */,
-				D055A7662D19A2B800F11F18 /* GoogleService-Info.plist */,
 				D0445C2E2C71B3800059D522 /* SwiftiDateApp.swift */,
 				D0903ABB2D589D0C00735323 /* AppDelegate.swift */,
 				D0445C302C71B3800059D522 /* ContentView.swift */,
@@ -1545,8 +1548,7 @@
 			buildPhases = (
 				D0445C272C71B3800059D522 /* Sources */,
 				D0445C282C71B3800059D522 /* Frameworks */,
-				D07E7F402D7EE81D00FEDBBF /* Run Script */,
-				D016DB4D2D857D4300946EB6 /* ShellScript */,
+				D016DB4D2D857D4300946EB6 /* Run Script */,
 				D0445C292C71B3800059D522 /* Resources */,
 				D0644C1D2D813F37007B2DE0 /* Embed App Clips */,
 			);
@@ -1774,8 +1776,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				D0445C362C71B3820059D522 /* Preview Assets.xcassets in Resources */,
-				D055A7672D19A2B800F11F18 /* GoogleService-Info.plist in Resources */,
 				D0644BD02D80826E007B2DE0 /* SwiftiDate.storekit in Resources */,
+				D0D86AB52E4457BC00F125F4 /* GoogleService-Info.plist in Resources */,
 				D0C99B2E2D0DBFED00FA98AD /* Localizable.strings in Resources */,
 				D0445C332C71B3820059D522 /* Assets.xcassets in Resources */,
 			);
@@ -1820,24 +1822,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		D016DB4D2D857D4300946EB6 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nif which swiftlint >/dev/null; then\n    swiftlint\nelse\n    echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
-		};
-		D07E7F402D7EE81D00FEDBBF /* Run Script */ = {
+		D016DB4D2D857D4300946EB6 /* Run Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1850,12 +1835,10 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(PROJECT_DIR)/SwiftiDate/GoogleService-Info.plist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n#!/bin/bash\nif [ -z \"$GOOGLESERVICEINFO_BASE64\" ]; then\n  echo \"環境變數 GOOGLESERVICEINFO_BASE64 沒有設定，無法生成 GoogleService-Info.plist\"\n  exit 1\nfi\n\necho \"$GOOGLESERVICEINFO_BASE64\" | base64 --decode > \"${PROJECT_DIR}/SwiftiDate/GoogleService-Info.plist\"\necho \"已生成 GoogleService-Info.plist 到專案目錄。\"\n";
-			showEnvVarsInLog = 0;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nif which swiftlint >/dev/null; then\n    swiftlint\nelse\n    echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1950,6 +1933,7 @@
 				D0B3882E2D5B7BAE003BC40C /* UploadPhotoView.swift in Sources */,
 				D06724EB2D6EC45200FD566F /* AliCloudService.swift in Sources */,
 				D0445C7F2C73C9080059D522 /* LookingForView.swift in Sources */,
+				D0D86AA12E439E5500F125F4 /* AuthError.swift in Sources */,
 				D0DDDB3E2CA179AC00A78A87 /* WhatIsSwiftiDatePremiumDiscountPolicyView.swift in Sources */,
 				D07C57F52D76F9870008DC9D /* RegisterLanguageSelectionView.swift in Sources */,
 				D09587D62CB8CDDA00BCD04B /* GenderSelectionView.swift in Sources */,
@@ -2467,6 +2451,7 @@
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -2489,6 +2474,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = SwiftiDate/SwiftiDate.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"SwiftiDate/Preview Content\"";
@@ -2510,8 +2496,10 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = stevenstudio.SwiftiDate;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -2524,6 +2512,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = SwiftiDate/SwiftiDate.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"SwiftiDate/Preview Content\"";
@@ -2545,8 +2534,10 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = stevenstudio.SwiftiDate;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

@@ -14,7 +14,10 @@ class FirebaseAuthManager {
     
     // MARK: - Singleton
     static let shared = FirebaseAuthManager()
-    private init() {}
+    private init() {
+        print("🏗️ FirebaseAuthManager 正在初始化")
+        // 如果這裡有耗時操作或會拋出錯誤的代碼，可能會導致問題
+    }
     
     // 新增一個屬性來注入 UserSettings
     var userSettings: UserSettings?
@@ -22,22 +25,21 @@ class FirebaseAuthManager {
     // MARK: - OTP 驗證相關
     
     /// 結合 userSettings 的國碼 + 電話號碼，發送 OTP 驗證碼
-    func sendOTP() {
+    func sendOTP(completion: @escaping (Result<String, Error>) -> Void) {
         // 使用注入的 userSettings
         guard let settings = userSettings else {
-            print("UserSettings not injected")
+            completion(.failure(NSError(domain: "FirebaseAuth", code: -999, userInfo: [NSLocalizedDescriptionKey: "Firebase not initialized"])))
             return
         }
         let fullPhoneNumber = "\(settings.globalCountryCode)\(settings.globalPhoneNumber)"
         sendFirebaseOTP(to: fullPhoneNumber) { result in
             switch result {
             case .success(let verificationID):
-                print("✅ 成功發送OTP, verificationID: \(verificationID)")
-                // 這裡可以存入LocalStorageManager或其他暫存位置
                 LocalStorageManager.shared.saveVerificationID(verificationID)
+                completion(.success(verificationID))
 
             case .failure(let error):
-                print("❌ 發送OTP失敗: \(error.localizedDescription)")
+                completion(.failure(error))
             }
         }
     }
@@ -46,11 +48,34 @@ class FirebaseAuthManager {
     ///
     /// - Parameter phoneNumber: 包含國碼的完整電話號碼 (e.g. "+886912345678")
     func sendFirebaseOTP(to phoneNumber: String, completion: @escaping (Result<String, Error>) -> Void) {
+        // 🔴 在這裡設置 breakpoint - 檢查 Firebase Auth 是否可用
+        guard Auth.auth().app != nil else {
+            NSLog("❌ Firebase Auth 未初始化")
+            completion(.failure(NSError(domain: "FirebaseAuth", code: -999, userInfo: [NSLocalizedDescriptionKey: "Firebase Auth 未初始化"])))
+            return
+        }
+        
         let formattedPhone = phoneNumber.replacingOccurrences(of: " ", with: "")
+        NSLog("🔥 開始執行 sendFirebaseOTP")
+        NSLog("🔥 格式化後的電話號碼: \(formattedPhone)")
 
-        PhoneAuthProvider.provider().verifyPhoneNumber(formattedPhone, uiDelegate: nil) { verificationID, error in
+        print("🔥 檢查 Auth 實例: \(Auth.auth())")
+        
+        // 檢查 PhoneAuthProvider
+        print("🔥 準備取得 PhoneAuthProvider")
+        let provider = PhoneAuthProvider.provider()
+        print("🔥 PhoneAuthProvider: \(provider)")
+        
+        print("🔥 即將呼叫 verifyPhoneNumber")
+        
+        provider.verifyPhoneNumber(formattedPhone, uiDelegate: nil) { verificationID, error in
+            print("🔥 Firebase verifyPhoneNumber 回調被觸發")
+            
             if let error = error {
-                print("❌ Firebase 發送 OTP 錯誤: \(error.localizedDescription)")
+                print("❌ Firebase 發送 OTP 錯誤: \(error)")
+                print("❌ 錯誤描述: \(error.localizedDescription)")
+                print("❌ 錯誤代碼: \((error as NSError).code)")
+                print("❌ 錯誤域: \((error as NSError).domain)")
                 completion(.failure(error))
                 return
             }
@@ -61,9 +86,14 @@ class FirebaseAuthManager {
                 return
             }
             
+            // ✅ 新增：將verificationID 存入 UserDefaults
+            UserDefaults.standard.set(verificationID, forKey: "authVerificationID")
+            
             print("✅ Firebase OTP 成功發送，verificationID：\(verificationID)")
             completion(.success(verificationID))
         }
+        
+        print("🔥 已呼叫 verifyPhoneNumber，等待回調")
     }
 
     /// 以電話號碼進行登入（驗證碼流程）
@@ -134,5 +164,15 @@ class FirebaseAuthManager {
         } catch {
             return .failure(error)
         }
+    }
+    
+    /// 儲存 verificationID 到 UserDefaults
+    private func storeVerificationID(_ verificationID: String) {
+        UserDefaults.standard.set(verificationID, forKey: "authVerificationID")
+    }
+
+    /// 取回 verificationID
+    func getStoredVerificationID() -> String? {
+        UserDefaults.standard.string(forKey: "authVerificationID")
     }
 }

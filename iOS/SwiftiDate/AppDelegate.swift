@@ -8,6 +8,7 @@
 import Foundation
 import CoreLocation
 import UIKit
+import FirebaseAuth
 import FirebaseCore
 import FirebaseCrashlytics
 import KeychainAccess
@@ -27,6 +28,7 @@ class AppDelegate: NSObject, UIApplicationDelegate, CLLocationManagerDelegate, U
         
         // 🔥 Firebase 官方標準初始化方式：
         FirebaseApp.configure()
+        print("Firebase Options:", FirebaseApp.app()?.options as Any)
 
         // AppCheck (這裡沒有問題)
         let providerFactory = DeviceCheckProviderFactory()
