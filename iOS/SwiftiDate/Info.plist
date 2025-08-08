@@ -2,24 +2,37 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NSCameraUsageDescription</key>
-	<string>需要相機權限進行臉部追蹤</string>
-	<key>UNNotificationExtensionCategory</key>
-	<string>message</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>app-1-131205636358-ios-bec8d4fd284a46d9e6be87</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleURLName</key>
+			<string>stevenstudio.SwiftiDate</string>
+		</dict>
+		<dict>
+			<key>CFBundleURLName</key>
+			<string>com.googleusercontent.apps.131205636358-vs1530oepa4dbclt1bf8v96dcg9flbhb</string>
+		</dict>
+	</array>
+	<key>FirebaseAppDelegateProxyEnabled</key>
+	<true/>
 	<key>FirebaseMessagingAutoInitEnabled</key>
 	<true/>
-	<key>NSUserTrackingUsageDescription</key>
-	<string>我們將使用通知來提醒您新的消息和活動更新。</string>
-	<key>UIBackgroundModes</key>
-	<array>
-		<string>remote-notification</string>
-	</array>
-	<key>CFBundleName</key>
-	<string>SwiftiDate</string>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>remote-notification</string>
+	</array>
+	<key>UNNotificationExtensionCategory</key>
+	<string>message</string>
 </dict>
 </plist>

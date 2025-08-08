@@ -10,7 +10,7 @@ import FirebaseAuth
 import FirebaseMessaging
 
 /// 使用 Firebase Auth 進行各種登入驗證的管理類別
-class FirebaseAuthManager {
+final class FirebaseAuthManager {
     
     // MARK: - Singleton
     static let shared = FirebaseAuthManager()
@@ -21,6 +21,8 @@ class FirebaseAuthManager {
     
     // 新增一個屬性來注入 UserSettings
     var userSettings: UserSettings?
+    
+    private var isVerifying = false
 
     // MARK: - OTP 驗證相關
     
@@ -54,7 +56,12 @@ class FirebaseAuthManager {
             completion(.failure(NSError(domain: "FirebaseAuth", code: -999, userInfo: [NSLocalizedDescriptionKey: "Firebase Auth 未初始化"])))
             return
         }
+        guard !isVerifying else {
+            print("⛔️ 已在驗證中，忽略重複呼叫")
+            return
+        }
         
+        isVerifying = true
         let formattedPhone = phoneNumber.replacingOccurrences(of: " ", with: "")
         NSLog("🔥 開始執行 sendFirebaseOTP")
         NSLog("🔥 格式化後的電話號碼: \(formattedPhone)")
@@ -68,20 +75,15 @@ class FirebaseAuthManager {
         
         print("🔥 即將呼叫 verifyPhoneNumber")
         
-        provider.verifyPhoneNumber(formattedPhone, uiDelegate: nil) { verificationID, error in
-            print("🔥 Firebase verifyPhoneNumber 回調被觸發")
-            
+        provider.verifyPhoneNumber(formattedPhone, uiDelegate: nil) { [weak self] verificationID, error in
+            defer { self?.isVerifying = false }   // ✅ 結束時釋放鎖
+
             if let error = error {
-                print("❌ Firebase 發送 OTP 錯誤: \(error)")
-                print("❌ 錯誤描述: \(error.localizedDescription)")
-                print("❌ 錯誤代碼: \((error as NSError).code)")
-                print("❌ 錯誤域: \((error as NSError).domain)")
                 completion(.failure(error))
                 return
             }
             
             guard let verificationID = verificationID else {
-                print("❌ Firebase 未提供 verificationID，錯誤不明")
                 completion(.failure(NSError(domain: "FirebaseAuth", code: -1, userInfo: [NSLocalizedDescriptionKey: "verificationID 為 nil"])))
                 return
             }

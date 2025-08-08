@@ -27,8 +27,12 @@ class AppDelegate: NSObject, UIApplicationDelegate, CLLocationManagerDelegate, U
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         
         // 🔥 Firebase 官方標準初始化方式：
-        FirebaseApp.configure()
+        if FirebaseApp.app() == nil { FirebaseApp.configure() }
         print("Firebase Options:", FirebaseApp.app()?.options as Any)
+        
+//        #if DEBUG
+//        Auth.auth().settings?.isAppVerificationDisabledForTesting = true
+//        #endif
 
         // AppCheck (這裡沒有問題)
         let providerFactory = DeviceCheckProviderFactory()
@@ -99,15 +103,27 @@ class AppDelegate: NSObject, UIApplicationDelegate, CLLocationManagerDelegate, U
                 print("✅ 已呼叫 registerForRemoteNotifications")
             }
         }
-
+        
+        // ✅ 確保在 configure 完成後才送事件
+        DispatchQueue.main.async {
+            AnalyticsManager.shared.trackEvent("app_launch")
+        }
         return true
     }
     
     // 收到設備令牌時的回調
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-        print("✅ 已成功取得 deviceToken: \(deviceToken)")
+        #if DEBUG
+        Auth.auth().setAPNSToken(deviceToken, type: .sandbox)
+        #else
+        Auth.auth().setAPNSToken(deviceToken, type: .prod)
+        #endif
+
         Messaging.messaging().apnsToken = deviceToken // 必須要有這行！
         NotificationManager.shared.handleDeviceToken(deviceToken: deviceToken)
+        
+        print("✅ 已成功取得 deviceToken: \(deviceToken)")
+
     }
 
     // 註冊失敗的回調
@@ -118,6 +134,14 @@ class AppDelegate: NSObject, UIApplicationDelegate, CLLocationManagerDelegate, U
     // 在前台顯示通知時的處理
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         completionHandler([.banner, .sound, .badge]) // 顯示通知
+    }
+    
+    // 2)（可選）使用者點通知的情況也轉給 Firebase Auth
+    func userNotificationCenter(_ center: UNUserNotificationCenter,
+                                didReceive response: UNNotificationResponse,
+                                withCompletionHandler completionHandler: @escaping () -> Void) {
+        _ = Auth.auth().canHandleNotification(response.notification.request.content.userInfo)
+        completionHandler()
     }
         
     private func storeDeviceIdentifier() {
@@ -158,5 +182,24 @@ class AppDelegate: NSObject, UIApplicationDelegate, CLLocationManagerDelegate, U
                 completion(true)
             }
         }
+    }
+    
+    func application(_ app: UIApplication, open url: URL,
+                     options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+        if Auth.auth().canHandle(url) { return true }
+        return false
+    }
+    
+    // 1) iOS 的 remote notification 回呼（含靜默推播）
+    func application(_ application: UIApplication,
+                     didReceiveRemoteNotification userInfo: [AnyHashable : Any],
+                     fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+        // 讓 Firebase Auth 嘗試處理 (自動讀碼會用到這裡)
+        if Auth.auth().canHandleNotification(userInfo) {
+            completionHandler(.noData)
+            return
+        }
+        // 你的其他處理...
+        completionHandler(.noData)
     }
 }

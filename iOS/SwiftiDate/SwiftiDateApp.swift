@@ -41,7 +41,8 @@ struct SwiftiDateApp: App {
             userSettings.globalPhoneNumber = ""
             userSettings.globalUserName = ""
         }
-        AnalyticsManager.shared.trackEvent("app_launch")
+        // ❌ 刪掉這行，因為 configure 還沒跑
+//        AnalyticsManager.shared.trackEvent("app_launch")
     }
     
     var body: some Scene {

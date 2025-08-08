@@ -26,6 +26,8 @@ struct OTPVerificationView: View {
     @State private var showResetPasswordView = false
     @State private var showRealVerification = false // ✅ 控制是否跳轉到真人認證
     @State private var errorMessage: String? // 新增錯誤訊息狀態
+    @State private var hasTriggeredSendOnce = false   // 防止 onAppear 重複發送
+    @State private var isSendingOTP = false           // 節流，避免短時間重複點擊
     
     // 新增的參數，用來判斷是否為重設密碼流程
     var isResetPassword: Bool = false
@@ -151,12 +153,14 @@ struct OTPVerificationView: View {
                     return
                 }
                 
-                // 發送 OTP
-                sendInitialOTP()
-                
+                if !hasTriggeredSendOnce {        // 👈 只在第一次 appear 時送
+                    hasTriggeredSendOnce = true
+                    sendInitialOTP()
+                    startCountdown()
+                }
+
                 self.focusedIndex = 0
                 print("✅ 手動觸發 `focusedIndex = \(String(describing: focusedIndex))` after a small delay")
-                startCountdown()
             }
             .onChange(of: focusedIndex) { oldValue, newValue in
                 print("🔍 當前選中的輸入框索引：\(String(describing: newValue))")
@@ -226,6 +230,10 @@ struct OTPVerificationView: View {
     
     // 新增：發送初始 OTP 的方法
     private func sendInitialOTP() {
+        guard !isSendingOTP else { return }   // 👈 節流
+        isSendingOTP = true
+        defer { isSendingOTP = false }
+        
         var formattedPhoneNumber = phoneNumber.replacingOccurrences(of: " ", with: "")
         
         if selectedCountryCode == "+886" && formattedPhoneNumber.hasPrefix("0") {
@@ -236,16 +244,9 @@ struct OTPVerificationView: View {
         
         // 清除之前的錯誤訊息
         errorMessage = nil
-        
         print("🔄 準備發送 OTP 到: \(fullPhoneNumber)")
-        
-        // 確認Firebase SDK的Auth是否正確初始化
-        print("Firebase Auth 是否初始化: \(Auth.auth().app != nil)")
 
-        let manager = FirebaseAuthManager.shared
-        print("🔍 取得 manager: \(manager)")
-
-        manager.sendFirebaseOTP(to: fullPhoneNumber) { result in
+        FirebaseAuthManager.shared.sendFirebaseOTP(to: fullPhoneNumber) { result in
             print("🔥 進入 completion closure")
             DispatchQueue.main.async {
                 switch result {
