@@ -1,7 +1,7 @@
-feat: 新增 GeminiView 與 AppleIDNotFoundView，移除 VertexAIView，並同步調整 iOS/Flutter 多處專案檔案
+feat(auth): 完成 Firebase 簡訊驗證流程
 
-- 新增 iOS/ChatRelated/AI/GeminiView.swift
-- 新增 iOS/SwiftiDate/AppleIDNotFoundView.swift
-- 移除 iOS/ChatRelated/AI/VertexAIView.swift
-- 調整/刪除 Flutter 與 iOS 多處設定、專案檔案
-- 修改多個主要 Swift 檔案與 Flutter 設定檔
+- 新增 OTPVerificationView，支援輸入與驗證 6 碼 OTP
+- 整合 Firebase PhoneAuthProvider，完成發送與驗證流程
+- 加入測試模式 (isAppVerificationDisabledForTesting) 以便開發
+- 支援倒數計時與重新發送 OTP
+- 驗證成功後導向真人認證畫面

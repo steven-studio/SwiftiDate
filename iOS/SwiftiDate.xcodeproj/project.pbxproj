@@ -206,6 +206,13 @@
 		D0903ABC2D589D0C00735323 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0903ABB2D589D0C00735323 /* AppDelegate.swift */; };
 		D0903ABE2D589D7C00735323 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0903ABD2D589D7C00735323 /* NotificationManager.swift */; };
 		D0903AC02D58A45200735323 /* modelSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0903ABF2D58A45200735323 /* modelSelector.swift */; };
+		D09215AA2E45DF0800DAA36D /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09215A92E45DF0300DAA36D /* AuthService.swift */; };
+		D09215AB2E45DF0800DAA36D /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09215A92E45DF0300DAA36D /* AuthService.swift */; };
+		D09215AE2E45E05800DAA36D /* FirebaseAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09215AD2E45E05300DAA36D /* FirebaseAuthService.swift */; };
+		D09215AF2E45E05800DAA36D /* FirebaseAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09215AD2E45E05300DAA36D /* FirebaseAuthService.swift */; };
+		D09215B12E45E2BD00DAA36D /* MatchTipsPopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09215B02E45E2BD00DAA36D /* MatchTipsPopupView.swift */; };
+		D09215B22E45E2BD00DAA36D /* MatchTipsPopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09215B02E45E2BD00DAA36D /* MatchTipsPopupView.swift */; };
+		D09215B42E4611A700DAA36D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09215B32E4611A200DAA36D /* SceneDelegate.swift */; };
 		D09587BB2CB7558600BCD04B /* SafetyCenterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09587BA2CB7558600BCD04B /* SafetyCenterView.swift */; };
 		D09587BD2CB77F5200BCD04B /* SafetyTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09587BC2CB77F5200BCD04B /* SafetyTestView.swift */; };
 		D09587BF2CB7899D00BCD04B /* SafetyQuizView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09587BE2CB7899D00BCD04B /* SafetyQuizView.swift */; };
@@ -437,7 +444,6 @@
 		D0B3F2D32D746499007A5EA0 /* ResetPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B3F2D12D746499007A5EA0 /* ResetPasswordView.swift */; };
 		D0B3F2D52D746890007A5EA0 /* ResetPasswordFlowUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B3F2D42D746890007A5EA0 /* ResetPasswordFlowUITests.swift */; };
 		D0C99B2E2D0DBFED00FA98AD /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D0C99B2C2D0DBFEC00FA98AD /* Localizable.strings */; };
-		D0D86AA12E439E5500F125F4 /* AuthError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D86AA02E439E4A00F125F4 /* AuthError.swift */; };
 		D0D86AB52E4457BC00F125F4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D0D86AB42E4457BC00F125F4 /* GoogleService-Info.plist */; };
 		D0DDDB052C9FA8AF00A78A87 /* ChatDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB042C9FA8AF00A78A87 /* ChatDetailView.swift */; };
 		D0DDDB072C9FDB1600A78A87 /* WhoLikedYouView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB062C9FDB1600A78A87 /* WhoLikedYouView.swift */; };
@@ -687,6 +693,10 @@
 		D0903ABB2D589D0C00735323 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D0903ABD2D589D7C00735323 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		D0903ABF2D58A45200735323 /* modelSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = modelSelector.swift; sourceTree = "<group>"; };
+		D09215A92E45DF0300DAA36D /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
+		D09215AD2E45E05300DAA36D /* FirebaseAuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAuthService.swift; sourceTree = "<group>"; };
+		D09215B02E45E2BD00DAA36D /* MatchTipsPopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchTipsPopupView.swift; sourceTree = "<group>"; };
+		D09215B32E4611A200DAA36D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		D09587BA2CB7558600BCD04B /* SafetyCenterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafetyCenterView.swift; sourceTree = "<group>"; wrapsLines = 1; };
 		D09587BC2CB77F5200BCD04B /* SafetyTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafetyTestView.swift; sourceTree = "<group>"; };
 		D09587BE2CB7899D00BCD04B /* SafetyQuizView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafetyQuizView.swift; sourceTree = "<group>"; };
@@ -767,7 +777,6 @@
 		D0C99B302D0DC00700FA98AD /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		D0C99B312D0DC02500FA98AD /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		D0C99B322D0DC04B00FA98AD /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
-		D0D86AA02E439E4A00F125F4 /* AuthError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthError.swift; sourceTree = "<group>"; };
 		D0D86AB42E4457BC00F125F4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D0DDDB042C9FA8AF00A78A87 /* ChatDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatDetailView.swift; sourceTree = "<group>"; };
 		D0DDDB062C9FDB1600A78A87 /* WhoLikedYouView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhoLikedYouView.swift; sourceTree = "<group>"; };
@@ -1115,7 +1124,7 @@
 		D0445C2D2C71B3800059D522 /* SwiftiDate */ = {
 			isa = PBXGroup;
 			children = (
-				D0D86AA02E439E4A00F125F4 /* AuthError.swift */,
+				D09215B32E4611A200DAA36D /* SceneDelegate.swift */,
 				D080E64D2E3E5B41004A5CAE /* UserListSection.swift */,
 				D04C5DAA2E393E1A000BE146 /* UserProfileCardView.swift */,
 				D04C5DA62E393432000BE146 /* UserProfile.swift */,
@@ -1305,6 +1314,7 @@
 		D06724E22D6EC03C00FD566F /* CloudService */ = {
 			isa = PBXGroup;
 			children = (
+				D09215A82E45DEEC00DAA36D /* AuthService */,
 				D06724E92D6EC42500FD566F /* AliCloudService */,
 				D06724E52D6EC12700FD566F /* FirebaseCloudService */,
 				D06724E32D6EC0F900FD566F /* CloudService.swift */,
@@ -1324,6 +1334,7 @@
 		D06724E62D6EC1DE00FD566F /* FirebaseManager */ = {
 			isa = PBXGroup;
 			children = (
+				D09215AD2E45E05300DAA36D /* FirebaseAuthService.swift */,
 				D07B41ED2D61DA530015C7AA /* FirebaseAuthManager.swift */,
 				D07B41EA2D61C3630015C7AA /* FirebaseManager.swift */,
 				D07B41DE2D6197570015C7AA /* FirebasePhotoManager.swift */,
@@ -1385,6 +1396,7 @@
 				D09587D52CB8CDDA00BCD04B /* GenderSelectionView.swift */,
 				D0445C582C71BFE70059D522 /* SwipeCardView.swift */,
 				D016DC0E2D86D99800946EB6 /* SwipeCardViewModel.swift */,
+				D09215B02E45E2BD00DAA36D /* MatchTipsPopupView.swift */,
 			);
 			path = SwipeCardRelated;
 			sourceTree = "<group>";
@@ -1412,6 +1424,14 @@
 				D07B41F12D621E9C0015C7AA /* LocalStorageManager.swift */,
 			);
 			path = LocalStorageManager;
+			sourceTree = "<group>";
+		};
+		D09215A82E45DEEC00DAA36D /* AuthService */ = {
+			isa = PBXGroup;
+			children = (
+				D09215A92E45DF0300DAA36D /* AuthService.swift */,
+			);
+			path = AuthService;
 			sourceTree = "<group>";
 		};
 		D0B3F1262D6F03BB007A5EA0 /* OTPRelated */ = {
@@ -1850,6 +1870,7 @@
 				D04729C82CC086F4007C33EC /* ProfileTabPicker.swift in Sources */,
 				D07C57FA2D76FC960008DC9D /* ExperienceSelectionView.swift in Sources */,
 				D07B41F22D621E9C0015C7AA /* LocalStorageManager.swift in Sources */,
+				D09215B22E45E2BD00DAA36D /* MatchTipsPopupView.swift in Sources */,
 				D0445C892C73CF610059D522 /* VacationOptionsView.swift in Sources */,
 				D0B3F1482D70079F007A5EA0 /* PhoneValidator.swift in Sources */,
 				D07E7FF32D7F68CF00FEDBBF /* SpreadsheetCellRepresentable.swift in Sources */,
@@ -1929,11 +1950,11 @@
 				D0B3F1CD2D72AF02007A5EA0 /* AnalyticsManagerProtocol.swift in Sources */,
 				D0B3882C2D5B7BAE003BC40C /* OTPVerificationView.swift in Sources */,
 				D0422E7F2D7D8CEA00609060 /* ChatListContainerView.swift in Sources */,
+				D09215AA2E45DF0800DAA36D /* AuthService.swift in Sources */,
 				D0B3882D2D5B7BAE003BC40C /* RealVerificationView.swift in Sources */,
 				D0B3882E2D5B7BAE003BC40C /* UploadPhotoView.swift in Sources */,
 				D06724EB2D6EC45200FD566F /* AliCloudService.swift in Sources */,
 				D0445C7F2C73C9080059D522 /* LookingForView.swift in Sources */,
-				D0D86AA12E439E5500F125F4 /* AuthError.swift in Sources */,
 				D0DDDB3E2CA179AC00A78A87 /* WhatIsSwiftiDatePremiumDiscountPolicyView.swift in Sources */,
 				D07C57F52D76F9870008DC9D /* RegisterLanguageSelectionView.swift in Sources */,
 				D09587D62CB8CDDA00BCD04B /* GenderSelectionView.swift in Sources */,
@@ -2023,6 +2044,7 @@
 				D0DDDB2A2CA156A700A78A87 /* WhatIsSwiftiDatePremiumView.swift in Sources */,
 				D04729E02CC1149E007C33EC /* TopRightActionButtons.swift in Sources */,
 				D0DDDB542CA25B4E00A78A87 /* PrivacyPolicyView.swift in Sources */,
+				D09215B42E4611A700DAA36D /* SceneDelegate.swift in Sources */,
 				D04729DC2CC0BDC4007C33EC /* ServiceSectionContainer.swift in Sources */,
 				D0445C732C72FB440059D522 /* HometownInputView.swift in Sources */,
 				D04729DA2CC09B54007C33EC /* EditSectionView.swift in Sources */,
@@ -2038,6 +2060,7 @@
 				D0644BEA2D810DDB007B2DE0 /* ConsumableStore.swift in Sources */,
 				D04729D62CC09749007C33EC /* ProfileImageView.swift in Sources */,
 				D0445C6F2C72EDF10059D522 /* IndustryPicker.swift in Sources */,
+				D09215AF2E45E05800DAA36D /* FirebaseAuthService.swift in Sources */,
 				D09587C32CB7C0A900BCD04B /* SafetyTipsView.swift in Sources */,
 				D09587C92CB7CDB800BCD04B /* HowToReportView.swift in Sources */,
 				D0DDDB1E2CA138B200A78A87 /* HowToMatchAndChatView.swift in Sources */,
@@ -2086,6 +2109,7 @@
 				D0B3F2A92D740B9B007A5EA0 /* FirestoreManager.swift in Sources */,
 				D0B3F2A82D740B7F007A5EA0 /* UploadPhotoView.swift in Sources */,
 				D0B3F2A72D740B76007A5EA0 /* FaceTrackingView.swift in Sources */,
+				D09215B12E45E2BD00DAA36D /* MatchTipsPopupView.swift in Sources */,
 				D0B3F2A62D740B3B007A5EA0 /* RealVerificationView.swift in Sources */,
 				D07C57FB2D76FC960008DC9D /* ExperienceSelectionView.swift in Sources */,
 				D0B3F2A52D740B29007A5EA0 /* FirebaseAuthManager.swift in Sources */,
@@ -2172,6 +2196,7 @@
 				D0B3F2512D736234007A5EA0 /* TopRightActionButtons.swift in Sources */,
 				D0B3F2522D736234007A5EA0 /* UnverifiedProfilePlaceholderView.swift in Sources */,
 				D0B3F2932D73F0F6007A5EA0 /* TurboPurchaseViewUITests.swift in Sources */,
+				D09215AB2E45DF0800DAA36D /* AuthService.swift in Sources */,
 				D0B3F2532D736234007A5EA0 /* VerifiedProfileProgressView.swift in Sources */,
 				D0422DB22D7C50AF00609060 /* WebRTCCallView.swift in Sources */,
 				D0422DB32D7C50AF00609060 /* WebRTCManager.swift in Sources */,
@@ -2267,6 +2292,7 @@
 				D0B3F1E32D72CCCD007A5EA0 /* BasicInfoUITests.swift in Sources */,
 				D0B3F23A2D735EF4007A5EA0 /* ProfileTabPickerUITests.swift in Sources */,
 				D0B3F29E2D7407F8007A5EA0 /* InfoPopupViewUITests.swift in Sources */,
+				D09215AE2E45E05800DAA36D /* FirebaseAuthService.swift in Sources */,
 				D0445C4C2C71B3830059D522 /* SwiftiDateUITestsLaunchTests.swift in Sources */,
 				D0B3F20A2D7324DC007A5EA0 /* HometownInputUITests.swift in Sources */,
 				D0B3F2082D732316007A5EA0 /* HeightPickerUITests.swift in Sources */,
@@ -2483,9 +2509,10 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				GOOGLESERVICEINFO_BASE64 = "PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPCFET0NUWVBFIHBsaXN0IFBVQkxJQyAiLS8vQXBwbGUvL0RURCBQTElTVCAxLjAvL0VOIiAiaHR0cDovL3d3dy5hcHBsZS5jb20vRFREcy9Qcm9wZXJ0eUxpc3QtMS4wLmR0ZCI+CjxwbGlzdCB2ZXJzaW9uPSIxLjAiPgo8ZGljdD4KCTxrZXk+QVBJX0tFWTwva2V5PgoJPHN0cmluZz5BSXphU3lEM1dvODhtWW44RmpZd0ZIa0RHMnp2c2JRZlpSLVp3djA8L3N0cmluZz4KCTxrZXk+R0NNX1NFTkRFUl9JRDwva2V5PgoJPHN0cmluZz4xMzEyMDU2MzYzNTg8L3N0cmluZz4KCTxrZXk+UExJU1RfVkVSU0lPTjwva2V5PgoJPHN0cmluZz4xPC9zdHJpbmc+Cgk8a2V5PkJVTkRMRV9JRDwva2V5PgoJPHN0cmluZz5zdGV2ZW5zdHVkaW8uU3dpZnRpRGF0ZTwvc3RyaW5nPgoJPGtleT5QUk9KRUNUX0lEPC9rZXk+Cgk8c3RyaW5nPnN3aWZ0aWRhdGUtY2RmZjA8L3N0cmluZz4KCTxrZXk+U1RPUkFHRV9CVUNLRVQ8L2tleT4KCTxzdHJpbmc+c3dpZnRpZGF0ZS1jZGZmMC5hcHBzcG90LmNvbTwvc3RyaW5nPgoJPGtleT5JU19BRFNfRU5BQkxFRDwva2V5PgoJPGZhbHNlPjwvZmFsc2U+Cgk8a2V5PklTX0FOQUxZVElDU19FTkFCTEVEPC9rZXk+Cgk8ZmFsc2U+PC9mYWxzZT4KCTxrZXk+SVNfQVBQSU5WSVRFX0VOQUJMRUQ8L2tleT4KCTx0cnVlPjwvdHJ1ZT4KCTxrZXk+SVNfR0NNX0VOQUJMRUQ8L2tleT4KCTx0cnVlPjwvdHJ1ZT4KCTxrZXk+SVNfU0lHTklOX0VOQUJMRUQ8L2tleT4KCTx0cnVlPjwvdHJ1ZT4KCTxrZXk+R09PR0xFX0FQUF9JRDwva2V5PgoJPHN0cmluZz4xOjEzMTIwNTYzNjM1ODppb3M6YmVjOGQ0ZmQyODRhNDZkOWU2YmU4Nzwvc3RyaW5nPgoJPGtleT5EQVRBQkFTRV9VUkw8L2tleT4KCTxzdHJpbmc+aHR0cHM6Ly9zd2lmdGlkYXRlLWNkZmYwLWRlZmF1bHQtcnRkYi5hc2lhLXNvdXRoZWFzdDEuZmlyZWJhc2VkYXRhYmFzZS5hcHA8L3N0cmluZz4KPC9kaWN0Pgo8L3BsaXN0Pg==\n";
 				INFOPLIST_FILE = SwiftiDate/Info.plist;
-				INFOPLIST_KEY_NSCameraUsageDescription = "We need access to your camera to scan QR codes.";
+				INFOPLIST_KEY_NSCameraUsageDescription = "需要相機權限進行臉部追蹤";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Your location is required to find nearby matches.";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Your location is required to find nearby matches.";
+				INFOPLIST_KEY_NSUserTrackingUsageDescription = "我們將使用通知來提醒您新的消息和活動更新。";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -2521,9 +2548,10 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				GOOGLESERVICEINFO_BASE64 = "PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPCFET0NUWVBFIHBsaXN0IFBVQkxJQyAiLS8vQXBwbGUvL0RURCBQTElTVCAxLjAvL0VOIiAiaHR0cDovL3d3dy5hcHBsZS5jb20vRFREcy9Qcm9wZXJ0eUxpc3QtMS4wLmR0ZCI+CjxwbGlzdCB2ZXJzaW9uPSIxLjAiPgo8ZGljdD4KCTxrZXk+QVBJX0tFWTwva2V5PgoJPHN0cmluZz5BSXphU3lEM1dvODhtWW44RmpZd0ZIa0RHMnp2c2JRZlpSLVp3djA8L3N0cmluZz4KCTxrZXk+R0NNX1NFTkRFUl9JRDwva2V5PgoJPHN0cmluZz4xMzEyMDU2MzYzNTg8L3N0cmluZz4KCTxrZXk+UExJU1RfVkVSU0lPTjwva2V5PgoJPHN0cmluZz4xPC9zdHJpbmc+Cgk8a2V5PkJVTkRMRV9JRDwva2V5PgoJPHN0cmluZz5zdGV2ZW5zdHVkaW8uU3dpZnRpRGF0ZTwvc3RyaW5nPgoJPGtleT5QUk9KRUNUX0lEPC9rZXk+Cgk8c3RyaW5nPnN3aWZ0aWRhdGUtY2RmZjA8L3N0cmluZz4KCTxrZXk+U1RPUkFHRV9CVUNLRVQ8L2tleT4KCTxzdHJpbmc+c3dpZnRpZGF0ZS1jZGZmMC5hcHBzcG90LmNvbTwvc3RyaW5nPgoJPGtleT5JU19BRFNfRU5BQkxFRDwva2V5PgoJPGZhbHNlPjwvZmFsc2U+Cgk8a2V5PklTX0FOQUxZVElDU19FTkFCTEVEPC9rZXk+Cgk8ZmFsc2U+PC9mYWxzZT4KCTxrZXk+SVNfQVBQSU5WSVRFX0VOQUJMRUQ8L2tleT4KCTx0cnVlPjwvdHJ1ZT4KCTxrZXk+SVNfR0NNX0VOQUJMRUQ8L2tleT4KCTx0cnVlPjwvdHJ1ZT4KCTxrZXk+SVNfU0lHTklOX0VOQUJMRUQ8L2tleT4KCTx0cnVlPjwvdHJ1ZT4KCTxrZXk+R09PR0xFX0FQUF9JRDwva2V5PgoJPHN0cmluZz4xOjEzMTIwNTYzNjM1ODppb3M6YmVjOGQ0ZmQyODRhNDZkOWU2YmU4Nzwvc3RyaW5nPgoJPGtleT5EQVRBQkFTRV9VUkw8L2tleT4KCTxzdHJpbmc+aHR0cHM6Ly9zd2lmdGlkYXRlLWNkZmYwLWRlZmF1bHQtcnRkYi5hc2lhLXNvdXRoZWFzdDEuZmlyZWJhc2VkYXRhYmFzZS5hcHA8L3N0cmluZz4KPC9kaWN0Pgo8L3BsaXN0Pg==\n";
 				INFOPLIST_FILE = SwiftiDate/Info.plist;
-				INFOPLIST_KEY_NSCameraUsageDescription = "We need access to your camera to scan QR codes.";
+				INFOPLIST_KEY_NSCameraUsageDescription = "需要相機權限進行臉部追蹤";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Your location is required to find nearby matches.";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Your location is required to find nearby matches.";
+				INFOPLIST_KEY_NSUserTrackingUsageDescription = "我們將使用通知來提醒您新的消息和活動更新。";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
