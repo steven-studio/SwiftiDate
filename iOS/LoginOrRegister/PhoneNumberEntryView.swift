@@ -150,6 +150,7 @@ struct PhoneNumberEntryView: View {
                 selectedCountryCode: $selectedCountryCode,
                 phoneNumber: $phoneNumber
             )
+            .environment(\.authService, FirebaseAuthService()) // 👈 之後要換 Twilio 改這裡
             .environmentObject(appState) // ✅ 傳遞 AppState
             .environmentObject(userSettings) // ✅ 傳遞 UserSettings
         }

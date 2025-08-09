@@ -23,6 +23,8 @@ class AppDelegate: NSObject, UIApplicationDelegate, CLLocationManagerDelegate, U
     let locationService = LocationService() // 建立實例
     let geocoder = CLGeocoder() // Initialize the geocoder
     
+    static var apnsReady = false
+    
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         
@@ -118,7 +120,11 @@ class AppDelegate: NSObject, UIApplicationDelegate, CLLocationManagerDelegate, U
         #else
         Auth.auth().setAPNSToken(deviceToken, type: .prod)
         #endif
-
+        guard AppDelegate.apnsReady == true else {
+            // 提示：還在初始化推播，請稍後再試
+            return
+        }
+        
         Messaging.messaging().apnsToken = deviceToken // 必須要有這行！
         NotificationManager.shared.handleDeviceToken(deviceToken: deviceToken)
         
@@ -128,6 +134,8 @@ class AppDelegate: NSObject, UIApplicationDelegate, CLLocationManagerDelegate, U
 
     // 註冊失敗的回調
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
+        AppDelegate.apnsReady = false
+        // NotificationCenter.default.post(name: .apnsFailed, object: error)
         print("Failed to register for notifications: \(error.localizedDescription)")
     }
     

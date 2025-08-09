@@ -13,6 +13,7 @@ import FirebaseAuth
 struct OTPVerificationView: View {
     @EnvironmentObject var appState: AppState // ✅ 存取全局登入狀態
     @EnvironmentObject var userSettings: UserSettings // ✅ 存取用戶設置
+    @Environment(\.authService) private var auth: AuthService   // ✅ 只看介面
 
     @State private var verificationID: String?
     @Binding var isRegistering: Bool
@@ -153,12 +154,11 @@ struct OTPVerificationView: View {
                     return
                 }
                 
-                if !hasTriggeredSendOnce {        // 👈 只在第一次 appear 時送
+                if !hasTriggeredSendOnce {
                     hasTriggeredSendOnce = true
                     sendInitialOTP()
                     startCountdown()
                 }
-
                 self.focusedIndex = 0
                 print("✅ 手動觸發 `focusedIndex = \(String(describing: focusedIndex))` after a small delay")
             }
@@ -217,50 +217,27 @@ struct OTPVerificationView: View {
         }
     }
     
-    // 完整正確的台灣號碼格式化
-    private func formatTaiwanPhone(_ phoneNumber: String) -> String {
-        var formattedNumber = phoneNumber.replacingOccurrences(of: " ", with: "")
-        
-        if formattedNumber.hasPrefix("0") {
-            formattedNumber.removeFirst()
-        }
-        
-        return formattedNumber
-    }
-    
     // 新增：發送初始 OTP 的方法
     private func sendInitialOTP() {
         guard !isSendingOTP else { return }   // 👈 節流
         isSendingOTP = true
         defer { isSendingOTP = false }
         
-        var formattedPhoneNumber = phoneNumber.replacingOccurrences(of: " ", with: "")
-        
-        if selectedCountryCode == "+886" && formattedPhoneNumber.hasPrefix("0") {
-            formattedPhoneNumber.removeFirst()
-        }
-        
-        let fullPhoneNumber = "\(selectedCountryCode)\(formattedPhoneNumber)"
-        
-        // 清除之前的錯誤訊息
-        errorMessage = nil
-        print("🔄 準備發送 OTP 到: \(fullPhoneNumber)")
-
-        FirebaseAuthManager.shared.sendFirebaseOTP(to: fullPhoneNumber) { result in
-            print("🔥 進入 completion closure")
-            DispatchQueue.main.async {
-                switch result {
-                case .success(let vid):
-                    self.verificationID = vid
-                    print("✅ OTP 初次發送成功，verificationID: \(vid)")
-                    self.errorMessage = nil
-                case .failure(let error):
-                    print("❌ OTP 初次發送失敗: \(error.localizedDescription)")
-                    self.errorMessage = "發送驗證碼失敗：\(error.localizedDescription)"
-                }
+        let phone = PhoneNumberUtils.normalizedFullPhone(selectedCountryCode, phoneNumber)
+        print("📨 sendInitialOTP -> \(phone)")
+        Task { @MainActor in
+            let result = await auth.startPhoneVerification(phone: phone)
+            switch result {
+            case .success(let vid):
+                print("✅ got verificationID = \(vid)")
+                verificationID = vid
+                errorMessage = nil
+                startCountdown() // <— 這裡再補一槓，保證有倒數
+            case .failure(let e):
+                print("❌ startPhoneVerification error = \(e)")
+                errorMessage = friendlyMessage(e)
             }
         }
-        print("🔥 已呼叫 sendFirebaseOTP")
     }
     
     /// 當使用者在第 index 欄位輸入(或刪除)新值時，更新 otpCode 並處理焦點
@@ -308,31 +285,20 @@ struct OTPVerificationView: View {
     
     // **🔹 重新發送驗證碼**
     private func resendOTP() {
-        // 檢查 Firebase 是否已初始化
-        guard Auth.auth().app != nil else {
-            print("❌ Firebase 尚未初始化")
-            errorMessage = "Firebase 初始化錯誤，請重新啟動應用程式"
-            return
-        }
-        
         isResending = true
         countdown = 59 // 重置倒數計時
         errorMessage = nil // 清除錯誤訊息
 
-        let fullPhoneNumber = "\(selectedCountryCode)\(phoneNumber)"
-        
-        FirebaseAuthManager.shared.sendFirebaseOTP(to: fullPhoneNumber) { result in
-            DispatchQueue.main.async {
-                isResending = false
-                switch result {
-                case .success(let verificationID):
-                    self.verificationID = verificationID
-                    print("✅ 重新發送OTP成功, verificationID: \(verificationID)")
-                    self.errorMessage = nil
-                case .failure(let error):
-                    print("❌ 重新發送OTP失敗: \(error.localizedDescription)")
-                    self.errorMessage = "重新發送驗證碼失敗：\(error.localizedDescription)"
-                }
+        let phone = PhoneNumberUtils.normalizedFullPhone(selectedCountryCode, phoneNumber)
+
+        Task { @MainActor in
+            defer { isResending = false }
+            switch await auth.startPhoneVerification(phone: phone) {
+            case .success(let vid):
+                verificationID = vid
+                errorMessage = nil
+            case .failure(let e):
+                errorMessage = friendlyMessage(e)
             }
         }
     }
@@ -353,7 +319,7 @@ struct OTPVerificationView: View {
 
     func verifyOTPCode() {
         // ✅ 直接從 UserDefaults 中取得
-        guard let verificationID = UserDefaults.standard.string(forKey: "authVerificationID") else {
+        guard let vid = verificationID else {
             errorMessage = "驗證ID不存在，請重新發送驗證碼"
             return
         }
@@ -375,32 +341,37 @@ struct OTPVerificationView: View {
                 }
             }
         } else {
-            // 檢查 Firebase 是否已初始化
-            guard Auth.auth().app != nil else {
-                print("❌ Firebase 尚未初始化")
-                isVerifying = false
-                errorMessage = "Firebase 初始化錯誤，請重新啟動應用程式"
-                return
-            }
-            
-            let credential = PhoneAuthProvider.provider().credential(withVerificationID: verificationID, verificationCode: code)
-            
-            Auth.auth().signIn(with: credential) { authResult, error in
-                DispatchQueue.main.async {
+            Task { @MainActor in
+                switch await auth.verifyOTP(verificationID: vid, code: otpCode.joined()) {
+                case .success:
                     isVerifying = false
-                    if let error = error {
-                        print("❌ 驗證失敗: \(error.localizedDescription)")
-                        self.errorMessage = "驗證失敗：\(error.localizedDescription)"
-                    } else {
-                        print("✅ 驗證成功！用戶登入成功")
-                        if isResetPassword {
-                            showResetPasswordView = true
-                        } else {
-                            showRealVerification = true // ✅ 觸發真人認證畫面
-                        }
-                    }
+                    routeAfterSuccess()
+                case .failure(let e):
+                    isVerifying = false
+                    errorMessage = friendlyMessage(e)
                 }
             }
+        }
+    }
+    
+    @MainActor
+    private func routeAfterSuccess() {
+        // 你也可以順便寫入 appState / userSettings 狀態
+        // appState.isLoggedIn = true
+
+        if isResetPassword {
+            showResetPasswordView = true
+        } else {
+            showRealVerification = true
+        }
+    }
+    
+    func logAuthError(_ error: Error) {
+        let ns = error as NSError
+        print("🔥 Auth error => domain=\(ns.domain) code=\(ns.code) desc=\(ns.localizedDescription)")
+        print("🔥 userInfo=\(ns.userInfo)")
+        if let underlying = ns.userInfo[NSUnderlyingErrorKey] as? NSError {
+            print("🔥 underlying=\(underlying) userInfo=\(underlying.userInfo)")
         }
     }
 }
@@ -412,6 +383,7 @@ struct OTPVerificationView_Previews: PreviewProvider {
             selectedCountryCode: .constant("+886"),
             phoneNumber: .constant("0972516868")
         )
+        .environment(\.authService, FirebaseAuthService()) // 👈 之後要換 Twilio 改這裡
         .environmentObject(AppState())
         .environmentObject(UserSettings())
         .previewDevice("iPhone 15 Pro")  // 指定模擬的裝置

@@ -41,8 +41,8 @@ struct SwiftiDateApp: App {
             userSettings.globalPhoneNumber = ""
             userSettings.globalUserName = ""
         }
-        // ❌ 刪掉這行，因為 configure 還沒跑
-//        AnalyticsManager.shared.trackEvent("app_launch")
+                
+        AnalyticsManager.shared.trackEvent("app_launch")
     }
     
     var body: some Scene {
@@ -53,9 +53,10 @@ struct SwiftiDateApp: App {
                         .environmentObject(userSettings)
                         .environmentObject(appState)
                         .environmentObject(consumableStore)
+                        .environment(\.authService, FirebaseAuthService())
                         .onAppear {
                             // 1. 在這裡呼叫一個方法，執行 Firebase 匿名登入
-                            signInAnonymously()
+//                            signInAnonymously()
                             AnalyticsManager.shared.trackEvent("content_view_appear", parameters: [
                                 "isLoggedIn": appState.isLoggedIn
                             ])
@@ -64,6 +65,7 @@ struct SwiftiDateApp: App {
                     LoginOrRegisterView()
                         .environmentObject(userSettings)
                         .environmentObject(appState)
+                        .environment(\.authService, FirebaseAuthService())
                 }
             }
             .onAppear {
@@ -84,8 +86,8 @@ struct SwiftiDateApp: App {
                 userSettings.globalCrushCount = 10000
                 userSettings.globalPraiseCount = 10000
                 userSettings.isProfilePhotoVerified = true
-                FirebaseAuthManager.shared.userSettings = userSettings
-                FirebasePhotoManager.shared.userSettings = userSettings
+//                FirebaseAuthManager.shared.userSettings = userSettings
+//                FirebasePhotoManager.shared.userSettings = userSettings
             }
         }
     }

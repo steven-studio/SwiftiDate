@@ -136,6 +136,10 @@
 		D055E9922C8CCFBA00A97DD1 /* InterestSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D055E9912C8CCFBA00A97DD1 /* InterestSelectionView.swift */; };
 		D05E978E2D79B74D00F05560 /* ChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05E978D2D79B74D00F05560 /* ChatViewModel.swift */; };
 		D05E978F2D79B74D00F05560 /* ChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05E978D2D79B74D00F05560 /* ChatViewModel.swift */; };
+		D063BD592E4645E6001CF5EB /* PhoneNumberUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09215B92E463A4800DAA36D /* PhoneNumberUtils.swift */; };
+		D063BD5A2E46467F001CF5EB /* PhoneNumberUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09215B92E463A4800DAA36D /* PhoneNumberUtils.swift */; };
+		D063BD5C2E4648BC001CF5EB /* AppNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = D063BD5B2E4648B9001CF5EB /* AppNotifications.swift */; };
+		D063BD5D2E4648BC001CF5EB /* AppNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = D063BD5B2E4648B9001CF5EB /* AppNotifications.swift */; };
 		D0644BC42D7FDB41007B2DE0 /* IPManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0644BC32D7FDB41007B2DE0 /* IPManager.swift */; };
 		D0644BD02D80826E007B2DE0 /* SwiftiDate.storekit in Resources */ = {isa = PBXBuildFile; fileRef = D0644BCF2D80826E007B2DE0 /* SwiftiDate.storekit */; };
 		D0644BD62D808860007B2DE0 /* CropViewController in Frameworks */ = {isa = PBXBuildFile; productRef = D0644BD52D808860007B2DE0 /* CropViewController */; };
@@ -160,7 +164,6 @@
 		D07B41DF2D6197570015C7AA /* FirebasePhotoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07B41DE2D6197570015C7AA /* FirebasePhotoManager.swift */; };
 		D07B41E12D61ABE80015C7AA /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07B41E02D61ABE80015C7AA /* ImagePicker.swift */; };
 		D07B41EC2D61C3630015C7AA /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07B41EA2D61C3630015C7AA /* FirebaseManager.swift */; };
-		D07B41EE2D61DA530015C7AA /* FirebaseAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07B41ED2D61DA530015C7AA /* FirebaseAuthManager.swift */; };
 		D07B41F02D61EE2C0015C7AA /* FirestoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07B41EF2D61EE2C0015C7AA /* FirestoreManager.swift */; };
 		D07B41F22D621E9C0015C7AA /* LocalStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07B41F12D621E9C0015C7AA /* LocalStorageManager.swift */; };
 		D07C57D72D76941E0008DC9D /* CreatePasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07C57D62D76941E0008DC9D /* CreatePasswordView.swift */; };
@@ -213,6 +216,8 @@
 		D09215B12E45E2BD00DAA36D /* MatchTipsPopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09215B02E45E2BD00DAA36D /* MatchTipsPopupView.swift */; };
 		D09215B22E45E2BD00DAA36D /* MatchTipsPopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09215B02E45E2BD00DAA36D /* MatchTipsPopupView.swift */; };
 		D09215B42E4611A700DAA36D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09215B32E4611A200DAA36D /* SceneDelegate.swift */; };
+		D09215B62E4636B200DAA36D /* AuthServiceEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09215B52E4636AC00DAA36D /* AuthServiceEnvironment.swift */; };
+		D09215B72E4636B200DAA36D /* AuthServiceEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09215B52E4636AC00DAA36D /* AuthServiceEnvironment.swift */; };
 		D09587BB2CB7558600BCD04B /* SafetyCenterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09587BA2CB7558600BCD04B /* SafetyCenterView.swift */; };
 		D09587BD2CB77F5200BCD04B /* SafetyTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09587BC2CB77F5200BCD04B /* SafetyTestView.swift */; };
 		D09587BF2CB7899D00BCD04B /* SafetyQuizView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09587BE2CB7899D00BCD04B /* SafetyQuizView.swift */; };
@@ -424,7 +429,6 @@
 		D0B3F2A22D740AEA007A5EA0 /* OTPVerificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B388252D5B7BAE003BC40C /* OTPVerificationView.swift */; };
 		D0B3F2A32D740B06007A5EA0 /* NoCursorTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B3F1272D6F0472007A5EA0 /* NoCursorTextField.swift */; };
 		D0B3F2A42D740B06007A5EA0 /* NoCursorTextFieldWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B3F1292D6F04B7007A5EA0 /* NoCursorTextFieldWrapper.swift */; };
-		D0B3F2A52D740B29007A5EA0 /* FirebaseAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07B41ED2D61DA530015C7AA /* FirebaseAuthManager.swift */; };
 		D0B3F2A62D740B3B007A5EA0 /* RealVerificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B388272D5B7BAE003BC40C /* RealVerificationView.swift */; };
 		D0B3F2A72D740B76007A5EA0 /* FaceTrackingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B388242D5B7BAE003BC40C /* FaceTrackingView.swift */; };
 		D0B3F2A82D740B7F007A5EA0 /* UploadPhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B388282D5B7BAE003BC40C /* UploadPhotoView.swift */; };
@@ -640,6 +644,7 @@
 		D055A7622D19931C00F11F18 /* GlobalVariables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalVariables.swift; sourceTree = "<group>"; };
 		D055E9912C8CCFBA00A97DD1 /* InterestSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterestSelectionView.swift; sourceTree = "<group>"; };
 		D05E978D2D79B74D00F05560 /* ChatViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewModel.swift; sourceTree = "<group>"; };
+		D063BD5B2E4648B9001CF5EB /* AppNotifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppNotifications.swift; sourceTree = "<group>"; };
 		D0644BC32D7FDB41007B2DE0 /* IPManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IPManager.swift; sourceTree = "<group>"; };
 		D0644BCF2D80826E007B2DE0 /* SwiftiDate.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = SwiftiDate.storekit; sourceTree = "<group>"; };
 		D0644BDE2D80F3E9007B2DE0 /* TransactionProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionProtocol.swift; sourceTree = "<group>"; };
@@ -661,7 +666,6 @@
 		D07B41DE2D6197570015C7AA /* FirebasePhotoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebasePhotoManager.swift; sourceTree = "<group>"; };
 		D07B41E02D61ABE80015C7AA /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		D07B41EA2D61C3630015C7AA /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
-		D07B41ED2D61DA530015C7AA /* FirebaseAuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAuthManager.swift; sourceTree = "<group>"; };
 		D07B41EF2D61EE2C0015C7AA /* FirestoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreManager.swift; sourceTree = "<group>"; };
 		D07B41F12D621E9C0015C7AA /* LocalStorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalStorageManager.swift; sourceTree = "<group>"; };
 		D07C57D62D76941E0008DC9D /* CreatePasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePasswordView.swift; sourceTree = "<group>"; };
@@ -697,6 +701,8 @@
 		D09215AD2E45E05300DAA36D /* FirebaseAuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAuthService.swift; sourceTree = "<group>"; };
 		D09215B02E45E2BD00DAA36D /* MatchTipsPopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchTipsPopupView.swift; sourceTree = "<group>"; };
 		D09215B32E4611A200DAA36D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		D09215B52E4636AC00DAA36D /* AuthServiceEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthServiceEnvironment.swift; sourceTree = "<group>"; };
+		D09215B92E463A4800DAA36D /* PhoneNumberUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneNumberUtils.swift; sourceTree = "<group>"; };
 		D09587BA2CB7558600BCD04B /* SafetyCenterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafetyCenterView.swift; sourceTree = "<group>"; wrapsLines = 1; };
 		D09587BC2CB77F5200BCD04B /* SafetyTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafetyTestView.swift; sourceTree = "<group>"; };
 		D09587BE2CB7899D00BCD04B /* SafetyQuizView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafetyQuizView.swift; sourceTree = "<group>"; };
@@ -1089,6 +1095,7 @@
 		D0445C222C71B3800059D522 = {
 			isa = PBXGroup;
 			children = (
+				D09215B82E463A0800DAA36D /* Utilities */,
 				D0B3F18F2D70A0DF007A5EA0 /* AnalyticsManager */,
 				D089DB5B2D69861300D6A1AB /* ChatRelated */,
 				D06724E22D6EC03C00FD566F /* CloudService */,
@@ -1335,7 +1342,6 @@
 			isa = PBXGroup;
 			children = (
 				D09215AD2E45E05300DAA36D /* FirebaseAuthService.swift */,
-				D07B41ED2D61DA530015C7AA /* FirebaseAuthManager.swift */,
 				D07B41EA2D61C3630015C7AA /* FirebaseManager.swift */,
 				D07B41DE2D6197570015C7AA /* FirebasePhotoManager.swift */,
 				D07B41EF2D61EE2C0015C7AA /* FirestoreManager.swift */,
@@ -1429,9 +1435,19 @@
 		D09215A82E45DEEC00DAA36D /* AuthService */ = {
 			isa = PBXGroup;
 			children = (
+				D09215B52E4636AC00DAA36D /* AuthServiceEnvironment.swift */,
 				D09215A92E45DF0300DAA36D /* AuthService.swift */,
 			);
 			path = AuthService;
+			sourceTree = "<group>";
+		};
+		D09215B82E463A0800DAA36D /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				D063BD5B2E4648B9001CF5EB /* AppNotifications.swift */,
+				D09215B92E463A4800DAA36D /* PhoneNumberUtils.swift */,
+			);
+			path = Utilities;
 			sourceTree = "<group>";
 		};
 		D0B3F1262D6F03BB007A5EA0 /* OTPRelated */ = {
@@ -1910,6 +1926,7 @@
 				D0445C772C73BF590059D522 /* HeightPickerView.swift in Sources */,
 				D018AD5F2C9E6976005A14B9 /* CrushPurchaseView.swift in Sources */,
 				D049387A2CBF0A6F00754E46 /* Models.swift in Sources */,
+				D09215B72E4636B200DAA36D /* AuthServiceEnvironment.swift in Sources */,
 				D089DB5A2D69830000D6A1AB /* PhishingChecker.swift in Sources */,
 				D051EF312CC033C5004563A3 /* AchievementSectionView.swift in Sources */,
 				D051EF272CBF50CB004563A3 /* LifestyleView.swift in Sources */,
@@ -1963,6 +1980,7 @@
 				D0445C312C71B3800059D522 /* ContentView.swift in Sources */,
 				D09587C72CB7CB5100BCD04B /* ReportConditionsView.swift in Sources */,
 				D0DDDB422CA17D2C00A78A87 /* HowToUseDailyPraiseOpportunityView.swift in Sources */,
+				D063BD592E4645E6001CF5EB /* PhoneNumberUtils.swift in Sources */,
 				D0445C812C73CA130059D522 /* PetSelectionView.swift in Sources */,
 				D0445C692C723AE80059D522 /* FlowLayout.swift in Sources */,
 				D0DDDB142CA10EAD00A78A87 /* SettingsView.swift in Sources */,
@@ -2019,7 +2037,6 @@
 				D04729D82CC099BA007C33EC /* VerificationStatusView.swift in Sources */,
 				D0DDDB342CA16D8B00A78A87 /* HowToEnablePremiumBadgeView.swift in Sources */,
 				D09587BB2CB7558600BCD04B /* SafetyCenterView.swift in Sources */,
-				D07B41EE2D61DA530015C7AA /* FirebaseAuthManager.swift in Sources */,
 				D09587CD2CB7D5C900BCD04B /* MeetingGuideView.swift in Sources */,
 				D09587BD2CB77F5200BCD04B /* SafetyTestView.swift in Sources */,
 				D07C57DD2D76DD100008DC9D /* UserGenderSelectionView.swift in Sources */,
@@ -2075,6 +2092,7 @@
 				D04729D02CC08CC1007C33EC /* SmartPhotoToggle.swift in Sources */,
 				D07C57EE2D76F7C60008DC9D /* LifestylePhotoView.swift in Sources */,
 				D089DB532D6896CB00D6A1AB /* QRCodeGeneratorView.swift in Sources */,
+				D063BD5C2E4648BC001CF5EB /* AppNotifications.swift in Sources */,
 				D07B41DD2D618E9B0015C7AA /* LocationService.swift in Sources */,
 				D0DDDB562CA29B1200A78A87 /* TermsOfServiceView.swift in Sources */,
 				D0B3F2342D734970007A5EA0 /* uncaughtExceptionHandler.swift in Sources */,
@@ -2112,7 +2130,6 @@
 				D09215B12E45E2BD00DAA36D /* MatchTipsPopupView.swift in Sources */,
 				D0B3F2A62D740B3B007A5EA0 /* RealVerificationView.swift in Sources */,
 				D07C57FB2D76FC960008DC9D /* ExperienceSelectionView.swift in Sources */,
-				D0B3F2A52D740B29007A5EA0 /* FirebaseAuthManager.swift in Sources */,
 				D0B3F2A32D740B06007A5EA0 /* NoCursorTextField.swift in Sources */,
 				D0B3F2A42D740B06007A5EA0 /* NoCursorTextFieldWrapper.swift in Sources */,
 				D0B3F2A22D740AEA007A5EA0 /* OTPVerificationView.swift in Sources */,
@@ -2148,6 +2165,7 @@
 				D0B3F26D2D736347007A5EA0 /* ManageProfilePhotosView.swift in Sources */,
 				D0B3F26E2D736347007A5EA0 /* PhotoUploadGuidelinesView.swift in Sources */,
 				D0E46ADE2E420ED5008B6871 /* CLAuthorizationStatus+Extensions.swift in Sources */,
+				D063BD5D2E4648BC001CF5EB /* AppNotifications.swift in Sources */,
 				D0B3F26F2D736347007A5EA0 /* RefundPolicyView.swift in Sources */,
 				D0B3F2702D736347007A5EA0 /* ReportUserView.swift in Sources */,
 				D0B3F2712D736347007A5EA0 /* RestorePurchaseView.swift in Sources */,
@@ -2197,6 +2215,7 @@
 				D0B3F2522D736234007A5EA0 /* UnverifiedProfilePlaceholderView.swift in Sources */,
 				D0B3F2932D73F0F6007A5EA0 /* TurboPurchaseViewUITests.swift in Sources */,
 				D09215AB2E45DF0800DAA36D /* AuthService.swift in Sources */,
+				D063BD5A2E46467F001CF5EB /* PhoneNumberUtils.swift in Sources */,
 				D0B3F2532D736234007A5EA0 /* VerifiedProfileProgressView.swift in Sources */,
 				D0422DB22D7C50AF00609060 /* WebRTCCallView.swift in Sources */,
 				D0422DB32D7C50AF00609060 /* WebRTCManager.swift in Sources */,
@@ -2290,6 +2309,7 @@
 				D0B3F1312D6F0F8F007A5EA0 /* OTPVerificationUITests.swift in Sources */,
 				D0B3F1EF2D72E426007A5EA0 /* DegreePickerUITests.swift in Sources */,
 				D0B3F1E32D72CCCD007A5EA0 /* BasicInfoUITests.swift in Sources */,
+				D09215B62E4636B200DAA36D /* AuthServiceEnvironment.swift in Sources */,
 				D0B3F23A2D735EF4007A5EA0 /* ProfileTabPickerUITests.swift in Sources */,
 				D0B3F29E2D7407F8007A5EA0 /* InfoPopupViewUITests.swift in Sources */,
 				D09215AE2E45E05800DAA36D /* FirebaseAuthService.swift in Sources */,

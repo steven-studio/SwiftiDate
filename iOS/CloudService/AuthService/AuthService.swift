@@ -10,7 +10,7 @@ import Foundation
 public typealias UserID = String
 public typealias VerificationID = String
 
-public protocol AuthService {
+public protocol AuthService: AnyObject {   // 👈 加 AnyObject
     func signInAnonymously() async -> Result<UserID, AuthError>
     func startPhoneVerification(phone: String) async -> Result<VerificationID, AuthError>
     func verifyOTP(verificationID: String, code: String) async -> Result<UserID, AuthError>

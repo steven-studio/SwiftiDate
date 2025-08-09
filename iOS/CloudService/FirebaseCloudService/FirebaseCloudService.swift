@@ -11,8 +11,8 @@ class FirebaseCloudService: CloudService {
     
     // 可以在這裡擁有各種 Manager 的參考
     private let firebaseManager = FirebaseManager.shared
+    private let authService = FirebaseAuthService()
     private let photoManager = FirebasePhotoManager.shared
-    private let authManager = FirebaseAuthManager.shared
     private let firestoreManager = FirestoreManager.shared
     
     // 注入的 UserSettings 實例
@@ -63,25 +63,32 @@ class FirebaseCloudService: CloudService {
     }
     
     func sendOTP(to phoneNumber: String, completion: @escaping (Result<String, Error>) -> Void) {
-        // 改寫 FirebaseAuthManager 的 sendFirebaseOTP 讓它可以回傳驗證 ID
-        authManager.sendFirebaseOTP(to: phoneNumber) { result in
+        Task {
+            let result = await authService.startPhoneVerification(phone: phoneNumber)
             
-            // 同樣要在 FirebaseAuthManager 中增加 callback or completion
-            // 這裡示範簡化
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                completion(.success("dummyVerificationID"))
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let verificationID):
+                    completion(.success(verificationID))
+                case .failure(let authError):
+                    completion(.failure(NSError(domain: "AuthError", code: 0, userInfo: [NSLocalizedDescriptionKey: "\(authError)"])))
+                }
             }
         }
     }
     
     func signInWithOTP(verificationID: String, verificationCode: String, completion: @escaping (Result<Void, Error>) -> Void) {
-        authManager.signInWithOTP(verificationID: verificationID, verificationCode: verificationCode) { result in
-            switch result {
-            case .success(let authResult):
-                print("成功登入：\(authResult.user.uid)")
-                completion(.success(()))
-            case .failure(let error):
-                completion(.failure(error))
+        Task {
+            let result = await authService.verifyOTP(verificationID: verificationID, code: verificationCode)
+            
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let userID):
+                    print("成功登入：\(userID)")
+                    completion(.success(()))
+                case .failure(let authError):
+                    completion(.failure(NSError(domain: "AuthError", code: 0, userInfo: [NSLocalizedDescriptionKey: "\(authError)"])))
+                }
             }
         }
     }

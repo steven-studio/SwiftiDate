@@ -7,16 +7,16 @@
 		<dict>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>app-1-131205636358-ios-bec8d4fd284a46d9e6be87</string>
+				<string>stevenstudio.SwiftiDate</string>
 			</array>
 		</dict>
 		<dict>
 			<key>CFBundleURLName</key>
-			<string>stevenstudio.SwiftiDate</string>
-		</dict>
-		<dict>
-			<key>CFBundleURLName</key>
 			<string>com.googleusercontent.apps.131205636358-vs1530oepa4dbclt1bf8v96dcg9flbhb</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.googleusercontent.apps.131205636358-vs1530oepa4dbclt1bf8v96dcg9flbhb</string>
+			</array>
 		</dict>
 	</array>
 	<key>FirebaseAppDelegateProxyEnabled</key>

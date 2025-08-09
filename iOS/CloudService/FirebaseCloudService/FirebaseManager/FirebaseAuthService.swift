@@ -20,9 +20,19 @@ final class FirebaseAuthService: AuthService {
     func startPhoneVerification(phone: String) async -> Result<VerificationID, AuthError> {
         await withCheckedContinuation { cont in
             PhoneAuthProvider.provider().verifyPhoneNumber(phone, uiDelegate: nil) { vid, err in
-                if let err = err { cont.resume(returning: .failure(self.map(err))) }
-                else if let vid = vid { cont.resume(returning: .success(vid)) }
-                else { cont.resume(returning: .failure(.unknown("nil verificationID"))) }
+                if let err = err {
+                    let mappedError = self.map(err)
+                    print("❌ startPhoneVerification failed for phone=\(phone), error=\(mappedError)")
+                    cont.resume(returning: .failure(mappedError))
+                }
+                else if let vid = vid {
+                    print("✅ startPhoneVerification success for phone=\(phone), verificationID=\(vid)")
+                    cont.resume(returning: .success(vid))
+                }
+                else {
+                    print("⚠️ startPhoneVerification got nil verificationID for phone=\(phone)")
+                    cont.resume(returning: .failure(.unknown("nil verificationID")))
+                }
             }
         }
     }
