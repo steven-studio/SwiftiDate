@@ -9,6 +9,9 @@ import Foundation
 import SwiftUI
 
 struct TaggingView: View {
+    @EnvironmentObject var userSettings: UserSettings   // ← 新增
+    @EnvironmentObject var appState: AppState           // ← 新增
+    
     @State private var categories: [TagCategory] = [
         TagCategory(
             title: "影音",
@@ -34,6 +37,7 @@ struct TaggingView: View {
             previewCount: 2
         )
     ]
+    @State private var showExperienceSelection = false
     
     var body: some View {
         NavigationView {
@@ -92,9 +96,15 @@ struct TaggingView: View {
                         cat.allTags.filter { $0.isSelected }.map { $0.name }
                     }
                     print("使用者選擇的標籤：\(selectedTags)")
+                    showExperienceSelection = true
                 }
             )
             .navigationBarTitleDisplayMode(.inline)
+        }
+        .fullScreenCover(isPresented: $showExperienceSelection) {
+            ExperienceSelectionView()
+                .environmentObject(userSettings)
+                .environmentObject(appState)
         }
     }
 }

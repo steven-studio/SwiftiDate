@@ -9,6 +9,8 @@ import Foundation
 import SwiftUI
 
 struct ExperienceSelectionView: View {
+    @EnvironmentObject var appState: AppState          // ← 新增
+    @EnvironmentObject var userSettings: UserSettings  // ← 新增
     @State private var showNotificationInfo = true
     
     var body: some View {
@@ -53,6 +55,7 @@ struct ExperienceSelectionView: View {
                     Button {
                         // 按下「點擊開啟完整體驗」的行為
                         print("使用者選擇開啟完整體驗")
+                        appState.isLoggedIn = true
                     } label: {
                         HStack {
                             Text("點擊開啟完整體驗")
@@ -82,6 +85,7 @@ struct ExperienceSelectionView: View {
                 Button {
                     // 按下「使用不完整體驗」的行為
                     print("使用者選擇不完整體驗")
+                    appState.isLoggedIn = true
                 } label: {
                     HStack {
                         Text("使用不完整體驗")

@@ -9,8 +9,13 @@ import Foundation
 import SwiftUI
 
 struct BirthdayInputView: View {
-    @State private var selectedDate = Date()  // 用於記錄使用者的生日
+    // 👇 新增：從環境取得 appState / userSettings
+    @EnvironmentObject var appState: AppState
+    @EnvironmentObject var userSettings: UserSettings
     
+    @State private var selectedDate = Date()  // 用於記錄使用者的生日
+    @State private var showLifestylePhotoView = false
+
     // 你可以根據需要設定可選擇的日期範圍，例如：16 歲以上
     // 這裡示範最小值為 1900 年 1 月 1 日，最大值為當天
     private var dateRange: ClosedRange<Date> {
@@ -86,6 +91,7 @@ struct BirthdayInputView: View {
                 // 在這裡執行儲存生日的動作
                 // 或跳轉到下一個頁面
                 print("使用者的生日：\(formattedDate)")
+                showLifestylePhotoView = true
             }) {
                 Text("完成")
                     .font(.headline)
@@ -100,6 +106,11 @@ struct BirthdayInputView: View {
             .padding(.bottom, 40)
         }
         .padding()
+        .fullScreenCover(isPresented: $showLifestylePhotoView) {
+            LifestylePhotoView()
+                .environmentObject(userSettings)
+                .environmentObject(appState)
+        }
     }
     
     // 將選擇的日期格式化顯示

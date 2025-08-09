@@ -125,6 +125,7 @@ struct UserGenderSelectionView_Previews: PreviewProvider {
         // 建議提供預覽時的 userSettings 或其他 EnvironmentObject
         UserGenderSelectionView()
             .environmentObject(UserSettings())
+            .environmentObject(AppState())
             .previewDevice("iPhone 15 Pro")
     }
 }

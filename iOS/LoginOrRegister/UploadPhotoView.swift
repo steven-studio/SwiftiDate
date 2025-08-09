@@ -251,8 +251,8 @@ struct UploadPhotoView: View {
         .fullScreenCover(isPresented: $showNicknameInputView) {
             // 這裡放你要顯示的暱稱輸入畫面
             NicknameInputView()
-                .environmentObject(appState)       // 如果需要傳遞給 NicknameInputView
                 .environmentObject(userSettings)   // 如果需要
+                .environmentObject(appState)       // 如果需要傳遞給 NicknameInputView
         }
     }
     

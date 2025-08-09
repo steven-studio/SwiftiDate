@@ -9,6 +9,7 @@ import Foundation
 import SwiftUI
 
 struct NicknameInputView: View {
+    @EnvironmentObject var appState: AppState           // ← 新增
     @EnvironmentObject var userSettings: UserSettings   // ✅ 取用全域狀態
     @State private var nickname: String = ""
     @State private var showBirthday = false             // ✅ 控制跳轉
@@ -91,6 +92,7 @@ struct NicknameInputView: View {
         .fullScreenCover(isPresented: $showBirthday) {
             BirthdayInputView()
                 .environmentObject(userSettings)  // 如果裡面要用到
+                .environmentObject(appState)
         }
     }
     

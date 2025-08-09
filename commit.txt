@@ -1,8 +1,6 @@
-feat: 完成今日主要功能與修正，準備進入休息狀態
-
-- 實作 Firebase ID Token 儲存至 Keychain 與 UserDefaults 備援
-- OTP 驗證成功後自動取得並同步更新 ID Token
-- 新增 AppDelegate 監聽 ID Token 變更邏輯
-- 修正 UserSettings 初始化邏輯，支援從 Keychain 讀取 Token
-- 上傳照片流程串接 Firestore 儲存使用者資料
-- 優化暱稱與生日輸入畫面導航邏輯
+- 修正 EnvironmentObject 在多個 View 中未注入造成的 UserSettings not injected 問題
+- 調整 UploadPhotoView、UserGenderSelectionView、ExperienceSelectionView 的依賴注入
+- 新增 appState.isLoggedIn 切換邏輯，確保註冊流程完成後能正確進入主畫面
+- 修正 Firebase 初始化順序，避免 "Firebase app has not yet been configured" 警告
+- 移除多餘測試資料，避免影響判斷註冊狀態
+- 優化註冊頁面與主畫面之間的條件判斷

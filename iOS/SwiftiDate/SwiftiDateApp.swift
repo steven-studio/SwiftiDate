@@ -48,7 +48,7 @@ struct SwiftiDateApp: App {
     var body: some Scene {
         WindowGroup {
             NavigationView {
-                if !userSettings.globalPhoneNumber.isEmpty { // 改為檢查非空
+                if appState.isLoggedIn || !userSettings.globalPhoneNumber.isEmpty {
                     ContentView()
                         .environmentObject(userSettings)
                         .environmentObject(appState)

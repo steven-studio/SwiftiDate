@@ -15,6 +15,9 @@ enum PhotoCategory {
 }
 
 struct LifestylePhotoView: View {
+    @EnvironmentObject var userSettings: UserSettings   // ← 新增
+    @EnvironmentObject var appState: AppState           // ← 新增
+    
     // 用來存放使用者上傳的圖片
     @State private var selfieImage: UIImage?
     @State private var interestImage: UIImage?
@@ -24,6 +27,7 @@ struct LifestylePhotoView: View {
     @State private var showImagePicker = false
     // 紀錄當前使用者要上傳哪一種類別
     @State private var selectedCategory: PhotoCategory?
+    @State private var showTaggingFullScreen = false
     
     var body: some View {
         VStack(spacing: 20) {
@@ -72,6 +76,7 @@ struct LifestylePhotoView: View {
             Button(action: {
                 // 按下繼續的行為
                 print("使用者點擊繼續")
+                showTaggingFullScreen = true
             }) {
                 Text("繼續")
                     .font(.headline)
@@ -92,6 +97,11 @@ struct LifestylePhotoView: View {
             //   .onDisappear {
             //       // 根據 selectedCategory 決定要存到 selfieImage / interestImage / travelImage
             //   }
+        }
+        .fullScreenCover(isPresented: $showTaggingFullScreen) {
+            TaggingView(
+                // selfieImage: selfieImage, interestImage: interestImage, travelImage: travelImage
+            )
         }
     }
     
