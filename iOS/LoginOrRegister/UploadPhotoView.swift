@@ -293,10 +293,7 @@ struct UploadPhotoView: View {
     }
 
     // ✅ 點擊「繼續」後，設定 appState.isLoggedIn = true
-    private func completeVerification() {
-        print("✅ 驗證完成，進入主畫面")
-        appState.isLoggedIn = true
-        
+    private func completeVerification() {        
         // 將手機號碼 & 國碼寫入 userSettings
         userSettings.globalPhoneNumber = phoneNumber
         userSettings.globalCountryCode = selectedCountryCode

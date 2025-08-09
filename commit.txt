@@ -1,6 +1,7 @@
-- 修正 EnvironmentObject 在多個 View 中未注入造成的 UserSettings not injected 問題
-- 調整 UploadPhotoView、UserGenderSelectionView、ExperienceSelectionView 的依賴注入
-- 新增 appState.isLoggedIn 切換邏輯，確保註冊流程完成後能正確進入主畫面
+- 修正多個 View（UploadPhotoView、UserGenderSelectionView、ExperienceSelectionView 等）
+  未正確注入 AppState / UserSettings 導致 "UserSettings not injected" 錯誤
+- 在註冊完成流程中新增 appState.isLoggedIn 切換邏輯，確保能正確跳轉至 ContentView
+- 調整 SwiftiDateApp 啟動條件判斷，合併 isLoggedIn 與 globalPhoneNumber 檢查
 - 修正 Firebase 初始化順序，避免 "Firebase app has not yet been configured" 警告
-- 移除多餘測試資料，避免影響判斷註冊狀態
-- 優化註冊頁面與主畫面之間的條件判斷
+- 清理測試用假資料設定，避免干擾判斷註冊狀態
+- 優化註冊流程各頁面之間的全域狀態傳遞
