@@ -315,7 +315,7 @@ struct SwipeCardView: View {
                 .padding()
 
             Button(action: {
-                viewModel.locationManager.requestPermission()
+                viewModel.locationManager.requestOrOpenSettings()
             }) {
                 Text("前往設置")
                     .font(.headline)

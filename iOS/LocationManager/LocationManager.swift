@@ -8,6 +8,7 @@
 import Foundation
 import CoreLocation
 import SwiftUI
+import UIKit   // ← 開設定頁需要
 
 class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     private var locationManager = CLLocationManager()
@@ -21,14 +22,35 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         super.init()
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.requestWhenInUseAuthorization()
-        locationManager.startUpdatingLocation()
+//        locationManager.requestWhenInUseAuthorization()
+//        locationManager.startUpdatingLocation()
         authorizationStatus = locationManager.authorizationStatus
     }
     
     // 請求使用者授權
     func requestPermission() {
         locationManager.requestWhenInUseAuthorization()
+    }
+    
+    /// 新增：未決定→請權限；拒絕/受限→打開 App 設定頁
+    func requestOrOpenSettings() {
+        let status = locationManager.authorizationStatus
+        switch status {
+        case .notDetermined:
+            locationManager.requestWhenInUseAuthorization()
+        case .denied, .restricted:
+            openAppSettings()
+        case .authorizedAlways, .authorizedWhenInUse:
+            startUpdatingLocation()
+        @unknown default:
+            break
+        }
+    }
+    
+    private func openAppSettings() {
+        guard let url = URL(string: UIApplication.openSettingsURLString),
+              UIApplication.shared.canOpenURL(url) else { return }
+        UIApplication.shared.open(url)
     }
     
     // 開始更新位置
@@ -73,5 +95,16 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         AnalyticsManager.shared.trackEvent("location_failed", parameters: [
             "error": error.localizedDescription
         ])
+    }
+    
+    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+        authorizationStatus = manager.authorizationStatus
+        if authorizationStatus == .authorizedAlways || authorizationStatus == .authorizedWhenInUse {
+            if CLLocationManager.locationServicesEnabled() {
+                startUpdatingLocation()
+            }
+        } else {
+            stopUpdatingLocation()
+        }
     }
 }
