@@ -16,7 +16,9 @@ enum GenderType: String {
 
 struct UserGenderSelectionView: View {
     @State private var selectedGender: GenderType? = nil
+    @State private var showUploadPhotoView = false       // ← 新增
     @EnvironmentObject var userSettings: UserSettings  // 若需要儲存到全局設定
+    @EnvironmentObject var appState: AppState
     
     var body: some View {
         VStack(spacing: 32) {
@@ -83,9 +85,7 @@ struct UserGenderSelectionView: View {
                     // 將性別儲存到 userSettings 或傳給後端
                     userSettings.globalSelectedGender = gender.rawValue
                     print("使用者選擇的性別：\(gender.rawValue)")
-                    
-                    // 例如，跳轉到下一個畫面
-                    // ...
+                    showUploadPhotoView = true           // ← 觸發跳轉
                 }
             }) {
                 Text("繼續")
@@ -100,6 +100,23 @@ struct UserGenderSelectionView: View {
             .padding(.horizontal, 20)
         }
         .padding()
+        // 彈出 UploadPhotoView
+        .fullScreenCover(isPresented: $showUploadPhotoView) {
+            UploadPhotoView(
+                selectedCountryCode: Binding(
+                    get: { userSettings.globalCountryCode },
+                    set: { userSettings.globalCountryCode = $0 }
+                ),
+                phoneNumber: Binding(
+                    get: { userSettings.globalPhoneNumber },
+                    set: { userSettings.globalPhoneNumber = $0 }
+                )
+            )
+            // 如果 AppState / UserSettings 已經在更上層用 .environmentObject 注入，
+            // 這裡其實可以不用再補，但補上也OK（要確保是同一份物件）
+            .environmentObject(userSettings)
+            .environmentObject(appState)
+        }
     }
 }
 

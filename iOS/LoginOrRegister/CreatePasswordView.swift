@@ -9,6 +9,9 @@ import Foundation
 import SwiftUI
 
 struct CreatePasswordView: View {
+    @EnvironmentObject var userSettings: UserSettings
+    @EnvironmentObject var appState: AppState
+    
     @State private var password: String = ""
     @State private var isPasswordVisible: Bool = false
     @State private var showUserGenderSelectionView: Bool = false  // 新增控制跳轉的狀態
@@ -96,7 +99,8 @@ struct CreatePasswordView: View {
         // 使用 fullScreenCover 呈現 UserGenderSelectionView
         .fullScreenCover(isPresented: $showUserGenderSelectionView) {
             UserGenderSelectionView()
-                .environmentObject(UserSettings())
+                .environmentObject(userSettings)
+                .environmentObject(appState)
         }
     }
 }

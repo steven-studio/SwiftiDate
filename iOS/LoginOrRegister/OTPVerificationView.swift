@@ -242,44 +242,41 @@ struct OTPVerificationView: View {
     
     /// 當使用者在第 index 欄位輸入(或刪除)新值時，更新 otpCode 並處理焦點
     private func handleInput(_ newValue: String, at index: Int) {
-        // 先記錄「舊值」
-        let oldValue = otpCode[index]
-        
-        // 更新當前欄位為 newValue 的「第一個字元」（或空字串）
-        if newValue.count > 1 {
-            let chars = Array(newValue)
-            otpCode[index] = String(chars[0])
-            var next = index + 1
-            var i = 1
-            while next < 6, i < chars.count {
-                otpCode[next] = String(chars[i])
-                next += 1
-                i += 1
-            }
-            focusedIndex = (next <= 5) ? next : nil
-        } else {
-            if newValue.isEmpty {
-                // 使用者把當前欄位清空 → 可能是退格
-                if !oldValue.isEmpty {
-                    otpCode[index] = ""
-                    // 自動跳回前一格
-                    if index > 0 {
-                        focusedIndex = index - 1
-                    }
-                } else {
-                    // 舊值也是空 -> 可能使用者在空欄位按退格 (更高階需求需要 Introspect 來攔截)
-                }
-            } else {
-                // newValue.count == 1
-                otpCode[index] = newValue
-                if index < 5 {
-                    focusedIndex = index + 1
-                } else {
-                    // 若已是最後一格，收起鍵盤
-                    focusedIndex = nil
-                }
-            }
+        func setFocus(_ i: Int?) {
+            DispatchQueue.main.async { self.focusedIndex = i }
         }
+
+        let oldValue = otpCode[index]
+        let digits = newValue.filter { $0.isNumber }           // 只收數字
+
+        if digits.count > 1 {
+            // 可能是貼上
+            let chars = Array(digits)
+            for i in 0..<min(chars.count, 6 - index) {
+                otpCode[index + i] = String(chars[i])
+            }
+            let filled = index + chars.count
+            setFocus(filled >= 6 ? nil : filled)                // ✅ 延後切焦點
+            return
+        }
+
+        if digits.isEmpty {
+            // 使用者清空/退格
+            if !oldValue.isEmpty {
+                otpCode[index] = ""
+                if index > 0 { setFocus(index - 1) }            // ✅ 延後切焦點
+            }
+            return
+        }
+
+        // 單一字元輸入
+        otpCode[index] = String(digits.prefix(1))
+        if index < 5 {
+            setFocus(index + 1)                                 // ✅ 延後切焦點
+        } else {
+            setFocus(nil)                                       // 最後一格 -> 收鍵盤
+        }
+
         print("Current OTP code array: \(otpCode)")
     }
     
