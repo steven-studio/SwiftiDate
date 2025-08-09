@@ -9,6 +9,7 @@ import Foundation
 import SwiftUI
 import Firebase
 import Mixpanel
+import KeychainAccess   // ← 新增
 
 // MARK: - Gender Enum
 enum Gender: String {
@@ -79,6 +80,9 @@ enum Country: String, CaseIterable {
 class UserSettings: ObservableObject {
     static let shared = UserSettings()
     
+    // 用於安全保存敏感資訊
+    private let keychain = Keychain(service: "stevenstudio.SwiftiDate")  // ← 新增
+    
     // MARK: - 1. UserDefaults Key 常數集中管理
     private let kUserID                = "kUserID"
     private let kUserName              = "kUserName"
@@ -115,6 +119,12 @@ class UserSettings: ObservableObject {
     private let kNewMatchedChatID      = "kNewMatchedChatID"
     private let kNewMatchedChatName    = "kNewMatchedChatName"
     private let kNewMatchedPhone       = "kNewMatchedPhone"
+    private let kFirebaseIDToken       = "kFirebaseIDToken"
+    @Published var firebaseIDToken: String? {
+        didSet {
+            UserDefaults.standard.set(firebaseIDToken, forKey: kFirebaseIDToken)
+        }
+    }
 
     // MARK: - 2. 屬性定義
     
@@ -358,6 +368,12 @@ class UserSettings: ObservableObject {
         } else {
             self.newMatchedPhone = nil
         }
+        // 先嘗試從 Keychain 讀取 Firebase ID Token
+        if let token = try? keychain.get("firebase_id_token"), !token.isEmpty {
+            self.firebaseIDToken = token
+        } else {
+            self.firebaseIDToken = defaults.string(forKey: kFirebaseIDToken)
+        }
     }
     
     // MARK: - 4. 若要提供「清除所有設定」的操作
@@ -399,6 +415,12 @@ class UserSettings: ObservableObject {
         self.globalLatitude      = 0.0
         self.globalLongitude     = 0.0
         self.globalSubadministrativeArea = ""
+        
+        // 清掉 Keychain 裡的 token  ← 新增
+        do { try keychain.remove("firebase_id_token") } catch {
+            print("❌ Keychain remove error (firebase_id_token): \(error)")
+        }
+        self.firebaseIDToken     = nil
     }
     
     // MARK: - 🔥 以下為行為分析平台的示範方法

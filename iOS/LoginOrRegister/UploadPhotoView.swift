@@ -346,7 +346,7 @@ struct UploadPhotoView: View {
             "selectedSmokingOption": "",
             "selectedVacationOption": "",
             "selectedZodiac": "",
-            "storedGender": userSettings.globalUserGender,
+            "storedGender": userSettings.globalUserGender.rawValue, // ← ✅ 用 rawValue 存字串
             "turboCount": 0,
             "userName": "",
             // ...

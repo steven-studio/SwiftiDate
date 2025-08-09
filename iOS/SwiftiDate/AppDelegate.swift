@@ -110,6 +110,25 @@ class AppDelegate: NSObject, UIApplicationDelegate, CLLocationManagerDelegate, U
         DispatchQueue.main.async {
             AnalyticsManager.shared.trackEvent("app_launch")
         }
+
+        // 🔐 ID Token auto-refresh listener: keep UserSettings.firebaseIDToken in sync
+        Auth.auth().addIDTokenDidChangeListener { _, _ in
+            if let user = Auth.auth().currentUser {
+                user.getIDToken { token, _ in
+                    guard let token = token else { return }
+                    // getIDToken callback is not guaranteed on main thread
+                    DispatchQueue.main.async {
+                        UserSettings.shared.firebaseIDToken = token
+                        // If you also persist to Keychain, write it here as well.
+                    }
+                }
+            } else {
+                // User logged out or token cleared
+                DispatchQueue.main.async {
+                    UserSettings.shared.firebaseIDToken = nil
+                }
+            }
+        }
         return true
     }
     

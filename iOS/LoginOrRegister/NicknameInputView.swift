@@ -9,7 +9,9 @@ import Foundation
 import SwiftUI
 
 struct NicknameInputView: View {
+    @EnvironmentObject var userSettings: UserSettings   // ✅ 取用全域狀態
     @State private var nickname: String = ""
+    @State private var showBirthday = false             // ✅ 控制跳轉
     private let maxLength = 35
     
     var body: some View {
@@ -67,14 +69,16 @@ struct NicknameInputView: View {
             
             // 「繼續」按鈕
             Button(action: {
-                // 按下繼續後的行為，例如：儲存暱稱、跳轉頁面
-                print("使用者輸入的暱稱：\(nickname)")
+                // ✅ 存暱稱，再開啟下一步
+                userSettings.globalUserName = nickname.trimmingCharacters(in: .whitespacesAndNewlines)
+                AnalyticsManager.shared.trackEvent("Nickname_ContinueTapped", parameters: ["nickname": userSettings.globalUserName])
+                showBirthday = true
             }) {
                 Text("繼續")
                     .frame(maxWidth: .infinity)
                     .padding()
                     .foregroundColor(.white)
-                    .background(isNicknameValid ? Color.blue : Color.gray)
+                    .background(isNicknameValid ? Color.green : Color.gray)
                     .frame(width: 300)
                     .cornerRadius(25)
             }
@@ -83,6 +87,11 @@ struct NicknameInputView: View {
             .padding(.bottom, 40)
         }
         .padding()
+        // ✅ 跳到生日輸入頁（全螢幕呈現，也可改成 .sheet）
+        .fullScreenCover(isPresented: $showBirthday) {
+            BirthdayInputView()
+                .environmentObject(userSettings)  // 如果裡面要用到
+        }
     }
     
     // 判斷暱稱是否有效（非空 & 長度 <= maxLength）

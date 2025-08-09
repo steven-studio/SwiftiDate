@@ -353,9 +353,21 @@ struct OTPVerificationView: View {
     
     @MainActor
     private func routeAfterSuccess() {
-        // 你也可以順便寫入 appState / userSettings 狀態
-        // appState.isLoggedIn = true
+        // 先嘗試取得並保存 Firebase ID Token（給後端或後續 API 使用）
+        if let user = Auth.auth().currentUser {
+            user.getIDToken { token, error in
+                if let token = token {
+                    userSettings.firebaseIDToken = token
+                    print("✅ Saved Firebase ID Token: \(token.prefix(16))...")
+                } else {
+                    print("❌ getIDToken error: \(error?.localizedDescription ?? "unknown")")
+                }
+            }
+        } else {
+            print("⚠️ No current Firebase user when routing after success.")
+        }
 
+        // 原有導流邏輯
         if isResetPassword {
             showResetPasswordView = true
         } else {
