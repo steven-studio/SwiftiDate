@@ -22,6 +22,7 @@ struct PhoneNumberEntryView: View {
     private var isPhoneValid: Bool {
         PhoneValidator.validate(countryCode: selectedCountryCode, phoneNumber: phoneNumber)
     }
+    @Environment(\.dismiss) private var dismiss
     
     var body: some View {
         VStack {
@@ -30,6 +31,7 @@ struct PhoneNumberEntryView: View {
                     // 返回上一頁前記錄事件
                     AnalyticsManager.shared.trackEvent("PhoneNumberEntry_BackTapped", parameters: nil)
                     isRegistering = false
+                    dismiss()
                 }) {
                     Image(systemName: "chevron.left")
                         .font(.title2)

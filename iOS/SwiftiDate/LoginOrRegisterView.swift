@@ -201,7 +201,7 @@ struct LoginOrRegisterView: View {
                     if let image = loadedImage {
                         Image(uiImage: image)
                             .resizable()
-                            .frame(width: 120, height: 120)
+                            .frame(width: 120, height: 160)
                             .clipShape(Circle())
                             .overlay(Circle().stroke(Color.white, lineWidth: 4))
                     } else {

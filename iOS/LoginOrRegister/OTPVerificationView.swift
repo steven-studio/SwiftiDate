@@ -189,12 +189,13 @@ struct OTPVerificationView: View {
                     }
                     Text(isVerifying ? "驗證中..." : "提交驗證碼")
                 }
-                .frame(maxWidth: .infinity)
+                .font(.title2)
+                .fontWeight(.bold)
                 .padding()
+                .frame(maxWidth: .infinity)
                 .background(Color.green)
-                .foregroundColor(.white)
-                .frame(width: 300)
                 .cornerRadius(25)
+                .foregroundColor(.white)
             }
             .disabled(isVerifying)
             .padding()

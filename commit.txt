@@ -1,7 +1,8 @@
-- 修正多個 View（UploadPhotoView、UserGenderSelectionView、ExperienceSelectionView 等）
-  未正確注入 AppState / UserSettings 導致 "UserSettings not injected" 錯誤
-- 在註冊完成流程中新增 appState.isLoggedIn 切換邏輯，確保能正確跳轉至 ContentView
-- 調整 SwiftiDateApp 啟動條件判斷，合併 isLoggedIn 與 globalPhoneNumber 檢查
-- 修正 Firebase 初始化順序，避免 "Firebase app has not yet been configured" 警告
-- 清理測試用假資料設定，避免干擾判斷註冊狀態
-- 優化註冊流程各頁面之間的全域狀態傳遞
+feat(auth): update iOS login/register views and Info.plist for Firebase iOS integration
+
+- Updated UI and logic in CreatePasswordView, OTPVerificationView, PhoneNumberEntryView, UploadPhotoView, UserGenderSelectionView
+- Added CropViewControllerWrapper for photo handling
+- Modified Info.plist for APNs and Firebase settings
+- Updated project.pbxproj configuration
+- Updated LoginOrRegisterView to integrate new flows
+- Revised commit.txt documentation

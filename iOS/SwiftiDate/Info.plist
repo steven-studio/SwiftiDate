@@ -18,6 +18,14 @@
 				<string>com.googleusercontent.apps.131205636358-vs1530oepa4dbclt1bf8v96dcg9flbhb</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>app-1-131205636358-ios-bec8d4fd284a46d9e6be87</string>
+			</array>
+		</dict>
 	</array>
 	<key>FirebaseAppDelegateProxyEnabled</key>
 	<true/>

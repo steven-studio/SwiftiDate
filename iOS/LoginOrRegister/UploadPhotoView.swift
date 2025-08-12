@@ -153,6 +153,8 @@ struct UploadPhotoView: View {
                 }
             }) {
                 Text("繼續")
+                    .font(.title2)
+                    .fontWeight(.bold)
                     .frame(maxWidth: .infinity)
                     .padding()
                     .background(selectedImages.contains(where: { $0 != nil }) ? Color.green : Color.gray)
@@ -183,19 +185,11 @@ struct UploadPhotoView: View {
         .sheet(isPresented: $showImagePicker) {
             ImagePicker(sourceType: .photoLibrary, selectedImage: $selectedImage)
                 .onDisappear {
-                    // ✅ 使用者關閉相簿後，若有選擇到照片就存到 selectedImages
-                    if let newlyPickedImage = selectedImage {
-                        AnalyticsManager.shared.trackEvent("UploadPhoto_ImageSelected", parameters: ["source": "photoLibrary", "index": selectedIndex])
-
-                        PhotoUtility.addImageToPhotos(newlyPickedImage, to: userSettings)
-                        
-                        // 使用者從相簿選完照片
-                        imageToCrop = newlyPickedImage
-                        showCropView = true
-                        
-                        print("✅ 用戶選了照片，並已存本地檔案名: \(newlyPickedImage)")
-                        // 若想要此時就同步上傳，也可在這裡呼叫 uploadPhoto(…)
-                    }
+                    guard let img = selectedImage else { return }
+                    // ❌ 刪掉這行：PhotoUtility.addImageToPhotos(img, to: userSettings)
+                    self.imageToCrop = img              // 只交給裁切
+                    self.showCropView = true
+                    self.selectedImage = nil
                 }
         }
         
@@ -208,10 +202,13 @@ struct UploadPhotoView: View {
                         self.imageToCrop = newImage
                         self.selectedImages[selectedIndex] = newImage
                     }
-                )) { croppedImage in
-                    // 當裁切完成後（或點擊確定上傳）
-                    self.selectedImages[selectedIndex] = croppedImage
-                    // 你也可以在這裡進行臉部偵測或上傳
+                )) { cropped in
+                    // ✅ 只有裁切完成才存、才更新 UI（3:4 已鎖在 CropVC）
+                    self.selectedImages[selectedIndex] = cropped
+                    PhotoUtility.addImageToPhotos(cropped, to: userSettings)
+                    
+                    self.imageToCrop = nil
+                    self.showCropView = false
                 }
             }
         }
@@ -220,13 +217,12 @@ struct UploadPhotoView: View {
         .fullScreenCover(isPresented: $showCameraPicker) { // ✅ 讓使用者拍照
             ImagePicker(sourceType: .camera, selectedImage: $selectedImage)
                 .onDisappear {
-                    if let newlyTaken = selectedImage {
-                        selectedImages[selectedIndex] = newlyTaken
-                        AnalyticsManager.shared.trackEvent("UploadPhoto_ImageSelected", parameters: ["source": "camera", "index": selectedIndex])
-
-                        PhotoUtility.addImageToPhotos(newlyTaken, to: userSettings)
-                        print("✅ 用戶拍照成功, 存本地檔案名: \(newlyTaken)")
-                    }
+                    guard let img = selectedImage else { return }
+                    // ❌ 刪掉：selectedImages[selectedIndex] = img
+                    // ❌ 刪掉：PhotoUtility.addImageToPhotos(img, to: userSettings)
+                    self.imageToCrop = img              // 只交給裁切
+                    self.showCropView = true
+                    self.selectedImage = nil
                 }
         }
         

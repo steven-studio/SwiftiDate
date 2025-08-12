@@ -89,11 +89,12 @@ struct UserGenderSelectionView: View {
                 }
             }) {
                 Text("繼續")
+                    .font(.title2)
+                    .fontWeight(.bold)
                     .frame(maxWidth: .infinity)
                     .padding()
                     .background(selectedGender == nil ? Color.gray : Color.green)
                     .foregroundColor(.white)
-                    .frame(width: 300)
                     .cornerRadius(25)
             }
             .disabled(selectedGender == nil)

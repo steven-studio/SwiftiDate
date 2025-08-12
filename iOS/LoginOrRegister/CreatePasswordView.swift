@@ -83,13 +83,13 @@ struct CreatePasswordView: View {
                 showUserGenderSelectionView = true
             }) {
                 Text("繼續")
-                    .font(.headline)
-                    .foregroundColor(.white)
+                    .font(.title2)
+                    .fontWeight(.bold)
                     .padding()
                     .frame(maxWidth: .infinity)
                     .background(isPasswordValid ? Color.green : Color.gray)
-                    .frame(width: 300)
                     .cornerRadius(25)
+                    .foregroundColor(.white)
             }
             .disabled(!isPasswordValid)
         }
