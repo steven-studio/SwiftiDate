@@ -35,7 +35,7 @@ class SwipeCardViewModel: ObservableObject {
     
     // Undo tracking:
     // This holds information about the last swiped card so that an undo can be performed.
-    @Published var lastSwipedData: (user: User, index: Int, isRightSwipe: Bool, docID: String)?
+    @Published var lastSwipedData: (user: Profile, index: Int, isRightSwipe: Bool, docID: String)?
     // Also record the offset at which the card flew out.
     @Published var lastSwipedOffset: CGSize?
     
@@ -43,8 +43,8 @@ class SwipeCardViewModel: ObservableObject {
     @Published var likeCount: Int = 0
     
     // The list of user cards. (In a real app, these would be loaded from a server.)
-    @Published var users: [User] = [
-        User(
+    @Published var users: [Profile] = [
+        Profile(
             id: "userID_2",
             name: "後照鏡被偷",
             age: 20,
@@ -53,7 +53,7 @@ class SwipeCardViewModel: ObservableObject {
             height: 172,
             photos: ["userID_2_photo1", "userID_2_photo2"]
         ),
-        User(
+        Profile(
             id: "userID_3",
             name: "小明",
             age: 22,
@@ -62,7 +62,7 @@ class SwipeCardViewModel: ObservableObject {
             height: 180,
             photos: ["userID_3_photo1", "userID_3_photo2", "userID_3_photo3", "userID_3_photo4", "userID_3_photo5", "userID_3_photo6"]
         ),
-        User(
+        Profile(
             id: "userID_4",
             name: "小花",
             age: 25,

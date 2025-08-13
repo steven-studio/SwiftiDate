@@ -233,6 +233,10 @@
 		D09587D62CB8CDDA00BCD04B /* GenderSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09587D52CB8CDDA00BCD04B /* GenderSelectionView.swift */; };
 		D096B0052E41137500C96047 /* PhoneCountry.swift in Sources */ = {isa = PBXBuildFile; fileRef = D096B0042E41137100C96047 /* PhoneCountry.swift */; };
 		D096B0062E41137500C96047 /* PhoneCountry.swift in Sources */ = {isa = PBXBuildFile; fileRef = D096B0042E41137100C96047 /* PhoneCountry.swift */; };
+		D0AF37452E4CE397005376E9 /* SwipeCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0AF37442E4CE395005376E9 /* SwipeCard.swift */; };
+		D0AF37462E4CE397005376E9 /* SwipeCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0AF37442E4CE395005376E9 /* SwipeCard.swift */; };
+		D0AF37482E4CE3FB005376E9 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0AF37472E4CE3F9005376E9 /* Profile.swift */; };
+		D0AF37492E4CE3FB005376E9 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0AF37472E4CE3F9005376E9 /* Profile.swift */; };
 		D0B388122D5B79A1003BC40C /* WebRTC in Frameworks */ = {isa = PBXBuildFile; productRef = D0B388112D5B79A1003BC40C /* WebRTC */; };
 		D0B388142D5B7A3E003BC40C /* SocialTrainingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B388132D5B7A3E003BC40C /* SocialTrainingView.swift */; };
 		D0B388292D5B7BAE003BC40C /* FaceTrackingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B388242D5B7BAE003BC40C /* FaceTrackingView.swift */; };
@@ -718,6 +722,8 @@
 		D09587D32CB8BDEA00BCD04B /* PrivacySettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacySettingsView.swift; sourceTree = "<group>"; };
 		D09587D52CB8CDDA00BCD04B /* GenderSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenderSelectionView.swift; sourceTree = "<group>"; };
 		D096B0042E41137100C96047 /* PhoneCountry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneCountry.swift; sourceTree = "<group>"; };
+		D0AF37442E4CE395005376E9 /* SwipeCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeCard.swift; sourceTree = "<group>"; };
+		D0AF37472E4CE3F9005376E9 /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		D0B388132D5B7A3E003BC40C /* SocialTrainingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialTrainingView.swift; sourceTree = "<group>"; };
 		D0B388232D5B7BAE003BC40C /* CountryCodePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryCodePickerView.swift; sourceTree = "<group>"; };
 		D0B388242D5B7BAE003BC40C /* FaceTrackingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceTrackingView.swift; sourceTree = "<group>"; };
@@ -1397,6 +1403,8 @@
 		D089DB612D69993D00D6A1AB /* SwipeCardRelated */ = {
 			isa = PBXGroup;
 			children = (
+				D0AF37472E4CE3F9005376E9 /* Profile.swift */,
+				D0AF37442E4CE395005376E9 /* SwipeCard.swift */,
 				D0E46ADD2E420ED1008B6871 /* CLAuthorizationStatus+Extensions.swift */,
 				D09587CE2CB7E44400BCD04B /* CircleExpansionView.swift */,
 				D09587D52CB8CDDA00BCD04B /* GenderSelectionView.swift */,
@@ -2064,11 +2072,13 @@
 				D09215B42E4611A700DAA36D /* SceneDelegate.swift in Sources */,
 				D04729DC2CC0BDC4007C33EC /* ServiceSectionContainer.swift in Sources */,
 				D0445C732C72FB440059D522 /* HometownInputView.swift in Sources */,
+				D0AF37482E4CE3FB005376E9 /* Profile.swift in Sources */,
 				D04729DA2CC09B54007C33EC /* EditSectionView.swift in Sources */,
 				D07E7FF92D7F690F00FEDBBF /* SpreadSheetViewRepresentable.swift in Sources */,
 				D018AD612C9E6ACF005A14B9 /* PraisePurchaseView.swift in Sources */,
 				D0422D992D7C509400609060 /* ChatGPTView.swift in Sources */,
 				D0422D9A2D7C509400609060 /* ClaudeAIView.swift in Sources */,
+				D0AF37462E4CE397005376E9 /* SwipeCard.swift in Sources */,
 				D0422D9B2D7C509400609060 /* LocalModelView.swift in Sources */,
 				D0422D9C2D7C509400609060 /* TextViewRepresentable.swift in Sources */,
 				D0422D9E2D7C509400609060 /* DeepSeekView.swift in Sources */,
@@ -2128,6 +2138,7 @@
 				D0B3F2A82D740B7F007A5EA0 /* UploadPhotoView.swift in Sources */,
 				D0B3F2A72D740B76007A5EA0 /* FaceTrackingView.swift in Sources */,
 				D09215B12E45E2BD00DAA36D /* MatchTipsPopupView.swift in Sources */,
+				D0AF37452E4CE397005376E9 /* SwipeCard.swift in Sources */,
 				D0B3F2A62D740B3B007A5EA0 /* RealVerificationView.swift in Sources */,
 				D07C57FB2D76FC960008DC9D /* ExperienceSelectionView.swift in Sources */,
 				D0B3F2A32D740B06007A5EA0 /* NoCursorTextField.swift in Sources */,
@@ -2144,6 +2155,7 @@
 				D0B3F27D2D73636B007A5EA0 /* SafetyQuizView.swift in Sources */,
 				D0B3F27E2D73636B007A5EA0 /* SafetyTipsView.swift in Sources */,
 				D0B3F2602D736347007A5EA0 /* HowToCancelSubscriptionView.swift in Sources */,
+				D0AF37492E4CE3FB005376E9 /* Profile.swift in Sources */,
 				D0B3F2612D736347007A5EA0 /* HowToDeleteMessagesView.swift in Sources */,
 				D0B3F2992D740400007A5EA0 /* AchievementSectionViewUITests.swift in Sources */,
 				D07C57E62D76F3B30008DC9D /* CropViewControllerWrapper.swift in Sources */,

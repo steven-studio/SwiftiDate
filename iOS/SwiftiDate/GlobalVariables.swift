@@ -77,7 +77,7 @@ enum Country: String, CaseIterable {
 }
 
 // Global variables for shared app settings and user states
-class UserSettings: ObservableObject {
+final class UserSettings: ObservableObject {
     static let shared = UserSettings()
     
     // 用於安全保存敏感資訊
