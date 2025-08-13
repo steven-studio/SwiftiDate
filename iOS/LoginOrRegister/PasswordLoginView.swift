@@ -16,6 +16,7 @@ struct PasswordLoginView: View {
     @State private var password: String = ""
     @State private var isLoggingIn = false
     @State private var showOTPForResetPassword = false  // 新增這個狀態
+    @Environment(\.dismiss) private var dismiss
 
     var body: some View {
         VStack {
@@ -25,6 +26,7 @@ struct PasswordLoginView: View {
                     AnalyticsManager.shared.trackEvent("PasswordLogin_BackTapped", parameters: nil)
                     // Handle Back Action (Pop to previous view)
                     // isRegistering = false
+                    dismiss()
                 }) {
                     Image(systemName: "chevron.left")
                         .font(.title2)

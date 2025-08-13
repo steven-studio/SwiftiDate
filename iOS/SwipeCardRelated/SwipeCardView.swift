@@ -11,11 +11,11 @@ import FirebaseAuth
 
 struct User {
     let id: String
-    let name: String
-    let age: Int
-    let zodiac: String
-    let location: String
-    let height: Int
+    let name: String?
+    let age: Int?
+    let zodiac: String?
+    let location: String?
+    let height: Int?
     let photos: [String]
 }
 
@@ -258,40 +258,39 @@ struct SwipeCardView: View {
             
             // 建立一個臨時陣列，去解析回傳文件
             var tempUsers: [User] = []
-            
+
             for doc in docs {
                 let data = doc.data()
                 let id = doc.documentID
-                
-                // 解析成 User 結構
-                if let name = data["name"] as? String,
-                   let age = data["age"] as? Int,
-                   let zodiac = data["zodiac"] as? String,
-                   let location = data["location"] as? String,
-                   let height = data["height"] as? Int,
-                   let photos = data["photos"] as? [String] {
-                    
-                    // 已滑過 or 自己 就跳過
-                    if self.swipedIDs.contains(id) || id == self.currentUserID {
-                        continue
-                    }
-                    
-                    let user = User(
-                        id: id,
-                        name: name,
-                        age: age,
-                        zodiac: zodiac,
-                        location: location,
-                        height: height,
-                        photos: photos
-                    )
-                    tempUsers.append(user)
+
+                // 已滑過 or 自己 就跳過
+                if self.swipedIDs.contains(id) || id == self.currentUserID {
+                    continue
                 }
+
+                let name = data["name"] as? String
+                let age = data["age"] as? Int
+                let zodiac = data["zodiac"] as? String
+                let location = data["location"] as? String
+                let height = data["height"] as? Int
+                let photos = (data["photos"] as? [String]) ?? []
+
+                let user = User(
+                    id: id,
+                    name: name,
+                    age: age,
+                    zodiac: zodiac,
+                    location: location,
+                    height: height,
+                    photos: photos
+                )
+
+                tempUsers.append(user)
             }
-            
+
             // 把新抓到的 user 陣列「接續」到 self.users
             self.viewModel.users.append(contentsOf: tempUsers)
-            
+
             // 更新 lastDocument，為下一頁做準備
             self.lastDocument = docs.last
         }
@@ -407,7 +406,7 @@ struct SwipeCard: View {
                     .onTapGesture { value in
                             let screenWidth = UIScreen.main.bounds.width
                             let tapX = value.x // 取得點擊的 X 軸座標
-                            
+
                             if tapX < screenWidth / 2 {
                                 // 點擊左半邊，切換到上一張
                                 if currentPhotoIndex > 0 {
@@ -428,7 +427,7 @@ struct SwipeCard: View {
                     .frame(width: 100, height: 100)
                     .foregroundColor(.gray)
             }
-            
+
             VStack(alignment: .leading, spacing: 5) {
                 HStack(spacing: 5) {
                     ForEach(0..<user.photos.count, id: \.self) { index in
@@ -441,25 +440,32 @@ struct SwipeCard: View {
                 .padding(.vertical, 8)
                 .padding(.horizontal)
                 .cornerRadius(10)
-                
+
                 Spacer()
-                
+
                 VStack {
                     Spacer()
-                    
+
+                    // Display variables for optionals
+                    let displayName = user.name ?? "用戶"
+                    let ageText = user.age.map { String($0) } ?? "—"
+                    let zodiacText = user.zodiac ?? "—"
+                    let locationText = user.location ?? "—"
+                    let heightText = user.height.map { "\($0) cm" } ?? "—"
+
                     // 顯示用戶名稱與年齡
-                    Text("\(user.name), \(user.age)")
+                    Text("\(displayName), \(ageText)")
                         .font(.title)
                         .fontWeight(.bold)
                         .foregroundColor(.white)
                         .frame(maxWidth: .infinity, alignment: .leading)
-                    
+
                     // 顯示用戶的標籤
                     HStack(spacing: 10) {
                         // 星座標籤
                         HStack(spacing: 5) {
                             Image(systemName: "bolt.circle.fill") // 替換為合適的星座圖示
-                            Text(user.zodiac)
+                            Text(zodiacText)
                         }
                         .padding(.horizontal, 8)
                         .padding(.vertical, 4)
@@ -470,7 +476,7 @@ struct SwipeCard: View {
                         // 地點標籤
                         HStack(spacing: 5) {
                             Image(systemName: "location.fill")
-                            Text(user.location)
+                            Text(locationText)
                         }
                         .padding(.horizontal, 8)
                         .padding(.vertical, 4)
@@ -481,7 +487,7 @@ struct SwipeCard: View {
                         // 身高標籤
                         HStack(spacing: 5) {
                             Image(systemName: "ruler")
-                            Text("\(user.height) cm")
+                            Text(heightText)
                         }
                         .padding(.horizontal, 8)
                         .padding(.vertical, 4)
@@ -491,10 +497,10 @@ struct SwipeCard: View {
                     }
                     .font(.subheadline)
                     .frame(maxWidth: .infinity, alignment: .leading) // 讓標籤靠左對齊
-                    
+
                     // 底部五個按鈕
                     HStack {
-                        
+
                         // MARK: - 這裡把 Undo 實作加上去
                         Button(action: {
                             // 呼叫父視圖的 undoSwipe()
@@ -509,7 +515,7 @@ struct SwipeCard: View {
                                 Circle()
                                     .fill(Color.gray.opacity(0.8))
                                     .frame(width: 50, height: 50) // 設定圓的大小
-                                
+
                                 VStack {
                                     Image(systemName: "arrow.uturn.backward")
                                         .font(.title)
@@ -517,9 +523,9 @@ struct SwipeCard: View {
                                 }
                             }
                         }
-                        
+
                         Spacer() // 按鈕之間的彈性間距
-                        
+
                         // Dislike button
                         Button(action: {
                             // Dislike action
@@ -529,7 +535,7 @@ struct SwipeCard: View {
                                 RoundedRectangle(cornerRadius: 30)
                                     .fill(Color.gray.opacity(0.8))
                                     .frame(width: 70, height: 50) // 設定矩形的大小
-                                
+
                                 Image(systemName: "xmark")
                                     .font(.system(size: 30, weight: .bold)) // 設定字體大小和粗體
                                     .foregroundColor(.red)
@@ -537,7 +543,7 @@ struct SwipeCard: View {
                                     .accessibility(identifier: "xmarkButtonImage")
                             }
                         }
-                        
+
                         Spacer() // 按鈕之間的彈性間距
 
                         Button(action: {
@@ -548,7 +554,7 @@ struct SwipeCard: View {
                                 Circle()
                                     .fill(Color.gray.opacity(0.8))
                                     .frame(width: 50, height: 50) // 設定圓的大小
-                                
+
                                 VStack {
                                     Image(systemName: "message.fill")
                                         .font(.system(size: 24))
@@ -556,7 +562,7 @@ struct SwipeCard: View {
                                 }
                             }
                         }
-                        
+
                         Spacer() // 按鈕之間的彈性間距
 
                         // Dislike button
@@ -568,7 +574,7 @@ struct SwipeCard: View {
                                 RoundedRectangle(cornerRadius: 30)
                                     .fill(Color.gray.opacity(0.8))
                                     .frame(width: 70, height: 50) // 設定矩形的大小
-                                
+
                                 Image(systemName: "heart.fill")
                                     .font(.system(size: 24, weight: .bold)) // 設定字體大小和粗體
                                     .foregroundColor(.green)
@@ -576,7 +582,7 @@ struct SwipeCard: View {
                                     .accessibility(identifier: "heartFillButtonImage")
                             }
                         }
-                        
+
                         Spacer() // 按鈕之間的彈性間距
 
                         Button(action: {
@@ -587,7 +593,7 @@ struct SwipeCard: View {
                                 Circle()
                                     .fill(Color.gray.opacity(0.8))
                                     .frame(width: 50, height: 50) // 設定圓的大小
-                                
+
                                 VStack {
                                     Image(systemName: "star.fill")
                                         .font(.system(size: 24))

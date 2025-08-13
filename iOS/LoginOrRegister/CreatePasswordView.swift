@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import FirebaseAuth
 
 struct CreatePasswordView: View {
     @EnvironmentObject var userSettings: UserSettings
@@ -15,6 +16,7 @@ struct CreatePasswordView: View {
     @State private var password: String = ""
     @State private var isPasswordVisible: Bool = false
     @State private var showUserGenderSelectionView: Bool = false  // 新增控制跳轉的狀態
+    @Environment(\.dismiss) private var dismiss
 
     // 檢查密碼長度是否符合
     private var isPasswordValid: Bool {
@@ -27,6 +29,7 @@ struct CreatePasswordView: View {
                 Button(action: {
                     // 返回上一頁前追蹤返回事件
                     AnalyticsManager.shared.trackEvent("CreatePassword_BackTapped", parameters: nil)
+//                    dismiss()
                 }) {
                     Image(systemName: "chevron.left")
                         .font(.title2)
@@ -73,14 +76,15 @@ struct CreatePasswordView: View {
             
             // 繼續按鈕
             Button(action: {
-                // 這裡放你想要的行為，例如：
-                // 1. 儲存密碼
-                // 2. 導向下一個頁面
-                // 3. 呼叫後端 API 等
-                print("建立密碼：\(password)")
-                // 在此可以加入儲存密碼、呼叫後端 API 的邏輯
-                // 驗證成功後跳轉到 UserGenderSelectionView
-                showUserGenderSelectionView = true
+                Task {
+                    // 這裡放你想要的行為，例如：
+                    // 1. 儲存密碼
+                    // 2. 導向下一個頁面
+                    // 3. 呼叫後端 API 等
+                    print("建立密碼：\(password)")
+                    await linkPasswordAfterPhone(password: password)
+                    showUserGenderSelectionView = true
+                }
             }) {
                 Text("繼續")
                     .font(.title2)
@@ -101,6 +105,24 @@ struct CreatePasswordView: View {
             UserGenderSelectionView()
                 .environmentObject(userSettings)
                 .environmentObject(appState)
+        }
+    }
+    
+    // 這裡就是原本的 linkPasswordAfterPhone
+    func linkPasswordAfterPhone(password: String) async {
+        guard let currentUser = Auth.auth().currentUser else {
+            print("尚未登入，無法設定密碼")
+            return
+        }
+        
+        let pseudoEmail = "\(currentUser.uid)@myapp.com"
+        let credential = EmailAuthProvider.credential(withEmail: pseudoEmail, password: password)
+        
+        do {
+            let result = try await currentUser.link(with: credential)
+            print("密碼綁定成功：\(result.user.uid)")
+        } catch {
+            print("綁定密碼失敗：\(error.localizedDescription)")
         }
     }
 }
