@@ -7,9 +7,20 @@
 
 import Foundation
 
+//struct PhoneValidator {
+//    static func validate(countryCode: String, phoneNumber: String) -> Bool {
+//        guard let country = PhoneCountry.from(code: countryCode) else { return false }
+//        return NSPredicate(format: "SELF MATCHES %@", country.regex).evaluate(with: phoneNumber)
+//    }
+//}
 struct PhoneValidator {
     static func validate(countryCode: String, phoneNumber: String) -> Bool {
-        guard let country = PhoneCountry.from(code: countryCode) else { return false }
-        return NSPredicate(format: "SELF MATCHES %@", country.regex).evaluate(with: phoneNumber)
+        // Get the first matching country for the dialing code
+        guard let country = PhoneCountry.fromDialingCode(countryCode).first else {
+            return false
+        }
+        
+        return NSPredicate(format: "SELF MATCHES %@", country.regex)
+            .evaluate(with: phoneNumber)
     }
 }
