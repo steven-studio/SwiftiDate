@@ -94,3 +94,61 @@ struct Profile: Identifiable, Codable {
         self.vacationOption  = data["selectedVacationOption"] as? String
     }
 }
+
+// MARK: - 偏好/生活方式（可公開或半公開，看規則）
+struct Preferences: Codable {
+    // 交友意圖
+    var lookingFor: String?           // selectedLookingFor
+
+    // 生活習慣
+    var diet: String?                 // selectedDietPreference
+    var drink: String?                // selectedDrinkOption
+    var smoke: String?                // selectedSmokingOption
+    var fitness: String?              // selectedFitnessOption
+    var pet: String?                  // selectedPet
+    var vacationStyle: String?        // selectedVacationOption
+
+    // 其他個人屬性
+    var bloodType: String?            // selectedBloodType
+    var hometown: String?             // selectedHometown
+    var meetWillingness: String?      // selectedMeetWillingness（目前空字串也可）
+}
+
+// MARK: - App 設定（通知、發現條件…這些多半不公開）
+struct AppSettings: Codable {
+    // 你原本 UserSettings 裡可以放進來的 app 行為設定
+    var discoveryGender: String?      // 你原本的 globalSelectedGender 等
+    var discoveryAgeMin: Int?
+    var discoveryAgeMax: Int?
+    var notificationEnabled: Bool?
+    // 之後有需要再加
+}
+
+// MARK: - 別人（列表/滑卡用，唯讀、輕量）
+struct RemoteUser: Codable, Identifiable {
+    let id: String
+    let profile: Profile
+    var distanceKm: Double?
+    var isLikedByMe: Bool?
+}
+
+// MARK: - 自己（可寫入；聚合公開 Profile + 偏好 + 設定 + 訂閱等）
+struct CurrentUser: Codable, Identifiable {
+    let id: String
+    var profile: Profile
+    var preferences: Preferences
+    var settings: AppSettings
+
+    // 私密資訊不應放在公開文件（Firestore 會拆子集合）
+    var email: String?
+    var phone: String?
+
+    var blockedUserIDs: Set<String>
+    var subscription: Subscription?   // 你既有的訂閱型別（可之後補）
+}
+
+// 你的 Subscription 可維持原先設計
+struct Subscription: Codable {
+    var plan: String
+    var validUntil: Date
+}

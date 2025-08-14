@@ -1,8 +1,6 @@
-feat(auth): update iOS login/register views and Info.plist for Firebase iOS integration
+refactor: replace User with Profile in SwipeCard module and fix ForEach errors
 
-- Updated UI and logic in CreatePasswordView, OTPVerificationView, PhoneNumberEntryView, UploadPhotoView, UserGenderSelectionView
-- Added CropViewControllerWrapper for photo handling
-- Modified Info.plist for APNs and Firebase settings
-- Updated project.pbxproj configuration
-- Updated LoginOrRegisterView to integrate new flows
-- Revised commit.txt documentation
+- Added new Profile.swift for public user data model
+- Updated SwipeCard, SwipeCardView, and SwipeCardViewModel to use Profile
+- Fixed SwiftUI ForEach binding/type inference issues
+- Adjusted Firestore query methods to avoid FirestoreSource closure errors

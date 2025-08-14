@@ -12,7 +12,8 @@ struct SwipeCard: View {
     var user: Profile
     @State private var currentPhotoIndex = 0 // 用來追蹤目前顯示的照片索引
     @EnvironmentObject var userSettings: UserSettings
-
+    @State private var showFullProfile = false
+    
     var body: some View {
         ZStack {
             // 照片預覽界面
@@ -115,6 +116,8 @@ struct SwipeCard: View {
                         .background(Color.gray.opacity(0.8))
                         .foregroundColor(.white)
                         .clipShape(Capsule())
+                        
+                        Spacer()
                     }
                     .font(.subheadline)
                     .frame(maxWidth: .infinity, alignment: .leading) // 讓標籤靠左對齊
@@ -229,5 +232,23 @@ struct SwipeCard: View {
         }
         .frame(maxWidth: UIScreen.main.bounds.width, maxHeight: UIScreen.main.bounds.height - 200)
         .shadow(color: Color.black.opacity(0.2), radius: 5, x: 0, y: 5)  // <--- 加上這裡
+        // ✅ 只在這裡放一顆展開按鈕，固定右下角
+        .overlay(alignment: .bottomTrailing) {
+            Button {
+                showFullProfile = true
+            } label: {
+                Image(systemName: "chevron.up")
+                    .foregroundColor(.white)
+                    .padding()
+                    .background(Color.gray.opacity(0.8))
+                    .clipShape(Circle())
+                    .shadow(radius: 4)
+            }
+            .padding(.trailing, 20)
+            .padding(.bottom, 80)
+        }
+        .fullScreenCover(isPresented: $showFullProfile) {
+            FullProfileView(user: user)
+        }
     }
 }

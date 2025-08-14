@@ -237,6 +237,8 @@
 		D0AF37462E4CE397005376E9 /* SwipeCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0AF37442E4CE395005376E9 /* SwipeCard.swift */; };
 		D0AF37482E4CE3FB005376E9 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0AF37472E4CE3F9005376E9 /* Profile.swift */; };
 		D0AF37492E4CE3FB005376E9 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0AF37472E4CE3F9005376E9 /* Profile.swift */; };
+		D0AF37512E4CF858005376E9 /* FullProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0AF37502E4CF851005376E9 /* FullProfileView.swift */; };
+		D0AF37522E4CF858005376E9 /* FullProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0AF37502E4CF851005376E9 /* FullProfileView.swift */; };
 		D0B388122D5B79A1003BC40C /* WebRTC in Frameworks */ = {isa = PBXBuildFile; productRef = D0B388112D5B79A1003BC40C /* WebRTC */; };
 		D0B388142D5B7A3E003BC40C /* SocialTrainingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B388132D5B7A3E003BC40C /* SocialTrainingView.swift */; };
 		D0B388292D5B7BAE003BC40C /* FaceTrackingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B388242D5B7BAE003BC40C /* FaceTrackingView.swift */; };
@@ -724,6 +726,7 @@
 		D096B0042E41137100C96047 /* PhoneCountry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneCountry.swift; sourceTree = "<group>"; };
 		D0AF37442E4CE395005376E9 /* SwipeCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeCard.swift; sourceTree = "<group>"; };
 		D0AF37472E4CE3F9005376E9 /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
+		D0AF37502E4CF851005376E9 /* FullProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullProfileView.swift; sourceTree = "<group>"; };
 		D0B388132D5B7A3E003BC40C /* SocialTrainingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialTrainingView.swift; sourceTree = "<group>"; };
 		D0B388232D5B7BAE003BC40C /* CountryCodePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryCodePickerView.swift; sourceTree = "<group>"; };
 		D0B388242D5B7BAE003BC40C /* FaceTrackingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceTrackingView.swift; sourceTree = "<group>"; };
@@ -1403,6 +1406,7 @@
 		D089DB612D69993D00D6A1AB /* SwipeCardRelated */ = {
 			isa = PBXGroup;
 			children = (
+				D0AF37502E4CF851005376E9 /* FullProfileView.swift */,
 				D0AF37472E4CE3F9005376E9 /* Profile.swift */,
 				D0AF37442E4CE395005376E9 /* SwipeCard.swift */,
 				D0E46ADD2E420ED1008B6871 /* CLAuthorizationStatus+Extensions.swift */,
@@ -1898,6 +1902,7 @@
 				D0445C892C73CF610059D522 /* VacationOptionsView.swift in Sources */,
 				D0B3F1482D70079F007A5EA0 /* PhoneValidator.swift in Sources */,
 				D07E7FF32D7F68CF00FEDBBF /* SpreadsheetCellRepresentable.swift in Sources */,
+				D0AF37512E4CF858005376E9 /* FullProfileView.swift in Sources */,
 				D0445C5F2C71F1070059D522 /* EditProfileView.swift in Sources */,
 				D080E64E2E3E5B49004A5CAE /* UserListSection.swift in Sources */,
 				D0DDDB072C9FDB1600A78A87 /* WhoLikedYouView.swift in Sources */,
@@ -2191,6 +2196,7 @@
 				D0B3F2782D736347007A5EA0 /* WhatIsSwiftiDateSupremeView.swift in Sources */,
 				D0B3F2792D736347007A5EA0 /* WhatIsTurboAndHowToUseView.swift in Sources */,
 				D0B3F27A2D736347007A5EA0 /* WhoLikedMeView.swift in Sources */,
+				D0AF37522E4CF858005376E9 /* FullProfileView.swift in Sources */,
 				D0B3F27B2D736347007A5EA0 /* WhyIsItHardToMatchView.swift in Sources */,
 				D0B3F25F2D73631E007A5EA0 /* LocalStorageManager.swift in Sources */,
 				D0B3F2572D736303007A5EA0 /* CommunityGuidelinesView.swift in Sources */,
