@@ -24,7 +24,8 @@
     "express": "^4.21.2",
     "firebase-admin": "^12.7.0",
     "firebase-functions": "^6.4.0",
-    "genkit": "^1.0.4"
+    "genkit": "^1.0.4",
+    "libphonenumber-js": "^1.12.12"
   },
   "devDependencies": {
     "@types/bcrypt": "^6.0.0",
