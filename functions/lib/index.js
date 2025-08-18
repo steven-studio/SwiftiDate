@@ -28,4 +28,12 @@ Object.defineProperty(exports, "copyUserData", { enumerable: true, get: function
 // index.ts 新增：
 var loginHandler_1 = require("./handlers/loginHandler");
 Object.defineProperty(exports, "loginHandler", { enumerable: true, get: function () { return loginHandler_1.loginHandler; } });
+
+var verifyLoginHttp_1 = require("./handlers/verifyLoginHttp")
+Object.defineProperty(exports, "verifyLogin", {
+  enumerable: true,
+  get: () => verifyLoginHttp_1.verifyLogin,
+})
 //# sourceMappingURL=index.js.map
+
+
