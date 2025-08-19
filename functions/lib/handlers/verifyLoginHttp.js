@@ -125,7 +125,7 @@ exports.verifyLogin = functions.https.onRequest(async (req, res) => {
     }
 
     // 2. Verify password with REST API
-    const apiKey = "AIzaSyC_J7NUPwT-pwhNCOyHxDeRsldzfwvo0mE"; // ✅ from config, not hardcoded
+    const apiKey = functions.config().app.apikey;
     const resp = await fetch(
       `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${apiKey}`,
       {
