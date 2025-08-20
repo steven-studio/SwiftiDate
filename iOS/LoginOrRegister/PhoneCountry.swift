@@ -35,7 +35,11 @@
 //        case .korea: return "^01[016789][0-9]{7,8}$"
 //        }
 //    }
+<<<<<<< HEAD
 //    
+=======
+//
+>>>>>>> ffff7276bce80cc2f6d5c9beeb1f9d0ae1510133
 //    static func from(code: String) -> PhoneCountry? {
 //        return PhoneCountry.allCases.first(where: { $0.rawValue == code })
 //    }

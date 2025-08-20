@@ -40,4 +40,5 @@ if (admin.apps.length === 0) {
     admin.initializeApp();
 }
 exports.db = admin.firestore();
+exports.admin = admin;
 //# sourceMappingURL=firebase.js.map
