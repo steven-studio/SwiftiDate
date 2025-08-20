@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI
 import FirebaseAuth
+import FirebaseFirestore
 
 struct CreatePasswordView: View {
     @EnvironmentObject var userSettings: UserSettings
@@ -109,6 +110,19 @@ struct CreatePasswordView: View {
     }
     
     // 這裡就是原本的 linkPasswordAfterPhone
+    func savePhoneEmailMapping(phoneNumber: String, email: String) {
+        let db = Firestore.firestore()
+        db.collection("phoneEmailMap").document(phoneNumber).setData([
+            "email": email
+        ]) { error in
+            if let error = error {
+                print("Error saving mapping: \(error)")
+            } else {
+                print("Mapping saved")
+            }
+        }
+    }
+
     func linkPasswordAfterPhone(password: String) async {
         guard let currentUser = Auth.auth().currentUser else {
             print("尚未登入，無法設定密碼")
@@ -121,6 +135,9 @@ struct CreatePasswordView: View {
         do {
             let result = try await currentUser.link(with: credential)
             print("密碼綁定成功：\(result.user.uid)")
+            
+            
+
         } catch {
             print("綁定密碼失敗：\(error.localizedDescription)")
         }

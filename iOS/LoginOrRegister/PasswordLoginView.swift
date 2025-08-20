@@ -7,8 +7,11 @@
 
 import Foundation
 import SwiftUI
+import FirebaseAuth
+import FirebaseFirestore
 
 struct PasswordLoginView: View {
+    
     @EnvironmentObject var appState: AppState // ✅ 存取全局登入狀態
     @EnvironmentObject var userSettings: UserSettings // ✅ 存取用戶設置
     @Binding var selectedCountryCode: String
@@ -17,6 +20,8 @@ struct PasswordLoginView: View {
     @State private var isLoggingIn = false
     @State private var showOTPForResetPassword = false  // 新增這個狀態
     @Environment(\.dismiss) private var dismiss
+    @State private var showAlert = false
+    @StateObject var alertManager = AlertManager()
 
     var body: some View {
         VStack {
@@ -104,6 +109,52 @@ struct PasswordLoginView: View {
             .environmentObject(appState)
             .environmentObject(userSettings)
         }
+        VStack {
+            }
+            .alert(alertManager.title, isPresented: $alertManager.isPresented) {
+                Button("OK", role: .cancel) {}
+            } message: {
+                Text(alertManager.message)
+            }
+    }
+
+    func loginWithPhoneAndPassword(phoneNumber: String, password: String) {
+        let db = Firestore.firestore()
+        
+        // Step 1: Get email from Firestore
+        db.collection("phoneEmailMap").document(phoneNumber).getDocument { document, error in
+            if let error = error {
+                print("Error fetching mapping: \(error)")
+                return
+            }
+            
+            if let document = document, document.exists,
+               let email = document.data()?["email"] as? String {
+                
+                // Step 2: Sign in with email + password
+                Auth.auth().signIn(withEmail: email, password: password) { authResult, error in
+                    if let error = error {
+                        isLoggingIn = false
+                        print("Login failed: \(error.localizedDescription)")
+                    } else {
+                        print("Login successful! UID: \(authResult?.user.uid ?? "")")
+                                      
+                        DispatchQueue.main.async {
+                                AnalyticsManager.shared.trackEvent("PasswordLogin_LoginSuccess", parameters: nil)
+                                // 跳轉到主畫面
+                                userSettings.globalPhoneNumber = phoneNumber
+                                appState.isLoggedIn = true
+
+                            }
+                        print("✅ 登入成功")
+
+                    }
+                }
+                
+            } else {
+                print("No mapping found for phone number")
+            }
+        }
     }
 
     private func loginUser() {
@@ -122,6 +173,7 @@ struct PasswordLoginView: View {
         isLoggingIn = true
         AnalyticsManager.shared.trackEvent("PasswordLogin_LoginAttempt", parameters: ["phone": "\(selectedCountryCode)\(phoneNumber)"])
         
+        
         // ✅ 自動去除手機號碼前面的0
         var formattedPhoneNumber = phoneNumber
         if formattedPhoneNumber.hasPrefix("0") {
@@ -129,15 +181,18 @@ struct PasswordLoginView: View {
         }
 
         let fullPhoneNumber = "\(selectedCountryCode)\(formattedPhoneNumber)"
+        print("fullPhoneNumber \(fullPhoneNumber)")
+        print("password \(password)")
 
-        // ✅🔥 已修改為 Firebase Function URL
-        let url = URL(string: "https://us-central1-swiftidate-cdff0.cloudfunctions.net/loginHandler")!
+        /*loginWithPhoneAndPassword*///(phoneNumber: fullPhoneNumber, password: password)
+       //  ✅🔥 已修改為 Firebase Function URL
+        let url = URL(string: "https://us-central1-swiftidate-cdff0.cloudfunctions.net/verifyLogin")!
 
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
 
-        let body: [String: Any] = ["phone": fullPhoneNumber, "password": password]
+        let body: [String: Any] = ["phoneNumber": fullPhoneNumber, "password": password]
         request.httpBody = try? JSONSerialization.data(withJSONObject: body)
 
         URLSession.shared.dataTask(with: request) { data, response, error in
@@ -149,29 +204,55 @@ struct PasswordLoginView: View {
                 print("❌ 登入失敗: \(error?.localizedDescription ?? "未知錯誤")")
                 return
             }
-
             do {
-                let result = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
-                let success = result?["success"] as? Bool ?? false
-                let message = result?["message"] as? String ?? "未知錯誤"
+                if let result = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
+                    if let idToken = result["idToken"] as? String {
+                        print("✅ 登入成功, Token: \(idToken)")
 
-                DispatchQueue.main.async {
-                    if success {
-                        print("✅ 登入成功")
-                        AnalyticsManager.shared.trackEvent("PasswordLogin_LoginSuccess", parameters: nil)
-                        // 跳轉到主畫面
-                        userSettings.globalPhoneNumber = phoneNumber
-                        appState.isLoggedIn = true
+                        DispatchQueue.main.async {
+                            AnalyticsManager.shared.trackEvent("PasswordLogin_LoginSuccess", parameters: nil)
+                            userSettings.globalPhoneNumber = fullPhoneNumber
+                            appState.isLoggedIn = true
+                        }
                     } else {
-                        print("❌ 登入失敗: \(message)")
-                        AnalyticsManager.shared.trackEvent("PasswordLogin_LoginFailure", parameters: ["reason": "密碼錯誤"])
+                        print("❌ 登入失敗: 沒有 Token")
+                        DispatchQueue.main.async {
+                            AnalyticsManager.shared.trackEvent("PasswordLogin_LoginFailure", parameters: ["reason": "沒有 Token"])
+                            let dsd = result["error"] as! String
+                            alertManager.show(title: "Login Failed", message: dsd)
+
+                        }
                     }
                 }
             } catch {
-                let parseError = error.localizedDescription
                 print("❌ API 回應解析失敗: \(error.localizedDescription)")
-                AnalyticsManager.shared.trackEvent("PasswordLogin_LoginFailure", parameters: ["error": parseError])
+                AnalyticsManager.shared.trackEvent("PasswordLogin_LoginFailure", parameters: ["error": error.localizedDescription])
+                alertManager.show(title: "Login Failed", message: "❌ API 回應解析失敗: \(error.localizedDescription)")
+
+
             }
+//            do {
+//                let result = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
+//                let success = result?["success"] as? Bool ?? false
+//                let message = result?["message"] as? String ?? "未知錯誤"
+//
+//                DispatchQueue.main.async {
+//                    if success {
+//                        print("✅ 登入成功")
+//                        AnalyticsManager.shared.trackEvent("PasswordLogin_LoginSuccess", parameters: nil)
+//                        // 跳轉到主畫面
+//                        userSettings.globalPhoneNumber = phoneNumber
+//                        appState.isLoggedIn = true
+//                    } else {
+//                        print("❌ 登入失敗: \(message)")
+//                        AnalyticsManager.shared.trackEvent("PasswordLogin_LoginFailure", parameters: ["reason": "密碼錯誤"])
+//                    }
+//                }
+//            } catch {
+//                let parseError = error.localizedDescription
+//                print("❌ API 回應解析失敗: \(error.localizedDescription)")
+//                AnalyticsManager.shared.trackEvent("PasswordLogin_LoginFailure", parameters: ["error": parseError])
+//            }
         }.resume()
     }
 }
@@ -186,5 +267,17 @@ struct PasswordLoginView_Previews: PreviewProvider {
         .environmentObject(AppState())
         .environmentObject(UserSettings())
         .previewDevice("iPhone 15 Pro") // ✅ 指定裝置模擬
+    }
+}
+
+class AlertManager: ObservableObject {
+    @Published var isPresented = false
+    @Published var title = ""
+    @Published var message = ""
+
+    func show(title: String, message: String) {
+        self.title = title
+        self.message = message
+        self.isPresented = true
     }
 }

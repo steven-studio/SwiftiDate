@@ -19,7 +19,7 @@ struct UserGenderSelectionView: View {
     @State private var showUploadPhotoView = false       // ← 新增
     @EnvironmentObject var userSettings: UserSettings  // 若需要儲存到全局設定
     @EnvironmentObject var appState: AppState
-    
+
     var body: some View {
         VStack(spacing: 32) {
             HStack {

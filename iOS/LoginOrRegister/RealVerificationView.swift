@@ -19,6 +19,7 @@ struct RealVerificationView: View {
 //    @State private var showUploadPhoto = false // ✅ 是否跳轉到上傳照片頁面
     @State private var showPasswordLoginView = false
     @State private var showCreatePasswordView = false
+    @Environment(\.dismiss) private var dismiss
 
     var body: some View {
         VStack {
@@ -26,6 +27,8 @@ struct RealVerificationView: View {
                 Button(action: {
                     // 返回上一頁前記錄事件
                     AnalyticsManager.shared.trackEvent("RealVerification_BackTapped", parameters: nil)
+                    dismiss()
+
                     // 這裡可以加入返回的行為，例如關閉頁面或其他邏輯
                 }) {
                     Image(systemName: "chevron.left")

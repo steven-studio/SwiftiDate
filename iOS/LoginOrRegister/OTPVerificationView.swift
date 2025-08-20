@@ -212,6 +212,7 @@ struct OTPVerificationView: View {
             .environmentObject(userSettings)
         }
         .fullScreenCover(isPresented: $showRealVerification) { // ✅ 驗證成功後跳轉真人認證
+
             RealVerificationView(selectedCountryCode: $selectedCountryCode, phoneNumber: $phoneNumber)
                 .environmentObject(appState) // ✅ 傳遞 AppState
                 .environmentObject(userSettings) // ✅ 傳遞 UserSettings
@@ -225,6 +226,10 @@ struct OTPVerificationView: View {
         defer { isSendingOTP = false }
         
         let phone = PhoneNumberUtils.normalizedFullPhone(selectedCountryCode, phoneNumber)
+        
+        userSettings.globalPhoneNumber = phoneNumber
+        userSettings.globalCountryCode = selectedCountryCode
+
         print("📨 sendInitialOTP -> \(phone)")
         Task { @MainActor in
             let result = await auth.startPhoneVerification(phone: phone)

@@ -7,6 +7,8 @@
 
 import Foundation
 import SwiftUI
+import FirebaseAuth
+import FirebaseFirestore
 
 struct PhoneNumberEntryView: View {
     @EnvironmentObject var appState: AppState // ✅ 存取全局登入狀態
@@ -23,7 +25,8 @@ struct PhoneNumberEntryView: View {
         PhoneValidator.validate(countryCode: selectedCountryCode, phoneNumber: phoneNumber)
     }
     @Environment(\.dismiss) private var dismiss
-    
+    @StateObject var alertManager = AlertManager()
+
     var body: some View {
         VStack {
             HStack {
@@ -171,11 +174,43 @@ struct PhoneNumberEntryView: View {
             // 畫面出現時記錄 Analytics 事件
             AnalyticsManager.shared.trackEvent("PhoneNumberEntryView_Appeared", parameters: nil)
         }
+        VStack {
+            }
+            .alert(alertManager.title, isPresented: $alertManager.isPresented) {
+                Button("OK", role: .cancel) {}
+            } message: {
+                Text(alertManager.message)
+            }
+
     }
     
     // **✅ 先檢查手機號碼是否存在**
+    
+    func checkPhoneNumberExists(phoneNumber: String, completion: @escaping (Bool) -> Void) {
+        let db = Firestore.firestore()
+        let normalizedPhone = phoneNumber.trimmingCharacters(in: .whitespacesAndNewlines)
+        
+        db.collection("phoneEmailMap").document(normalizedPhone).getDocument { document, error in
+            if let error = error {
+                print("Error checking phone number: \(error.localizedDescription)")
+                completion(false)
+                return
+            }
+            
+            if let document = document, document.exists {
+                print("✅ Phone number exists.")
+                completion(true)
+            } else {
+                print("❌ Phone number does not exist.")
+                completion(false)
+            }
+        }
+    }
+
     func checkPhoneNumber() {
+    
         isChecking = true
+        
         let url = URL(string: "https://us-central1-swiftidate-cdff0.cloudfunctions.net/checkPhone")!
         
         var request = URLRequest(url: url)
@@ -192,6 +227,7 @@ struct PhoneNumberEntryView: View {
         request.httpBody = try? JSONSerialization.data(withJSONObject: body)
         
         URLSession.shared.dataTask(with: request) { data, response, error in
+           
             DispatchQueue.main.async { isChecking = false }
             
             if let error = error {

@@ -21,13 +21,13 @@ class AliCloudService: CloudService {
         print("Fetching photos from AliCloud...")
         completion([])
     }
-    
+    //ywcxEqtW5gaGeHAiL6PYTqdLwMl1
     func uploadAllPhotos(completion: @escaping (Bool) -> Void) {
         // 這裡放你上傳照片到阿里雲的流程
         print("Uploading all photos to AliCloud...")
         completion(true)
     }
-    
+    //990
     func saveUserData(userID: String, data: [String : Any], completion: @escaping (Result<Void, Error>) -> Void) {
         // 這裡放你上傳「使用者資料」到阿里雲資料庫的流程
         print("Saving user data to AliCloud...")

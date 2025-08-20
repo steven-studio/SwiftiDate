@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7D73C3B62E4CCFD2002318F4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7D73C3B52E4CCFD2002318F4 /* GoogleService-Info.plist */; };
 		D016DC0F2D86D99800946EB6 /* SwipeCardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D016DC0E2D86D99800946EB6 /* SwipeCardViewModel.swift */; };
 		D016DC102D86D99800946EB6 /* SwipeCardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D016DC0E2D86D99800946EB6 /* SwipeCardViewModel.swift */; };
 		D017F4EE2CAEBC8700C71D18 /* QRCodeScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D017F4ED2CAEBC8700C71D18 /* QRCodeScannerView.swift */; };
@@ -448,7 +449,6 @@
 		D0B3F2D32D746499007A5EA0 /* ResetPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B3F2D12D746499007A5EA0 /* ResetPasswordView.swift */; };
 		D0B3F2D52D746890007A5EA0 /* ResetPasswordFlowUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B3F2D42D746890007A5EA0 /* ResetPasswordFlowUITests.swift */; };
 		D0C99B2E2D0DBFED00FA98AD /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D0C99B2C2D0DBFEC00FA98AD /* Localizable.strings */; };
-		D0D86AB52E4457BC00F125F4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D0D86AB42E4457BC00F125F4 /* GoogleService-Info.plist */; };
 		D0DDDB052C9FA8AF00A78A87 /* ChatDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB042C9FA8AF00A78A87 /* ChatDetailView.swift */; };
 		D0DDDB072C9FDB1600A78A87 /* WhoLikedYouView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB062C9FDB1600A78A87 /* WhoLikedYouView.swift */; };
 		D0DDDB092C9FDE0500A78A87 /* InteractiveContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDDB082C9FDE0500A78A87 /* InteractiveContentView.swift */; };
@@ -551,6 +551,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		7D73C3B52E4CCFD2002318F4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D016DC0E2D86D99800946EB6 /* SwipeCardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeCardViewModel.swift; sourceTree = "<group>"; };
 		D017F4ED2CAEBC8700C71D18 /* QRCodeScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeScannerView.swift; sourceTree = "<group>"; };
 		D017F4EF2CAECC5100C71D18 /* PersonalInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalInfoView.swift; sourceTree = "<group>"; };
@@ -783,7 +784,6 @@
 		D0C99B302D0DC00700FA98AD /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		D0C99B312D0DC02500FA98AD /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		D0C99B322D0DC04B00FA98AD /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
-		D0D86AB42E4457BC00F125F4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D0DDDB042C9FA8AF00A78A87 /* ChatDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatDetailView.swift; sourceTree = "<group>"; };
 		D0DDDB062C9FDB1600A78A87 /* WhoLikedYouView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhoLikedYouView.swift; sourceTree = "<group>"; };
 		D0DDDB082C9FDE0500A78A87 /* InteractiveContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractiveContentView.swift; sourceTree = "<group>"; };
@@ -1144,8 +1144,8 @@
 				D0B3882F2D5B7C12003BC40C /* SocialCourse.swift */,
 				D0B388132D5B7A3E003BC40C /* SocialTrainingView.swift */,
 				D09587D22CB8AC6900BCD04B /* SwiftiDate.entitlements */,
-				D0D86AB42E4457BC00F125F4 /* GoogleService-Info.plist */,
 				D018AD972C9F1A0F005A14B9 /* Info.plist */,
+				7D73C3B52E4CCFD2002318F4 /* GoogleService-Info.plist */,
 				D0445C2E2C71B3800059D522 /* SwiftiDateApp.swift */,
 				D0903ABB2D589D0C00735323 /* AppDelegate.swift */,
 				D0445C302C71B3800059D522 /* ContentView.swift */,
@@ -1210,7 +1210,6 @@
 		D0472D392CCC6CDA0047FE10 /* LoginOrRegister */ = {
 			isa = PBXGroup;
 			children = (
-				D0E46AD72E4139AD008B6871 /* PasswordLoginView.swift */,
 				D096B0042E41137100C96047 /* PhoneCountry.swift */,
 				D0B3F1262D6F03BB007A5EA0 /* OTPRelated */,
 				D07C57EA2D76F70C0008DC9D /* BirthdayInputView.swift */,
@@ -1224,6 +1223,7 @@
 				D07C57E72D76F5AE0008DC9D /* NicknameInputView.swift */,
 				D0B388252D5B7BAE003BC40C /* OTPVerificationView.swift */,
 				D017F4F72CAFC9A200C71D18 /* PhoneNumberEntryView.swift */,
+				D0E46AD72E4139AD008B6871 /* PasswordLoginView.swift */,
 				D0B3F1472D70079F007A5EA0 /* PhoneValidator.swift */,
 				D07C57F32D76F9870008DC9D /* RegisterLanguageSelectionView.swift */,
 				D0B3F2D12D746499007A5EA0 /* ResetPasswordView.swift */,
@@ -1813,7 +1813,7 @@
 			files = (
 				D0445C362C71B3820059D522 /* Preview Assets.xcassets in Resources */,
 				D0644BD02D80826E007B2DE0 /* SwiftiDate.storekit in Resources */,
-				D0D86AB52E4457BC00F125F4 /* GoogleService-Info.plist in Resources */,
+				7D73C3B62E4CCFD2002318F4 /* GoogleService-Info.plist in Resources */,
 				D0C99B2E2D0DBFED00FA98AD /* Localizable.strings in Resources */,
 				D0445C332C71B3820059D522 /* Assets.xcassets in Resources */,
 			);

@@ -294,6 +294,8 @@ struct UploadPhotoView: View {
         userSettings.globalPhoneNumber = phoneNumber
         userSettings.globalCountryCode = selectedCountryCode
         
+        print("❌ phoneNumber: \(phoneNumber)")
+
         // ✅ 這裡新增把使用者資訊存到 Firestore 的動作
         saveUserDataToFirestore()
         AnalyticsManager.shared.trackEvent("UploadPhoto_VerificationComplete", parameters: ["uploadedCount": selectedImages.compactMap { $0 }.count])
@@ -318,7 +320,7 @@ struct UploadPhotoView: View {
             "likeCount": 0,
             "likesMeCount": 0,
             // ... 你想要存的其它 key-value
-            "phoneNumber": userSettings.globalPhoneNumber,
+            "phoneNumber": userSettings.globalCountryCode + userSettings.globalPhoneNumber,
             "praiseCount": 0,
             "selectedBloodType": "",
             "selectedDegree": "",
@@ -346,6 +348,10 @@ struct UploadPhotoView: View {
             // 你也可以加入照片 URL 的清單
         ]
         
+        print("userDatauserData \(userData)")
+        print("globalPhoneNumber \(userSettings.globalPhoneNumber)")
+        print("userSettings.aboutMe \(userSettings.aboutMe)")
+
         // 3. 呼叫 FirestoreManager 進行資料庫存取
         FirestoreManager.shared.saveUserData(userID: userID, data: userData) { result in
             switch result {
