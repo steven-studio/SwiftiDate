@@ -1,0 +1,3 @@
+[submodule "iOS/SwipeCard"]
+	path = iOS/SwipeCard
+	url = https://github.com/steven-studio/SwipeCardKit
