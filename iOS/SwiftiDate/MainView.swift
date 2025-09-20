@@ -6,16 +6,26 @@
 //
 
 import SwiftUI
+import SwipeCardKit
 
 struct TabBarIcon: View {
     let systemImageName: String
+    let foregroundColor: Color
+    let strokeColor: Color
+    
+    init(systemImageName: String, foregroundColor: Color = .white, strokeColor: Color = .white) {
+        self.systemImageName = systemImageName
+        self.foregroundColor = foregroundColor
+        self.strokeColor = strokeColor
+    }
+    
     var body: some View {
         Image(systemName: systemImageName)
-            .foregroundColor(.white)
+            .foregroundColor(foregroundColor)
             .padding(8)
             .background(
                 Circle()
-                    .stroke(Color.white, lineWidth: 1)
+                    .stroke(strokeColor, lineWidth: 1)
             )
     }
 }
@@ -33,8 +43,14 @@ struct MainView: View {
     @State private var selectedTab: Int = 0
     @State private var selectedTurboTab: Int = 0
     
+    // 控制 PrivacySettingsView 顯示
+    @State private var showPrivacySettings = false
+    
     // 使用狀態機管理器
     @StateObject private var tabStateMachineManager = TabStateMachineManager()
+    
+    // 建立 SwipeCard DataSource
+    private let swipeDataSource = MainViewSwipeDataSource()
     
     init() {
         UITabBar.appearance().backgroundImage = UIImage()
@@ -47,12 +63,39 @@ struct MainView: View {
 
     var body: some View {
         TabView(selection: $selectedTab) { // Bind TabView selection to selectedTab
-            SwipeCardView()
-                .tabItem {
-                    TabBarIcon(systemImageName: "heart.fill")
+            // SwipeCard Tab 包含頂部導航
+            VStack(spacing: 0) {
+                // 頂部導航欄
+                HStack {
+                    Spacer()
+                    Button {
+                        showPrivacySettings = true
+                    } label: {
+                        Image(systemName: "slider.horizontal.3")
+                            .foregroundColor(.gray)
+                            .font(.system(size: 22, weight: .semibold))
+                    }
                 }
-                .tag(0) // Assign a tag for SwipeCardView tab
-            
+                .padding(.horizontal, 16)
+                .padding(.top, 8)
+                .padding(.bottom, 8)
+                .background(Color.clear)
+                .zIndex(1000) // 確保在最上層
+                
+                // SwipeCard 內容
+                SwipeCardView()
+                    .environment(\.swipeDataSource, swipeDataSource)
+                    .zIndex(1) // 較低的 z-index
+            }
+            .fullScreenCover(isPresented: $showPrivacySettings) {
+                PrivacySettingsView(isPresented: $showPrivacySettings)
+                    .environmentObject(userSettings)
+            }
+            .tabItem {
+                TabBarIcon(systemImageName: "heart.fill", foregroundColor: .pink, strokeColor: .pink)
+            }
+            .tag(0) // Assign a tag for SwipeCardView tab
+
             // Pass the selectedTab to TurboView
             TurboView(contentSelectedTab: $selectedTab, turboSelectedTab: $selectedTurboTab, showBackButton: false) // Match the parameter name here
                 .tabItem {
